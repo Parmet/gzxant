@@ -353,7 +353,6 @@
         //	$("#index001").click();
     });
     function devPeing() {
-        layer.msg("待开发。。。");
     }
 </script>
 
@@ -361,7 +360,6 @@
     console.log("===========================");
     console.log(window.location.href);
     if (typeof console == "object") {
-        console.info("邦客 app");
 
     }
 
