@@ -1,16 +1,16 @@
 package com.gzxant.controller;
 
-import com.gzxant.base.entity.ReturnDTO;
-import com.gzxant.cache.CacheUtils;
-import com.gzxant.entity.SysMenu;
-import com.gzxant.util.ReturnDTOUtil;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
+import com.gzxant.base.entity.ReturnDTO;
+import com.gzxant.cache.CacheUtils;
+import com.gzxant.entity.SysMenu;
+import com.gzxant.util.ReturnDTOUtil;
 
 /**
  * Created by chen on 2017/9/28.

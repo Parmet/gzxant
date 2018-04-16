@@ -1,19 +1,17 @@
 package com.gzxant.service.impl;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.baomidou.mybatisplus.mapper.Condition;
 import com.gzxant.base.service.impl.BaseService;
 import com.gzxant.base.vo.JsTree;
 import com.gzxant.constant.Global;
 import com.gzxant.dao.SysOfficeDao;
-import com.gzxant.entity.SysMenu;
 import com.gzxant.entity.SysOffice;
 import com.gzxant.service.ISysOfficeService;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author chen

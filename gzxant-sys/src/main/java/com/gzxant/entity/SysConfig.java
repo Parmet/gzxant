@@ -1,8 +1,9 @@
 package com.gzxant.entity;
 
+import org.hibernate.validator.constraints.Length;
+
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.validator.constraints.Length;
 
 /**
  * Created by chen on 2017/4/10.

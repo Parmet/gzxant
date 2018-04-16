@@ -1,5 +1,14 @@
 package com.gzxant.service.impl;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.baomidou.mybatisplus.mapper.Condition;
 import com.baomidou.mybatisplus.toolkit.CollectionUtils;
 import com.gzxant.base.service.impl.BaseService;
@@ -9,15 +18,6 @@ import com.gzxant.entity.SysUser;
 import com.gzxant.entity.SysUserOffice;
 import com.gzxant.service.ISysUserOfficeService;
 import com.gzxant.service.ISysUserService;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author chen

@@ -1,9 +1,9 @@
 package com.gzxant.entity;
 
+import java.io.Serializable;
+
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
-
-import java.io.Serializable;
 
 /**
  * @author chen

@@ -14,6 +14,10 @@
 
     <dependencies>
 
+		<dependency>
+            <groupId>org.sitemesh</groupId>
+            <artifactId>sitemesh</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.commons</groupId>

@@ -1,9 +1,9 @@
 package com.gzxant.dao;
 
+import org.springframework.stereotype.Component;
+
 import com.gzxant.base.dao.CrudDao;
 import com.gzxant.entity.SysUserRole;
-
-import org.springframework.stereotype.Component;
 
 /**
  * Created by chen on 2017/9/1.

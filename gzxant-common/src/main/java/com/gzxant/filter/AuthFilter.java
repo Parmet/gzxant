@@ -1,7 +1,13 @@
 package com.gzxant.filter;
 
 
-import io.jsonwebtoken.JwtException;
+import java.io.IOException;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +19,7 @@ import com.gzxant.rest.JwtProperties;
 import com.gzxant.rest.JwtTokenUtil;
 import com.gzxant.util.RenderUtils;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import io.jsonwebtoken.JwtException;
 
 /**
  * 对客户端请求的jwt token验证过滤器

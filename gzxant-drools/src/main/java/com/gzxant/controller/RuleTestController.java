@@ -1,12 +1,12 @@
 package com.gzxant.controller;
 
+import javax.annotation.Resource;
+
 import org.kie.api.runtime.KieSession;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gzxant.fact.User;
-
-import javax.annotation.Resource;
 
 /**
  * Created by chen on 2017/12/21.

@@ -1,11 +1,10 @@
 package com.gzxant.dao;
 
 
+import java.util.List;
+
 import com.gzxant.base.dao.CrudDao;
 import com.gzxant.entity.SysRole;
-import com.gzxant.vo.SysRoleVO;
-
-import java.util.List;
 
 /**
  * Created by chen on 2017/3/2.

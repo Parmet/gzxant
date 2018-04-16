@@ -1,13 +1,12 @@
 package com.gzxant.entity;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableName;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gzxant.base.entity.DataEntity;
+import java.io.Serializable;
 
 import org.hibernate.validator.constraints.Length;
 
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableName;
+import com.gzxant.base.entity.DataEntity;
 
 /**
  * Created by chen on 2017/3/31.

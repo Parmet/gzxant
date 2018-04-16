@@ -31,13 +31,6 @@
             <version>1.0.2</version>
         </dependency>
 
-
-        <dependency>
-            <groupId>org.sitemesh</groupId>
-            <artifactId>sitemesh</artifactId>
-        </dependency>
-
-
         <dependency>
             <groupId>com.gzxant</groupId>
             <artifactId>gzxant-code</artifactId>

@@ -49,6 +49,7 @@
         <module>gzxant-blog</module>
         <module>gzxant-wx-applet</module>
         <module>gzxant-shop</module>
+        <module>gzxant-food-safety</module>
     </modules>
 
     <!--全局依赖-->

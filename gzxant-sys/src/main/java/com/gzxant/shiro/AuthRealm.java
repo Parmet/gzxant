@@ -1,16 +1,14 @@
 package com.gzxant.shiro;
 
-import com.gzxant.constant.Global;
-import com.gzxant.constant.Setting;
-import com.gzxant.entity.SysRole;
-import com.gzxant.entity.SysUser;
-import com.gzxant.service.ISysRoleService;
-import com.gzxant.service.ISysUserService;
-import com.gzxant.shiro.ShiroUser;
-import com.gzxant.util.ApplicationContextRegister;
-import com.gzxant.util.Encodes;
+import javax.annotation.PostConstruct;
 
-import org.apache.shiro.authc.*;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.DisabledAccountException;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -21,7 +19,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
+import com.gzxant.constant.Global;
+import com.gzxant.constant.Setting;
+import com.gzxant.entity.SysRole;
+import com.gzxant.entity.SysUser;
+import com.gzxant.service.ISysRoleService;
+import com.gzxant.service.ISysUserService;
+import com.gzxant.util.ApplicationContextRegister;
+import com.gzxant.util.Encodes;
 
 /**
  * Created by chen on 2017/7/14.
