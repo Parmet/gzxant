@@ -49,7 +49,6 @@
         <module>gzxant-blog</module>
         <module>gzxant-wx-applet</module>
         <module>gzxant-shop</module>
-        <module>gzxant-food-safety</module>
     </modules>
 
     <!--全局依赖-->
@@ -277,10 +276,10 @@
                 <artifactId>gzxant-web</artifactId>
                 <version>${gzxant.version}</version>
             </dependency>
-
-			<dependency>
+            
+            <dependency>
                 <groupId>com.gzxant</groupId>
-                <artifactId>gzxant-food-safety</artifactId>
+                <artifactId>gzxant-shop</artifactId>
                 <version>${gzxant.version}</version>
             </dependency>
 
