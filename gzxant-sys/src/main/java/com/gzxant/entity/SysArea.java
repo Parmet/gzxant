@@ -1,10 +1,10 @@
 package com.gzxant.entity;
 
 
+import java.io.Serializable;
+
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.gzxant.base.entity.BaseEntity;
-
-import java.io.Serializable;
 
 /**
  * Created by chen on 2017/3/31.

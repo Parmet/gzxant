@@ -3,11 +3,11 @@ package com.gzxant.base.dao;
 
 
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.gzxant.base.entity.TreeEntity;
-
-import java.util.List;
 
 /**
  * Created by chen on 2017/4/10.

@@ -1,5 +1,9 @@
 package com.gzxant.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,9 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gzxant.service.IPomService;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 /**
  * Created by chen on 2017/12/28.
  * <p>

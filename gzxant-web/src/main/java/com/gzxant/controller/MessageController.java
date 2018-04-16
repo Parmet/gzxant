@@ -1,5 +1,7 @@
 package com.gzxant.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -9,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gzxant.entity.Message;
-
-import java.security.Principal;
 
 /**
  * Created by chen on 2017/10/19.

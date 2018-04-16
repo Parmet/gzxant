@@ -5,8 +5,6 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.gzxant.base.entity.DataEntity;
 import com.gzxant.constant.Global;
 
-import org.hibernate.validator.constraints.Length;
-
 /**
  * Created by chen on 2017/7/31.
  * <p>

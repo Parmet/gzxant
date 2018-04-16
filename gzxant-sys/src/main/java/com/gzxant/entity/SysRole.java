@@ -1,17 +1,16 @@
 package com.gzxant.entity;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gzxant.constant.Global;
 import com.gzxant.enums.DataScopeEnum;
-import com.gzxant.vo.SysMenuVO;
-
-import org.hibernate.validator.constraints.Length;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by chenjianan on 2017/3/1-16:12.

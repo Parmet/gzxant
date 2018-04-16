@@ -1,14 +1,13 @@
 package com.gzxant.dao;
 
 
-import com.baomidou.mybatisplus.plugins.Page;
-import com.gzxant.base.dao.CrudDao;
-import com.gzxant.entity.SysUser;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import com.gzxant.base.dao.CrudDao;
+import com.gzxant.entity.SysUser;
 
 /**
  * Created by chenjianan on 2016/12/14-20:11.

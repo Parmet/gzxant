@@ -1,13 +1,13 @@
 package com.gzxant.util;
 
-import org.apache.commons.lang3.StringEscapeUtils;
-
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringEscapeUtils;
 
 /**
  * Created by chen on 2017/5/12.

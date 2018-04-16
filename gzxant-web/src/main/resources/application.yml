@@ -1,6 +1,8 @@
+server:
+  port: 8081
+  context-path: /gzxant/web
+
 spring:
-  application:
-    name: gzxant
   profiles:
     active: dev
 
@@ -17,38 +19,22 @@ spring:
     request-context-attribute: rc
     charset: UTF-8
 
-  redis:
-    database: 0
-    host: 192.168.0.200
-    port: 6379
-    password: 123456
-    pool:
-      max-active: 8
-      max-wait: -1
-      max-idle: 18
-      min-idle: 0
-    timeout: 0
-
-
 sitemesh:
   contentPath: /*
   decoratorPath: classpath:/layouts/default.jsp
   excludedPaths: /js/*,/assets/*,/css/*
 
-
-
 management:
   security:
     enabled: false
 
-
 logging.level.project.user.UserClient: DEBUG
 
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath:mapper/sys/*.xml, classpath:mapper/log/*.xml
   type-aliases-package: com.gzxant.entity
 mybatis-plus:
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath:mapper/sys/*.xml, classpath:mapper/log/*.xml
   type-aliases-package: com.gzxant.entity
   global-config:
     id-type: 2
@@ -60,7 +46,7 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
+
 security:
   basic:
     enabled: false
-

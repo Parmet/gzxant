@@ -1,5 +1,26 @@
 package com.gzxant.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.alibaba.fastjson.JSON;
 import com.gzxant.annotation.SLog;
 import com.gzxant.base.controller.BaseController;
@@ -10,27 +31,13 @@ import com.gzxant.enums.HttpCodeEnum;
 import com.gzxant.exception.SlifeException;
 import com.gzxant.service.ISysRoleService;
 import com.gzxant.service.ISysUserService;
-import com.gzxant.shiro.SlifeSysUser;
+import com.gzxant.shiro.GzxantSysUser;
 import com.gzxant.util.FileUtils;
 import com.gzxant.util.PasswordUtils;
 import com.gzxant.util.ReturnDTOUtil;
 import com.gzxant.util.StringUtils;
 
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.aop.support.AopUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by chen on 2017/8/1.
@@ -96,7 +103,7 @@ public class SysUserController extends BaseController {
             logger.info("默认头像不可删除！");
             return ReturnDTOUtil.custom(HttpCodeEnum.DELETE_DEFAULT_PHOTO_ERR);
         }
-        Long userId = SlifeSysUser.id();
+        Long userId = GzxantSysUser.id();
         SysUser sysUser = sysUserService.selectById(userId);
         if (ObjectUtils.isEmpty(sysUser)) {
             return ReturnDTOUtil.notFound();
@@ -241,7 +248,7 @@ public class SysUserController extends BaseController {
     @ResponseBody
     public ReturnDTO selectUserSideMenu() {
 
-        return ReturnDTOUtil.success(sysUserService.selectUserAllInfoById(SlifeSysUser.id()));
+        return ReturnDTOUtil.success(sysUserService.selectUserAllInfoById(GzxantSysUser.id()));
     }
 
     @SLog("批量删除用户")

@@ -1,6 +1,8 @@
 package com.gzxant.exception;
 
 
+import java.sql.SQLException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -16,8 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.gzxant.base.entity.ReturnDTO;
 import com.gzxant.enums.HttpCodeEnum;
 import com.gzxant.util.ReturnDTOUtil;
-
-import java.sql.SQLException;
 
 /**
  * 通用异常处理类

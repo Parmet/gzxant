@@ -1,12 +1,12 @@
 package com.gzxant.service.impl;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.gzxant.base.service.impl.BaseService;
 import com.gzxant.dao.SysCompanyDao;
 import com.gzxant.entity.SysCompany;
 import com.gzxant.service.ISysCompanyService;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  *

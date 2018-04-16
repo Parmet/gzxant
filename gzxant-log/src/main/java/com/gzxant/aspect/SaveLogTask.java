@@ -1,22 +1,17 @@
 package com.gzxant.aspect;
 
-import com.alibaba.fastjson.JSON;
-import com.gzxant.annotation.SLog;
-import com.gzxant.dao.SlifeLogDao;
-import com.gzxant.entity.SlifeLog;
-import com.gzxant.shiro.ShiroUser;
-import com.gzxant.shiro.SlifeSysUser;
-import com.gzxant.util.ApplicationContextRegister;
-import com.gzxant.util.IPUtils;
-import com.gzxant.util.ServletUtils;
+import java.lang.reflect.Method;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Method;
-import java.util.Date;
+import com.alibaba.fastjson.JSON;
+import com.gzxant.annotation.SLog;
+import com.gzxant.dao.GzxantLogDao;
+import com.gzxant.entity.GzxantLog;
+import com.gzxant.shiro.GzxantSysUser;
+import com.gzxant.shiro.ShiroUser;
+import com.gzxant.util.ApplicationContextRegister;
 
 /**
  *
@@ -29,8 +24,7 @@ import java.util.Date;
  */
 public class SaveLogTask implements Runnable {
 
-
-    private SlifeLogDao slifeLogDao = ApplicationContextRegister.getBean(SlifeLogDao.class);
+    private GzxantLogDao gzxantLogDao = ApplicationContextRegister.getBean(GzxantLogDao.class);
 
     private ProceedingJoinPoint joinPoint;
     private long time;
@@ -57,7 +51,7 @@ public class SaveLogTask implements Runnable {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
 
-        SlifeLog slifeLog = new SlifeLog();
+        GzxantLog slifeLog = new GzxantLog();
         SLog sLog = method.getAnnotation(SLog.class);
 
         if (slifeLog != null) {
@@ -81,7 +75,7 @@ public class SaveLogTask implements Runnable {
         // 设置IP地址
         slifeLog.setIp(ip);
         // 用户名
-        ShiroUser currUser = SlifeSysUser.ShiroUser();
+        ShiroUser currUser = GzxantSysUser.ShiroUser();
 
         if (null == currUser) {
             if (null != slifeLog.getParams()) {
@@ -95,13 +89,12 @@ public class SaveLogTask implements Runnable {
         } else {
             slifeLog.setName(currUser.getName());
             slifeLog.setLoginName(currUser.getUsername());
-
         }
 
         slifeLog.setUseTime(time);
 
 
         // 保存系统日志
-        slifeLogDao.insert(slifeLog);
+        gzxantLogDao.insert(slifeLog);
     }
 }

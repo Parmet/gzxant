@@ -1,16 +1,16 @@
 package com.gzxant.entity;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableName;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gzxant.constant.Global;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gzxant.constant.Global;
 
 /**
  * Created by chenjianan on 2016/12/13-20:00.

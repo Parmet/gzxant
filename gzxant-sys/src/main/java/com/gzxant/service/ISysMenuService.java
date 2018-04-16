@@ -1,11 +1,10 @@
 package com.gzxant.service;
 
-import com.baomidou.mybatisplus.service.IService;
+import java.util.List;
+
 import com.gzxant.base.service.IBaseService;
 import com.gzxant.base.vo.JsTree;
 import com.gzxant.entity.SysMenu;
-
-import java.util.List;
 
 /**
  *

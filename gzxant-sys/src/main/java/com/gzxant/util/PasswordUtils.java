@@ -1,8 +1,5 @@
 package com.gzxant.util;
 
-import com.gzxant.util.Digests;
-import com.gzxant.util.Encodes;
-
 /**
  * Created by chen on 2017/9/1.
  * <p>

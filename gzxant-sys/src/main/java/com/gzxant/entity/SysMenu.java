@@ -1,14 +1,14 @@
 package com.gzxant.entity;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableName;
-import com.gzxant.base.entity.TreeEntity;
-
-import org.hibernate.validator.constraints.Length;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.validator.constraints.Length;
+
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableName;
+import com.gzxant.base.entity.TreeEntity;
 
 /**
  * Created by chen on 2017/3/2.

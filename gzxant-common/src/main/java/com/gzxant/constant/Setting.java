@@ -8,11 +8,16 @@ package com.gzxant.constant;
  * Describe: 系统的参数设置，后面要放到数据库和缓存中。
  */
 public class Setting {
+	/**
+	 * 启动类扫描mapper文件路径
+	 */
+	public static final String SCAN_MAPPER_PATH = "com.gzxant.dao";
+	
     /**
      * 文件根目录
      */
     public static final String BASEFLODER = "attach";
-
+    
     /**
      * excel 目录
      */

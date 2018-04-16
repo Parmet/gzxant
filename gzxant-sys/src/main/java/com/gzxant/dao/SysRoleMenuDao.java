@@ -1,9 +1,9 @@
 package com.gzxant.dao;
 
+import org.springframework.stereotype.Component;
+
 import com.gzxant.base.dao.CrudDao;
 import com.gzxant.entity.SysRoleMenu;
-
-import org.springframework.stereotype.Component;
 
 /**
  *
