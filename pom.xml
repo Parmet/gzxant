@@ -45,15 +45,11 @@
         <module>gzxant-log</module>
         <module>gzxant-code</module>
         <module>gzxant-drools</module>
-        <module>gzxant-activiti</module>
-        <module>gzxant-blog</module>
-        <module>gzxant-wx-applet</module>
-        <module>gzxant-shop</module>
+        <module>gzxant-food-safety</module>
     </modules>
 
     <!--全局依赖-->
     <dependencies>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -75,7 +71,6 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${swagger.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-web</artifactId>
@@ -86,19 +81,16 @@
             <artifactId>shiro-cas</artifactId>
             <version>${shiro.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-core</artifactId>
             <version>${shiro.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
             <version>${shiro.version}</version>
         </dependency>
-
         <!--缓存-->
         <dependency>
             <groupId>org.ehcache</groupId>
@@ -135,7 +127,6 @@
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-data-redis</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
@@ -162,32 +153,23 @@
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
-
-
-
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
-
     </dependencies>
 
 
@@ -205,14 +187,11 @@
                 <artifactId>pinyin4j</artifactId>
                 <version>${pinyin4j.version}</version>
             </dependency>
-
-
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
@@ -223,7 +202,6 @@
                 <artifactId>druid</artifactId>
                 <version>${druid.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -234,8 +212,28 @@
                 <artifactId>mybatis-plus</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
-
             <dependency>
+                <groupId>org.activiti</groupId>
+                <artifactId>activiti-spring-boot-starter-basic</artifactId>
+                <version>${activiti.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.activiti</groupId>
+                <artifactId>activiti-spring-boot-starter-rest-api</artifactId>
+                <version>${activiti.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.activiti</groupId>
+                <artifactId>activiti-spring-boot-starter-actuator</artifactId>
+                <version>${activiti.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.sitemesh</groupId>
+                <artifactId>sitemesh</artifactId>
+                <version>${sitemesh.version}</version>
+            </dependency>
+
+			<dependency>
                 <groupId>com.gzxant</groupId>
                 <artifactId>gzxant-common</artifactId>
                 <version>${gzxant.version}</version>
@@ -276,6 +274,12 @@
                 <version>${gzxant.version}</version>
             </dependency>
 
+			<dependency>
+                <groupId>com.gzxant</groupId>
+                <artifactId>gzxant-food-safety</artifactId>
+                <version>${gzxant.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.gzxant</groupId>
                 <artifactId>gzxant-activiti</artifactId>
@@ -286,30 +290,6 @@
                 <artifactId>gzxant-drools</artifactId>
                 <version>${gzxant.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.activiti</groupId>
-                <artifactId>activiti-spring-boot-starter-basic</artifactId>
-                <version>${activiti.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.activiti</groupId>
-                <artifactId>activiti-spring-boot-starter-rest-api</artifactId>
-                <version>${activiti.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.activiti</groupId>
-                <artifactId>activiti-spring-boot-starter-actuator</artifactId>
-                <version>${activiti.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.sitemesh</groupId>
-                <artifactId>sitemesh</artifactId>
-                <version>${sitemesh.version}</version>
-            </dependency>
-
 
         </dependencies>
     </dependencyManagement>
