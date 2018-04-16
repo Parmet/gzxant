@@ -43,9 +43,12 @@ CREATE TABLE IF NOT EXISTS `blog_content` (
 -- Dumping structure for table gzxant.shop_brand
 DROP TABLE IF EXISTS `shop_brand`;
 CREATE TABLE IF NOT EXISTS `shop_brand` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `created_date` datetime DEFAULT NULL,
-  `last_modified_date` datetime DEFAULT NULL,
+  `id` BIGINT(18) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `create_id` BIGINT(18) NULL DEFAULT NULL COMMENT '创建者id',
+  `update_id` BIGINT(18) NULL DEFAULT NULL COMMENT '修改者id',
+  `create_date` DATETIME NULL DEFAULT NULL COMMENT '创建时间',
+  `update_date` DATETIME NULL DEFAULT NULL COMMENT '修改时间',
+  `del_flag` CHAR(1) NULL DEFAULT NULL COMMENT '删除标记Y：正常；N：删除；A：审核' COLLATE 'utf8_bin',
   `version` int(11) DEFAULT NULL,
   `found_date` datetime DEFAULT NULL,
   `logo` varchar(255) DEFAULT NULL,
@@ -66,9 +69,12 @@ CREATE TABLE IF NOT EXISTS `shop_brand` (
 -- Dumping structure for table gzxant.shop_catalog
 DROP TABLE IF EXISTS `shop_catalog`;
 CREATE TABLE IF NOT EXISTS `shop_catalog` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `create_date` datetime DEFAULT NULL,
-  `last_modified_date` datetime DEFAULT NULL,
+  `id` BIGINT(18) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `create_id` BIGINT(18) NULL DEFAULT NULL COMMENT '创建者id',
+  `update_id` BIGINT(18) NULL DEFAULT NULL COMMENT '修改者id',
+  `create_date` DATETIME NULL DEFAULT NULL COMMENT '创建时间',
+  `update_date` DATETIME NULL DEFAULT NULL COMMENT '修改时间',
+  `del_flag` CHAR(1) NULL DEFAULT NULL COMMENT '删除标记Y：正常；N：删除；A：审核' COLLATE 'utf8_bin',
   `version` int(11) DEFAULT NULL,
   `level` int(11) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
@@ -89,14 +95,18 @@ CREATE TABLE IF NOT EXISTS `shop_catalog` (
 -- Dumping structure for table gzxant.shop_catalog_property
 DROP TABLE IF EXISTS `shop_catalog_property`;
 CREATE TABLE IF NOT EXISTS `shop_catalog_property` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` BIGINT(18) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `create_id` BIGINT(18) NULL DEFAULT NULL COMMENT '创建者id',
+  `update_id` BIGINT(18) NULL DEFAULT NULL COMMENT '修改者id',
+  `create_date` DATETIME NULL DEFAULT NULL COMMENT '创建时间',
+  `update_date` DATETIME NULL DEFAULT NULL COMMENT '修改时间',
+  `del_flag` CHAR(1) NULL DEFAULT NULL COMMENT '删除标记Y：正常；N：删除；A：审核' COLLATE 'utf8_bin',
   `catalog_id` bigint(20) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `sequence` int(11) DEFAULT NULL,
   `type` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `catalog_id` (`catalog_id`),
-  CONSTRAINT `shop_catalog_property_ibfk_1` FOREIGN KEY (`catalog_id`) REFERENCES `shop_catalog` (`id`)
+  KEY `catalog_id` (`catalog_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table gzxant.shop_catalog_property: ~0 rows (approximately)
@@ -107,13 +117,17 @@ CREATE TABLE IF NOT EXISTS `shop_catalog_property` (
 -- Dumping structure for table gzxant.shop_catalog_property_value
 DROP TABLE IF EXISTS `shop_catalog_property_value`;
 CREATE TABLE IF NOT EXISTS `shop_catalog_property_value` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` BIGINT(18) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `create_id` BIGINT(18) NULL DEFAULT NULL COMMENT '创建者id',
+  `update_id` BIGINT(18) NULL DEFAULT NULL COMMENT '修改者id',
+  `create_date` DATETIME NULL DEFAULT NULL COMMENT '创建时间',
+  `update_date` DATETIME NULL DEFAULT NULL COMMENT '修改时间',
+  `del_flag` CHAR(1) NULL DEFAULT NULL COMMENT '删除标记Y：正常；N：删除；A：审核' COLLATE 'utf8_bin',
   `catalog_property_id` bigint(20) NOT NULL,
   `value` varchar(255) DEFAULT NULL,
   `sequence` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `catalog_property_id` (`catalog_property_id`),
-  CONSTRAINT `shop_catalog_property_value_ibfk_1` FOREIGN KEY (`catalog_property_id`) REFERENCES `shop_catalog_property` (`id`)
+  KEY `catalog_property_id` (`catalog_property_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table gzxant.shop_catalog_property_value: ~0 rows (approximately)
@@ -124,7 +138,12 @@ CREATE TABLE IF NOT EXISTS `shop_catalog_property_value` (
 -- Dumping structure for table gzxant.shop_order_action
 DROP TABLE IF EXISTS `shop_order_action`;
 CREATE TABLE IF NOT EXISTS `shop_order_action` (
-  `id` bigint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `id` BIGINT(18) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `create_id` BIGINT(18) NULL DEFAULT NULL COMMENT '创建者id',
+  `update_id` BIGINT(18) NULL DEFAULT NULL COMMENT '修改者id',
+  `create_date` DATETIME NULL DEFAULT NULL COMMENT '创建时间',
+  `update_date` DATETIME NULL DEFAULT NULL COMMENT '修改时间',
+  `del_flag` CHAR(1) NULL DEFAULT NULL COMMENT '删除标记Y：正常；N：删除；A：审核' COLLATE 'utf8_bin',
   `order_id` bigint(8) unsigned NOT NULL DEFAULT '0',
   `action_user` varchar(30) NOT NULL DEFAULT '',
   `order_status` tinyint(2) unsigned NOT NULL DEFAULT '0',
@@ -134,8 +153,7 @@ CREATE TABLE IF NOT EXISTS `shop_order_action` (
   `action_note` varchar(255) NOT NULL DEFAULT '',
   `action_time` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `order_id` (`order_id`),
-  CONSTRAINT `shop_order_action_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `shop_order_info` (`id`)
+  KEY `order_id` (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table gzxant.shop_order_action: ~0 rows (approximately)
@@ -146,7 +164,12 @@ CREATE TABLE IF NOT EXISTS `shop_order_action` (
 -- Dumping structure for table gzxant.shop_order_info
 DROP TABLE IF EXISTS `shop_order_info`;
 CREATE TABLE IF NOT EXISTS `shop_order_info` (
-  `id` bigint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `id` BIGINT(18) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `create_id` BIGINT(18) NULL DEFAULT NULL COMMENT '创建者id',
+  `update_id` BIGINT(18) NULL DEFAULT NULL COMMENT '修改者id',
+  `create_date` DATETIME NULL DEFAULT NULL COMMENT '创建时间',
+  `update_date` DATETIME NULL DEFAULT NULL COMMENT '修改时间',
+  `del_flag` CHAR(1) NULL DEFAULT NULL COMMENT '删除标记Y：正常；N：删除；A：审核' COLLATE 'utf8_bin',
   `order_sn` varchar(20) NOT NULL DEFAULT '',
   `user_id` bigint(8) unsigned NOT NULL DEFAULT '0',
   `order_status` tinyint(2) unsigned NOT NULL DEFAULT '0',
@@ -166,8 +189,7 @@ CREATE TABLE IF NOT EXISTS `shop_order_info` (
   KEY `user_id` (`user_id`),
   KEY `order_status` (`order_status`),
   KEY `shipping_status` (`shipping_status`),
-  KEY `pay_status` (`pay_status`),
-  CONSTRAINT `shop_order_info_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  KEY `pay_status` (`pay_status`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table gzxant.shop_order_info: ~0 rows (approximately)
@@ -178,7 +200,12 @@ CREATE TABLE IF NOT EXISTS `shop_order_info` (
 -- Dumping structure for table gzxant.shop_order_product
 DROP TABLE IF EXISTS `shop_order_product`;
 CREATE TABLE IF NOT EXISTS `shop_order_product` (
-  `id` bigint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `id` BIGINT(18) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `create_id` BIGINT(18) NULL DEFAULT NULL COMMENT '创建者id',
+  `update_id` BIGINT(18) NULL DEFAULT NULL COMMENT '修改者id',
+  `create_date` DATETIME NULL DEFAULT NULL COMMENT '创建时间',
+  `update_date` DATETIME NULL DEFAULT NULL COMMENT '修改时间',
+  `del_flag` CHAR(1) NULL DEFAULT NULL COMMENT '删除标记Y：正常；N：删除；A：审核' COLLATE 'utf8_bin',
   `order_id` bigint(8) unsigned NOT NULL DEFAULT '0',
   `sku_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `product_name` varchar(120) NOT NULL DEFAULT '',
@@ -187,8 +214,7 @@ CREATE TABLE IF NOT EXISTS `shop_order_product` (
   `sku_attr` varchar(1000) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `order_id` (`order_id`),
-  KEY `goods_id` (`sku_id`),
-  CONSTRAINT `shop_order_product_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `shop_order_info` (`id`)
+  KEY `goods_id` (`sku_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table gzxant.shop_order_product: ~0 rows (approximately)
@@ -199,9 +225,12 @@ CREATE TABLE IF NOT EXISTS `shop_order_product` (
 -- Dumping structure for table gzxant.shop_product
 DROP TABLE IF EXISTS `shop_product`;
 CREATE TABLE IF NOT EXISTS `shop_product` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `created_date` datetime DEFAULT NULL,
-  `last_modified_date` datetime DEFAULT NULL,
+  `id` BIGINT(18) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `create_id` BIGINT(18) NULL DEFAULT NULL COMMENT '创建者id',
+  `update_id` BIGINT(18) NULL DEFAULT NULL COMMENT '修改者id',
+  `create_date` DATETIME NULL DEFAULT NULL COMMENT '创建时间',
+  `update_date` DATETIME NULL DEFAULT NULL COMMENT '修改时间',
+  `del_flag` CHAR(1) NULL DEFAULT NULL COMMENT '删除标记Y：正常；N：删除；A：审核' COLLATE 'utf8_bin',
   `version` int(11) DEFAULT NULL,
   `catalog_id` bigint(20) DEFAULT NULL,
   `brand_id` bigint(20) DEFAULT NULL,
@@ -215,9 +244,7 @@ CREATE TABLE IF NOT EXISTS `shop_product` (
   `impressions` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `catalog_id` (`catalog_id`),
-  KEY `brand_id` (`brand_id`),
-  CONSTRAINT `shop_product_ibfk_1` FOREIGN KEY (`catalog_id`) REFERENCES `shop_catalog` (`id`),
-  CONSTRAINT `shop_product_ibfk_2` FOREIGN KEY (`brand_id`) REFERENCES `shop_brand` (`id`)
+  KEY `brand_id` (`brand_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table gzxant.shop_product: ~0 rows (approximately)
@@ -228,13 +255,17 @@ CREATE TABLE IF NOT EXISTS `shop_product` (
 -- Dumping structure for table gzxant.shop_product_catalog_property_value
 DROP TABLE IF EXISTS `shop_product_catalog_property_value`;
 CREATE TABLE IF NOT EXISTS `shop_product_catalog_property_value` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` BIGINT(18) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `create_id` BIGINT(18) NULL DEFAULT NULL COMMENT '创建者id',
+  `update_id` BIGINT(18) NULL DEFAULT NULL COMMENT '修改者id',
+  `create_date` DATETIME NULL DEFAULT NULL COMMENT '创建时间',
+  `update_date` DATETIME NULL DEFAULT NULL COMMENT '修改时间',
+  `del_flag` CHAR(1) NULL DEFAULT NULL COMMENT '删除标记Y：正常；N：删除；A：审核' COLLATE 'utf8_bin',
   `product_id` bigint(20) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `value` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `product_id` (`product_id`),
-  CONSTRAINT `shop_product_catalog_property_value_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `shop_product` (`id`)
+  KEY `product_id` (`product_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table gzxant.shop_product_catalog_property_value: ~0 rows (approximately)
@@ -245,12 +276,16 @@ CREATE TABLE IF NOT EXISTS `shop_product_catalog_property_value` (
 -- Dumping structure for table gzxant.shop_product_desc
 DROP TABLE IF EXISTS `shop_product_desc`;
 CREATE TABLE IF NOT EXISTS `shop_product_desc` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` BIGINT(18) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `create_id` BIGINT(18) NULL DEFAULT NULL COMMENT '创建者id',
+  `update_id` BIGINT(18) NULL DEFAULT NULL COMMENT '修改者id',
+  `create_date` DATETIME NULL DEFAULT NULL COMMENT '创建时间',
+  `update_date` DATETIME NULL DEFAULT NULL COMMENT '修改时间',
+  `del_flag` CHAR(1) NULL DEFAULT NULL COMMENT '删除标记Y：正常；N：删除；A：审核' COLLATE 'utf8_bin',
   `details` longtext NOT NULL,
   `product_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `product_id` (`product_id`),
-  CONSTRAINT `shop_product_desc_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `shop_product` (`id`)
+  KEY `product_id` (`product_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table gzxant.shop_product_desc: ~0 rows (approximately)
@@ -261,15 +296,19 @@ CREATE TABLE IF NOT EXISTS `shop_product_desc` (
 -- Dumping structure for table gzxant.shop_product_image
 DROP TABLE IF EXISTS `shop_product_image`;
 CREATE TABLE IF NOT EXISTS `shop_product_image` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` BIGINT(18) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `create_id` BIGINT(18) NULL DEFAULT NULL COMMENT '创建者id',
+  `update_id` BIGINT(18) NULL DEFAULT NULL COMMENT '修改者id',
+  `create_date` DATETIME NULL DEFAULT NULL COMMENT '创建时间',
+  `update_date` DATETIME NULL DEFAULT NULL COMMENT '修改时间',
+  `del_flag` CHAR(1) NULL DEFAULT NULL COMMENT '删除标记Y：正常；N：删除；A：审核' COLLATE 'utf8_bin',
   `product_id` bigint(20) DEFAULT NULL,
   `image_path` varchar(255) DEFAULT NULL,
   `sequence` int(11) DEFAULT NULL,
   `mods` bigint(20) DEFAULT NULL,
   `cover` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `product_id` (`product_id`),
-  CONSTRAINT `shop_product_image_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `shop_product` (`id`)
+  KEY `product_id` (`product_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table gzxant.shop_product_image: ~0 rows (approximately)
@@ -280,14 +319,18 @@ CREATE TABLE IF NOT EXISTS `shop_product_image` (
 -- Dumping structure for table gzxant.shop_product_sku
 DROP TABLE IF EXISTS `shop_product_sku`;
 CREATE TABLE IF NOT EXISTS `shop_product_sku` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` BIGINT(18) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `create_id` BIGINT(18) NULL DEFAULT NULL COMMENT '创建者id',
+  `update_id` BIGINT(18) NULL DEFAULT NULL COMMENT '修改者id',
+  `create_date` DATETIME NULL DEFAULT NULL COMMENT '创建时间',
+  `update_date` DATETIME NULL DEFAULT NULL COMMENT '修改时间',
+  `del_flag` CHAR(1) NULL DEFAULT NULL COMMENT '删除标记Y：正常；N：删除；A：审核' COLLATE 'utf8_bin',
   `product_id` bigint(20) DEFAULT NULL,
   `code` varchar(255) DEFAULT NULL,
   `price` decimal(18,2) DEFAULT NULL,
   `mods` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `product_id` (`product_id`),
-  CONSTRAINT `shop_product_sku_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `shop_product` (`id`)
+  KEY `product_id` (`product_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table gzxant.shop_product_sku: ~0 rows (approximately)
@@ -298,16 +341,19 @@ CREATE TABLE IF NOT EXISTS `shop_product_sku` (
 -- Dumping structure for table gzxant.shop_product_sku_property
 DROP TABLE IF EXISTS `shop_product_sku_property`;
 CREATE TABLE IF NOT EXISTS `shop_product_sku_property` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` BIGINT(18) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `create_id` BIGINT(18) NULL DEFAULT NULL COMMENT '创建者id',
+  `update_id` BIGINT(18) NULL DEFAULT NULL COMMENT '修改者id',
+  `create_date` DATETIME NULL DEFAULT NULL COMMENT '创建时间',
+  `update_date` DATETIME NULL DEFAULT NULL COMMENT '修改时间',
+  `del_flag` CHAR(1) NULL DEFAULT NULL COMMENT '删除标记Y：正常；N：删除；A：审核' COLLATE 'utf8_bin',
   `product_sku_id` bigint(20) DEFAULT NULL,
   `sku_property_id` bigint(20) DEFAULT NULL,
   `value` varchar(255) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `product_sku_id` (`product_sku_id`),
-  KEY `sku_property_id` (`sku_property_id`),
-  CONSTRAINT `shop_product_sku_property_ibfk_1` FOREIGN KEY (`product_sku_id`) REFERENCES `shop_product_sku` (`id`),
-  CONSTRAINT `shop_product_sku_property_ibfk_2` FOREIGN KEY (`sku_property_id`) REFERENCES `shop_sku_property` (`id`)
+  KEY `sku_property_id` (`sku_property_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table gzxant.shop_product_sku_property: ~0 rows (approximately)
@@ -318,14 +364,18 @@ CREATE TABLE IF NOT EXISTS `shop_product_sku_property` (
 -- Dumping structure for table gzxant.shop_sku_property
 DROP TABLE IF EXISTS `shop_sku_property`;
 CREATE TABLE IF NOT EXISTS `shop_sku_property` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` BIGINT(18) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `create_id` BIGINT(18) NULL DEFAULT NULL COMMENT '创建者id',
+  `update_id` BIGINT(18) NULL DEFAULT NULL COMMENT '修改者id',
+  `create_date` DATETIME NULL DEFAULT NULL COMMENT '创建时间',
+  `update_date` DATETIME NULL DEFAULT NULL COMMENT '修改时间',
+  `del_flag` CHAR(1) NULL DEFAULT NULL COMMENT '删除标记Y：正常；N：删除；A：审核' COLLATE 'utf8_bin',
   `name` varchar(255) NOT NULL,
   `catalog_id` bigint(20) NOT NULL,
   `type` tinyint(4) NOT NULL,
   `sequence` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `catalog_id` (`catalog_id`),
-  CONSTRAINT `shop_sku_property_ibfk_1` FOREIGN KEY (`catalog_id`) REFERENCES `shop_catalog` (`id`)
+  KEY `catalog_id` (`catalog_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table gzxant.shop_sku_property: ~0 rows (approximately)
@@ -336,13 +386,17 @@ CREATE TABLE IF NOT EXISTS `shop_sku_property` (
 -- Dumping structure for table gzxant.shop_sku_property_value
 DROP TABLE IF EXISTS `shop_sku_property_value`;
 CREATE TABLE IF NOT EXISTS `shop_sku_property_value` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` BIGINT(18) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `create_id` BIGINT(18) NULL DEFAULT NULL COMMENT '创建者id',
+  `update_id` BIGINT(18) NULL DEFAULT NULL COMMENT '修改者id',
+  `create_date` DATETIME NULL DEFAULT NULL COMMENT '创建时间',
+  `update_date` DATETIME NULL DEFAULT NULL COMMENT '修改时间',
+  `del_flag` CHAR(1) NULL DEFAULT NULL COMMENT '删除标记Y：正常；N：删除；A：审核' COLLATE 'utf8_bin',
   `sku_property_id` bigint(20) NOT NULL,
   `value` varchar(255) NOT NULL,
   `sequence` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `sku_property_id` (`sku_property_id`),
-  CONSTRAINT `shop_sku_property_value_ibfk_1` FOREIGN KEY (`sku_property_id`) REFERENCES `shop_sku_property` (`id`)
+  KEY `sku_property_id` (`sku_property_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table gzxant.shop_sku_property_value: ~0 rows (approximately)
