@@ -1,4 +1,4 @@
-package org.gzxant.shop;
+package org.gzxant;
 
 /**
  * Hello world!

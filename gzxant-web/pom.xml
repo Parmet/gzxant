@@ -35,7 +35,12 @@
             <groupId>com.gzxant</groupId>
             <artifactId>gzxant-code</artifactId>
         </dependency>
-
+        
+        <dependency>
+            <groupId>com.gzxant</groupId>
+            <artifactId>gzxant-common</artifactId>
+        </dependency>
+<!-- 
         <dependency>
             <groupId>com.gzxant</groupId>
             <artifactId>gzxant-drools</artifactId>
@@ -51,7 +56,7 @@
             <artifactId>gzxant-log</artifactId>
         </dependency>
 
-
+ -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
