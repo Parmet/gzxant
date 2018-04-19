@@ -19,7 +19,7 @@ import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 public class CodeGenerate {
-	private static String[] tableName = {"shop_product"};
+	private static String[] tableName = {"shop_goods_sku"};
 	public static String author = "xiaoyc";
 	public static String dataType = "base"; // tree, crud, base
 	public static String output = "E:\\temp\\code-generate"; 
