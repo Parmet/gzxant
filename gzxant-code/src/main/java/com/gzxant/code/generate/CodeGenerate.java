@@ -2,6 +2,7 @@ package com.gzxant.code.generate;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,8 +28,8 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
  * @since 2018-4-19
  */
 public class CodeGenerate {
-	//TODO 用扩展的方式实现自定义 mybatis plus
-	
+	// TODO 用扩展的方式实现自定义 mybatis plus
+
 	// --------------变动参数区 start------------------------------------------
 	/* === 表名 === */
 	private static String[] tableNames = { "shop_goods" };
@@ -36,6 +37,9 @@ public class CodeGenerate {
 	public static String author = "xiaoyc";
 	/* === 输出目标项目，为空则生成在当前项目中 === */
 	public static String targetProject = "gzxant-shop";
+	/* === 准备生成文件[controller, service, dao, entity, xml] === */
+	public static List<String> beGenerateFile = new ArrayList<>(
+			Arrays.asList("controller", "service", "dao", "entity", "xml"));
 	// --------------变动参数区 end------------------------------------------
 
 	// --------------数据源配置区 start------------------------------------------
@@ -109,7 +113,7 @@ public class CodeGenerate {
 		// strategy.setExclude(new String[]{"test"}); // 排除生成的表
 		// 自定义实体父类
 		// 自定义实体，公共字段
-//		strategy.setSuperEntityColumns(new String[] { "test_id", "age" });
+		// strategy.setSuperEntityColumns(new String[] { "test_id", "age" });
 		// 自定义 service 父类
 		strategy.setSuperServiceClass("com.gzxant.base.service.IBaseService");
 		// 自定义 service 实现类父类
@@ -156,22 +160,24 @@ public class CodeGenerate {
 		mpg.setCfg(cfg);
 
 		// 调整 xml 生成目录
-		focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
-			@Override
-			public String outputFile(TableInfo tableInfo) {
-				CodeGenerate cg = new CodeGenerate();
-				String path = cg.getPath("gzxant-common") + "\\src\\main\\resources\\mapper";
-				String[] names = tableInfo.getName().split("_");
-				for (int i = 0; i < names.length; i++) {
-					path = path + "\\" + names[i];
-				}
+		if (!beGenerateFile.isEmpty() && beGenerateFile.contains("xml")) {
+			focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
+				@Override
+				public String outputFile(TableInfo tableInfo) {
+					CodeGenerate cg = new CodeGenerate();
+					String path = cg.getPath("gzxant-common") + "\\src\\main\\resources\\mapper";
+					String[] names = tableInfo.getName().split("_");
+					for (int i = 0; i < names.length; i++) {
+						path = path + "\\" + names[i];
+					}
 
-				path = path + "\\" + tableInfo.getEntityName() + "Dao.xml";
-				System.out.println("dao path : " + path);
-				return path;
-			}
-		});
-		cfg.setFileOutConfigList(focList);
+					path = path + "\\" + tableInfo.getEntityName() + "Dao.xml";
+					System.out.println("dao path : " + path);
+					return path;
+				}
+			});
+			cfg.setFileOutConfigList(focList);
+		}
 		mpg.setCfg(cfg);
 
 		// 关闭默认 xml 生成，调整生成 至 根目录
@@ -182,12 +188,27 @@ public class CodeGenerate {
 		// 自定义模板配置，可以 copy 源码 mybatis-plus/src/main/resources/templates 下面内容修改，
 		// 放置自己项目的 src/main/resources/templates 目录下, 默认名称一下可以不配置，也可以自定义模板名称
 		TemplateConfig tc = new TemplateConfig();
-		tc.setController("/controller.java.vm");
-		tc.setServiceImpl("/serviceImpl.java.vm");
+		if (!beGenerateFile.isEmpty() && beGenerateFile.contains("controller")) {
+			tc.setController("/controller.java.vm");
+		} else {
+			tc.setController("");
+		}
+
+		if (!beGenerateFile.isEmpty() && beGenerateFile.contains("service")) {
+			tc.setServiceImpl("/serviceImpl.java.vm");
+		} else {
+			tc.setServiceImpl("");
+			tc.setService("");
+		}
+
 		tc.setXml("");
-		// tc.setEntity(null);
-		// tc.setMapper("...");
-		// tc.setService("...");
+
+		if (!beGenerateFile.isEmpty() && !beGenerateFile.contains("entity")) {
+			tc.setEntity("");
+		}
+		if (!beGenerateFile.isEmpty() && !beGenerateFile.contains("dao")) {
+			tc.setMapper("");
+		}
 		// 如上任何一个模块如果设置 空 OR Null 将不生成该模块。
 		mpg.setTemplate(tc);
 
