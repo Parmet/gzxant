@@ -12,8 +12,8 @@ import com.baomidou.mybatisplus.generator.config.FileOutConfig;
 import com.baomidou.mybatisplus.generator.config.GlobalConfig;
 import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
+import com.baomidou.mybatisplus.generator.config.TemplateConfig;
 import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
-import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
@@ -33,7 +33,6 @@ public class CodeGenerate {
 //	@Value("${spring.datasource.driver-class-name}")
 	public static String driver = "com.mysql.jdbc.Driver";
 	
-
 	public static void main(String[] args) {
 		
 		AutoGenerator mpg = new AutoGenerator();
@@ -60,7 +59,9 @@ public class CodeGenerate {
 		
 		// 自定义包配置
 		PackageConfig pg = new PackageConfig();
+		pg.setParent("com.gzxant");
 		pg.setController("controller");
+		pg.setMapper("dao");
 		pg.setXml("xml");
 		
 		mpg.setPackageInfo(pg);
@@ -118,12 +119,6 @@ public class CodeGenerate {
 		// strategy.setEntityBuilderModel(true);
 		mpg.setStrategy(strategy);
 
-		// 包配置
-		PackageConfig pc = new PackageConfig();
-		pc.setParent("com.gzxant");
-//		pc.setModuleName("shop");
-		mpg.setPackageInfo(pc);
-
 		// 注入自定义配置，可以在 VM 中使用 cfg.abc 【可无】
 		InjectionConfig cfg = new InjectionConfig() {
 			@Override
@@ -134,26 +129,35 @@ public class CodeGenerate {
 			}
 		};
 
-		// 自定义 xxList.jsp 生成
+//		页面 生成
 		List<FileOutConfig> focList = new ArrayList<FileOutConfig>();
-//		focList.add(new FileOutConfig("/template/list.jsp.vm") {
+//		focList.add(new FileOutConfig("/template/list.ftl.vm") {
 //			@Override
 //			public String outputFile(TableInfo tableInfo) {
 //				// 自定义输入文件名称
-//				return "D://my_" + tableInfo.getEntityName() + ".ftl";
+//				return output + "\\html\\" + tableInfo.getEntityName() + "\\list.ftl";
+//			}
+//		});
+//		
+//		focList.add(new FileOutConfig("/template/detail.ftl.vm") {
+//			@Override
+//			public String outputFile(TableInfo tableInfo) {
+//				// 自定义输入文件名称
+//				return output + "\\html\\" + tableInfo.getEntityName() + "\\detail.ftl";
+//			}
+//		});
+		
+		cfg.setFileOutConfigList(focList);
+		mpg.setCfg(cfg);
+
+		// 调整 xml 生成目录
+//		focList.add(new FileOutConfig(/templates/mapper.xml.vm") {
+//			@Override
+//			public String outputFile(TableInfo tableInfo) {
+//				return "/develop/code/xml/" + tableInfo.getEntityName() + ".xml";
 //			}
 //		});
 //		cfg.setFileOutConfigList(focList);
-		mpg.setCfg(cfg);
-
-		// 调整 xml 生成目录演示
-		focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
-			@Override
-			public String outputFile(TableInfo tableInfo) {
-				return "/develop/code/xml/" + tableInfo.getEntityName() + ".xml";
-			}
-		});
-		cfg.setFileOutConfigList(focList);
 		mpg.setCfg(cfg);
 
 		// 关闭默认 xml 生成，调整生成 至 根目录
@@ -163,15 +167,15 @@ public class CodeGenerate {
 
 		// 自定义模板配置，可以 copy 源码 mybatis-plus/src/main/resources/templates 下面内容修改，
 		// 放置自己项目的 src/main/resources/templates 目录下, 默认名称一下可以不配置，也可以自定义模板名称
-//		 TemplateConfig tc = new TemplateConfig();
-//		 tc.setController("/templates/code/controllerTemplate.ftl");
+		 TemplateConfig tc = new TemplateConfig();
+		 tc.setController("/controller.java.vm");
+		 tc.setServiceImpl("/serviceImpl.java.vm");
 //		 tc.setEntity(null);
 //		 tc.setMapper("...");
 //		 tc.setXml(null);
 //		 tc.setService("...");
-//		 tc.setServiceImpl("...");
 		// 如上任何一个模块如果设置 空 OR Null 将不生成该模块。
-//		 mpg.setTemplate(tc);
+		 mpg.setTemplate(tc);
 
 		// 执行生成
 		mpg.execute();
