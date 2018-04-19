@@ -9,13 +9,44 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>gzxant-shop</artifactId>
+    <artifactId>com.gzxant-shop</artifactId>
 
     <dependencies>
+
+        <!--启动springboot必要的依赖-->
+        <dependency>
+            <groupId>com.github.drtrang</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+
+
+        <!-- 代码生成模块-->
         <dependency>
             <groupId>com.gzxant</groupId>
             <artifactId>gzxant-common</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.gzxant</groupId>
+            <artifactId>com.gzxant-sys</artifactId>
+        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+
 
 </project>

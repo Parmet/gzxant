@@ -1,35 +1,32 @@
 package com.gzxant.code.generate;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
-import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
-import com.baomidou.mybatisplus.generator.config.FileOutConfig;
-import com.baomidou.mybatisplus.generator.config.GlobalConfig;
-import com.baomidou.mybatisplus.generator.config.PackageConfig;
-import com.baomidou.mybatisplus.generator.config.StrategyConfig;
+import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
 public class CodeGenerate {
-	private static String[] tableName = {"shop_goods_sku"};
-	public static String author = "xiaoyc";
-	public static String dataType = "base"; // tree, crud, base
-	public static String output = "E:\\temp\\code-generate"; 
+	private static String[] tableName = {"shop_brand"};
+	public static String author = "zt";
+	public static String dataType = "crud"; // tree, crud, base
+	public static String output = "D:\\360Downloads\\code-generate";
 
 //	@Value("${spring.datasource.url}")
-	public static String url = "jdbc:mysql://localhost:3306/gzxant?useUnicode=true&characterEncoding=utf8&useSSL=false";
+	public static String url = "jdbc:mysql://192.168.0.200:3306/gzxant?useUnicode=true&characterEncoding=utf8&useSSL=false";
 //	@Value("${spring.datasource.username}")
-	public static String name = "root";
+	public static String name = "gzxant";
 //	@Value("${spring.datasource.password}")
-	public static String passWord = "123456";
+	public static String passWord = "gzxant1804";
 //	@Value("${spring.datasource.driver-class-name}")
 	public static String driver = "com.mysql.jdbc.Driver";
 	
