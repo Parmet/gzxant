@@ -20,6 +20,7 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 public class CodeGenerate {
 	private static String[] tableName = {"shop_product"};
+	public static String author = "xiaoyc";
 	public static String dataType = "base"; // tree, crud, base
 	public static String output = "E:\\temp\\code-generate"; 
 
@@ -47,7 +48,7 @@ public class CodeGenerate {
 		gc.setEnableCache(false);// XML 二级缓存
 		gc.setBaseResultMap(true);// XML ResultMap
 		gc.setBaseColumnList(false);// XML columList
-		gc.setAuthor("xiaoyc");
+		gc.setAuthor(author);
 
 		// 自定义文件命名，注意 %s 会自动填充表实体属性！
 		gc.setMapperName("%sDao");
@@ -56,6 +57,13 @@ public class CodeGenerate {
 		gc.setServiceImplName("%sService");
 		gc.setControllerName("%sController");
 		mpg.setGlobalConfig(gc);
+		
+		// 自定义包配置
+		PackageConfig pg = new PackageConfig();
+		pg.setController("controller");
+		pg.setXml("xml");
+		
+		mpg.setPackageInfo(pg);
 
 		// 数据源配置
 		DataSourceConfig dsc = new DataSourceConfig();
