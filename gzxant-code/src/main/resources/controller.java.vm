@@ -1,7 +1,7 @@
-#set (${serviceAttr} = $table.serviceImplName.substring(0,1).toLowerCase() + $table.serviceImplName.substring(1,$table.serviceImplName.length())) 
-#set (${requestMapping} = "")
-#foreach($name in $!table.name.split('_'))
-	#set (${requestMapping} = ${requestMapping} + "/" + $name)
+#set ($serviceAttr = $table.serviceImplName.substring(0,1).toLowerCase() + $table.serviceImplName.substring(1,$table.serviceImplName.length())) 
+#set ($requestMapping = "")
+#foreach($name in $table.name.split('_'))
+	#set ($requestMapping = $requestMapping + "/" + $name)
 #end
 package ${package.Controller};
 
@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gzxant.annotation.SLog;
-import com.gzxant.base.controller.BaseController;
 import com.gzxant.base.entity.ReturnDTO;
 import com.gzxant.base.vo.DataTable;
 import ${package.Service}.${table.serviceName};
@@ -34,9 +33,6 @@ import ${superControllerClassPackage};
 #end
 
 import io.swagger.annotations.ApiOperation;
-
-
-
 
 /**
  * <p>
@@ -92,7 +88,7 @@ public class ${table.controllerName} {
 	@PostMapping(value = "/update")
 	@ResponseBody
 	public ReturnDTO update(${table.entityName} param) {
-		${serviceAttr}.update(param);
+		${serviceAttr}.updateById(param);
 		return ReturnDTOUtil.success();
 	}
 
@@ -106,6 +102,5 @@ public class ${table.controllerName} {
 			return ReturnDTOUtil.success();
 		}
 		return ReturnDTOUtil.fail();
-
 	}
 }
