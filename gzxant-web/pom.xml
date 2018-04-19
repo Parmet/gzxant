@@ -54,6 +54,10 @@
             <groupId>com.gzxant</groupId>
             <artifactId>gzxant-log</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.gzxant</groupId>
+            <artifactId>gzxant-shop</artifactId>
+        </dependency>
 
 
         <dependency>
