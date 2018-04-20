@@ -56,7 +56,9 @@ public class ShopBrandController extends BaseController {
 	public ReturnDTO create(ShopBrand param) {
 		param.setId(1L);
 		param.setName("添加测试");
-
+		if (param == null){
+			ReturnDTOUtil.fail();
+		}
 		shopBrandService.insert(param);
 		return ReturnDTOUtil.success();
 	}
@@ -67,6 +69,9 @@ public class ShopBrandController extends BaseController {
 	public ReturnDTO update(ShopBrand param) {
 		param.setId(1L);
 		param.setName("修改测试");
+		if (param == null){
+			ReturnDTOUtil.fail();
+		}
 		shopBrandService.updateById(param);
 		return ReturnDTOUtil.success();
 	}
