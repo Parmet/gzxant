@@ -1,7 +1,7 @@
 package com.gzxant.service.impl;
 
 import com.gzxant.entity.ShopGoodsSku;
-import com.gzxant.mapper.ShopGoodsSkuDao;
+import com.gzxant.dao.ShopGoodsSkuDao;
 import com.gzxant.service.IShopGoodsSkuService;
 import om.gzxant.base.service.impl.BaseService;
 import org.springframework.stereotype.Service;
