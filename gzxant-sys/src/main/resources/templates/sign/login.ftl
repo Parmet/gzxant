@@ -7,8 +7,8 @@
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <title>登陆页</title>
-    <meta name="keywords" content="slife管理系统">
-    <meta name="description" content="slife管理系统">
+    <meta name="keywords" content="gzxant管理系统">
+    <meta name="description" content="gzxant管理系统">
     <link href="${base}/css/bootstrap.min.css" rel="stylesheet">
     <link href="${base}/css/font-awesome.css?v=4.4.0" rel="stylesheet">
     <link href="${base}/css/animate.css" rel="stylesheet">
@@ -33,7 +33,7 @@
 
             <form class="login-form" action="${base}/login" method="post">
 
-                <p class="m-t-md">欢迎登录slife后台管理系统</p>
+                <p class="m-t-md">欢迎登录gzxant后台管理系统</p>
                 <div class="form-group">
                     <input type="text" id="username" name="username" class="form-control uname" placeholder="用户名" value="admin"/>
                 </div>
