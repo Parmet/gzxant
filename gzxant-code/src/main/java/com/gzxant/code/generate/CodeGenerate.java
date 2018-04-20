@@ -19,17 +19,17 @@ import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 public class CodeGenerate {
-	private static String[] tableName = {"fs_information"};
+	private static String[] tableName = {"shop_goods_sku"};
 	public static String author = "xiaoyc";
 	public static String dataType = "base"; // tree, crud, base
 	public static String output = "E:\\temp\\code-generate"; 
 
 //	@Value("${spring.datasource.url}")
-	public static String url = "jdbc:mysql://192.168.0.200:3306/gzxant?useUnicode=true&characterEncoding=utf8&useSSL=false";
+	public static String url = "jdbc:mysql://localhost:3306/gzxant?useUnicode=true&characterEncoding=utf8&useSSL=false";
 //	@Value("${spring.datasource.username}")
-	public static String name = "gzxant";
+	public static String name = "root";
 //	@Value("${spring.datasource.password}")
-	public static String passWord = "gzxant1804";
+	public static String passWord = "123456";
 //	@Value("${spring.datasource.driver-class-name}")
 	public static String driver = "com.mysql.jdbc.Driver";
 	
@@ -93,7 +93,7 @@ public class CodeGenerate {
 		// 自定义实体父类
 		// 自定义实体，公共字段
 		// strategy.setSuperEntityColumns(new String[] { "test_id", "age" });
-		// 自定义 dao 父类
+		// 自定义 mapper 父类
 		if (dataType.equals("tree")) {
 			strategy.setSuperEntityClass("com.gzxant.base.entity.TreeEntity");
 			strategy.setSuperMapperClass("com.gzxant.base.dao.TreeDao");

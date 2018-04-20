@@ -14,6 +14,16 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.gzxant</groupId>
+            <artifactId>gzxant-common</artifactId>
+        </dependency>
+        
+    	<dependency>
+            <groupId>com.gzxant</groupId>
+            <artifactId>gzxant-log</artifactId>
+        </dependency>
+    
+        <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.5</version>
@@ -23,14 +33,15 @@
 		<dependency>
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
-		    <version>5.1.43</version>
 		</dependency>
-		
+
+		<!-- https://mvnrepository.com/artifact/org.apache.velocity/velocity -->
 		<dependency>
 		    <groupId>org.apache.velocity</groupId>
-		    <artifactId>velocity-engine-core</artifactId>
-		    <version>2.0</version>
+		    <artifactId>velocity</artifactId>
+		    <version>1.7</version>
 		</dependency>
+
 		        
     </dependencies>
 
