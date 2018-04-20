@@ -1,25 +1,16 @@
 package com.gzxant.code.generate;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
-import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
-import com.baomidou.mybatisplus.generator.config.FileOutConfig;
-import com.baomidou.mybatisplus.generator.config.GlobalConfig;
-import com.baomidou.mybatisplus.generator.config.PackageConfig;
-import com.baomidou.mybatisplus.generator.config.StrategyConfig;
-import com.baomidou.mybatisplus.generator.config.TemplateConfig;
+import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+
+import java.io.File;
+import java.util.*;
 
 /**
  * 代码生成器
@@ -32,9 +23,9 @@ public class CodeGenerate {
 
 	// --------------变动参数区 start------------------------------------------
 	/* === 表名 === */
-	private static String[] tableNames = { "shop_goods" };
+	private static String[] tableNames = { "shop_brand" };
 	/* === 开发者 === */
-	public static String author = "xiaoyc";
+	public static String author = "zt";
 	/* === 输出目标项目，为空则生成在当前项目中 === */
 	public static String targetProject = "gzxant-shop";
 	/* === 准备生成文件[controller, service, dao, entity, xml] === */
@@ -45,7 +36,7 @@ public class CodeGenerate {
 	// --------------数据源配置区 start------------------------------------------
 	public static String url = "jdbc:mysql://localhost:3306/gzxant?useUnicode=true&characterEncoding=utf8&useSSL=false";
 	public static String name = "root";
-	public static String passWord = "123456";
+	public static String passWord = "admin";
 	public static String driver = "com.mysql.jdbc.Driver";
 	// --------------数据源配置区 end------------------------------------------
 
