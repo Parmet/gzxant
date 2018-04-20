@@ -66,7 +66,7 @@ public class SignController extends BaseController{
      */
     @GetMapping(value = "login")
     public String login(Model model, HttpServletRequest request) {
-
+    	System.out.println(request.getContextPath());
         model.addAttribute("base", request.getContextPath());
         Subject s = SecurityUtils.getSubject();
         return s.isRemembered() || s.isAuthenticated() ? "redirect:index" : "sign/login";
@@ -83,7 +83,7 @@ public class SignController extends BaseController{
     @PostMapping(value = "login")
     public String fail(HttpServletRequest request,@RequestParam(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM) String userName, Model model) {
         model.addAttribute(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM, userName);
-
+        System.out.println(request.getContextPath());
         String error=(String)request.getAttribute(org.apache.shiro.web.filter.authc.FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
         if(error!=null){
             if(error.contains("DisabledAccountException")){
@@ -94,6 +94,8 @@ public class SignController extends BaseController{
                 model.addAttribute("error","登录失败，请重试.");
             }
         }
+        
+        model.addAttribute("base", request.getContextPath());
         return "sign/login";
     }
 

@@ -1,13 +1,13 @@
 <html>
 <head>
-    <title>博客编辑</title>
-    <link href="${rc.contextPath}/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <link href="${rc.contextPath}/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
-    <link href="${rc.contextPath}/css/animate.css" rel="stylesheet">
+    <title>$!{table.comment}编辑</title>
+    <link href="/${rc.contextPath}/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/${rc.contextPath}/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="/${rc.contextPath}/css/animate.css" rel="stylesheet">
     <!--summernote css -->
-    <link href="${rc.contextPath}/css/plugins/summernote/summernote-0.8.8.css" rel="stylesheet">
+    <link href="/${rc.contextPath}/css/plugins/summernote/summernote-0.8.8.css" rel="stylesheet">
     <script>
-        var url = "${url}",  action = "${action}";
+        var action = "/${action}";
     </script>
 
 </head>
@@ -69,9 +69,6 @@
                             <a class="btn btn-default waves-effect waves-light" href="${rc.contextPath}/blog/content">返回列表</a>
                             <button type="button"
                                     class="btn btn-primary waves-effect waves-light" type="submit">保存文章</button>
-                            <button type="button"
-                                    class="btn btn-warning waves-effect waves-light" onclick="save(0)">存为草稿
-                            </button>
                         </div>
                     </form>
                 </div>
@@ -148,11 +145,11 @@
     }
 
 
-$.validator.setDefaults({
-    submitHandler : function() {
-        saveForm(1);
-    }
-});
+    $.validator.setDefaults({
+        submitHandler : function() {
+            saveForm(1);
+        }
+    });
 
 
     /**
@@ -193,10 +190,6 @@ $.validator.setDefaults({
         var content_sn = $("#content_sn").summernote('code');
         $("#content").val(content_sn);
         saveForm();
-    }
-    
-    function cusFunction() {
-        
     }
 
 </script>
