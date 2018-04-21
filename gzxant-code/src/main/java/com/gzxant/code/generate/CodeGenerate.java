@@ -14,6 +14,16 @@ import java.util.*;
 
 /**
  * 代码生成器
+ * 根据表名自动生成对应目录以及文件
+ * 例如：
+ *   shop_order_goods ==> {
+ *   	"controller" : com.gzxant.controller.shop.order.goods.ShopOrderGoodsController, 
+ *   	"service" : [com.gzxant.service.shop.order.goods.ShopOrderGoodsService, 
+ *   				 com.gzxant.service.shop.order.goods.IShopOrderGoodsService],
+ *   	"dao" : com.gzxant.dao.shop.order.goods.ShopOrderGoodsDao,
+ *   	"entity" : com.gzxant.entity.shop.order.goods.ShopOrderGoods,
+ *   	".xml" : gzxant-common/src/main/resource/mapper/shop/order/goods/ShopOrderGoodsDao.xml
+ *   }
  * 
  * @author xiaoyc
  * @since 2018-4-19
@@ -23,9 +33,9 @@ public class CodeGenerate {
 
 	// --------------变动参数区 start------------------------------------------
 	/* === 表名 === */
-	private static String[] tableNames = { "shop_brand" };
+	private static String[] tableNames = { "shop_order_pay"}; //, "shop_order_goods", "shop_order_pay" 
 	/* === 开发者 === */
-	public static String author = "zt";
+	public static String author = "xiaoyc";
 	/* === 输出目标项目，为空则生成在当前项目中 === */
 	public static String targetProject = "gzxant-shop";
 	/* === 准备生成文件[controller, service, dao, entity, xml] === */
@@ -36,7 +46,7 @@ public class CodeGenerate {
 	// --------------数据源配置区 start------------------------------------------
 	public static String url = "jdbc:mysql://localhost:3306/gzxant?useUnicode=true&characterEncoding=utf8&useSSL=false";
 	public static String name = "root";
-	public static String passWord = "admin";
+	public static String passWord = "123456";
 	public static String driver = "com.mysql.jdbc.Driver";
 	// --------------数据源配置区 end------------------------------------------
 
@@ -97,9 +107,9 @@ public class CodeGenerate {
 
 		// 策略配置
 		StrategyConfig strategy = new StrategyConfig();
-		// strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
-		// strategy.setTablePrefix(new String[] { "tlog_", "tsys_" });// 此处可以修改为您的表前缀
-		strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
+		// strategy.setCapitalMode(true); // 全局大写命名 ORACLE 注意
+		// strategy.setTablePrefix(new String[] { "tlog_", "tsys_" }); // 此处可以修改为您的表前缀
+		strategy.setNaming(NamingStrategy.underline_to_camel); // 表名生成策略
 		strategy.setInclude(tableNames); // 需要生成的表
 		// strategy.setExclude(new String[]{"test"}); // 排除生成的表
 		// 自定义实体父类

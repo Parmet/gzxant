@@ -154,6 +154,16 @@ public class AutoGenerator {
         String superMapperPackage = "";
         VelocityContext ctx;
         for (TableInfo tableInfo : tableList) {
+        	// 根据表名给java文件分包
+        	String packagePath = tableInfo.getName().replaceAll("_", "\\.");
+        	if (packagePath != null && !packagePath.equals("")) {
+        		packageInfo.put("Controller", packageInfo.get("Controller") + "." + packagePath);
+        		packageInfo.put("Service", packageInfo.get("Service") + "." + packagePath);
+        		packageInfo.put("ServiceImpl", packageInfo.get("Service"));
+        		packageInfo.put("Mapper", packageInfo.get("Mapper") + "." + packagePath);
+        		packageInfo.put("Entity", packageInfo.get("Entity") + "." + packagePath);
+        	}
+        	
         	String type = "";
         	// 根据数据库结构判断Entity以及Dao父类的类型（tree, data, base）
         	if (tableInfo.getFieldNames().contains("parent_id")) { // tree
@@ -239,8 +249,6 @@ public class AutoGenerator {
         		superMapperPackage = "com.gzxant.base.dao.BaseDao";
         		tableInfo.setImportPackages(superEntityPackage);
     		}
-            
-            
             
             // Boolean类型is前缀处理
             if (config.getStrategyConfig().isEntityBooleanColumnRemoveIsPrefix()) {
@@ -333,16 +341,25 @@ public class AutoGenerator {
      */
     private void batchOutput(String entityName, VelocityContext context) {
         try {
-            TableInfo tableInfo = (TableInfo) context.get("table");
+        	TableInfo tableInfo = (TableInfo) context.get("table");
+        	String packagePath = tableInfo.getName().replace("_", File.separator);
+
             Map<String, String> pathInfo = config.getPathInfo();
-            String entityFile = String.format((pathInfo.get(ConstVal.ENTITY_PATH) + ConstVal.ENTITY_NAME), entityName);
-            String mapperFile = String.format((pathInfo.get(ConstVal.MAPPER_PATH) + File.separator + tableInfo.getMapperName() + ConstVal.JAVA_SUFFIX), entityName);
-            String xmlFile = String.format((pathInfo.get(ConstVal.XML_PATH) + File.separator + tableInfo.getXmlName() + ConstVal.XML_SUFFIX), entityName);
-            String serviceFile = String.format((pathInfo.get(ConstVal.SERIVCE_PATH) + File.separator + tableInfo.getServiceName() + ConstVal.JAVA_SUFFIX), entityName);
-            String implFile = String.format((pathInfo.get(ConstVal.SERVICEIMPL_PATH) + File.separator + tableInfo.getServiceImplName() + ConstVal.JAVA_SUFFIX), entityName);
-            String controllerFile = String.format((pathInfo.get(ConstVal.CONTROLLER_PATH) + File.separator + tableInfo.getControllerName() + ConstVal.JAVA_SUFFIX), entityName);
+            String entityFile = String.format((pathInfo.get(ConstVal.ENTITY_PATH) + File.separator + packagePath + ConstVal.ENTITY_NAME), entityName);
+            String mapperFile = String.format((pathInfo.get(ConstVal.MAPPER_PATH) + File.separator + packagePath + File.separator + tableInfo.getMapperName() + ConstVal.JAVA_SUFFIX), entityName);
+            String xmlFile = String.format((pathInfo.get(ConstVal.XML_PATH) + File.separator + packagePath + File.separator + tableInfo.getXmlName() + ConstVal.XML_SUFFIX), entityName);
+            String serviceFile = String.format((pathInfo.get(ConstVal.SERIVCE_PATH) + File.separator + packagePath + File.separator + tableInfo.getServiceName() + ConstVal.JAVA_SUFFIX), entityName);
+            String implFile = String.format((pathInfo.get(ConstVal.SERIVCE_PATH) + File.separator + packagePath + File.separator + tableInfo.getServiceImplName() + ConstVal.JAVA_SUFFIX), entityName);
+            String controllerFile = String.format((pathInfo.get(ConstVal.CONTROLLER_PATH) + File.separator + packagePath + File.separator + tableInfo.getControllerName() + ConstVal.JAVA_SUFFIX), entityName);
 
             TemplateConfig template = config.getTemplate();
+            
+            // 根据表名创建相应路
+//            controllerFile = controllerFile + packagePath;
+//            serviceFile = serviceFile + packagePath;
+//            implFile = implFile + packagePath;
+//            mapperFile = mapperFile + packagePath;
+//            entityFile = entityFile + packagePath;
 
             // 根据override标识来判断是否需要创建文件
             if (isCreate(entityFile)) {
