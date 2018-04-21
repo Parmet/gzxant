@@ -51,7 +51,7 @@ public class SysOfficeController extends BaseController {
     private ISysUserOfficeService sysUserOfficeService;
 
 
-    @RequiresPermissions("sys:office:list")
+    @RequiresPermissions("tmplates:office:list")
     @SLog("获取组织用户列表数据")
     @ApiOperation(value = "获取组织用户列表数据", notes = "获取组织用户列表数据:使用约定的DataTable")
     @PostMapping(value = "/user/list")
@@ -133,7 +133,7 @@ public class SysOfficeController extends BaseController {
         }
 
         redirectAttributes.addFlashAttribute("message", "保存组织成功");
-        return "redirect:/sys/office";
+        return "redirect:/tmplates/office";
     }
 
 

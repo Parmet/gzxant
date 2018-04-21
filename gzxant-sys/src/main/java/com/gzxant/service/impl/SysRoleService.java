@@ -36,7 +36,7 @@ import com.gzxant.service.ISysUserRoleService;
  * <p>
  * Email 122741482@qq.com
  * <p>
- * Describe: sys 角色 服务
+ * Describe: tmplates 角色 服务
  */
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)

@@ -115,11 +115,11 @@ public class SysUserController extends BaseController {
         return ReturnDTOUtil.success();
     }
 
-    @RequiresPermissions("sys:user:list")
+    @RequiresPermissions("tmplates:user:list")
     @ApiOperation(value = "进入用户列表界面", notes = "进入用户列表界面")
     @GetMapping(value = "")
     public String list(Model model, HttpServletRequest request) {
-        model.addAttribute("url", request.getContextPath() + "/sys/user/");
+        model.addAttribute("url", request.getContextPath() + "/tmplates/user/");
         return "user/list";
     }
 
@@ -155,7 +155,7 @@ public class SysUserController extends BaseController {
         SysUser sysUser = sysUserService.selectUserAllInfoById(id);
         model.addAttribute("sysUser", sysUser);
         model.addAttribute("roles", sysUser.getSysRoles());
-        model.addAttribute("url", request.getContextPath() + "/sys/user/");
+        model.addAttribute("url", request.getContextPath() + "/tmplates/user/");
         return "user/detail";
     }
 
@@ -173,7 +173,7 @@ public class SysUserController extends BaseController {
         sysUser.setId(0L);
         model.addAttribute("sysUser", sysUser);
         model.addAttribute("roles", sysRoleService.ListSysRoleUseable());
-        model.addAttribute("url", request.getContextPath() + "/sys/user/");
+        model.addAttribute("url", request.getContextPath() + "/tmplates/user/");
         return "user/detail";
     }
 
@@ -186,7 +186,7 @@ public class SysUserController extends BaseController {
     @GetMapping(value = "update/{id}")
     public String update(@PathVariable("id") Long id, Model model,HttpServletRequest request) {
         model.addAttribute("action", "update");
-        model.addAttribute("url", request.getContextPath() + "/sys/user/");
+        model.addAttribute("url", request.getContextPath() + "/tmplates/user/");
         SysUser sysUser = sysUserService.selectUserAllInfoById(id);
         sysUser.setPassword(null);
         logger.info(JSON.toJSONString(sysUser));

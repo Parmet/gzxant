@@ -46,7 +46,7 @@ public class AttachmentController {
      * @param response
      * @return
      */
-    @ApiOperation(value = "系统请求文件",notes = "系统请求文件  demo  http://localhost:8081/sys/user/attach/head?filename=150641181924855150.png&s=s")
+    @ApiOperation(value = "系统请求文件",notes = "系统请求文件  demo  http://localhost:8081/tmplates/user/attach/head?filename=150641181924855150.png&s=s")
     @GetMapping("/{basefloder}/{type}")
     public String download(@PathVariable("basefloder") String baseFloder,
                            @RequestParam("filename") String filename,

@@ -143,13 +143,14 @@
                         <ul class="dropdown-menu dropdown-messages">
                             <li class="m-t-xs">
                                 <div class="dropdown-messages-box">
-                                    <a href="profile.html" class="pull-left"> <img alt="image"
-                                                                                   class="img-circle" src="">
+                                    <a href="profile.html" class="pull-left">
+	 									<img alt="image" class="img-circle" src="${rc.contextPath}\img\log9.png">
                                     </a>
                                     <div class="media-body">
                                         <small class="pull-right">1小时前</small>
-                                        <strong>张三</strong>
-                                        这个需求半小时内完成 <br>
+                                        <strong>同学</strong>
+                                        <span>这个需求半小时内完成 </span>
+                                        <br>
                                         <small class="text-muted">xxx</small>
                                     </div>
                                 </div>
@@ -157,13 +158,13 @@
                             <li class="divider"></li>
                             <li>
                                 <div class="dropdown-messages-box">
-                                    <a href="profile.html" class="pull-left"> <img alt="image"
-                                                                                   class="img-circle" src="">
+                                    <a href="profile.html" class="pull-left">
+	 									<img alt="image" class="img-circle" src="${rc.contextPath}\img\log9.png">
                                     </a>
                                     <div class="media-body ">
                                         <small class="pull-right text-navy">2小时前</small>
-                                        <strong>李四</strong>
-                                        有客户要见你<br>
+                                        <strong>同学</strong>
+                                        <span>有客户要见你 </span><br>
                                         <small class="text-muted">昨天</small>
                                     </div>
                                 </div>
