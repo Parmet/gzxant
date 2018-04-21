@@ -43,7 +43,7 @@ public class ShopBrandController extends BaseController {
 	}
 
 	@ApiOperation(value = "获取商城-品牌表列表数据", notes = "获取商城-品牌表列表数据:使用约定的DataTable")
-	@PostMapping(value = "/list")
+	@RequestMapping(value = "/list")
 	@ResponseBody
 	public DataTable<ShopBrand> list(@RequestBody DataTable<ShopBrand> dt) {
 
