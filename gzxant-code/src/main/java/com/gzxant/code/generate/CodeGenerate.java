@@ -14,6 +14,16 @@ import java.util.*;
 
 /**
  * 代码生成器
+ * 根据表名自动生成对应目录以及文件
+ * 例如：
+ *   shop_order_goods ==> {
+ *   	"controller" : com.gzxant.controller.shop.order.goods.ShopOrderGoodsController, 
+ *   	"service" : [com.gzxant.service.shop.order.goods.ShopOrderGoodsService, 
+ *   				 com.gzxant.service.shop.order.goods.IShopOrderGoodsService],
+ *   	"dao" : com.gzxant.dao.shop.order.goods.ShopOrderGoodsDao,
+ *   	"entity" : com.gzxant.entity.shop.order.goods.ShopOrderGoods,
+ *   	".xml" : gzxant-common/src/main/resource/mapper/shop/order/goods/ShopOrderGoodsDao.xml
+ *   }
  * 
  * @author xiaoyc
  * @since 2018-4-19
@@ -97,9 +107,9 @@ public class CodeGenerate {
 
 		// 策略配置
 		StrategyConfig strategy = new StrategyConfig();
-		// strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
-		// strategy.setTablePrefix(new String[] { "tlog_", "tsys_" });// 此处可以修改为您的表前缀
-		strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
+		// strategy.setCapitalMode(true); // 全局大写命名 ORACLE 注意
+		// strategy.setTablePrefix(new String[] { "tlog_", "tsys_" }); // 此处可以修改为您的表前缀
+		strategy.setNaming(NamingStrategy.underline_to_camel); // 表名生成策略
 		strategy.setInclude(tableNames); // 需要生成的表
 		// strategy.setExclude(new String[]{"test"}); // 排除生成的表
 		// 自定义实体父类
