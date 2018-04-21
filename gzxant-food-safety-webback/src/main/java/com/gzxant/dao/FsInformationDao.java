@@ -11,6 +11,10 @@ import com.gzxant.base.dao.BaseDao;
  * @author xiaoyc
  * @since 2018-04-19
  */
-public interface FsInformationDao extends BaseDao<FsInformation> {
+public interface
+
+
+
+FsInformationDao extends BaseDao<FsInformation> {
 
 }
