@@ -33,9 +33,9 @@ public class CodeGenerate {
 
 	// --------------变动参数区 start------------------------------------------
 	/* === 表名 === */
-	private static String[] tableNames = { "shop_order_pay"}; //, "shop_order_goods", "shop_order_pay" 
+	private static String[] tableNames = { "standard_category"}; //, "shop_order_goods", "shop_order_pay"
 	/* === 开发者 === */
-	public static String author = "xiaoyc";
+	public static String author = "zt";
 	/* === 输出目标项目，为空则生成在当前项目中 === */
 	public static String targetProject = "gzxant-shop";
 	/* === 准备生成文件[controller, service, dao, entity, xml] === */
@@ -46,7 +46,7 @@ public class CodeGenerate {
 	// --------------数据源配置区 start------------------------------------------
 	public static String url = "jdbc:mysql://localhost:3306/gzxant?useUnicode=true&characterEncoding=utf8&useSSL=false";
 	public static String name = "root";
-	public static String passWord = "123456";
+	public static String passWord = "admin";
 	public static String driver = "com.mysql.jdbc.Driver";
 	// --------------数据源配置区 end------------------------------------------
 

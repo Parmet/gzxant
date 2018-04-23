@@ -54,8 +54,6 @@ public class ShopBrandController extends BaseController {
 	@PostMapping(value = "/create")
 	@ResponseBody
 	public ReturnDTO create(ShopBrand param) {
-		param.setId(1L);
-		param.setName("添加测试");
 		if (param == null){
 			ReturnDTOUtil.fail();
 		}
@@ -67,8 +65,6 @@ public class ShopBrandController extends BaseController {
 	@PostMapping(value = "/update")
 	@ResponseBody
 	public ReturnDTO update(ShopBrand param) {
-		param.setId(1L);
-		param.setName("修改测试");
 		if (param == null){
 			ReturnDTOUtil.fail();
 		}
@@ -81,7 +77,6 @@ public class ShopBrandController extends BaseController {
 	@PostMapping(value = "/delete")
 	@ResponseBody
 	public ReturnDTO delete(@RequestParam("ids") List<Long> ids) {
-		ids.add(1L);
 		boolean success = shopBrandService.deleteBatchIds(ids);
 		if (success) {
 			return ReturnDTOUtil.success();
