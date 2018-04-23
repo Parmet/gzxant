@@ -51,10 +51,10 @@ public class SysRoleController extends BaseController {
      * @param model
      * @return
      */
-    @RequiresPermissions("tmplates:role:list")
+    @RequiresPermissions("sys:role:list")
     @GetMapping(value = "")
     public String list(Model model, HttpServletRequest request) {
-        model.addAttribute("url", request.getContextPath() + "/tmplates/role/");
+        model.addAttribute("url", request.getContextPath() + "/sys/role/");
         return "role/list";
     }
 
@@ -80,7 +80,7 @@ public class SysRoleController extends BaseController {
         sysRole.setId(0L);
         model.addAttribute("action", "insert");
         model.addAttribute("role", sysRole);
-        model.addAttribute("url", request.getContextPath() + "/tmplates/role/");
+        model.addAttribute("url", request.getContextPath() + "/sys/role/");
         model.addAttribute("menuTree", JSON.toJSONString(sysMenuService.getMenuTree()));
         return "role/detail";
     }
@@ -120,7 +120,7 @@ public class SysRoleController extends BaseController {
         SysRole sysRole = sysRoleService.selectById(id);
         model.addAttribute("role", sysRole);
         model.addAttribute("menuTree", JSON.toJSONString(sysRoleService.selectMenuTreeHasSelectDis(id,true)));
-        model.addAttribute("url", request.getContextPath() + "/tmplates/role/");
+        model.addAttribute("url", request.getContextPath() + "/sys/role/");
         return "role/detail";
     }
 
@@ -137,7 +137,7 @@ public class SysRoleController extends BaseController {
         model.addAttribute("action","update");
         SysRole sysRole = sysRoleService.selectById(id);
         model.addAttribute("role",sysRole);
-        model.addAttribute("url", request.getContextPath() + "/tmplates/role/");
+        model.addAttribute("url", request.getContextPath() + "/sys/role/");
         model.addAttribute("menuTree", JSON.toJSONString(sysRoleService.selectMenuTreeHasSelectDis(id,false)));
         return "role/detail";
     }

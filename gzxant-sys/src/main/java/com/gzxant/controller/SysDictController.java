@@ -38,7 +38,7 @@ public class SysDictController extends BaseController {
      *
      * @return
      */
-    @RequiresPermissions("tmplates:dict:list")
+    @RequiresPermissions("sys:dict:list")
     @GetMapping(value = "")
     public String list(Model model) {
         model.addAttribute("dictTrees", JSON.toJSON(sysDictService.getDictTree()).toString());
@@ -72,7 +72,7 @@ public class SysDictController extends BaseController {
             redirectAttributes.addFlashAttribute("message", "保存数据字典成功");
         }
 
-        return "redirect:/tmplates/dict";
+        return "redirect:/sys/dict";
     }
 
     /**

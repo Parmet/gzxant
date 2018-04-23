@@ -61,7 +61,7 @@ public class SysMenuController extends BaseController{
     /**
      * 进入系统菜单管理首页
      */
-    @RequiresPermissions("tmplates:menu:list")
+    @RequiresPermissions("sys:menu:list")
     @GetMapping(value = "")
     public String list(Model model) {
 
@@ -97,7 +97,7 @@ public class SysMenuController extends BaseController{
         }
 
         redirectAttributes.addFlashAttribute("message","保存菜单成功");
-        return "redirect:/tmplates/menu";
+        return "redirect:/sys/menu";
     }
 
 
