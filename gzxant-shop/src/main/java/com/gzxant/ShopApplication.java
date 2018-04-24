@@ -7,9 +7,14 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.gzxant.constant.Setting;
 
+/**
+ * shop 项目启动类
+ * 
+ * @author xiaoyc
+ */
 @SpringBootApplication
 @EnableTransactionManagement
-@MapperScan(Setting.SCAN_MAPPER_PATH)//@Mapper  在mapper 接口上加入也行
+@MapperScan(Setting.SCAN_MAPPER_PATH)
 public class ShopApplication {
 
 	public static void main(String[] args) {

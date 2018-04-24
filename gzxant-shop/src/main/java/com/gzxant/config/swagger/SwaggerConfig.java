@@ -19,10 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by chen on 2017/4/19.
- * <p>
- * <p>
- * Describe: swagger 配置类
+ * @author xiaoyc
+ * @describe: swagger 配置类
  */
 
 @Configuration
