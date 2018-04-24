@@ -182,8 +182,9 @@ public class TenancySqlParser extends AbstractSqlParser {
             Table fromTable = (Table) fromItem;
             if (doTableFilter(fromTable.getName())) {
                 plainSelect.setWhere(builderExpression(plainSelect.getWhere(), fromTable));
-                if (addColumn)
-                    plainSelect.getSelectItems().add(new SelectExpressionItem(new Column("'" + this.tenantInfo.getTenantId() + "'")));
+                if (addColumn) {
+                	plainSelect.getSelectItems().add(new SelectExpressionItem(new Column("'" + this.tenantInfo.getTenantId() + "'")));
+                }
             }
         } else {
             processFromItem(fromItem);

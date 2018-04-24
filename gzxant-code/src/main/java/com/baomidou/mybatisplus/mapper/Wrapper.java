@@ -245,8 +245,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return this
      */
     public Wrapper<T> where(boolean condition, String sqlWhere, Object... params) {
-        if (condition)
-            sql.WHERE(formatSql(sqlWhere, params));
+        if (condition) {
+        	sql.WHERE(formatSql(sqlWhere, params));
+        }
+        
         return this;
     }
 
@@ -279,8 +281,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return
      */
     public Wrapper<T> eq(boolean condition, String column, Object params) {
-        if (condition)
-            sql.WHERE(formatSql(String.format("%s = {0}", column), params));
+        if (condition) {
+        	sql.WHERE(formatSql(String.format("%s = {0}", column), params));
+        }
+        
         return this;
     }
 
@@ -308,8 +312,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return
      */
     public Wrapper<T> ne(boolean condition, String column, Object params) {
-        if (condition)
-            sql.WHERE(formatSql(String.format("%s <> {0}", column), params));
+        if (condition) {
+        	sql.WHERE(formatSql(String.format("%s <> {0}", column), params));
+        }
+        
         return this;
     }
 
@@ -377,8 +383,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return
      */
     public Wrapper<T> gt(boolean condition, String column, Object params) {
-        if (condition)
-            sql.WHERE(formatSql(String.format("%s > {0}", column), params));
+        if (condition) {
+        	sql.WHERE(formatSql(String.format("%s > {0}", column), params));
+        }
+        
         return this;
     }
 
@@ -406,8 +414,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return
      */
     public Wrapper<T> ge(boolean condition, String column, Object params) {
-        if (condition)
-            sql.WHERE(formatSql(String.format("%s >= {0}", column), params));
+        if (condition) {
+        	sql.WHERE(formatSql(String.format("%s >= {0}", column), params));
+        }
+        
         return this;
     }
 
@@ -435,8 +445,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return
      */
     public Wrapper<T> lt(boolean condition, String column, Object params) {
-        if (condition)
-            sql.WHERE(formatSql(String.format("%s < {0}", column), params));
+        if (condition) {
+        	sql.WHERE(formatSql(String.format("%s < {0}", column), params));
+        }
+        
         return this;
     }
 
@@ -464,8 +476,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return
      */
     public Wrapper<T> le(boolean condition, String column, Object params) {
-        if (condition)
-            sql.WHERE(formatSql(String.format("%s <= {0}", column), params));
+        if (condition) {
+        	sql.WHERE(formatSql(String.format("%s <= {0}", column), params));
+        }
+        
         return this;
     }
 
@@ -493,8 +507,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return this
      */
     public Wrapper<T> and(boolean condition, String sqlAnd, Object... params) {
-        if (condition)
-            sql.AND().WHERE(formatSql(sqlAnd, params));
+        if (condition) {
+        	sql.AND().WHERE(formatSql(sqlAnd, params));
+        }
+        
         return this;
     }
 
@@ -526,8 +542,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return this
      */
     public Wrapper<T> andNew(boolean condition, String sqlAnd, Object... params) {
-        if (condition)
-            sql.AND_NEW().WHERE(formatSql(sqlAnd, params));
+        if (condition) {
+        	sql.AND_NEW().WHERE(formatSql(sqlAnd, params));
+        }
+        
         return this;
     }
 
@@ -692,8 +710,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return this
      */
     public Wrapper<T> groupBy(boolean condition, String columns) {
-        if (condition)
-            sql.GROUP_BY(columns);
+        if (condition) {
+        	sql.GROUP_BY(columns);
+        }
+        
         return this;
     }
 
@@ -726,8 +746,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return EntityWrapper<T>
      */
     public Wrapper<T> having(boolean condition, String sqlHaving, Object... params) {
-        if (condition)
-            sql.HAVING(formatSql(sqlHaving, params));
+        if (condition) {
+        	sql.HAVING(formatSql(sqlHaving, params));
+        }
+        
         return this;
     }
 
@@ -761,8 +783,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return this
      */
     public Wrapper<T> orderBy(boolean condition, String columns) {
-        if (condition)
-            sql.ORDER_BY(columns);
+        if (condition) {
+        	sql.ORDER_BY(columns);
+        }
+        
         return this;
     }
 
@@ -823,8 +847,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return this
      */
     public Wrapper<T> like(boolean condition, String column, String value) {
-        if (condition)
-            handerLike(column, value, SqlLike.DEFAULT, false);
+        if (condition) {
+        	handerLike(column, value, SqlLike.DEFAULT, false);
+        }
+        
         return this;
     }
 
@@ -852,8 +878,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return this
      */
     public Wrapper<T> notLike(boolean condition, String column, String value) {
-        if (condition)
-            handerLike(column, value, SqlLike.DEFAULT, true);
+        if (condition) {
+        	handerLike(column, value, SqlLike.DEFAULT, true);
+        }
+        
         return this;
     }
 
@@ -903,8 +931,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return this
      */
     public Wrapper<T> like(boolean condition, String column, String value, SqlLike type) {
-        if (condition)
-            handerLike(column, value, type, false);
+        if (condition) {
+        	handerLike(column, value, type, false);
+        }
+        
         return this;
     }
 
@@ -934,8 +964,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return this
      */
     public Wrapper<T> notLike(boolean condition, String column, String value, SqlLike type) {
-        if (condition)
-            handerLike(column, value, type, true);
+        if (condition) {
+        	handerLike(column, value, type, true);
+        }
+        
         return this;
     }
 
@@ -963,8 +995,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return this
      */
     public Wrapper<T> isNotNull(boolean condition, String columns) {
-        if (condition)
-            sql.IS_NOT_NULL(columns);
+        if (condition) {
+        	sql.IS_NOT_NULL(columns);
+        }
+        
         return this;
     }
 
@@ -990,8 +1024,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return this
      */
     public Wrapper<T> isNull(boolean condition, String columns) {
-        if (condition)
-            sql.IS_NULL(columns);
+        if (condition) {
+        	sql.IS_NULL(columns);
+        }
+        
         return this;
     }
 
@@ -1017,8 +1053,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return this
      */
     public Wrapper<T> exists(boolean condition, String value) {
-        if (condition)
-            sql.EXISTS(value);
+        if (condition) {
+        	sql.EXISTS(value);
+        }
+        
         return this;
     }
 
@@ -1044,8 +1082,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return this
      */
     public Wrapper<T> notExists(boolean condition, String value) {
-        if (condition)
-            sql.NOT_EXISTS(value);
+        if (condition) {
+        	sql.NOT_EXISTS(value);
+        }
+        
         return this;
     }
 
@@ -1132,8 +1172,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return this
      */
     public Wrapper<T> in(boolean condition, String column, Collection<?> value) {
-        if (condition && CollectionUtils.isNotEmpty(value))
-            sql.WHERE(formatSql(inExpression(column, value, false), value.toArray()));
+        if (condition && CollectionUtils.isNotEmpty(value)) {
+        	sql.WHERE(formatSql(inExpression(column, value, false), value.toArray()));
+        }
+        
         return this;
     }
 
@@ -1161,8 +1203,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return this
      */
     public Wrapper<T> notIn(boolean condition, String column, Collection<?> value) {
-        if (condition && CollectionUtils.isNotEmpty(value))
-            sql.WHERE(formatSql(inExpression(column, value, true), value.toArray()));
+        if (condition && CollectionUtils.isNotEmpty(value)) {
+        	sql.WHERE(formatSql(inExpression(column, value, true), value.toArray()));
+        }
+        
         return this;
     }
 
@@ -1190,8 +1234,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return this
      */
     public Wrapper<T> in(boolean condition, String column, Object[] value) {
-        if (condition && ArrayUtils.isNotEmpty(value))
-            sql.WHERE(formatSql(inExpression(column, Arrays.asList(value), false), value));
+        if (condition && ArrayUtils.isNotEmpty(value)) {
+        	sql.WHERE(formatSql(inExpression(column, Arrays.asList(value), false), value));
+        }
+        
         return this;
     }
 
@@ -1219,8 +1265,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return this
      */
     public Wrapper<T> notIn(boolean condition, String column, Object... value) {
-        if (condition && ArrayUtils.isNotEmpty(value))
-            sql.WHERE(formatSql(inExpression(column, Arrays.asList(value), true), value));
+        if (condition && ArrayUtils.isNotEmpty(value)) {
+        	sql.WHERE(formatSql(inExpression(column, Arrays.asList(value), true), value));
+        }
+        
         return this;
     }
 
@@ -1280,8 +1328,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return this
      */
     public Wrapper<T> between(boolean condition, String column, Object val1, Object val2) {
-        if (condition)
-            sql.WHERE(formatSql(String.format("%s BETWEEN {0} AND {1}", column), val1, val2));
+        if (condition) {
+        	sql.WHERE(formatSql(String.format("%s BETWEEN {0} AND {1}", column), val1, val2));
+        }
+        
         return this;
     }
 
@@ -1311,8 +1361,10 @@ public abstract class Wrapper<T> implements Serializable {
      * @return this
      */
     public Wrapper<T> notBetween(boolean condition, String column, Object val1, Object val2) {
-        if (condition)
-            sql.WHERE(formatSql(String.format("%s NOT BETWEEN {0} AND {1}", column), val1, val2));
+        if (condition) {
+        	sql.WHERE(formatSql(String.format("%s NOT BETWEEN {0} AND {1}", column), val1, val2));
+        }
+        
         return this;
     }
 

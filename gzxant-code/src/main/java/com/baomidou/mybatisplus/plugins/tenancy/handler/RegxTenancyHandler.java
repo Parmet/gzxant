@@ -40,7 +40,9 @@ public class RegxTenancyHandler implements TenancyHandler {
         this.setFilterStatementRegexStr(PluginUtils.getProperty(properties, "filterStatementRegexStr"));
         this.setFilterTableRegexStr(PluginUtils.getProperty(properties, "filterTableRegexStr"));
         String filterDefault = PluginUtils.getProperty(properties, "filterDefault");
-        if (filterDefault != null) this.setFilterDefault(Boolean.valueOf(filterDefault));
+        if (filterDefault != null) {
+        	this.setFilterDefault(Boolean.valueOf(filterDefault));
+        }
     }
 
     @Override
@@ -74,13 +76,19 @@ public class RegxTenancyHandler implements TenancyHandler {
     }
 
     public static Pattern[] compile(String patterString) {
-        if (patterString == null) return new Pattern[]{};
+        if (patterString == null) {
+        	 return new Pattern[]{};
+        }
+        
         String[] patterStrings = patterString.split(",");
         return compile(patterStrings);
     }
 
     public static Pattern[] compile(String[] patterStrings) {
-        if (patterStrings == null) return new Pattern[]{};
+        if (patterStrings == null) {
+        	 return new Pattern[]{};	
+        }
+        
         Pattern[] patterns = new Pattern[patterStrings.length];
         for (int i = 0; i < patterStrings.length; i++) {
             Pattern pattern = Pattern.compile(patterStrings[i]);
@@ -98,7 +106,10 @@ public class RegxTenancyHandler implements TenancyHandler {
     }
 
     public RegxTenancyHandler setFilterTableRegexArr(String[] tableRegexArr) {
-        if (tableRegexArr == null) return this;
+        if (tableRegexArr == null) {
+        	return this;
+        }
+        
         this.tablePatterns = compile(tableRegexArr);
         return this;
     }

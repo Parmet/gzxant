@@ -308,8 +308,10 @@ public class AutoGenerator {
      * @return
      */
     private String getSuperClassName(String classPath) {
-        if (StringUtils.isEmpty(classPath))
-            return null;
+        if (StringUtils.isEmpty(classPath)) {
+        	return null;
+        }
+        
         return classPath.substring(classPath.lastIndexOf(".") + 1);
     }
 
