@@ -34,26 +34,29 @@
             <version>1.0.2</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.gzxant</groupId>
-            <artifactId>gzxant-common</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.gzxant</groupId>-->
+            <!--<artifactId>gzxant-common</artifactId>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>com.gzxant</groupId>
-            <artifactId>gzxant-drools</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.gzxant</groupId>-->
+            <!--<artifactId>gzxant-drools</artifactId>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>com.gzxant</groupId>
-            <artifactId>gzxant-log</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.gzxant</groupId>-->
+            <!--<artifactId>gzxant-log</artifactId>-->
+        <!--</dependency>-->
         
         <dependency>
             <groupId>com.gzxant</groupId>
             <artifactId>gzxant-food-safety-web</artifactId>
         </dependency>
-        
+        <!--<dependency>-->
+            <!--<groupId>com.gzxant</groupId>-->
+            <!--<artifactId>gzxant-blog</artifactId>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>com.gzxant</groupId>
             <artifactId>gzxant-food-safety-webback</artifactId>

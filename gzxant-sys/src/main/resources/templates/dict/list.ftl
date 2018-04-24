@@ -194,7 +194,7 @@
         text = selectd.node.text;
         if (dic_id) {
             $.ajax({
-                url: '${rc.contextPath}/sys/dict/select/' + dic_id,
+                url: '${rc.contextPath}/tmplates/dict/select/' + dic_id,
                 type: 'GET',
                 success: function (msg) {
                     var data = msg.dict;
@@ -303,7 +303,7 @@
             btn: ['是', '否']
         },function () {
             $.ajax({
-                url: '${rc.contextPath}/sys/dict/delete/' + dic_id,
+                url: '${rc.contextPath}/tmplates/dict/delete/' + dic_id,
                 type: 'DELETE',
                 success: function (data) {
                     if (data.success) {
@@ -321,7 +321,7 @@
     $('.btn-rush').click(function () {
 
         $.ajax({
-            url: '${rc.contextPath}/sys/dict/rush',
+            url: '${rc.contextPath}/tmplates/dict/rush',
             type: 'GET',
             success: function (data) {
                layer.msg('刷新成功');
