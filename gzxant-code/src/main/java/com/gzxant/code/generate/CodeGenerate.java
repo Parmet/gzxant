@@ -33,7 +33,7 @@ public class CodeGenerate {
 
 	// --------------变动参数区 start------------------------------------------
 	/* === 表名 === */
-	private static String[] tableNames = { "shop_category"}; //, "shop_order_goods", "shop_order_pay"
+	private static String[] tableNames = { "shop_brand"}; //, "shop_order_goods", "shop_order_pay"
 	/* === 开发者 === */
 	public static String author = "xiaoyc";
 	/* === 输出目标项目，为空则生成在当前项目中 === */

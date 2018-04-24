@@ -43,7 +43,7 @@ public class ShopCategoryController extends BaseController {
 	@ApiOperation(value = "进入商城-分类表列表界面", notes = "进入商城-分类表列表界面")
 	@GetMapping(value = "")
 	public String list(Model model, HttpServletRequest request) {
-		model.addAttribute("url", request.getContextPath() + "/category/");
+		model.addAttribute("url", request.getContextPath() + "/category");
 		System.out.println("list index");
 		return "/shop/category/list";
 	}

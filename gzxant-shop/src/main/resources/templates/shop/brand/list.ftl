@@ -82,36 +82,28 @@
                 title: '序号' // 列标题
             },
             {
-                field: 'updateDate',
+                field: 'name',
+                title: '名称'
+            },
+            {
+                field: 'logo',
+                title: '商标'
+            },
+            {
+                field: 'createId',
+                title: '创造时间'
+            },
+            {
+                field: 'updateId',
                 title: '修改时间'
             },
             {
-                field: 'title',
-                title: '标题'
+                field: 'createDate',
+                title: '修改者'
             },
             {
-                field: 'tags',
-                title: '标签'
-            },
-            {
-                field: 'type',
-                title: '类型'
-            },
-            {
-                field: 'categories',
-                title: '分类'
-            },
-            {
-                field: 'allowComment',
-                title: '可评论'
-            },
-            {
-                field: 'status',
-                title: '状态'
-            },
-            {
-                field: 'author',
-                title: '作者'
+                field: 'updateDate',
+                title: '修改时间'
             },
             {
                 title: '操作',

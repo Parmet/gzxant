@@ -1,6 +1,6 @@
-package com.gzxant.service;
+package com.gzxant.service.shop.brand;
 
-import com.gzxant.entity.ShopBrand;
+import com.gzxant.entity.shop.brand.ShopBrand;
 import com.gzxant.base.service.IBaseService;
 
 /**
@@ -9,7 +9,7 @@ import com.gzxant.base.service.IBaseService;
  * </p>
  *
  * @author zt
- * @since 2018-04-20
+ * @since 2018-04-24
  */
 public interface IShopBrandService extends IBaseService<ShopBrand> {
 	

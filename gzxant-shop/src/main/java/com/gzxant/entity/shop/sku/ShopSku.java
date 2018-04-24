@@ -1,4 +1,4 @@
-package com.gzxant.entity;
+package com.gzxant.entity.shop.sku;
 
 import java.io.Serializable;
 
@@ -8,14 +8,14 @@ import com.gzxant.base.entity.DataEntity;
 
 /**
  * <p>
- * 商城-品牌表
+ * sku
  * </p>
  *
  * @author zt
- * @since 2018-04-20
+ * @since 2018-04-24
  */
-@TableName("shop_brand")
-public class ShopBrand extends DataEntity<ShopBrand> {
+@TableName("shop_sku")
+public class ShopSku extends DataEntity<ShopSku> {
 
     private static final long serialVersionUID = 1L;
 
@@ -23,7 +23,18 @@ public class ShopBrand extends DataEntity<ShopBrand> {
      * 名称
      */
 	private String name;
-	private String logo;
+    /**
+     * 属性id
+     */
+	@TableField("property_id")
+	private Long propertyId;
+    /**
+     * 顺序
+     */
+	private Integer sort;
+    /**
+     * 更新者
+     */
 	@TableField("update_id")
 	private Long updateId;
 
@@ -36,12 +47,20 @@ public class ShopBrand extends DataEntity<ShopBrand> {
 		this.name = name;
 	}
 
-	public String getLogo() {
-		return logo;
+	public Long getPropertyId() {
+		return propertyId;
 	}
 
-	public void setLogo(String logo) {
-		this.logo = logo;
+	public void setPropertyId(Long propertyId) {
+		this.propertyId = propertyId;
+	}
+
+	public Integer getSort() {
+		return sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
 	}
 
 	public Long getUpdateId() {
@@ -59,9 +78,10 @@ public class ShopBrand extends DataEntity<ShopBrand> {
 
 	@Override
 	public String toString() {
-		return "ShopBrand{" +
+		return "ShopSku{" +
 			"name=" + name +
-			", logo=" + logo +
+			", propertyId=" + propertyId +
+			", sort=" + sort +
 			", updateId=" + updateId +
 			"}";
 	}

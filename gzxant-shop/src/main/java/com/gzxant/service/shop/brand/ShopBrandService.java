@@ -1,11 +1,11 @@
-package com.gzxant.service.impl;
+package com.gzxant.service.shop.brand;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gzxant.entity.ShopBrand;
-import com.gzxant.dao.ShopBrandDao;
-import com.gzxant.service.IShopBrandService;
+import com.gzxant.entity.shop.brand.ShopBrand;
+import com.gzxant.dao.shop.brand.ShopBrandDao;
+import com.gzxant.service.shop.brand.IShopBrandService;
 import com.gzxant.base.service.impl.BaseService;
 
 /**
@@ -14,7 +14,7 @@ import com.gzxant.base.service.impl.BaseService;
  * </p>
  *
  * @author zt
- * @since 2018-04-20
+ * @since 2018-04-24
  */
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)

@@ -1,11 +1,11 @@
-package com.gzxant.controller;
+package com.gzxant.controller.shop.brand;
 
 import com.gzxant.annotation.SLog;
 import com.gzxant.base.controller.BaseController;
 import com.gzxant.base.entity.ReturnDTO;
 import com.gzxant.base.vo.DataTable;
-import com.gzxant.entity.ShopBrand;
-import com.gzxant.service.IShopBrandService;
+import com.gzxant.entity.shop.brand.ShopBrand;
+import com.gzxant.service.shop.brand.IShopBrandService;
 import com.gzxant.util.ReturnDTOUtil;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import java.util.List;
  * </p>
  *
  * @author zt
- * @since 2018-04-20
+ * @since 2018-04-24
  */
 @Controller
 @RequestMapping("/shop/brand")
@@ -43,10 +43,9 @@ public class ShopBrandController extends BaseController {
 	}
 
 	@ApiOperation(value = "获取商城-品牌表列表数据", notes = "获取商城-品牌表列表数据:使用约定的DataTable")
-	@RequestMapping(value = "/list")
+	@PostMapping(value = "/list")
 	@ResponseBody
 	public DataTable<ShopBrand> list(@RequestBody DataTable<ShopBrand> dt) {
-
 		return shopBrandService.pageSearch(dt);
 	}
 
@@ -56,8 +55,9 @@ public class ShopBrandController extends BaseController {
 	public ReturnDTO create(ShopBrand param) {
 		if (param == null){
 			ReturnDTOUtil.fail();
+		}else {
+			shopBrandService.insert(param);
 		}
-		shopBrandService.insert(param);
 		return ReturnDTOUtil.success();
 	}
 
@@ -67,8 +67,9 @@ public class ShopBrandController extends BaseController {
 	public ReturnDTO update(ShopBrand param) {
 		if (param == null){
 			ReturnDTOUtil.fail();
+		}else {
+			shopBrandService.updateById(param);
 		}
-		shopBrandService.updateById(param);
 		return ReturnDTOUtil.success();
 	}
 

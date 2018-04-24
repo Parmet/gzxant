@@ -1,6 +1,6 @@
-package com.gzxant.dao;
+package com.gzxant.dao.shop.brand;
 
-import com.gzxant.entity.ShopBrand;
+import com.gzxant.entity.shop.brand.ShopBrand;
 import com.gzxant.base.dao.CrudDao;
 
 /**
@@ -9,7 +9,7 @@ import com.gzxant.base.dao.CrudDao;
  * </p>
  *
  * @author zt
- * @since 2018-04-20
+ * @since 2018-04-24
  */
 public interface ShopBrandDao extends CrudDao<ShopBrand> {
 

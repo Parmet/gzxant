@@ -98,7 +98,6 @@
     }
 
     load_data( getcolumns(), {});
-
 </script>
 </body>
 </html>
