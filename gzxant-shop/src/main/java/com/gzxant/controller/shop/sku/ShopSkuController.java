@@ -57,6 +57,7 @@ public class ShopSkuController extends BaseController {
 		return ReturnDTOUtil.success();
 	}
 
+
 	@ApiOperation(value = "编辑sku", notes = "编辑sku")
 	@PostMapping(value = "/update")
 	@ResponseBody
