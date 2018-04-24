@@ -23,11 +23,7 @@
     </properties>
 
     <dependencies>
-    	<dependency>
-            <groupId>org.sitemesh</groupId>
-            <artifactId>sitemesh</artifactId>
-        </dependency>
-    
+
         <dependency>
             <groupId>com.github.drtrang</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
@@ -36,22 +32,32 @@
 
         <dependency>
             <groupId>com.gzxant</groupId>
-            <artifactId>gzxant-common</artifactId>
+            <artifactId>gzxant-code</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.gzxant</groupId>
+            <artifactId>gzxant-blog</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.gzxant</groupId>
-            <artifactId>gzxant-drools</artifactId>
-        </dependency>
-        
- 		<dependency>
-            <groupId>com.gzxant</groupId>
-            <artifactId>gzxant-log</artifactId>
+            <artifactId>gzxant-common</artifactId>
         </dependency>
         
         <dependency>
             <groupId>com.gzxant</groupId>
+            <artifactId>gzxant-drools</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gzxant</groupId>
             <artifactId>gzxant-sys</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gzxant</groupId>
+            <artifactId>gzxant-log</artifactId>
         </dependency>
 
         <dependency>

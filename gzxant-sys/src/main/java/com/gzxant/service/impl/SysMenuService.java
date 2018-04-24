@@ -32,7 +32,7 @@ import com.gzxant.service.ISysRoleMenuService;
  * <p>
  * Email 122741482@qq.com
  * <p>
- * Describe: sys 菜单 servive
+ * Describe: tmplates 菜单 servive
  */
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)

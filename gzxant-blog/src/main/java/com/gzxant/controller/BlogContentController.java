@@ -35,7 +35,8 @@ import io.swagger.annotations.ApiOperation;
  * Describe:
  */
 @Controller
-@RequestMapping(value = "/blog/content")
+
+
 public class BlogContentController extends BaseController {
 
     @Autowired
@@ -45,8 +46,8 @@ public class BlogContentController extends BaseController {
     @ApiOperation(value = "进入博客列表界面", notes = "进入博客列表界面")
     @GetMapping(value = "")
     public String list(Model model, HttpServletRequest request) {
-        model.addAttribute("url", request.getContextPath() + "/blog/content/");
-        return "blog/list";
+        model.addAttribute("url", request.getContextPath() + "/fs/content/");
+        return "fs/list";
     }
 
     @ApiOperation(value = "获取列表列表数据", notes = "获取列表列表数据:使用约定的DataTable")
@@ -60,8 +61,8 @@ public class BlogContentController extends BaseController {
     @GetMapping(value = "/detail/{action}")
     public String create(@PathVariable("action") String action, Model model, HttpServletRequest request) {
         model.addAttribute("action", action);
-        model.addAttribute("url", request.getContextPath() + "/blog/content/");
-        return "blog/detail";
+        model.addAttribute("url", request.getContextPath() + "/fs/content/");
+        return "fs/detail";
     }
 
 

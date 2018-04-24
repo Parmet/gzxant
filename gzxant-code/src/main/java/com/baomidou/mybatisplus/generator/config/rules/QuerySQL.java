@@ -42,9 +42,9 @@ public enum QuerySQL {
 
     SQL_SERVER("sql_server",
             "select cast(name as varchar(500)) as TABLE_NAME from sysObjects where xtype='U' order by name",
-            "select name as TABLE_NAME,(select cast(value as varchar(500)) from sys.extended_properties where major_id=id and minor_id = 0) as COMMENTS from sysobjects where xtype='U'",
+            "select name as TABLE_NAME,(select cast(value as varchar(500)) from tmplates.extended_properties where major_id=id and minor_id = 0) as COMMENTS from sysobjects where xtype='U'",
             "SELECT  cast(a.NAME AS VARCHAR(500)) AS TABLE_NAME,cast(b.NAME AS VARCHAR(500)) AS COLUMN_NAME, "
-                    + "cast(c.VALUE AS VARCHAR(500)) AS COMMENTS,cast(sys.types.NAME AS VARCHAR (500)) AS DATA_TYPE,"
+                    + "cast(c.VALUE AS VARCHAR(500)) AS COMMENTS,cast(tmplates.types.NAME AS VARCHAR (500)) AS DATA_TYPE,"
                     + "(" + " SELECT CASE count(1) WHEN 1 then 'PRI' ELSE '' END"
                     + " FROM syscolumns,sysobjects,sysindexes,sysindexkeys,systypes "
                     + " WHERE syscolumns.xusertype = systypes.xusertype AND syscolumns.id = object_id (A.NAME) AND sysobjects.xtype = 'PK'"
@@ -53,10 +53,10 @@ public enum QuerySQL {
                     + " AND sysindexkeys.indid = sysindexes.indid "
                     + " AND syscolumns.colid = sysindexkeys.colid AND syscolumns.NAME = B.NAME) as 'KEY',"
                     + "  b.is_identity isIdentity "
-                    + " FROM sys.TABLES a " + " INNER JOIN sys.COLUMNS b ON b.object_id = a.object_id "
-                    + " LEFT JOIN sys.types ON b.user_type_id = sys.types.user_type_id   "
-                    + " LEFT JOIN sys.extended_properties c ON c.major_id = b.object_id AND c.minor_id = b.column_id "
-                    + " WHERE a.NAME = '%s' and sys.types.NAME !='sysname' ",
+                    + " FROM tmplates.TABLES a " + " INNER JOIN tmplates.COLUMNS b ON b.object_id = a.object_id "
+                    + " LEFT JOIN tmplates.types ON b.user_type_id = tmplates.types.user_type_id   "
+                    + " LEFT JOIN tmplates.extended_properties c ON c.major_id = b.object_id AND c.minor_id = b.column_id "
+                    + " WHERE a.NAME = '%s' and tmplates.types.NAME !='sysname' ",
             "TABLE_NAME", "COMMENTS", "COLUMN_NAME", "DATA_TYPE", "COMMENTS", "KEY"),
 
     POSTGRE_SQL("postgre_sql", "select tablename from pg_tables where schemaname='%s' ORDER BY tablename",

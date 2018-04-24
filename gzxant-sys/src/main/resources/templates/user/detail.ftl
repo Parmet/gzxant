@@ -241,7 +241,7 @@
                 minlength: 2,
                 maxlength: 30,
                 required: true,
-                remote: '${rc.contextPath}/sys/user/check/${sysUser.id}'
+                remote: '${rc.contextPath}/tmplates/user/check/${sysUser.id}'
             },
             name: {
                 required: true

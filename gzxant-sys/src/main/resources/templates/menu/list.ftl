@@ -297,7 +297,7 @@
         text = selectd.node.text;
         if (menuid) {
             $.ajax({
-                url: '${rc.contextPath}/sys/menu/select/' + menuid,
+                url: '${rc.contextPath}/tmplates/menu/select/' + menuid,
                 type: 'GET',
                 success: function (data) {
                     data=data.menu;
@@ -429,7 +429,7 @@
                 btn: ['确定', '取消']
             }, function () {
                 $.ajax({
-                    url: '${rc.contextPath}/sys/menu/delete/' + menuid,
+                    url: '${rc.contextPath}/tmplates/menu/delete/' + menuid,
                     type: "DELETE",
 
                     success: function (r) {

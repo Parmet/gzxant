@@ -132,7 +132,7 @@
         $.ajax({
             data : formData,
             type : "POST",
-            url : "/file/upload/blog",    // 图片上传出来的url，返回的是图片上传后的路径，http格式
+            url : "/file/upload/fs",    // 图片上传出来的url，返回的是图片上传后的路径，http格式
             cache : false,
             contentType : false,
             processData : false,

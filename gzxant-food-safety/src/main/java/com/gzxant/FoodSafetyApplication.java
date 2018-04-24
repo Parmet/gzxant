@@ -12,7 +12,7 @@ import com.gzxant.constant.Setting;
 @MapperScan(Setting.SCAN_MAPPER_PATH)//@Mapper  在mapper 接口上加入也行
 public class FoodSafetyApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(FoodSafetyApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(FoodSafetyApplication.class, args);
+    }
 }
