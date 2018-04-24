@@ -7,6 +7,7 @@
     <link href="${rc.contextPath}/css/animate.css" rel="stylesheet">
     <script>
         console.log('${rc}');
+        var url = "${url}";
     </script>
 </head>
 

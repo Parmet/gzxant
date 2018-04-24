@@ -2,6 +2,8 @@ package com.gzxant.controller.shop.category;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,7 +42,8 @@ public class ShopCategoryController extends BaseController {
 
 	@ApiOperation(value = "进入商城-分类表列表界面", notes = "进入商城-分类表列表界面")
 	@GetMapping(value = "")
-	public String list(Model model) {
+	public String list(Model model, HttpServletRequest request) {
+		model.addAttribute("url", request.getContextPath() + "/category/");
 		System.out.println("list index");
 		return "/shop/category/list";
 	}
