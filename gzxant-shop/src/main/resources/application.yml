@@ -4,11 +4,12 @@ server:
 
 spring:
   profiles:
-    active: dev
+    active: local
 
   aop:
     proxy-target-class: true
   freemarker:
+    cache: false
     template-loader-path: classpath:/templates/
     prefer-file-system-access: false
     settings:

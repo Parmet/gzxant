@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>系统用户编辑</title>
+    <title>分类详情</title>
 
     <link href="${rc.contextPath}/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="${rc.contextPath}/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
@@ -22,9 +22,9 @@
     <script src="${rc.contextPath}/js/plugins/dropzone/dropzone.min.js"></script>
 
     <script>
-        var url = "${url}",  action = "${action}";
-
+        var url = "${rc.requestUri}" + "/",  action = "${action}";
     </script>
+    
     <script src="${rc.contextPath}/js/slife/slife.js"></script>
     <script src="${rc.contextPath}/js/slife/slifeform.js"></script>
 </head>
@@ -37,128 +37,18 @@
                 <div class="ibox-content">
 
                     <form class="form-horizontal form-bordered" id="slifeForm">
-                        <input type="hidden" name="id" value="${sysUser.id}"/>
-                        <input type="hidden" name="photo" value="${sysUser.photo}" id="photo"/>
-
                         <div class="form-group">
                             <label class="col-sm-3 control-label">头像</label>
                             <div class="col-sm-2">
                                 <div id="localImag" style="margin-left:15px;">
                                     <div class="img_box" id="imgBox">
-                                        <img id="imgshowdiv" style="width: 60px" src="${sysUser.photo}"
-                                             onerror="javascript:errimg()" class="img_file img-rounded"/>
 
-                                    <#--          <div class="img_edit_box">
-                                                  <a class="img_desr" href="javascript:doDeleteImg()">删除</a>
-                                              </div>-->
                                     </div>
                                 </div>
                             </div>
-                        <#if action !='detail'>
-                            <div class="col-sm-4">
-                                <div id="mydropzone" class="dropzone"></div>
-                            </div>
-                        </#if>
                         </div>
 
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">登录名<span class="required">*</span></label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="loginName" placeholder="请输入登录名"
-                                       value="${sysUser.loginName}" required aria-required="true"/>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">用户名<span class="required">*</span></label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="name" placeholder="请输入用户名"
-                                       value="${sysUser.name}"/>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">电子邮件<span class="required">*</span></label>
-
-                            <div class="col-sm-8">
-                                <input name="email" type="email" class="form-control" value="${sysUser.email}"
-                                       placeholder="电子邮件地址">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">密码<#if action !='update'><span
-                                    class="required">*</span></#if></label>
-
-                            <div class="col-sm-8">
-                                <div class="input-icon right">
-                                    <input name="password" type="password" class="form-control"
-                                           placeholder="请输入登录密码">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">工号<span class="required">*</span></label>
-
-                            <div class="col-sm-8">
-                                <input name="no" type="text" class="form-control" value="${sysUser.no}"
-                                       placeholder="工号">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">电话</label>
-
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <input name="phone" type="text" class="form-control" value="${sysUser.phone}"
-                                           placeholder="电话">
-                                </div>
-                            </div>
-
-                            <label class="col-sm-2 control-label">手机</label>
-
-                            <div class="col-sm-3">
-                                <input name="mobile" type="text" class="form-control" value="${sysUser.mobile}"
-                                       placeholder="手机">
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">备注</label>
-
-                            <div class="col-sm-8">
-                                <input name="remark" type="text" class="form-control" value="${sysUser.remark}"
-                                       placeholder="备注">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">状态</label>
-
-                            <div class="col-sm-8">
-                                <select name="status" class="form-control">
-                                    <option value="Y">启用</option>
-                                    <option value="N">禁用</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">角色</label>
-
-                            <div class="col-sm-8">
-                                <select name="ids" multiple="multiple" class="select" style="width: 100%;">
-                                <#list roles as r>
-                                    <option value="${r.id}">${r.name}</option>
-                                </#list>
-                                </select>
-                            </div>
-                        </div>
-
-                    <#if action !='detail'>
+                    <#if action != 'detail'>
                         <div class="form-actions fluid">
                             <div class="col-md-offset-3 col-md-9">
                                 <button type="submit" class="btn green">保存</button>
@@ -186,35 +76,6 @@
     function errimg() {
         $("#photo").val("/img/log9.png");
         $("#imgshowdiv").attr('src', "/img/log9.png");
-    }
-
-
-    /**
-     * 删除头像
-     */
-
-    function doDeleteImg() {
-        var name = $("#photo").val();
-        layer.confirm('确定要删除头像吗？', {
-            btn: ['确定', '取消']
-        }, function () {
-            $.ajax({
-                url: url + "delete/photo",
-                type: "POST",
-                data: {
-                    'name': name
-                },
-                success: function (r) {
-                    if (r.code == 200) {
-                        errimg();
-
-                    } else {
-                        layer.msg(r.error);
-                    }
-                }
-            });
-        })
-
     }
 
     var select = $(".select").select2();

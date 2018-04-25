@@ -2,8 +2,6 @@ package com.gzxant.controller.shop.category;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,12 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gzxant.annotation.SLog;
+import com.gzxant.base.controller.BaseController;
 import com.gzxant.base.entity.ReturnDTO;
 import com.gzxant.base.vo.DataTable;
-import com.gzxant.service.shop.category.IShopCategoryService;
+import com.gzxant.constant.Global;
 import com.gzxant.entity.shop.category.ShopCategory;
+import com.gzxant.service.shop.category.IShopCategoryService;
+import com.gzxant.util.PathUtils;
 import com.gzxant.util.ReturnDTOUtil;
-import com.gzxant.base.controller.BaseController;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -42,15 +42,25 @@ public class ShopCategoryController extends BaseController {
 
 	@ApiOperation(value = "进入商城-分类表列表界面", notes = "进入商城-分类表列表界面")
 	@GetMapping(value = "")
-	public String list(Model model, HttpServletRequest request) {
-		model.addAttribute("url", request.getContextPath() + "/category");
-		System.out.println("list index");
+	public String list(Model model) {
 		return "/shop/category/list";
 	}
 
-	@ApiOperation(value = "进入商城-分类表编辑界面", notes = "进入商城-分类表编辑界面")
-	@GetMapping(value = "/detail/{action}")
-	public String detail(@PathVariable("action") String action, Model model) {
+	@ApiOperation(value = "进入商城-分类表详情界面", notes = "进入商城-分类表详情界面")
+	@GetMapping(value = {"/{action}/{id}", "/{action}"})
+	public String detail(@PathVariable(name = "action") String action, 
+			@PathVariable(name = "id", required = false) String id, Model model) {
+		if (!PathUtils.checkDetailPath(action, id)) {
+			model.addAttribute("msg", "未识别参数");
+			return "/shop/category/list";
+		}
+		
+		ShopCategory category = null;
+		if (StringUtils.isNumeric(id)) {
+			category = shopCategoryService.selectById(id);
+		}
+		
+		model.addAttribute("category", category);
 		model.addAttribute("action", action);
 		return "/shop/category/detail";
 	}
@@ -69,9 +79,9 @@ public class ShopCategoryController extends BaseController {
 	}
 
 	@ApiOperation(value = "添加商城-分类表", notes = "添加商城-分类表")
-	@PostMapping(value = "/create")
+	@PostMapping(value = "/insert")
 	@ResponseBody
-	public ReturnDTO create(ShopCategory param) {
+	public ReturnDTO insert(ShopCategory param) {
 		if (param == null
 			|| param.getParentId() == null || param.getParentId().intValue() < 0
 			|| StringUtils.isBlank(param.getName())) {
@@ -83,7 +93,7 @@ public class ShopCategoryController extends BaseController {
 	}
 
 	@ApiOperation(value = "编辑商城-分类表", notes = "编辑商城-分类表")
-	@PostMapping(value = "/update")
+	@PostMapping(value = "/update/{id}")
 	@ResponseBody
 	public ReturnDTO update(ShopCategory param) {
 		if (param == null || param.getId() == null
