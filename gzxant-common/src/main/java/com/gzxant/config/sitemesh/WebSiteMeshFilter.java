@@ -22,7 +22,7 @@ public class WebSiteMeshFilter extends ConfigurableSiteMeshFilter {
 
     /** 不需要装饰的访问路径,多个之间用英文逗号分隔 */
 
-    private String excludedPaths="*.js,*.css,/druid/*,/swagger-ui,/login";
+    private String excludedPaths="*.js,*.css,/druid/*,/swagger-ui,/login,/**/detail/*,/**/insert,/**/update/*";
 
     @Override
     protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
