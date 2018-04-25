@@ -1,19 +1,5 @@
 package com.gzxant.controller.shop.category;
 
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.gzxant.annotation.SLog;
 import com.gzxant.base.controller.BaseController;
 import com.gzxant.base.entity.ReturnDTO;
@@ -22,8 +8,14 @@ import com.gzxant.entity.shop.category.ShopCategory;
 import com.gzxant.service.shop.category.IShopCategoryService;
 import com.gzxant.util.PathUtils;
 import com.gzxant.util.ReturnDTOUtil;
-
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -96,7 +88,7 @@ public class ShopCategoryController extends BaseController {
 	@ResponseBody
 	public ReturnDTO update(ShopCategory param) {
 		if (param == null || param.getId() == null
-			|| param.getId().intValue() < 0) {
+				|| param.getId().intValue() < 0) {
 			return ReturnDTOUtil.paramError();
 		}
 		

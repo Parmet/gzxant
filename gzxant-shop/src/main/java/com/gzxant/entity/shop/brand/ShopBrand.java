@@ -1,10 +1,9 @@
 package com.gzxant.entity.shop.brand;
 
-import java.io.Serializable;
-
-import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.gzxant.base.entity.DataEntity;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -24,8 +23,6 @@ public class ShopBrand extends DataEntity<ShopBrand> {
      */
 	private String name;
 	private String logo;
-	@TableField("update_id")
-	private Long updateId;
 
 
 	public String getName() {
@@ -44,13 +41,6 @@ public class ShopBrand extends DataEntity<ShopBrand> {
 		this.logo = logo;
 	}
 
-	public Long getUpdateId() {
-		return updateId;
-	}
-
-	public void setUpdateId(Long updateId) {
-		this.updateId = updateId;
-	}
 
 	@Override
 	protected Serializable pkVal() {

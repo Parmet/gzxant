@@ -6,58 +6,59 @@
     <link href="${rc.contextPath}/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
     <link href="${rc.contextPath}/css/animate.css" rel="stylesheet">
     <script>
-        var url = "${url}";
+        var url = "${rc.requestUri}" + "/";
     </script>
 </head>
 
 
 <body class="gray-bg">
-<div class="wrapper wrapper-content animated fadeInRight">
-    <div class="col-sm-12">
-        <div class="ibox">
-            <div class="ibox-body">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="col-sm-12">
+            <div class="ibox">
+                <div class="ibox-body">
+                    <div id="exampleToolbar" role="group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">查询条件</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 form-group">
+                                        <label for="nameInput" class="control-label">角色名称:</label>
+                                        <input type="text" class="form-filter form-control _search" id="nameInput" name="search_like_name"  />
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 form-group">
+                                        <label for="nameInput" class="control-label">角色编码：</label>
+                                        <input type="text" class="form-filter form-control _search" id="nameInput" name="search_like_code"  />
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 form-group">
+                                        <label for="nameInput" class="control-label">姓名：</label>
+                                        <input type="text" class="form-filter form-control _search" id="nameInput" name="search_like_useable"  />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <button type="button" class="btn btn-success" onclick="re_load()">
+                                    <i class="fa fa-search" aria-hidden="true"></i> 查询
+                                </button>
+                                <button type="button" class="btn btn-primary" onclick="reset()">
+                                    <i class="fa fa-circle-thin" aria-hidden="true"></i> 重置
+                                </button>
+                                <button type="button" class="btn btn-danger" onclick="batch_remove()">
+                                    <i class="fa fa-trash" aria-hidden="true"></i> 删除
+                                </button>
+                                <button type="button" class="btn btn-info" onclick="dt_insert()">
+                                    <i class="fa fa-plus-square" aria-hidden="true"></i> 添加
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
-                <div id="exampleToolbar" role="group">
-
-                    <label style="margin-left: 10px;">
-                        角色名称：
-                        <input type="text" class="form-filter input-sm _search" name="search_like_name">
-                    </label>
-                    <label style="margin-left: 10px;">
-                        角色编码：
-                        <input type="text" class="form-filter input-sm _search" name="search_like_code">
-                    </label>
-                    <label style="margin-left: 10px;">
-                        姓名：
-                        <input type="text" class="form-filter input-sm _search" name="search_eq_useable">
-                    </label>
-
-
-                    <label style="margin-left: 10px;">
-                        <button class="btn btn-success" onclick="re_load()">
-                            <i class="fa fa-search" aria-hidden="true"></i>查询
-                        </button>
-                        <button type="button" class="btn  btn-primary" onclick="reset()">
-                            <i class="fa fa-circle-thin" aria-hidden="true"></i>重置
-                        </button>
-                        <button type="button" class="btn  btn-danger" onclick="batch_remove()">
-                            <i class="fa fa-trash" aria-hidden="true"></i>删除
-                        </button>
-                        <button  type="button" class="btn  btn-info" onclick="dt_insert()">
-                            <i class="fa fa-plus-square" aria-hidden="true"></i>添加
-                        </button>
-                    </label>
-
-
-
+                    <table class="table" id="exampleTable" data-mobile-responsive="true">
+                    </table>
                 </div>
-
-                <table id="exampleTable" data-mobile-responsive="true">
-                </table>
-
             </div>
         </div>
-    </div>
 </div>
 
 <!-- Bootstrap table -->
@@ -114,7 +115,8 @@
         return c;
     }
 
-    load_data( getcolumns(), {"createDate": "desc"});
+    load_data( getcolumns(), {});
+    $(".bars").css("width", "100%");
 
 
 </script>
