@@ -31,6 +31,7 @@ public class ShopBrandController extends BaseController {
 	@Autowired
 	private IShopBrandService shopBrandService;
 
+
 	@ApiOperation(value = "进入商城-品牌表列表界面", notes = "进入商城-品牌表列表界面")
 	@GetMapping(value = "")
 	public String list(Model model) {
