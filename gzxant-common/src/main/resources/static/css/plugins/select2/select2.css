@@ -122,7 +122,7 @@ Version: 3.4.6 Timestamp: Sat Mar 22 22:30:15 EDT 2014
     height: auto;
     width: auto;
     opacity: 0;
-    z-index: 9998;
+    z-index: 19891017;
     /* styles required for IE to work */
     background-color: #fff;
     filter: alpha(opacity=0);
@@ -132,7 +132,7 @@ Version: 3.4.6 Timestamp: Sat Mar 22 22:30:15 EDT 2014
     width: 100%;
     margin-top: -1px;
     position: absolute;
-    z-index: 9999;
+    z-index: 19891018;
     top: 100%;
 
     background: #fff;

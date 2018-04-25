@@ -71,7 +71,7 @@
 <script src="${base}/js/plugins/validate/messages_zh.min.js"></script>
 <script src="${base}/js/plugins/layer/layer.min.js"></script>
 <script src="${base}/js/plugins/toastr/toastr.min.js"></script>
-<script src="${base}/js/slife/toast.js"></script>
+<script src="${base}/js/gzxant/toast.js"></script>
 
 <script>
 

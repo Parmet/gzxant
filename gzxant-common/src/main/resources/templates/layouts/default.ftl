@@ -11,8 +11,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta name="renderer" content="webkit">
-    <meta name="keywords" content="slife">
-    <meta name="description" content="slife，....">
+    <meta name="keywords" content="gzxant">
+    <meta name="description" content="gzxant，....">
 
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
@@ -23,7 +23,9 @@
     <link href="${rc.contextPath}/css/font-awesome.min.css?v=4.4.0" rel="stylesheet"/>
     <link href="${rc.contextPath}/css/animate.css" rel="stylesheet"/>
     <link href="${rc.contextPath}/css/style.css?v=4.1.0" rel="stylesheet"/>
-    <link href="${rc.contextPath}/css/slife.css" rel="stylesheet"/>
+    <link href="${rc.contextPath}/css/gzxant.css" rel="stylesheet"/>
+    <link href="${rc.contextPath}/css/plugins/select2/select2.css" rel="stylesheet">
+    <link href="${rc.contextPath}/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
 
     <script src="${rc.contextPath}/js/jquery.min.js?v=2.1.4"></script>
     <script src="${rc.contextPath}/js/bootstrap.min.js?v=3.3.6"></script>
@@ -38,12 +40,23 @@
     <script src="${rc.contextPath}/js/websocket/sockjs.min.js" type="text/javascript"></script>
     <script src="${rc.contextPath}/js/websocket/stomp.min.js" type="text/javascript"></script>
     <script src="${rc.contextPath}/js/websocket/sliescoket.js" type="text/javascript"></script>
+    <script src="${rc.contextPath}/js/plugins/select2/select2.min.js"></script>
+    <script src="${rc.contextPath}/js/plugins/validate/jquery.validate.min.js"></script>
+	<script src="${rc.contextPath}/js/plugins/validate/messages_zh.min.js"></script>
+	<script src="${rc.contextPath}/js/gzxant/datatable.js"></script>
+	<script src="${rc.contextPath}/js/gzxant/gzxantform.js"></script>
+	<script src="${rc.contextPath}/js/jquery.form.js"></script>
+	<!-- Bootstrap table -->
+	<script src="${rc.contextPath}/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	<script src="${rc.contextPath}/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+	<script src="${rc.contextPath}/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 
 <script>
-    var slifebase="${rc.contextPath}";
+    //var slifebase="${rc.contextPath}";
+    var url = "${rc.requestUri}" + "/",  action = "${action}";
 </script>
     <script src="${rc.contextPath}/js/plugins/pace/pace.min.js"></script>
-    <script src="${rc.contextPath}/js/slife/slife.js"></script>
+    <script src="${rc.contextPath}/js/gzxant/gzxant.js"></script>
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden">
@@ -352,17 +365,13 @@
 <script type="text/javascript">
     $(document).ready(function () {
         //	$("#index001").click();
+	    $(".select2").select2();
     });
     function devPeing() {
     }
 </script>
 
 <script type="text/javascript">
-    console.log("===========================");
-    console.log(window.location.href);
-    if (typeof console == "object") {
-
-    }
 
 </script>
 

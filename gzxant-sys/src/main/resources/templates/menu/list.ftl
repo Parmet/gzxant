@@ -1,23 +1,18 @@
-<html>
-<head>
-    <title>菜单管理</title>
-    <link rel="stylesheet" type="text/css" href="${rc.contextPath}/css/plugins/jsTree/style.min.css"/>
-    <style>
-        #menu_edit_table .control-label {
-            text-align: left !important;
-        }
+<link rel="stylesheet" type="text/css" href="${rc.contextPath}/css/plugins/jsTree/style.min.css"/>
+<style>
+    #menu_edit_table .control-label {
+        text-align: left !important;
+    }
 
-        #menu_edit_table input, #menu_edit_table select {
-            margin-left: -45px;
-        }
+    #menu_edit_table input, #menu_edit_table select {
+        margin-left: -45px;
+    }
 
-        #menu_edit_table .row {
-            margin-top: 15px !important;
-        }
+    #menu_edit_table .row {
+        margin-top: 15px !important;
+    }
 
-    </style>
-</head>
-<body class="gray-bg">
+</style>
 <div class="wrapper wrapper-content animated fadeInRight">
 
     <div class="row">
@@ -266,10 +261,6 @@
 </div>
 
 <script src="${rc.contextPath}/js/plugins/jsTree/jstree.min.js" type="text/javascript"></script>
-<script src="${rc.contextPath}/js/plugins/validate/jquery.validate.min.js"></script>
-<script src="${rc.contextPath}/js/plugins/validate/messages_zh.min.js"></script>
-<script src="${rc.contextPath}/js/jquery.form.js"></script>
-
 <script type="text/javascript">
 
 
@@ -297,7 +288,7 @@
         text = selectd.node.text;
         if (menuid) {
             $.ajax({
-                url: '${rc.contextPath}/tmplates/menu/select/' + menuid,
+                url: '${rc.contextPath}/sys/menu/select/' + menuid,
                 type: 'GET',
                 success: function (data) {
                     data=data.menu;
@@ -429,7 +420,7 @@
                 btn: ['确定', '取消']
             }, function () {
                 $.ajax({
-                    url: '${rc.contextPath}/tmplates/menu/delete/' + menuid,
+                    url: '${rc.contextPath}/sys/menu/delete/' + menuid,
                     type: "DELETE",
 
                     success: function (r) {
@@ -546,6 +537,3 @@
 
 
 </script>
-</body>
-
-</html>
