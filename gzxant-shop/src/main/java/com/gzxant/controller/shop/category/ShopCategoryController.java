@@ -18,7 +18,6 @@ import com.gzxant.annotation.SLog;
 import com.gzxant.base.controller.BaseController;
 import com.gzxant.base.entity.ReturnDTO;
 import com.gzxant.base.vo.DataTable;
-import com.gzxant.constant.Global;
 import com.gzxant.entity.shop.category.ShopCategory;
 import com.gzxant.service.shop.category.IShopCategoryService;
 import com.gzxant.util.PathUtils;

@@ -59,8 +59,6 @@
     </div>
 </div>
 
-
-
 <!-- Bootstrap table -->
 <script src="${rc.contextPath}/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
 <script src="${rc.contextPath}/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
