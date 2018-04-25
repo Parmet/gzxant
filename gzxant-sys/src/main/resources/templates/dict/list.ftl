@@ -1,6 +1,3 @@
-<html>
-<head>
-    <title>数据字典管理</title>
     <link rel="stylesheet" type="text/css" href="${rc.contextPath}/css/plugins/jsTree/style.min.css"/>
     <style>
         #dict_edit_table .control-label {
@@ -15,9 +12,6 @@
         }
 
     </style>
-</head>
-
-<body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">
 <!--数据列表-->
 <div class="row" style="margin-right: 0!important;">
@@ -164,11 +158,6 @@
 </div>
 </div>
 <script src="${rc.contextPath}/js/plugins/jsTree/jstree.min.js" type="text/javascript"></script>
-<script src="${rc.contextPath}/js/plugins/validate/jquery.validate.min.js"></script>
-<script src="${rc.contextPath}/js/plugins/validate/messages_zh.min.js"></script>
-<script src="${rc.contextPath}/js/jquery.form.js"></script>
-
-
 <script type="text/javascript">
     var form = $('#dictForm'), dic_id = 0, pid = 0, text;
     $("#dictTree").jstree({
@@ -194,7 +183,7 @@
         text = selectd.node.text;
         if (dic_id) {
             $.ajax({
-                url: '${rc.contextPath}/tmplates/dict/select/' + dic_id,
+                url: '${rc.contextPath}/sys/dict/select/' + dic_id,
                 type: 'GET',
                 success: function (msg) {
                     var data = msg.dict;
@@ -303,7 +292,7 @@
             btn: ['是', '否']
         },function () {
             $.ajax({
-                url: '${rc.contextPath}/tmplates/dict/delete/' + dic_id,
+                url: '${rc.contextPath}/sys/dict/delete/' + dic_id,
                 type: 'DELETE',
                 success: function (data) {
                     if (data.success) {
@@ -321,7 +310,7 @@
     $('.btn-rush').click(function () {
 
         $.ajax({
-            url: '${rc.contextPath}/tmplates/dict/rush',
+            url: '${rc.contextPath}/sys/dict/rush',
             type: 'GET',
             success: function (data) {
                layer.msg('刷新成功');
@@ -351,6 +340,3 @@
     }
 </script>
 
-</body>
-
-</html>

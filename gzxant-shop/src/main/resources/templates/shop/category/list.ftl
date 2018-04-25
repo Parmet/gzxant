@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>商城分类列表</title>
-    <link href="${rc.contextPath}/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <link href="${rc.contextPath}/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
-    <link href="${rc.contextPath}/css/animate.css" rel="stylesheet">
-    <script>
-        var url = "${rc.requestUri}" + "/";
-    </script>
-</head>
-
-
-<body class="gray-bg">
-<div class="wrapper wrapper-content animated fadeInRight">
+<div class="wrapper animated fadeInRight">
     <div class="col-sm-12">
         <div class="ibox">
             <div class="ibox-body">
@@ -59,12 +45,6 @@
     </div>
 </div>
 
-<!-- Bootstrap table -->
-<script src="${rc.contextPath}/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-<script src="${rc.contextPath}/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
-<script src="${rc.contextPath}/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-
-<script src="${rc.contextPath}/js/slife/datatable.js"></script>
 <script type="text/javascript">
 
     function getcolumns() {
@@ -101,8 +81,5 @@
     }
 
     load_data( getcolumns(), {});
-    
-    $(".bars").css("width", "100%");
+    //$(".bars").css("width", "100%");
 </script>
-</body>
-</html>

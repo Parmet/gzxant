@@ -6,13 +6,20 @@ $.validator.setDefaults({
 /**
  * 提交表单
  */
-function saveForm() {
+function saveForm(form_id) {
     cusFunction(); //回调一个自定义方法，比如修改提交参数。每个form表单都必须定义
+    var form;
+    if (form_id != "") {
+    	form = $('#' + form_id);
+    } else {
+    	form = $('#gzxantForm');
+    }
+    
     $.ajax({
         cache: true,
         type: "POST",
         url: url+action,
-        data: $('#slifeForm').serialize(),// 你的formid
+        data: form.serialize(),// 你的formid
         async: false,
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             parent.layer.alert(XMLHttpRequest.responseJSON.error);

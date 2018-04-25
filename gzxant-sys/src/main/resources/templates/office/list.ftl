@@ -1,33 +1,23 @@
-<html>
-<head>
-    <title>组织管理</title>
-    <link rel="stylesheet" type="text/css" href="${rc.contextPath}/css/plugins/jsTree/style.min.css"/>
-    <link href="${rc.contextPath}/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <link href="${rc.contextPath}/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
-    <link href="${rc.contextPath}/css/animate.css" rel="stylesheet">
-    <script>
-        var url = "/tmplates/office/user/";
-    </script>
-    <style>
-        #menu_edit_table .control-label {
-            text-align: left !important;
-        }
+<script>
+    url = "${rc.contextPath}" + "/sys/office/user/";
+</script>
+<style>
+    #menu_edit_table .control-label {
+        text-align: left !important;
+    }
 
-        #menu_edit_table input, #menu_edit_table select {
-            margin-left: -45px;
-        }
+    #menu_edit_table input, #menu_edit_table select {
+        margin-left: -45px;
+    }
 
-        #menu_edit_table .row {
-            margin-top: 15px !important;
-        }
+    #menu_edit_table .row {
+        margin-top: 15px !important;
+    }
 
-    </style>
-</head>
-<body class="gray-bg">
+</style>
+<link rel="stylesheet" type="text/css" href="${rc.contextPath}/css/plugins/jsTree/style.min.css"/>
 <div class="wrapper wrapper-content animated fadeInRight">
-
     <div class="row">
-
         <div class="col-md-3">
             <div class="portlet box green-haze" style="padding: 15px">
                 <div class="portlet-body" id="resTree"></div>
@@ -256,16 +246,6 @@
 </div>
 
 <script src="${rc.contextPath}/js/plugins/jsTree/jstree.min.js" type="text/javascript"></script>
-<script src="${rc.contextPath}/js/plugins/validate/jquery.validate.min.js"></script>
-<script src="${rc.contextPath}/js/plugins/validate/messages_zh.min.js"></script>
-<script src="${rc.contextPath}/js/jquery.form.js"></script>
-
-<!-- Bootstrap table -->
-<script src="${rc.contextPath}/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-<script src="${rc.contextPath}/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
-<script src="${rc.contextPath}/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-
-<script src="${rc.contextPath}/js/slife/datatable.js"></script>
 <script type="text/javascript">
 
 
@@ -367,7 +347,7 @@
         text = selectd.node.text;
         if (menuid) {
             $.ajax({
-                url: '${rc.contextPath}/tmplates/office/select/' + menuid,
+                url: '${rc.contextPath}/sys/office/select/' + menuid,
                 type: 'GET',
                 success: function (data) {
                     data=data.office;
@@ -495,7 +475,7 @@
                 btn: ['确定', '取消']
             }, function () {
                 $.ajax({
-                    url: '${rc.contextPath}/tmplates/office/disable/' + menuid,
+                    url: '${rc.contextPath}/sys/office/disable/' + menuid,
                     type: "POST",
 
                     success: function (r) {
@@ -612,6 +592,3 @@
 
 
 </script>
-</body>
-
-</html>

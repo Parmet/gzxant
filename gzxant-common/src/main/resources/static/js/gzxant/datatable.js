@@ -239,13 +239,15 @@ function dt_detail(id) {
  * @param action
  */
 function dt_action(title, action) {
-    // iframe层
-    layer.open({
-        type: 2,
-        title: title,
-        maxmin: true,
-        shadeClose: false, // 点击遮罩关闭层
-        area: ['800px', '520px'],
-        content: url + action // iframe的url
-    });
+	var initSelect2 = "<script type='text/javascript'>$('.select2').select2();</script>";
+	$.get(url + action, {},function (html) {
+		layer.open({
+	        type: 1,
+	        title: title,
+	        maxmin: true,
+	        shadeClose: false, // 点击遮罩关闭层
+	        area: ['800px', '520px'],
+	        content: html + initSelect2
+	    });
+	}, "html"); 
 }

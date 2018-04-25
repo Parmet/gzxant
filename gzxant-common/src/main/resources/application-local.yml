@@ -7,7 +7,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/gzxant?useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
-    password: 123456
+    password: admin
     druid:
       validationQuery: SELECT 1
       initialSize: 10
@@ -21,7 +21,8 @@ spring:
       logAbandoned: true
       poolPreparedStatements: true
       maxOpenPreparedStatements: 100
-
+  freemarker:
+    cache: false
   redis:
     database: 1
     host: localhost
