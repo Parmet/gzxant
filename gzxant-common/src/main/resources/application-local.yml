@@ -21,8 +21,6 @@ spring:
       logAbandoned: true
       poolPreparedStatements: true
       maxOpenPreparedStatements: 100
-  freemarker:
-    cache: false
   redis:
     database: 1
     host: localhost
