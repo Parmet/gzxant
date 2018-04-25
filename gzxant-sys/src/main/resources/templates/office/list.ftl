@@ -6,7 +6,7 @@
     <link href="${rc.contextPath}/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
     <link href="${rc.contextPath}/css/animate.css" rel="stylesheet">
     <script>
-        var url = "/sys/office/user/";
+        var url = "/tmplates/office/user/";
     </script>
     <style>
         #menu_edit_table .control-label {
@@ -367,7 +367,7 @@
         text = selectd.node.text;
         if (menuid) {
             $.ajax({
-                url: '${rc.contextPath}/sys/office/select/' + menuid,
+                url: '${rc.contextPath}/tmplates/office/select/' + menuid,
                 type: 'GET',
                 success: function (data) {
                     data=data.office;
@@ -495,7 +495,7 @@
                 btn: ['确定', '取消']
             }, function () {
                 $.ajax({
-                    url: '${rc.contextPath}/sys/office/disable/' + menuid,
+                    url: '${rc.contextPath}/tmplates/office/disable/' + menuid,
                     type: "POST",
 
                     success: function (r) {

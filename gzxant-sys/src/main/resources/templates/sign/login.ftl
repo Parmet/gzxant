@@ -55,7 +55,7 @@
         </div>
     </div>
     <div class="signup-footer">
-        <div style="text-align: center;">&copy; 2017 All Rights Reserved. slife
+        <div style="text-align: center;">&copy; 2018 All Rights Reserved. gzxant
         </div>
     </div>
 </div>

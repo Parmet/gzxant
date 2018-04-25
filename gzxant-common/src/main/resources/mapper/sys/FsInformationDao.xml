@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gzxant.dao.FsInformationDao">
+
+	<!--&lt;!&ndash;&lt;!&ndash; 通用查询映射结果 &ndash;&gt;&ndash;&gt;-->
+	<!--&lt;!&ndash;<resultMap id="BaseResultMap" type="com.gzxant.entity.FsInformation">&ndash;&gt;-->
+		<!--&lt;!&ndash;<id column="id" property="id" />&ndash;&gt;-->
+		<!--&lt;!&ndash;<result column="create_id" property="createId" />&ndash;&gt;-->
+		<!--&lt;!&ndash;<result column="update_id" property="updateId" />&ndash;&gt;-->
+		<!--&lt;!&ndash;<result column="create_date" property="createDate" />&ndash;&gt;-->
+		<!--&lt;!&ndash;<result column="update_date" property="updateDate" />&ndash;&gt;-->
+		<!--&lt;!&ndash;<result column="del_flag" property="delFlag" />&ndash;&gt;-->
+		<!--&lt;!&ndash;<result column="title" property="title" />&ndash;&gt;-->
+		<!--&lt;!&ndash;<result column="content" property="content" />&ndash;&gt;-->
+		<!--&lt;!&ndash;<result column="type" property="type" />&ndash;&gt;-->
+		<!--&lt;!&ndash;<result column="status" property="status" />&ndash;&gt;-->
+		<!--&lt;!&ndash;<result column="author" property="author" />&ndash;&gt;-->
+	<!--&lt;!&ndash;</resultMap>&ndash;&gt;-->
+
+	<!--<insert id="insert" parameterType="fsInformationDao"-->
+			<!--useGeneratedKeys="true" keyProperty="id">-->
+        <!--insert into fs_information(create_date,update_date,del_flag,author,status,type,content,title)-->
+             <!--values(#{create_date},#{update_date},#{del_flag},#{author},#{status},#{type},#{content},#{title})-->
+    <!--</insert>-->
+	<!--<delete id="deleteById">-->
+		  <!--DELETE FROM-->
+		  <!--fs_information-->
+		  <!--WHERE-->
+		  <!--id=(#{id})-->
+		<!--</delete>-->
+	<!--<update id="updateByIds"  parameterType="fsInformationDao">-->
+ <!--update fs_information SET  author=#{author},status=#{status},type=#{type},-->
+        <!--title=#{title} where id=#{id}-->
+<!--</update>-->
+	<!--&lt;!&ndash;<update id="updateById" parameterType="sysFsInformation">&ndash;&gt;-->
+	<!--&lt;!&ndash;update fs_information&ndash;&gt;-->
+	<!--&lt;!&ndash;<set>&ndash;&gt;-->
+	<!--&lt;!&ndash;<if test="author!=null">et=#{author},</if>&ndash;&gt;-->
+	<!--&lt;!&ndash;<if test="status!=null">et=#{status},</if>&ndash;&gt;-->
+	<!--&lt;!&ndash;<if test="content!=null">et=#{content}</if>&ndash;&gt;-->
+	<!--&lt;!&ndash;<if test="type!=null">et=#{type}</if>&ndash;&gt;-->
+	<!--&lt;!&ndash;<if test="title!=null">et=#{title}</if>&ndash;&gt;-->
+	<!--&lt;!&ndash;</set>&ndash;&gt;-->
+	<!--&lt;!&ndash;where et=(#{id})&ndash;&gt;-->
+	<!--&lt;!&ndash;</update>&ndash;&gt;-->
+	<!--<select id="selectById" resultType="fsInformationDao">-->
+		<!--SELECT author,status,type,create_date,update_date-->
+		<!--FROM fs_information-->
+		<!--WHERE id=#{id}-->
+		<!--</select>-->
+	<!--<select id="selectSysFsInformation" resultType="fsInformationDao" >-->
+		<!--SELECT author,status,type,create_date,update_date-->
+		<!--FROM fs_information-->
+		<!--</select>-->
+
+</mapper>

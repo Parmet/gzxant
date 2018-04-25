@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>gzxant-sys</artifactId>
-
+	<packaging>jar</packaging>
     <name>gzxant-sys</name>
     <dependencies>
         <dependency>

@@ -157,7 +157,7 @@
             code: {
                 maxlength: 64,
                 required: true,
-                remote: '${rc.contextPath}/sys/role/check/${role.id}'
+                remote: '${rc.contextPath}/tmplates/role/check/${role.id}'
             },
             name: {
                 maxlength: 64,

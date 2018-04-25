@@ -80,7 +80,7 @@
                             <li><a href="${rc.contextPath}/logout">安全退出</a></li>
                         </ul>
                     </div>
-                    <div class="logo-element">Slife</div>
+                    <div class="logo-element">Gzxant</div>
                 </li>
 
 
@@ -232,7 +232,7 @@
 
 
         <div class="footer">
-            <div class="pull-right">呵呵 @ 版权</div>
+            <div class="pull-right">@2018 gzxant</div>
         </div>
     </div>
     <!--右侧部分结束-->
