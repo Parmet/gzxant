@@ -28,7 +28,7 @@
     <link href="${rc.contextPath}/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
     
 	<script>
-	    //var slifebase="${rc.contextPath}";
+	    var base_url ="${rc.contextPath}";
 	    var url = "${rc.requestUri}" + "/",  action = "${action}";
 	</script>
 
