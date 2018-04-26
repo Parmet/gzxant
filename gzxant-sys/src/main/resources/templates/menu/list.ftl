@@ -52,10 +52,10 @@
                             <button type="button" class="btn red btn-delete btn-danger" disabled="disabled">
                                 <i class="fa fa-trash-o"></i>
                                 <span class="hidden-480">删除此菜单</span>
-                            </button>
+                            </button
                         </div>
                         <div class="portlet-body form" id="menu_edit_table">
-                            <form id="menuForm" action="${rc.contextPath}/shop/sku/insert" class="form-horizontal form-bordered"
+                            <form id="menuForm" action="${rc.contextPath}/sys/menu/insert" class="form-horizontal form-bordered"
                                   method="POST">
                                 <input type="hidden" name="id"/>
                                 <input type="hidden" name="parentId" value="0"/>

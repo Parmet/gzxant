@@ -55,7 +55,7 @@
                             </button>
                         </div>
                         <div class="portlet-body form" id="menu_edit_table">
-                            <form id="menuForm" action="${rc.contextPath}/shop/sku/insert" class="form-horizontal form-bordered"
+                            <form id="menuForm" action="${rc.contextPath}/sku/insert" class="form-horizontal form-bordered"
                                   method="POST">
                                 <input type="hidden" name="id"/>
                                 <input type="hidden" name="parentId" value="0"/>
@@ -65,7 +65,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="col-md-2 control-label">菜单名称<span
+                                                <label class="col-md-2 control-label">品牌名称<span
                                                         class="required">*</span></label>
 
                                                 <div class="col-md-10">
@@ -79,11 +79,11 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="col-md-2 control-label">权限标识<span
+                                                <label class="col-md-2 control-label">属性ID<span
                                                         class="required">*</span></label>
 
                                                 <div class="col-md-10">
-                                                    <input type="text" class="form-control" name="permission"
+                                                    <input type="text" class="form-control" name="propertyId"
                                                            readonly="true"/>
                                                 </div>
                                             </div>
@@ -287,7 +287,7 @@
         text = selectd.node.text;
         if (menuid) {
             $.ajax({
-                url: '${rc.contextPath}/sys/menu/select/' + menuid,
+                url: '${rc.contextPath}/sku/select/' + menuid,
                 type: 'GET',
                 success: function (data) {
                     data=data.menu;
@@ -419,7 +419,7 @@
                 btn: ['确定', '取消']
             }, function () {
                 $.ajax({
-                    url: '${rc.contextPath}/sys/menu/delete/' + menuid,
+                    url: '${rc.contextPath}/sku/delete/' + menuid,
                     type: "DELETE",
 
                     success: function (r) {

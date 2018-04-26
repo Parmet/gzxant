@@ -1,23 +1,23 @@
 package com.gzxant.controller.shop.sku;
 
 import com.alibaba.fastjson.JSON;
-import com.gzxant.annotation.SLog;
 import com.gzxant.base.controller.BaseController;
 import com.gzxant.base.entity.ReturnDTO;
-import com.gzxant.base.vo.DataTable;
 import com.gzxant.entity.shop.sku.ShopSku;
 import com.gzxant.enums.SysMenuType;
 import com.gzxant.service.shop.sku.IShopSkuService;
+import com.gzxant.shiro.GzxantSysUser;
 import com.gzxant.util.ReturnDTOUtil;
-import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -47,7 +47,9 @@ public class ShopSkuController extends BaseController {
 		return map;
 	}
 
-
+	/**
+	 * 进入系统菜单管理首页
+	 */
 	@RequiresPermissions("shop:sku:list")
 	@GetMapping(value = "")
 	public String list1(Model model){
@@ -56,58 +58,60 @@ public class ShopSkuController extends BaseController {
 		return "/shop/sku/list";
 	}
 
-
-
-
-
-
-	//================================
-	@ApiOperation(value = "进入sku列表界面", notes = "进入sku列表界面")
-	@GetMapping(value = "")
-	public String list(Model model) {
-		return "/shop/sku/list";
-	}
-
-	@ApiOperation(value = "进入sku编辑界面", notes = "进入sku编辑界面")
-	@GetMapping(value = "/detail/{action}")
-	public String detail(@PathVariable("action") String action, Model model) {
-		model.addAttribute("action", action);
-		return "/shop/sku/detail";
-	}
-
-	@ApiOperation(value = "获取sku列表数据", notes = "获取sku列表数据:使用约定的DataTable")
-	@PostMapping(value = "/list")
+	/**
+	 * 查询系统用户 侧边栏菜单      ,   , 	  ,
+	 */
+	@GetMapping(value = "/usersidemenu")
 	@ResponseBody
-	public DataTable<ShopSku> list(@RequestBody DataTable<ShopSku> dt) {
-		return shopSkuService.pageSearch(dt);
-	}
+	public ReturnDTO selectUserSideMenu() {
 
-	@ApiOperation(value = "添加sku", notes = "添加sku")
-	@PostMapping(value = "/create")
-	@ResponseBody
-	public ReturnDTO create(ShopSku param) {
-		shopSkuService.insert(param);
-		return ReturnDTOUtil.success();
+		return ReturnDTOUtil.success(shopSkuService.CaseMenu(GzxantSysUser.id()));
 	}
 
 
-	@ApiOperation(value = "编辑sku", notes = "编辑sku")
-	@PostMapping(value = "/update")
-	@ResponseBody
-	public ReturnDTO update(ShopSku param) {
-		shopSkuService.updateById(param);
-		return ReturnDTOUtil.success();
-	}
-
-	@SLog("批量删除sku")
-	@ApiOperation(value = "批量删除sku", notes = "批量删除sku")
-	@PostMapping(value = "/delete")
-	@ResponseBody
-	public ReturnDTO delete(@RequestParam("ids") List<Long> ids) {
-		boolean success = shopSkuService.deleteBatchIds(ids);
-		if (success) {
-			return ReturnDTOUtil.success();
+	/**
+	 * 保存资源信息
+	 *
+	 * @param shopSku
+	 * @param redirectAttributes
+	 *
+	 * @return
+	 */
+	@PostMapping(value="insert")
+	public String save(@Valid ShopSku shopSku, RedirectAttributes redirectAttributes){
+		if (ObjectUtils.isEmpty(shopSku.getId())) {
+			shopSkuService.add(shopSku);
+		}else {
+			shopSkuService.update(shopSku);
 		}
-		return ReturnDTOUtil.fail();
+
+		redirectAttributes.addFlashAttribute("message","保存菜单成功");
+		return "redirect:/sys/menu";
 	}
+
+
+	/**
+	 * 设置为不可用
+	 * @param id
+	 * @return
+	 */
+	@PostMapping(value="disable/{id}")
+	@ResponseBody
+	public ReturnDTO disable(@PathVariable("id") Long id){
+		shopSkuService.disableMenu(id);
+		return ReturnDTOUtil.success();
+	}
+
+	/**
+	 * 删除菜单
+	 * @param id
+	 * @return
+	 */
+	@DeleteMapping(value="delete/{id}")
+	@ResponseBody
+	public ReturnDTO delete(@PathVariable("id") Long id){
+		shopSkuService.deleteMenu(id);
+		return ReturnDTOUtil.success();
+	}
+
 }

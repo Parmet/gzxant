@@ -1,7 +1,9 @@
 package com.gzxant.dao.shop.sku;
 
+import com.gzxant.base.dao.TreeDao;
 import com.gzxant.entity.shop.sku.ShopSku;
-import com.gzxant.base.dao.CrudDao;
+
+import java.util.List;
 
 /**
  * <p>
@@ -11,6 +13,12 @@ import com.gzxant.base.dao.CrudDao;
  * @author zt
  * @since 2018-04-24
  */
-public interface ShopSkuDao extends CrudDao<ShopSku> {
-
+public interface ShopSkuDao extends TreeDao<ShopSku> {
+    /**
+     * 查询 用户的所有菜单
+     *
+     * @param userId
+     * @return
+     */
+    List<ShopSku> selectMenusByUserId(Long userId);
 }

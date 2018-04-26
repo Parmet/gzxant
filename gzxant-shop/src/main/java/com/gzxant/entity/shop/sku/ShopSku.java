@@ -1,10 +1,13 @@
 package com.gzxant.entity.shop.sku;
 
-import java.io.Serializable;
-
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
-import com.gzxant.base.entity.DataEntity;
+import com.gzxant.base.entity.TreeEntity;
+import org.hibernate.validator.constraints.Length;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -15,7 +18,7 @@ import com.gzxant.base.entity.DataEntity;
  * @since 2018-04-24
  */
 @TableName("shop_sku")
-public class ShopSku extends DataEntity<ShopSku> {
+public class ShopSku extends TreeEntity<ShopSku> implements Comparable<ShopSku> {
 
     private static final long serialVersionUID = 1L;
 
@@ -39,13 +42,11 @@ public class ShopSku extends DataEntity<ShopSku> {
 	private Long updateId;
 
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
+	/**
+	 * char(1) NULL是否展示
+	 */
+	@TableField(value ="show_flag")
+	private String showFlag;
 
 	public Long getPropertyId() {
 		return propertyId;
@@ -55,21 +56,6 @@ public class ShopSku extends DataEntity<ShopSku> {
 		this.propertyId = propertyId;
 	}
 
-	public Integer getSort() {
-		return sort;
-	}
-
-	public void setSort(Integer sort) {
-		this.sort = sort;
-	}
-
-	public Long getUpdateId() {
-		return updateId;
-	}
-
-	public void setUpdateId(Long updateId) {
-		this.updateId = updateId;
-	}
 
 	@Override
 	protected Serializable pkVal() {
@@ -85,4 +71,31 @@ public class ShopSku extends DataEntity<ShopSku> {
 			", updateId=" + updateId +
 			"}";
 	}
+
+
+	@Override
+	public int compareTo(ShopSku o) {
+		return this.getSort().compareTo(o.getSort());
+	}
+
+
+
+	@TableField(exist=false)
+	public List<ShopSku> children= new ArrayList();
+
+	public List<ShopSku> getChildren() {
+		return children;
+	}
+    public void setChildren(List<ShopSku> children) {
+        this.children = children;
+    }
+
+
+	@Length(min = 0, max = 1, message = "标识长度必须介于 1 和 1 之间")
+	public String getShowFlag() {
+		return showFlag;
+	}
+    public void setShowFlag(String showFlag) {
+        this.showFlag = showFlag;
+    }
 }
