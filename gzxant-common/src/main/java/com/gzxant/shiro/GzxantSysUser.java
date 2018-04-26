@@ -1,6 +1,10 @@
 package com.gzxant.shiro;
 
+import java.util.Map;
+
 import org.apache.shiro.SecurityUtils;
+
+import com.gzxant.util.JsonUtil;
 
 /**
  * Created by chen on 2017/7/28.
@@ -29,7 +33,21 @@ public class GzxantSysUser {
     }
 
     public static ShiroUser ShiroUser() {
-        ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
-        return user;
+    	Object obj = SecurityUtils.getSubject().getPrincipal();
+    	ShiroUser user = null;
+    	if (obj instanceof com.gzxant.shiro.ShiroUser) {
+    		user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
+    	} else {
+    		// 为什么会不能强转，因为不同类加载器，还是session不同导致的
+    		@SuppressWarnings("unchecked")
+			Map<String, Object> map = JsonUtil.stringToCollect(JsonUtil.toJSONString(obj));
+    		Long id = Long.parseLong(String.valueOf(map.get("id")));
+    		String username = String.valueOf(map.get("username"));
+    		String name = String.valueOf(map.get("name"));
+    		String photo = String.valueOf(map.get("photo"));
+    		user = new ShiroUser(id, username, name, photo);
+    	}
+    	
+    	return user;
     }
 }

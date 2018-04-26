@@ -40,7 +40,7 @@ public class BaseController{
         map.put(excelTitle, arrayList);
 
 
-        String nowDate = DateUtils.formatDate(new Date(),"yyyyMMddHHmmss");
+        String nowDate = DateUtils.getDateTime("yyyyMMddHHmmss", new Date());
         String fileLocal=  ExcelUtils.exportXlsExcel(map,excelFilePath,String.valueOf(System
                 .currentTimeMillis()));
         FileUtils.downLoadFile(response,fileLocal,nowDate,false); //导出2003 excel
