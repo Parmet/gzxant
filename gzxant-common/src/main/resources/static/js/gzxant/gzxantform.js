@@ -9,7 +9,7 @@ $.validator.setDefaults({
 function saveForm(form_id) {
     cusFunction(); //回调一个自定义方法，比如修改提交参数。每个form表单都必须定义
     var form;
-    if (form_id != "") {
+    if (validate.isEmpty(form_id)) {
     	form = $('#' + form_id);
     } else {
     	form = $('#gzxantForm');
