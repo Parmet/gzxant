@@ -23,10 +23,56 @@
                                 </div>
                             </div>
                         <#if action !='detail'>
-                            <div class="col-sm-4">
-                                <div id="mydropzone" class="dropzone"></div>
-                            </div>
-                        </#if>
+	                    <script src="${rc.contextPath}/js/plugins/dropzone/dropzone.min.js"></script>
+	                    <link href="${rc.contextPath}/css/plugins/dropzone/dropzone.css" rel="stylesheet">
+	                    <div class="col-sm-4">
+	                        <div id="mydropzone" class="dropzone"></div>
+	                    </div>
+	                    <script type="text/javascript">
+		                    // --------------------------图片上传-------------------------------------------------- //
+		                    Dropzone.autoDiscover = false;
+						    var myDropzone = new Dropzone("div#mydropzone", {
+						        url: "/file/upload/avatar",
+						        filesizeBase: 1024,//定义字节算法 默认1000
+						        maxFiles: 2,//最大文件数量
+						        maxFilesize: 100, //MB
+						        fallback: function () {
+						            layer.alert('暂不支持您的浏览器上传!');
+						        },
+						        uploadMultiple: false,
+						        addRemoveLinks: true,
+						        dictFileTooBig: '您的文件超过' + 100 + 'MB!',
+						        dictInvalidInputType: '不支持您上传的类型',
+						        dictMaxFilesExceeded: '您的文件超过1个!',
+						        init: function () {
+						            this.on('queuecomplete', function (files) {
+						                // layer.alert('上传成功');
+						            });
+						            this.on('success', function (uploadimfo, result) {
+						                console.info(result);
+						                $("#photo").val(result.message[0].s_url);
+						                $("#imgshowdiv").attr('src', result.message[0].s_url);
+						                layer.alert('上传成功');
+						            });
+						            this.on('error', function (a, errorMessage, result) {
+						                if (!result) {
+						                    layer.alert(result.error || '上传失败');
+						                }
+						            });
+						            this.on('maxfilesreached', function () {
+						                this.removeAllFiles(true);
+						                layer.alert('文件数量超出限制');
+						            });
+						            this.on('removedfile', function () {
+						                $("#photo").val("${rc.contextPath}${sysUser.photo}");
+						                $("#imgshowdiv").attr('src', "${rc.contextPath}${sysUser.photo}");
+						                layer.alert('删除成功');
+						            });
+						
+						        }
+						    });
+	                    </script>
+	               		</#if>
                         </div>
 
 
@@ -152,15 +198,13 @@
      * 错误图片的默认处理
      */
     function errimg() {
-        $("#photo").val("/img/log9.png");
-        $("#imgshowdiv").attr('src', "/img/log9.png");
+        $("#photo").val("${rc.contextPath}/img/log9.png");
+        $("#imgshowdiv").attr('src', "${rc.contextPath}/img/log9.png");
     }
-
 
     /**
      * 删除头像
      */
-
     function doDeleteImg() {
         var name = $("#photo").val();
         layer.confirm('确定要删除头像吗？', {
@@ -209,7 +253,7 @@
                 minlength: 2,
                 maxlength: 30,
                 required: true,
-                remote: '${rc.contextPath}/tmplates/user/check/${sysUser.id}'
+                remote: '${rc.contextPath}/sys/user/check/${sysUser.id}'
             },
             name: {
                 required: true
@@ -234,47 +278,7 @@
         }
     });
 
-    Dropzone.autoDiscover = false;
-    var myDropzone = new Dropzone("div#mydropzone", {
-        url: "/file/upload/avatar",
-        filesizeBase: 1024,//定义字节算法 默认1000
-        maxFiles: 2,//最大文件数量
-        maxFilesize: 100, //MB
-        fallback: function () {
-            layer.alert('暂不支持您的浏览器上传!');
-        },
-        uploadMultiple: false,
-        addRemoveLinks: true,
-        dictFileTooBig: '您的文件超过' + 100 + 'MB!',
-        dictInvalidInputType: '不支持您上传的类型',
-        dictMaxFilesExceeded: '您的文件超过1个!',
-        init: function () {
-            this.on('queuecomplete', function (files) {
-                // layer.alert('上传成功');
-            });
-            this.on('success', function (uploadimfo, result) {
-                console.info(result);
-                $("#photo").val(result.message[0].s_url);
-                $("#imgshowdiv").attr('src', result.message[0].s_url);
-                layer.alert('上传成功');
-            });
-            this.on('error', function (a, errorMessage, result) {
-                if (!result) {
-                    layer.alert(result.error || '上传失败');
-                }
-            });
-            this.on('maxfilesreached', function () {
-                this.removeAllFiles(true);
-                layer.alert('文件数量超出限制');
-            });
-            this.on('removedfile', function () {
-                $("#photo").val("${sysUser.photo}");
-                $("#imgshowdiv").attr('src', " {sysUser.photo}");
-                layer.alert('删除成功');
-            });
-
-        }
-    });
+   
 
 
 </script>

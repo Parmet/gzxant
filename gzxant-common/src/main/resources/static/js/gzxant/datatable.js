@@ -239,15 +239,31 @@ function dt_detail(id) {
  * @param action
  */
 function dt_action(title, action) {
+	var btn = "";
+	if (action.indexOf("insert") >= 0
+		|| action.indexOf("update") >= 0) {
+		btn = "保存";
+	} else if (action.indexOf("detail") >= 0) {
+		btn = "确定";
+	} else {
+		btn = "关闭";
+	}
+	
 	var initSelect2 = "<script type='text/javascript'>$('.select2').select2();</script>";
 	$.get(url + action, {},function (html) {
 		layer.open({
 	        type: 1,
 	        title: title,
+	        btn: btn,
+	        id: 'layer' + action,
+	        btnAlign: 'c',
 	        maxmin: true,
 	        shadeClose: false, // 点击遮罩关闭层
 	        area: ['800px', '520px'],
-	        content: html + initSelect2
+	        content: html + initSelect2,
+	        yes: function(){
+	        	layer.closeAll();
+	        }
 	    });
 	}, "html"); 
 }
