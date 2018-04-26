@@ -109,7 +109,6 @@ public class ShopCategoryController extends BaseController {
 		if (success) {
 			return ReturnDTOUtil.success();
 		}
-		
 		return ReturnDTOUtil.fail();
 	}
 }
