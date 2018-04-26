@@ -72,15 +72,16 @@ public class ShopBrandController extends BaseController {
 	}
 
 	@ApiOperation(value = "添加商城-品牌表", notes = "添加商城-品牌表")
-	@PostMapping(value = "/create")
+	@PostMapping(value = "/insert")
 	@ResponseBody
 	public ReturnDTO create(ShopBrand param) {
 		//非空判断
 		if (param == null
-				|| param.getId() == null || param.getId().intValue() < 0
+				|| StringUtils.isBlank(param.getLogo())
 				|| StringUtils.isBlank(param.getName())) {
 			return ReturnDTOUtil.paramError();
 		}
+		shopBrandService.insert(param);
 		return ReturnDTOUtil.success();
 	}
 
@@ -93,6 +94,7 @@ public class ShopBrandController extends BaseController {
 				|| param.getId().intValue() < 0) {
 			return ReturnDTOUtil.paramError();
 		}
+		shopBrandService.updateById(param);
 		return ReturnDTOUtil.success();
 	}
 

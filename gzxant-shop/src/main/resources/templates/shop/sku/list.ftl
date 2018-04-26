@@ -59,7 +59,6 @@
                                   method="POST">
                                 <input type="hidden" name="id"/>
                                 <input type="hidden" name="parentId" value="0"/>
-                                <input type="hidden" name="path"/>
 
                                 <div class="form-body">
 

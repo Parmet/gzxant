@@ -1,19 +1,24 @@
 package com.gzxant.controller.shop.sku;
 
+import com.alibaba.fastjson.JSON;
 import com.gzxant.annotation.SLog;
 import com.gzxant.base.controller.BaseController;
 import com.gzxant.base.entity.ReturnDTO;
 import com.gzxant.base.vo.DataTable;
 import com.gzxant.entity.shop.sku.ShopSku;
+import com.gzxant.enums.SysMenuType;
 import com.gzxant.service.shop.sku.IShopSkuService;
 import com.gzxant.util.ReturnDTOUtil;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -24,11 +29,39 @@ import java.util.List;
  * @since 2018-04-24
  */
 @Controller
-@RequestMapping("/shop/sku")
+@RequestMapping("/sku")
 public class ShopSkuController extends BaseController {
 	@Autowired
 	private IShopSkuService shopSkuService;
 
+	/**
+	 * 获取sku详情
+	 *
+	 * @param id 菜单ID
+	 */
+	@GetMapping(value = "select/{id}")
+	@ResponseBody
+	public Map selectById(@PathVariable Long id){
+		Map map = new HashMap();
+		map.put("menu", shopSkuService.selectById(id));
+		return map;
+	}
+
+
+	@RequiresPermissions("shop:sku:list")
+	@GetMapping(value = "")
+	public String list1(Model model){
+		model.addAttribute("menuTree", JSON.toJSONString(shopSkuService.getMenuTree()));
+		model.addAttribute("menuTypes", SysMenuType.values());
+		return "/shop/sku/list";
+	}
+
+
+
+
+
+
+	//================================
 	@ApiOperation(value = "进入sku列表界面", notes = "进入sku列表界面")
 	@GetMapping(value = "")
 	public String list(Model model) {
