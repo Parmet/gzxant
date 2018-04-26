@@ -1,6 +1,8 @@
 attach_path: F:/gzxant/attach/
 
 spring:
+  freemarker:
+    cache: false
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/gzxant?useUnicode=true&characterEncoding=utf8&useSSL=false
@@ -19,7 +21,6 @@ spring:
       logAbandoned: true
       poolPreparedStatements: true
       maxOpenPreparedStatements: 100
-
   redis:
     database: 1
     host: localhost
