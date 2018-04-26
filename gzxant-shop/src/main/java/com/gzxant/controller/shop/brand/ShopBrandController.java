@@ -59,11 +59,6 @@ public class ShopBrandController extends BaseController {
 		return "/shop/brand/detail";
 	}
 
-
-
-
-
-
 	@ApiOperation(value = "获取商城-品牌表列表数据", notes = "获取商城-品牌表列表数据:使用约定的DataTable")
 	@PostMapping(value = "/list")
 	@ResponseBody
