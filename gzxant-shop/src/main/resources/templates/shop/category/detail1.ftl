@@ -2,6 +2,7 @@
     <div class="row">
         <div class="col-sm-12">
             <form class="form-horizontal form-bordered" id="gzxantForm">
+            	<input type="hidden" name="id" value="${category.id}" />
             	<div class="form-group">
                     <label class="col-sm-3 control-label">图标</label>
                     <div class="col-sm-3">
@@ -74,10 +75,6 @@
 					    </#list>
 					    <#else>
 					    <option value="0" selected>顶级分类</option>
-					    <option value="1">顶级分类1</option>
-					    <option value="2">顶级分类2</option>
-					    <option value="3">顶级分类3</option>
-					    <option value="4">顶级分类4</option>
 					    </#if>
                         </select>
                     </div>
@@ -119,7 +116,7 @@
 
 
 <script type="text/javascript">
-
+	action = "${action}";
     function  cusFunction() {
         //console.info("提交之前，最后执行自定义的函数");
     }

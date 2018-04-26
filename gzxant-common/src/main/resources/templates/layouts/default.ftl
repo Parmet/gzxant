@@ -26,6 +26,11 @@
     <link href="${rc.contextPath}/css/gzxant.css" rel="stylesheet"/>
     <link href="${rc.contextPath}/css/plugins/select2/select2.css" rel="stylesheet">
     <link href="${rc.contextPath}/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    
+	<script>
+	    //var slifebase="${rc.contextPath}";
+	    var url = "${rc.requestUri}" + "/",  action = "${action}";
+	</script>
 
     <script src="${rc.contextPath}/js/jquery.min.js?v=2.1.4"></script>
     <script src="${rc.contextPath}/js/bootstrap.min.js?v=3.3.6"></script>
@@ -46,15 +51,13 @@
 	<script src="${rc.contextPath}/js/gzxant/datatable.js"></script>
 	<script src="${rc.contextPath}/js/gzxant/gzxantform.js"></script>
 	<script src="${rc.contextPath}/js/jquery.form.js"></script>
+	<script src="${rc.contextPath}/js/util/validate-util.js"></script>
 	<!-- Bootstrap table -->
 	<script src="${rc.contextPath}/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
 	<script src="${rc.contextPath}/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
 	<script src="${rc.contextPath}/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 
-<script>
-    //var slifebase="${rc.contextPath}";
-    var url = "${rc.requestUri}" + "/",  action = "${action}";
-</script>
+
     <script src="${rc.contextPath}/js/plugins/pace/pace.min.js"></script>
     <script src="${rc.contextPath}/js/gzxant/gzxant.js"></script>
 </head>

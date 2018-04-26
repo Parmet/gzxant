@@ -39,11 +39,7 @@ import com.gzxant.util.Encodes;
 @Component(value = "authRealm")
 public class AuthRealm extends AuthorizingRealm {
 
-
-
     private  Logger logger= LoggerFactory.getLogger(getClass());
-
-
 
     /**
      * 设定密码校验的Hash算法与迭代次数

@@ -84,7 +84,7 @@ public class ShopCategoryController extends BaseController {
 	}
 
 	@ApiOperation(value = "编辑商城-分类表", notes = "编辑商城-分类表")
-	@PostMapping(value = "/update/{id}")
+	@PostMapping(value = "/update")
 	@ResponseBody
 	public ReturnDTO update(ShopCategory param) {
 		if (param == null || param.getId() == null
