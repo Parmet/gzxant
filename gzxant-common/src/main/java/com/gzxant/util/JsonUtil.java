@@ -1,13 +1,13 @@
 package com.gzxant.util;
 
-import java.util.List;
-import java.util.Map;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.JSONLibDataFormatSerializer;
 import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+
+import java.util.List;
+import java.util.Map;
 
 public class JsonUtil {
 	private static final SerializeConfig config;  
@@ -59,7 +59,7 @@ public class JsonUtil {
   
     /**  
      * 将string转化为序列化的json字符串  
-     * @param keyvalue  
+     * @param text
      * @return  
      */  
     public static Object textToJson(String text) {  

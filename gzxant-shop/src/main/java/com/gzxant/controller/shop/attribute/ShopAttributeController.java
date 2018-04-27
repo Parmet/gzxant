@@ -1,11 +1,11 @@
-package com.gzxant.controller.shop.sku;
+package com.gzxant.controller.shop.attribute;
 
 import com.alibaba.fastjson.JSON;
 import com.gzxant.base.controller.BaseController;
 import com.gzxant.base.entity.ReturnDTO;
-import com.gzxant.entity.shop.sku.ShopSku;
+import com.gzxant.entity.shop.attribute.ShopAttribute;
 import com.gzxant.enums.SysMenuType;
-import com.gzxant.service.shop.sku.IShopSkuService;
+import com.gzxant.service.shop.attribute.IShopAttributeService;
 import com.gzxant.shiro.GzxantSysUser;
 import com.gzxant.util.ReturnDTOUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -22,17 +22,17 @@ import java.util.Map;
 
 /**
  * <p>
- * sku 前端控制器
+ * attribute 前端控制器
  * </p>
  *
  * @author zt
  * @since 2018-04-24
  */
 @Controller
-@RequestMapping("/sku")
-public class ShopSkuController extends BaseController {
+@RequestMapping("/attribute")
+public class ShopAttributeController extends BaseController {
 	@Autowired
-	private IShopSkuService shopSkuService;
+	private IShopAttributeService shopSkuService;
 
 	/**
 	 * 获取sku详情
@@ -50,12 +50,12 @@ public class ShopSkuController extends BaseController {
 	/**
 	 * 进入系统菜单管理首页
 	 */
-	@RequiresPermissions("shop:sku:list")
+	@RequiresPermissions("shop:attribute:list")
 	@GetMapping(value = "")
 	public String list1(Model model){
 		model.addAttribute("menuTree", JSON.toJSONString(shopSkuService.getMenuTree()));
 		model.addAttribute("menuTypes", SysMenuType.values());
-		return "/shop/sku/list";
+		return "/shop/attribute/list";
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class ShopSkuController extends BaseController {
 	 * @return
 	 */
 	@PostMapping(value="insert")
-	public String save(@Valid ShopSku shopSku, RedirectAttributes redirectAttributes){
+	public String save(@Valid ShopAttribute shopSku, RedirectAttributes redirectAttributes){
 		if (ObjectUtils.isEmpty(shopSku.getId())) {
 			shopSkuService.add(shopSku);
 		}else {

@@ -1,28 +1,28 @@
-package com.gzxant.service.shop.sku;
+package com.gzxant.service.shop.attribute;
 
 import com.gzxant.base.service.IBaseService;
 import com.gzxant.base.vo.JsTree;
-import com.gzxant.entity.shop.sku.ShopSku;
+import com.gzxant.entity.shop.attribute.ShopAttribute;
 
 import java.util.List;
 
 /**
  * <p>
- * sku 服务类
+ * attribute 服务类
  * </p>
  *
  * @author zt
  * @since 2018-04-24
  */
-public interface IShopSkuService extends IBaseService<ShopSku> {
+public interface IShopAttributeService extends IBaseService<ShopAttribute> {
     /**
      * 获取用户的 私人菜单
      * @param userId
      * @return
      */
-    List<ShopSku> selectMenusByUserId(Long userId);
+    List<ShopAttribute> selectMenusByUserId(Long userId);
 
-    List<ShopSku> CaseMenu(Long userId);
+    List<ShopAttribute> CaseMenu(Long userId);
 
     /**
      * 获取菜单树
@@ -34,13 +34,13 @@ public interface IShopSkuService extends IBaseService<ShopSku> {
      * 保存菜单
      * @param shopSku
      */
-    void add(ShopSku shopSku);
+    void add(ShopAttribute shopSku);
 
     /**
      * 更新菜单
      * @param shopSku
      */
-    void update(ShopSku shopSku);
+    void update(ShopAttribute shopSku);
 
     /**
      * 把菜单设置为失效

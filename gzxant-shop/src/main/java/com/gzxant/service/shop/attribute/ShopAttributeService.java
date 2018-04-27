@@ -1,4 +1,4 @@
-package com.gzxant.service.shop.sku;
+package com.gzxant.service.shop.attribute;
 
 
 import com.baomidou.mybatisplus.enums.SqlLike;
@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.mapper.Condition;
 import com.gzxant.base.service.impl.BaseService;
 import com.gzxant.base.vo.JsTree;
 import com.gzxant.constant.Global;
-import com.gzxant.dao.shop.sku.ShopSkuDao;
-import com.gzxant.entity.shop.sku.ShopSku;
+import com.gzxant.dao.shop.attribute.ShopAttributeDao;
+import com.gzxant.entity.shop.attribute.ShopAttribute;
 import com.gzxant.enums.HttpCodeEnum;
 import com.gzxant.exception.SlifeException;
 import com.gzxant.service.ISysRoleMenuService;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- * sku 服务实现类
+ * attribute 服务实现类
  * </p>
  *
  * @author zt
@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)
-public class ShopSkuService extends BaseService<ShopSkuDao, ShopSku> implements IShopSkuService {
+public class ShopAttributeService extends BaseService<ShopAttributeDao, ShopAttribute> implements IShopAttributeService {
 
     @Autowired
     private ISysRoleMenuService sysRoleMenuService;
@@ -42,7 +42,7 @@ public class ShopSkuService extends BaseService<ShopSkuDao, ShopSku> implements 
      * @return
      */
     @Override
-    public List<ShopSku> selectMenusByUserId(Long userId) {
+    public List<ShopAttribute> selectMenusByUserId(Long userId) {
         return this.baseMapper.selectMenusByUserId(userId);
     }
 
@@ -55,20 +55,20 @@ public class ShopSkuService extends BaseService<ShopSkuDao, ShopSku> implements 
      */
     @Cacheable(cacheNames="books", key="#userId")
     @Override
-    public List<ShopSku> CaseMenu(Long userId) {
+    public List<ShopAttribute> CaseMenu(Long userId) {
 
-        Map<Long, List<ShopSku>> map = new HashMap();
-        List<ShopSku> shopSkus = this.baseMapper.selectMenusByUserId(userId);
+        Map<Long, List<ShopAttribute>> map = new HashMap();
+        List<ShopAttribute> shopSkus = this.baseMapper.selectMenusByUserId(userId);
 
-        for (ShopSku shopSku : shopSkus) {
-            List<ShopSku> parentMenu = map.get(shopSku.getParentId());
+        for (ShopAttribute shopSku : shopSkus) {
+            List<ShopAttribute> parentMenu = map.get(shopSku.getParentId());
             if (parentMenu == null) {
                 parentMenu = new ArrayList();
             }
             parentMenu.add(shopSku);
             map.put(shopSku.getParentId(), parentMenu);
         }
-        List<ShopSku> retList = MakeMenu(map, 0L);
+        List<ShopAttribute> retList = MakeMenu(map, 0L);
         Collections.sort(retList);
         return retList;
     }
@@ -79,11 +79,11 @@ public class ShopSkuService extends BaseService<ShopSkuDao, ShopSku> implements 
      * @param supId
      * @return
      */
-    public List<ShopSku> MakeMenu(Map<Long, List<ShopSku>> map, Long supId) {
-        List<ShopSku> shopSkus = new ArrayList();
-        List<ShopSku> menuList = map.get(supId);
+    public List<ShopAttribute> MakeMenu(Map<Long, List<ShopAttribute>> map, Long supId) {
+        List<ShopAttribute> shopSkus = new ArrayList();
+        List<ShopAttribute> menuList = map.get(supId);
         if (menuList != null) {
-            for (ShopSku me : menuList) {
+            for (ShopAttribute me : menuList) {
                 me.setChildren(MakeMenu(map, me.getId()));
                 shopSkus.add(me);
             }
@@ -99,7 +99,7 @@ public class ShopSkuService extends BaseService<ShopSkuDao, ShopSku> implements 
      */
     @Override
     public List<JsTree> getMenuTree() {
-        List<ShopSku> shopSkus = selectList(Condition.create().orderBy("sort", true));
+        List<ShopAttribute> shopSkus = selectList(Condition.create().orderBy("sort", true));
         return makeTree(shopSkus);
     }
 
@@ -111,7 +111,7 @@ public class ShopSkuService extends BaseService<ShopSkuDao, ShopSku> implements 
      */
     @Transactional(readOnly = false, rollbackFor = Exception.class)
     @Override
-    public void add(ShopSku shopSku) {
+    public void add(ShopAttribute shopSku) {
 
         insert(shopSku);
         if (Global.TOP_TREE_NODE.equals(shopSku.getParentId())) {
@@ -131,7 +131,7 @@ public class ShopSkuService extends BaseService<ShopSkuDao, ShopSku> implements 
      */
     @Transactional(readOnly = false, rollbackFor = Exception.class)
     @Override
-    public void update(ShopSku shopSku) {
+    public void update(ShopAttribute shopSku) {
         updateById(shopSku);
     }
 
@@ -143,10 +143,10 @@ public class ShopSkuService extends BaseService<ShopSkuDao, ShopSku> implements 
     @Transactional(readOnly = false, rollbackFor = Exception.class)
     @Override
     public void disableMenu(Long id) {
-        ShopSku shopSku = selectById(id);
+        ShopAttribute shopSku = selectById(id);
         Optional.ofNullable(shopSku).orElseThrow(() -> new SlifeException(HttpCodeEnum.NOT_FOUND));
 
-        List<ShopSku> delList = selectList(Condition.create().like("path", shopSku.getPath(), SqlLike.RIGHT));
+        List<ShopAttribute> delList = selectList(Condition.create().like("path", shopSku.getPath(), SqlLike.RIGHT));
         delList.stream().parallel().forEach(menu -> menu.setShowFlag(Global.NO));
         updateBatchById(delList);
         //TODO 判断是否有角色，有角色要清理角色与资源关系
@@ -162,10 +162,10 @@ public class ShopSkuService extends BaseService<ShopSkuDao, ShopSku> implements 
     @Transactional(readOnly = false, rollbackFor = Exception.class)
     @Override
     public Boolean deleteMenu(Long id) {
-        ShopSku shopSku = selectById(id);
+        ShopAttribute shopSku = selectById(id);
         Optional.ofNullable(shopSku).orElseThrow(() -> new SlifeException(HttpCodeEnum.NOT_FOUND));
 
-        List<ShopSku> delList = selectList(Condition.create().like("path", shopSku.getPath(), SqlLike.RIGHT));
+        List<ShopAttribute> delList = selectList(Condition.create().like("path", shopSku.getPath(), SqlLike.RIGHT));
         List<Long> ids = delList.stream().parallel().map(menu -> menu.getId()).collect(Collectors.toList());
         deleteBatchIds(ids);
         //删除对应的角色关联

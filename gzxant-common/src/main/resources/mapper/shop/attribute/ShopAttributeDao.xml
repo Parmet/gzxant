@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gzxant.dao.shop.sku.ShopSkuDao">
+<mapper namespace="com.gzxant.dao.shop.attribute.ShopAttributeDao">
 
 	<!-- 通用查询映射结果 -->
-	<resultMap id="BaseResultMap" type="com.gzxant.entity.shop.sku.ShopSku">
+	<resultMap id="BaseResultMap" type="com.gzxant.entity.shop.attribute.ShopAttribute">
 		<result column="name" property="name" />
 		<result column="property_id" property="propertyId" />
 		<result column="sort" property="sort" />

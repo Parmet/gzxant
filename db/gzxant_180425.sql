@@ -322,7 +322,7 @@ CREATE TABLE IF NOT EXISTS `shop_sku` (
   PRIMARY KEY (`id`),
   KEY `property_id` (`property_id`),
   KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='sku';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='attribute';
 
 -- Dumping data for table gzxant.shop_sku: ~0 rows (approximately)
 /*!40000 ALTER TABLE `shop_sku` DISABLE KEYS */;

@@ -1,4 +1,4 @@
-package com.gzxant.entity.shop.sku;
+package com.gzxant.entity.shop.attribute;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
@@ -11,14 +11,14 @@ import java.util.List;
 
 /**
  * <p>
- * sku
+ * attribute
  * </p>
  *
  * @author zt
  * @since 2018-04-24
  */
-@TableName("shop_sku")
-public class ShopSku extends TreeEntity<ShopSku> implements Comparable<ShopSku> {
+@TableName("shop_attribute")
+public class ShopAttribute extends TreeEntity<ShopAttribute> implements Comparable<ShopAttribute> {
 
     private static final long serialVersionUID = 1L;
 
@@ -35,12 +35,16 @@ public class ShopSku extends TreeEntity<ShopSku> implements Comparable<ShopSku> 
      * 顺序
      */
 	private Integer sort;
-    /**
-     * 更新者
-     */
-	@TableField("update_id")
-	private Long updateId;
 
+	/**
+	 * 属性类型
+	 */
+	private String type;
+
+	/**
+	 * 备注
+	 */
+	private String remark;
 
 	/**
 	 * char(1) NULL是否展示
@@ -48,13 +52,6 @@ public class ShopSku extends TreeEntity<ShopSku> implements Comparable<ShopSku> 
 	@TableField(value ="show_flag")
 	private String showFlag;
 
-	public Long getPropertyId() {
-		return propertyId;
-	}
-
-	public void setPropertyId(Long propertyId) {
-		this.propertyId = propertyId;
-	}
 
 
 	@Override
@@ -62,31 +59,22 @@ public class ShopSku extends TreeEntity<ShopSku> implements Comparable<ShopSku> 
 		return this.id;
 	}
 
-	@Override
-	public String toString() {
-		return "ShopSku{" +
-			"name=" + name +
-			", propertyId=" + propertyId +
-			", sort=" + sort +
-			", updateId=" + updateId +
-			"}";
-	}
+
+
 
 
 	@Override
-	public int compareTo(ShopSku o) {
+	public int compareTo(ShopAttribute o) {
 		return this.getSort().compareTo(o.getSort());
 	}
 
-
-
 	@TableField(exist=false)
-	public List<ShopSku> children= new ArrayList();
+	public List<ShopAttribute> children= new ArrayList();
 
-	public List<ShopSku> getChildren() {
+	public List<ShopAttribute> getChildren() {
 		return children;
 	}
-    public void setChildren(List<ShopSku> children) {
+    public void setChildren(List<ShopAttribute> children) {
         this.children = children;
     }
 
