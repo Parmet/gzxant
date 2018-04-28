@@ -13,11 +13,18 @@
                                     <label for="parentSelect" class="control-label">品牌分类</label>
                                     <select class="form-filter form-control _search" id="parentSelect" name="">
                                         <option value="0">-- 请选择 --</option>
+                                     <#list brands as brand>
+                                        <option value="${brand.id}">${brand.chineseName}</option>
+                                    </#list>
                                     </select>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 form-group">
-                                    <label for="nameInput" class="control-label">品牌名称</label>
-                                    <input type="text" class="form-filter form-control _search" id="nameInput" name="search_like_name"  />
+                                    <label for="nameInput" class="control-label">品牌中文名称</label>
+                                    <input type="text" class="form-filter form-control _search" id="nameInput" name="search_like_chineseName"  />
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 form-group">
+                                    <label for="nameInput" class="control-label">品牌英文名称</label>
+                                    <input type="text" class="form-filter form-control _search" id="nameInput" name="search_like_englishName"  />
                                 </div>
                             </div>
                         </div>
@@ -58,28 +65,24 @@
                 title: '序号' // 列标题
             },
             {
-                field: 'name',
-                title: '名称'
+                field: 'chineseName',
+                title: '品牌中文名称'
+            },
+            {
+                field: 'englishName',
+                title: '品牌英文名称'
             },
             {
                 field: 'logo',
                 title: '商标'
             },
             {
-                field: 'createId',
-                title: '创造时间'
+                field: 'url',
+                title: '品牌连接'
             },
             {
-                field: 'updateId',
-                title: '修改时间'
-            },
-            {
-                field: 'createDate',
-                title: '修改者'
-            },
-            {
-                field: 'updateDate',
-                title: '修改时间'
+                field: 'remark',
+                title: '备注'
             },
             {
                 title: '操作',

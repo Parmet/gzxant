@@ -53,7 +53,7 @@ public class ShopBrandController extends BaseController {
 			brand = shopBrandService.selectById(id);
 		}
 
-		model.addAttribute("brand", brand);
+		model.addAttribute("brands", brand);
 		model.addAttribute("action", action);
 
 		return "/shop/brand/detail";
@@ -78,7 +78,7 @@ public class ShopBrandController extends BaseController {
 		//非空判断
 		if (param == null
 				|| StringUtils.isBlank(param.getLogo())
-				|| StringUtils.isBlank(param.getName())) {
+				|| StringUtils.isBlank(param.getChineseName())) {
 			return ReturnDTOUtil.paramError();
 		}
 		shopBrandService.insert(param);
@@ -112,4 +112,5 @@ public class ShopBrandController extends BaseController {
 		}
 		return ReturnDTOUtil.fail();
 	}
+
 }

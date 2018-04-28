@@ -7,10 +7,17 @@
             	<input type="hidden" name="logo" value="/img/log9.png" />
                 </#if>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">品牌名称<span class="required">*</span></label>
+                    <label class="col-sm-3 control-label">品牌中文名称<span class="required">*</span></label>
                     <div class="col-sm-3">
-                    	<input type="text" class="form-control" name="name" placeholder="请输入分类名称"
-                               value="${brand.name}" required aria-required="true"/>
+                    	<input type="text" class="form-control" name="chineseName" placeholder="请输入品牌中文名称"
+                               value="${brand.chineseName}" required aria-required="true"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">品牌英文名称<span class="required">*</span></label>
+                    <div class="col-sm-3">
+                    	<input type="text" class="form-control" name="englishName" placeholder="请输入品牌英文名称"
+                               value="${brand.englishName}" required aria-required="true"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -23,6 +30,21 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">品牌连接<span class="required">*</span></label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="url" placeholder="请输入品牌连接"
+                                   value="${brand.url}" required aria-required="true"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">品牌备注<span class="required">*</span></label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="remark" placeholder="请输入品牌备注"
+                                   value="${brand.remark}" required aria-required="true"/>
+                        </div>
+                    </div>
+
                 <#if action !='detail'>
                     <script src="${rc.contextPath}/js/plugins/dropzone/dropzone.min.js"></script>
                     <link href="${rc.contextPath}/css/plugins/dropzone/dropzone.css" rel="stylesheet">
