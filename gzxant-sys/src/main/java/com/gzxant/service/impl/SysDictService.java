@@ -30,8 +30,6 @@ import com.gzxant.service.ISysDictService;
 @Transactional(readOnly = true, rollbackFor = Exception.class)
 public class SysDictService extends BaseService<SysDictDao, SysDict> implements ISysDictService {
 
-
-
     /**
      * 更新节点
      *

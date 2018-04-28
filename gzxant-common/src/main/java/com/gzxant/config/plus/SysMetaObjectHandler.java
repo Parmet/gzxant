@@ -27,8 +27,7 @@ public class SysMetaObjectHandler extends MetaObjectHandler {
         Object createId = metaObject.getValue("createId");
         Object updateDate = metaObject.getValue("updateDate");
         Object updateId = metaObject.getValue("updateId");
-
-
+        
         if (null == createDate) {
             metaObject.setValue("createDate", new Date());
         }

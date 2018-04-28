@@ -2,9 +2,7 @@ package com.gzxant.entity.shop.category;
 
 import java.io.Serializable;
 
-import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
-import com.baomidou.mybatisplus.enums.IdType;
 import com.gzxant.base.entity.TreeEntity;
 
 /**
@@ -20,9 +18,6 @@ public class ShopCategory extends TreeEntity<ShopCategory> {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "ID", type = IdType.AUTO)
-    private Long id;
-    
     /**
      * 编码
      */

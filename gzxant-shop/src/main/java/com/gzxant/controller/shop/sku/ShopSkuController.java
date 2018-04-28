@@ -48,20 +48,6 @@ public class ShopSkuController extends BaseController {
 	}
 
 
-	@RequiresPermissions("shop:sku:list")
-	@GetMapping(value = "")
-	public String list1(Model model){
-		model.addAttribute("menuTree", JSON.toJSONString(shopSkuService.getMenuTree()));
-		model.addAttribute("menuTypes", SysMenuType.values());
-		return "/shop/sku/list";
-	}
-
-
-
-
-
-
-	//================================
 	@ApiOperation(value = "进入sku列表界面", notes = "进入sku列表界面")
 	@GetMapping(value = "")
 	public String list(Model model) {
