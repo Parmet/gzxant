@@ -13,18 +13,32 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">产品的分类</label>
+                    <label class="col-sm-3 control-label">合计总数</label>
                     <div class="col-sm-6">
-                    	<input type="text" class="form-control" name="categoryId" placeholder="请输入产品的分类"
-                               value="${shopProducts.categoryId}"/>
+                    	<input type="text" class="form-control" name="totalStock" placeholder="请输入产品的分类"
+                               value="${shopProducts.totalStock}"/>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">产品的品牌</label>
+                    <label class="col-sm-3 control-label">剩余的总数</label>
                     <div class="col-sm-6">
-                    	<input type="text" class="form-control" name="brandId" placeholder="请输入产品的品牌"
-                               value="${shopProducts.brandId}"/>
+                    	<input type="text" class="form-control" name="ableStock" placeholder="请输入产品的品牌"
+                               value="${shopProducts.ableStock}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">冻结的总数</label>
+                    <div class="col-sm-6">
+                    	<input type="text" class="form-control" name="freezeStock" placeholder="请输入产品的品牌"
+                               value="${shopProducts.freezeStock}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">存储过期</label>
+                    <div class="col-sm-6">
+                    	<input type="text" class="form-control" name="overStock" placeholder="请输入产品的品牌"
+                               value="${shopProducts.overStock}"/>
                     </div>
                 </div>
 
@@ -72,36 +86,5 @@
             }
         }
     });
-
-    function getcolumns() {
-        var c = [
-            {
-                checkbox: true
-            },
-            {
-                field: 'productId', // 列字段名
-                title: '产品spu属性' // 列标题
-            },
-            {
-                field: 'spuId',
-                title: '产品的spu'
-            },
-            {
-                field: 'sort',
-                title: 'spu的种类'
-            },
-            {
-                title: '操作',
-                field: 'spuId',
-                align: 'center',
-                formatter: function (value, row, index) {
-                    return dt_edit_button(row)+dt_detail_button(row)+dt_delete_button(row);
-                }
-            }];
-
-        return c;
-    }
-
-    load_data( getcolumns(), {});
 
 </script>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gzxant.dao.shop.goods.stock.ShopGoodsStockDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.gzxant.entity.shop.goods.stock.ShopGoodsStock">
+		<result column="total_stock" property="totalStock" />
+		<result column="able_stock" property="ableStock" />
+		<result column="freeze_stock" property="freezeStock" />
+		<result column="over_stock" property="overStock" />
+		<result column="version" property="version" />
+	</resultMap>
+
+</mapper>
