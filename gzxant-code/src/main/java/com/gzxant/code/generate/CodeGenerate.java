@@ -37,10 +37,10 @@ public class CodeGenerate {
 	/* === 开发者 === */
 	public static String author = "zt";
 	/* === 输出目标项目，为空则生成在当前项目中 === */
-	public static String targetProject = "gzxant-shop";
+	public static String targetProject = "";
 	/* === 准备生成文件[controller, service, dao, entity, xml] === */
 	public static List<String> beGenerateFile = new ArrayList<>(
-			Arrays.asList("controller", "service", "dao", "entity", "xml"));
+			Arrays.asList("entity"));
 	// --------------变动参数区 end------------------------------------------
 
 	// --------------数据源配置区 start------------------------------------------
