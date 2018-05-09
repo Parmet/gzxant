@@ -39,7 +39,7 @@
                 </div>
                 <div class="form-group">
                     <input type="password" id="password" name="password" class="form-control pword m-b" placeholder="密码"
-                           value="123456"/>
+                           value="admin"/>
                 </div>
 
 

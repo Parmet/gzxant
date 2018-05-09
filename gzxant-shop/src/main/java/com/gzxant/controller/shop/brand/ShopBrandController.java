@@ -53,16 +53,11 @@ public class ShopBrandController extends BaseController {
 			brand = shopBrandService.selectById(id);
 		}
 
-		model.addAttribute("brand", brand);
+		model.addAttribute("brands", brand);
 		model.addAttribute("action", action);
 
 		return "/shop/brand/detail";
 	}
-
-
-
-
-
 
 	@ApiOperation(value = "获取商城-品牌表列表数据", notes = "获取商城-品牌表列表数据:使用约定的DataTable")
 	@PostMapping(value = "/list")
@@ -77,15 +72,16 @@ public class ShopBrandController extends BaseController {
 	}
 
 	@ApiOperation(value = "添加商城-品牌表", notes = "添加商城-品牌表")
-	@PostMapping(value = "/create")
+	@PostMapping(value = "/insert")
 	@ResponseBody
 	public ReturnDTO create(ShopBrand param) {
 		//非空判断
 		if (param == null
-				|| param.getId() == null || param.getId().intValue() < 0
-				|| StringUtils.isBlank(param.getName())) {
+				|| StringUtils.isBlank(param.getLogo())
+				|| StringUtils.isBlank(param.getChineseName())) {
 			return ReturnDTOUtil.paramError();
 		}
+		shopBrandService.insert(param);
 		return ReturnDTOUtil.success();
 	}
 
@@ -98,6 +94,7 @@ public class ShopBrandController extends BaseController {
 				|| param.getId().intValue() < 0) {
 			return ReturnDTOUtil.paramError();
 		}
+		shopBrandService.updateById(param);
 		return ReturnDTOUtil.success();
 	}
 
@@ -115,4 +112,5 @@ public class ShopBrandController extends BaseController {
 		}
 		return ReturnDTOUtil.fail();
 	}
+
 }

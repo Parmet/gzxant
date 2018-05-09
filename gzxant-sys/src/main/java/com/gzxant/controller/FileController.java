@@ -93,7 +93,6 @@ public class FileController {
             FileUtils.createThumbnail(localFile, thumbnailName);
         }
 
-
         Map<String, String> rt = new HashMap<String, String>();
 
         rt.put("uuid", uuid);

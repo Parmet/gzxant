@@ -1,24 +1,24 @@
-<link rel="stylesheet" type="text/css" href="${rc.contextPath}/css/plugins/jsTree/style.min.css"/>
-<style>
-    #dict_edit_table .control-label {
-        text-align: left !important;
-    }
+    <link rel="stylesheet" type="text/css" href="${rc.contextPath}/css/plugins/jsTree/style.min.css"/>
+    <style>
+        #dict_edit_table .control-label {
+            text-align: left !important;
+        }
 
-    #dict_edit_table input ,#dict_edit_table select{
-        margin-left: -45px;
-    }
-    #dict_edit_table .row{
-      margin-top: 15px!important;
-    }
+        #dict_edit_table input ,#dict_edit_table select{
+            margin-left: -45px;
+        }
+        #dict_edit_table .row{
+          margin-top: 15px!important;
+        }
 
-</style>
+    </style>
 <div class="wrapper wrapper-content animated fadeInRight">
 <!--数据列表-->
 <div class="row" style="margin-right: 0!important;">
 
     <div class="col-sm-3">
         <div class="portlet box green-haze" style="padding: 15px">
-            <div class="portlet-body" id="dictTree"></div>
+            <div class="portlet-body" id="categoryTree"></div>
         </div>
     </div>
 
@@ -47,21 +47,33 @@
                     </div>
 
                     <div class="portlet-body form" id="dict_edit_table">
-                        <form class="form-horizontal m-t" action="${rc.requestUri}/insert" method="POST" id="dictForm">
+                        <form class="form-horizontal m-t" action="${rc.requestUri}/insert" method="POST" id="categoryForm">
                             <input type="hidden" name="id"/>
-                            <input type="hidden" name="dicPid" value="0"/>
+                            <input type="hidden" name="parentId" value="0"/>
                             <input type="hidden" name="path"/>
 
                             <div class="form-body">
                                 <div class="row">
+                                    <div class="col-md-4">
+                                    	<div class="form-group">
+                                            <label class="col-sm-3 control-label">图标<span class="required">*</span></label>
+
+                                            <div class="col-sm-9">
+		                                    	<button id="icon" disabled="disabled" name="icon" value="" class="btn btn-white btn-circle btn-lg" type="button">
+		                                    	</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5"></div>
+                                </div>
+                                <div class="row" style="text-align:left">
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">名称<span class="required">*</span></label>
 
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="dicValue"
+                                                <input type="text" class="form-control" name="name"
                                                        placeholder="请录入数据名称" readonly="true" required="required"/>
-
                                             </div>
                                         </div>
                                     </div>
@@ -71,29 +83,13 @@
                                             <label class="col-sm-3 control-label">编码<span class="required">*</span></label>
 
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="dicKey"
+                                                <input type="text" class="form-control" name="number"
                                                        placeholder="请录入数据编码" readonly="true" required="required"/>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group" style="text-align:left">
-                                            <label class="col-md-2 control-label">图标&nbsp;<span
-                                                    class="required">*</span></label>
-                                            <div class="col-md-8">
-                                                <input type="text" id="icon" name="icon"
-                                                       class="form-control mess_text" placeholder="请选择系统图标">
-                                            </div>
-                                        <span class="input-group-btn">
-                                            <button id="icon_add" disabled="disabled"  class="btn btn-default"
-                                                    onclick="showIconModul()" type="button"><i
-                                                    class="fa fa-check"></i>选择</button>
-                                        </span>
-                                        </div>
-                                    </div>
-                                </div>
+                                    
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -107,9 +103,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label col-md-3">排序</label>
@@ -137,11 +130,10 @@
                             </div>
                             <div class="form-actions fluid">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="col-md-offset-3 col-md-9">
-                                            <button type="submit" class="btn green" disabled="disabled">保存</button>
-                                            <button type="button" class="btn default btn-cancel" disabled="disabled">取消</button>
-                                        </div>
+                                	<div class="col-md-9"></div>
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn btn-success" disabled="disabled">保存</button>
+                                        <button type="button" class="btn btn-default btn-cancel" disabled="disabled">取消</button>
                                     </div>
                                 </div>
                             </div>
@@ -153,11 +145,16 @@
 
     </div>
 </div>
+
+	
 </div>
 <script src="${rc.contextPath}/js/plugins/jsTree/jstree.min.js" type="text/javascript"></script>
+<script src="${rc.contextPath}/js/plugins/iIcon/iIcon.js" type="text/javascript"></script>
 <script type="text/javascript">
-    var form = $('#dictForm'), dic_id = 0, pid = 0, text;
-    $("#dictTree").jstree({
+	var icon = $("#icon").iIcon({});
+
+    var form = $('#categoryForm'), id = 0, pid = 0, text;
+    $("#categoryTree").jstree({
         "core": {
             "animation": 0,
             "themes": {
@@ -166,7 +163,7 @@
                 "icons": true
             },
             "check_callback": true,
-            'data':${dictTrees!''}
+            'data': ${categoryTrees!''}
         },
         "types": {
             "default": {
@@ -175,31 +172,28 @@
         },
         "plugins": ["types", "wholerow"]
     }).on("select_node.jstree", function (node, selectd) {
-        dic_id = selectd.node.id;
+        id = selectd.node.id;
         pid = selectd.node.parent;
         text = selectd.node.text;
-        if (dic_id) {
+        if (id) {
             $.ajax({
-                url: '${rc.requestUri}/select/' + dic_id,
+                url: '${rc.requestUri}/select/' + id,
                 type: 'GET',
                 success: function (msg) {
-                    var data = msg.dict;
+                    var data = msg.categorys;
+                    icon.editIcon(data.icon);
                     $('input[name=id]').val(data.id);
-                    $('input[name=dicPid]').val(data.parentId);
-                    $('input[name=dicKey]').val(data.jkey);
-                    $('input[name=dicValue]').val(data.jvalue);
+                    $('input[name=parentId]').val(data.parentId);
+                    $('input[name=number]').val(data.number);
+                    $('input[name=name]').val(data.name);
                     $('input[name=sort]').val(data.sort);
-                    $('input[name=desc]').val(data.remark);
                     $('input[name=path]').val(data.path);
+                    $('input[name=remark]').val(data.remark);
 
                     $("select[name=invalid] option[value='" + data.invalid + "']").attr("selected", "selected");
                     $("select[name=invalid] option[value!='" + data.invalid + "']").attr("selected", false);
 
-
-                    $("select[name=type] option[value='" + data.type + "']").attr("selected", "selected");
-                    $("select[name=type] option[value!='" + data.type + "']").attr("selected", false);
-
-                    $('#dictForm :input').each(function (a) {
+                    $('#categoryForm :input').each(function (a) {
                         $(this).attr('disabled', "disabled");
                         $(this).attr("readonly", "true");
                     });
@@ -218,16 +212,16 @@
         rules: {
             name: {
                 minlength: 2,
-                maxlength: 30,
+                maxlength: 50,
                 required: true
             },
-            code: {
+            icon: {
                 required: true
             },
-            orgType: {
+            number: {
                 required: true
             },
-            active: {
+            invalid: {
                 required: true
             }
         },
@@ -249,10 +243,11 @@
         }
     });
     $('.btn-parent').click(function () {
+    	icon.init();
         form.resetForm();
         $('input[name=id]').val("");
-        $('input[name=dicPid]').val(0);
-        $('#dictForm :input').each(function (a) {
+        $('input[name=parentId]').val(0);
+        $('#categoryForm :input').each(function (a) {
             $(this).enable();
             $(this).attr("readonly", false);
         });
@@ -261,10 +256,11 @@
 
     });
     $('.btn-children').click(function () {
+    	icon.init();
         form.resetForm();
         $('input[name=id]').val("");
-        $('input[name=dicPid]').val(dic_id);
-        $('#dictForm :input').each(function (a) {
+        $('input[name=parentId]').val(id);
+        $('#categoryForm :input').each(function (a) {
             $(this).enable();
             $(this).attr("readonly", false);
         });
@@ -272,20 +268,22 @@
         $('.btn-delete').attr('disabled', "disabled");
     });
     $('.btn-edit').click(function () {
-        $('#dictForm :input').each(function (a) {
+        $('#categoryForm :input').each(function (a) {
             $(this).enable();
             $(this).attr("readonly", false);
         });
     });
     $('.btn-cancel').click(function () {
+    	icon.init();
         form.resetForm();
-        $('#dictForm :input').each(function (a) {
+        $('#categoryForm :input').each(function (a) {
             $(this).attr('disabled', "disabled");
             $(this).attr("readonly", "true");
         });
     });
     $('.btn-delete').click(function () {
-        layer.confirm('是否要删除此数据字典及其下级数？', {
+    	icon.init();
+        layer.confirm('是否要删除此分类及其下级？', {
             btn: ['是', '否']
         },function () {
             $.ajax({
@@ -335,5 +333,7 @@
     function alertClose() {
         $(".alert").alert('close');
     }
+    
+    
 </script>
 

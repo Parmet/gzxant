@@ -28,7 +28,7 @@
     <link href="${rc.contextPath}/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
     
 	<script>
-	    //var slifebase="${rc.contextPath}";
+	    var base_url ="${rc.contextPath}";
 	    var url = "${rc.requestUri}" + "/",  action = "${action}";
 	</script>
 
@@ -272,7 +272,8 @@
                             <i class="fa fa-comments-o"></i> 主题设置
                         </h3>
                         <small><i class="fa fa-tim"></i>
-                            你可以从这里选择和预览主题的布局和样式，这些设置会被保存在本地，下次打开的时候会直接应用这些设置。
+                            你可以从这里选择和预览主
+                            题的布局和样式，这些设置会被保存在本地，下次打开的时候会直接应用这些设置。
                         </small>
                     </div>
                     <div class="skin-setttings">

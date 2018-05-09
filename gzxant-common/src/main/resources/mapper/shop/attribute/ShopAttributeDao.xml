@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gzxant.dao.shop.attribute.ShopAttributeDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.gzxant.entity.shop.attribute.ShopAttribute">
+		<result column="name" property="name" />
+		<result column="property_id" property="propertyId" />
+		<result column="sort" property="sort" />
+		<result column="update_id" property="updateId" />
+	</resultMap>
+
+	<select id="selectMenusByUserId" resultMap="BaseResultMap">
+		SELECT DISTINCT
+		sku.id AS sku_id,sku.name AS sku_name,sku.property_id AS sku_property_id,
+		sku.sort AS sku_sort,sku.remark AS sku_remark
+		FROM sys_role_sys_menu AS srsm
+		LEFT JOIN shop_sku AS sku
+		ON srsm.sys_menu_id=sku.id
+		WHERE srsm.sys_role_id
+		IN(
+		SELECT DISTINCT susr.sys_role_id
+		FROM sys_user_sys_role AS susr
+		LEFT JOIN sys_role AS sr
+		ON sr.id=susr.sys_role_id
+		WHERE susr.sys_user_id=#{userId}
+		AND sr.del_flag='Y' AND sr.useable='Y'
+		)
+		AND sku.del_flag='Y' AND sku.show_flag='Y'
+
+	</select>
+
+</mapper>

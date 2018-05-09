@@ -29,7 +29,14 @@ function rep_message(r) {
     }
 }
 
-
+/**
+ * 错误图片的默认处理
+ * @returns
+ */
+function errimg() {
+    $("#photo").val(base_url + "/img/log9.png");
+    $("#imgshowdiv").attr('src', base_url + "/img/log9.png");
+}
 
 
 

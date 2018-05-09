@@ -11,8 +11,6 @@ function dataTable_rep_message(r) {
     }
 }
 
-
-
 /**
  * 批量删除
  */
@@ -129,14 +127,14 @@ function load_data(columns, sorts) {
     $('#exampleTable').bootstrapTable(
         {
             method: 'post', // 服务器数据的请求方式 get or post
-            url: url + "list", // 服务器数据的加载地址
-            //showRefresh : true,
-            //showToggle : true,
-            //showColumns : true,
+            url: url + "list", // 服务器数据的加载地址showColumns : true,
             iconSize: 'outline',
             toolbar: '#exampleToolbar',
             striped: true, // 设置为true会有隔行变色效果
             dataType: "json", // 服务器返回的数据类型
+            //showRefresh : true,
+            //showToggle : true,
+            //
             pagination: true, // 设置为true会在底部显示分页条
             // queryParamsType : "limit",
             // //设置为limit则会发送符合RESTFull格式的参数
@@ -229,7 +227,7 @@ function dt_update(id) {
  * 打开详情框
  * @param id
  */
-function dt_detail(id) {
+function dt_update(id) {
     dt_action("详情", "detail/" + id);
 }
 
@@ -239,15 +237,31 @@ function dt_detail(id) {
  * @param action
  */
 function dt_action(title, action) {
+//	var btn = "";
+//	if (action.indexOf("insert") >= 0
+//		|| action.indexOf("update") >= 0) {
+//		btn = "保存";
+//	} else if (action.indexOf("detail") >= 0) {
+//		btn = "确定";
+//	} else {
+//		btn = "关闭";
+//	}
+	
 	var initSelect2 = "<script type='text/javascript'>$('.select2').select2();</script>";
 	$.get(url + action, {},function (html) {
 		layer.open({
 	        type: 1,
 	        title: title,
+//	        btn: btn,
+	        id: 'layer' + action,
+	        btnAlign: 'c',
 	        maxmin: true,
 	        shadeClose: false, // 点击遮罩关闭层
 	        area: ['800px', '520px'],
-	        content: html + initSelect2
+	        content: html + initSelect2,
+	        yes: function(){
+	        	layer.closeAll();
+	        }
 	    });
 	}, "html"); 
 }
