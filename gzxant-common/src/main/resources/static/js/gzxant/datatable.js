@@ -11,8 +11,6 @@ function dataTable_rep_message(r) {
     }
 }
 
-
-
 /**
  * 批量删除
  */
@@ -229,7 +227,7 @@ function dt_update(id) {
  * 打开详情框
  * @param id
  */
-function dt_detail(id) {
+function dt_update(id) {
     dt_action("详情", "detail/" + id);
 }
 
@@ -239,22 +237,22 @@ function dt_detail(id) {
  * @param action
  */
 function dt_action(title, action) {
-	var btn = "";
-	if (action.indexOf("insert") >= 0
-		|| action.indexOf("update") >= 0) {
-		btn = "保存";
-	} else if (action.indexOf("detail") >= 0) {
-		btn = "确定";
-	} else {
-		btn = "关闭";
-	}
+//	var btn = "";
+//	if (action.indexOf("insert") >= 0
+//		|| action.indexOf("update") >= 0) {
+//		btn = "保存";
+//	} else if (action.indexOf("detail") >= 0) {
+//		btn = "确定";
+//	} else {
+//		btn = "关闭";
+//	}
 	
 	var initSelect2 = "<script type='text/javascript'>$('.select2').select2();</script>";
 	$.get(url + action, {},function (html) {
 		layer.open({
 	        type: 1,
 	        title: title,
-	        btn: btn,
+//	        btn: btn,
 	        id: 'layer' + action,
 	        btnAlign: 'c',
 	        maxmin: true,

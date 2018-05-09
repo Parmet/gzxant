@@ -18,7 +18,7 @@
 
     <div class="col-sm-3">
         <div class="portlet box green-haze" style="padding: 15px">
-            <div class="portlet-body" id="dictTree"></div>
+            <div class="portlet-body" id="categoryTree"></div>
         </div>
     </div>
 
@@ -53,8 +53,20 @@
                             <input type="hidden" name="path"/>
 
                             <div class="form-body">
-
                                 <div class="row">
+                                    <div class="col-md-4">
+                                    	<div class="form-group">
+                                            <label class="col-sm-3 control-label">图标<span class="required">*</span></label>
+
+                                            <div class="col-sm-9">
+		                                    	<button id="icon" disabled="disabled" name="icon" value="" class="btn btn-white btn-circle btn-lg" type="button">
+		                                    	</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5"></div>
+                                </div>
+                                <div class="row" style="text-align:left">
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">名称<span class="required">*</span></label>
@@ -62,7 +74,6 @@
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" name="name"
                                                        placeholder="请录入数据名称" readonly="true" required="required"/>
-
                                             </div>
                                         </div>
                                     </div>
@@ -78,6 +89,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                    
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -91,9 +103,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label col-md-3">排序</label>
@@ -121,15 +130,11 @@
                             </div>
                             <div class="form-actions fluid">
                                 <div class="row">
-
-                                    <div class="col-md-6">
-                                        <div class="col-md-offset-3 col-md-9">
-                                            <button type="submit" class="btn green" disabled="disabled">保存</button>
-                                            <button type="button" class="btn default btn-cancel" disabled="disabled">取消</button>
-                                        </div>
+                                	<div class="col-md-9"></div>
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn btn-success" disabled="disabled">保存</button>
+                                        <button type="button" class="btn btn-default btn-cancel" disabled="disabled">取消</button>
                                     </div>
-
-
                                 </div>
                             </div>
                         </form>
@@ -140,11 +145,16 @@
 
     </div>
 </div>
+
+	
 </div>
 <script src="${rc.contextPath}/js/plugins/jsTree/jstree.min.js" type="text/javascript"></script>
+<script src="${rc.contextPath}/js/plugins/iIcon/iIcon.js" type="text/javascript"></script>
 <script type="text/javascript">
+	var icon = $("#icon").iIcon({});
+
     var form = $('#categoryForm'), id = 0, pid = 0, text;
-    $("#dictTree").jstree({
+    $("#categoryTree").jstree({
         "core": {
             "animation": 0,
             "themes": {
@@ -153,7 +163,7 @@
                 "icons": true
             },
             "check_callback": true,
-            'data':${categoryTrees!''}
+            'data': ${categoryTrees!''}
         },
         "types": {
             "default": {
@@ -171,13 +181,14 @@
                 type: 'GET',
                 success: function (msg) {
                     var data = msg.categorys;
+                    icon.editIcon(data.icon);
                     $('input[name=id]').val(data.id);
                     $('input[name=parentId]').val(data.parentId);
                     $('input[name=number]').val(data.number);
                     $('input[name=name]').val(data.name);
                     $('input[name=sort]').val(data.sort);
-                    $('input[name=name]').val(data.remark);
                     $('input[name=path]').val(data.path);
+                    $('input[name=remark]').val(data.remark);
 
                     $("select[name=invalid] option[value='" + data.invalid + "']").attr("selected", "selected");
                     $("select[name=invalid] option[value!='" + data.invalid + "']").attr("selected", false);
@@ -202,6 +213,9 @@
             name: {
                 minlength: 2,
                 maxlength: 50,
+                required: true
+            },
+            icon: {
                 required: true
             },
             number: {
@@ -229,6 +243,7 @@
         }
     });
     $('.btn-parent').click(function () {
+    	icon.init();
         form.resetForm();
         $('input[name=id]').val("");
         $('input[name=parentId]').val(0);
@@ -241,6 +256,7 @@
 
     });
     $('.btn-children').click(function () {
+    	icon.init();
         form.resetForm();
         $('input[name=id]').val("");
         $('input[name=parentId]').val(id);
@@ -258,6 +274,7 @@
         });
     });
     $('.btn-cancel').click(function () {
+    	icon.init();
         form.resetForm();
         $('#categoryForm :input').each(function (a) {
             $(this).attr('disabled', "disabled");
@@ -265,7 +282,8 @@
         });
     });
     $('.btn-delete').click(function () {
-        layer.confirm('是否要删除此数据字典及其下级数？', {
+    	icon.init();
+        layer.confirm('是否要删除此分类及其下级？', {
             btn: ['是', '否']
         },function () {
             $.ajax({
@@ -315,5 +333,7 @@
     function alertClose() {
         $(".alert").alert('close');
     }
+    
+    
 </script>
 
