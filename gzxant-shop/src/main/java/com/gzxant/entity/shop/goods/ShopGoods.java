@@ -11,7 +11,7 @@ import com.gzxant.base.entity.DataEntity;
  * 商城商品表
  * </p>
  *
- * @author zt
+ * @author xiaoyc
  * @since 2018-05-02
  */
 @TableName("shop_goods")
@@ -34,8 +34,6 @@ public class ShopGoods extends DataEntity<ShopGoods> {
      * 价格
      */
 	private Double price;
-	@TableField("update_id")
-	private Long updateId;
 
 
 	public Long getSellerId() {
@@ -84,14 +82,6 @@ public class ShopGoods extends DataEntity<ShopGoods> {
 
 	public void setPrice(Double price) {
 		this.price = price;
-	}
-
-	public Long getUpdateId() {
-		return updateId;
-	}
-
-	public void setUpdateId(Long updateId) {
-		this.updateId = updateId;
 	}
 
 	@Override

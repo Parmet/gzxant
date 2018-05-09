@@ -13,7 +13,7 @@ import com.gzxant.base.service.impl.BaseService;
  * 商城商品表 服务实现类
  * </p>
  *
- * @author zt
+ * @author xiaoyc
  * @since 2018-05-02
  */
 @Service

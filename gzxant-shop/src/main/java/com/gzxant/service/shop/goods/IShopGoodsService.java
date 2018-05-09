@@ -8,7 +8,7 @@ import com.gzxant.base.service.IBaseService;
  * 商城商品表 服务类
  * </p>
  *
- * @author zt
+ * @author xiaoyc
  * @since 2018-05-02
  */
 public interface IShopGoodsService extends IBaseService<ShopGoods> {

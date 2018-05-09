@@ -40,6 +40,8 @@ public class ShopCategoryService extends BaseService<ShopCategoryDao, ShopCatego
             jt.setText(category.getName());
             if (StringUtils.isBlank(category.getIcon())) {
                 jt.setIcon("glyphicon glyphicon-tint");
+            } else {
+            	jt.setIcon(category.getIcon());
             }
             
             jts.add(jt);

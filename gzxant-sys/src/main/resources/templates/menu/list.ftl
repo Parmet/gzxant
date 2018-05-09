@@ -45,14 +45,14 @@
                                 <span class="hidden-480">编辑此菜单</span>
                             </button>
 
-<#--                            <button type="button" class="btn red btn-delete btn-danger" disabled="disabled">
+							<button type="button" class="btn red btn-delete btn-danger" disabled="disabled">
                                 <i class="fa fa-trash-o"></i>
                                 <span class="hidden-480">禁用此菜单</span>
-                            </button>-->
+                            </button>
                             <button type="button" class="btn red btn-delete btn-danger" disabled="disabled">
                                 <i class="fa fa-trash-o"></i>
                                 <span class="hidden-480">删除此菜单</span>
-                            </button
+                            </button>
                         </div>
                         <div class="portlet-body form" id="menu_edit_table">
                             <form id="menuForm" action="${rc.contextPath}/sys/menu/insert" class="form-horizontal form-bordered"

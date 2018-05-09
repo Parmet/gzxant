@@ -1,26 +1,36 @@
 package com.gzxant.controller.shop.goods;
 
-import com.gzxant.annotation.SLog;
-import com.gzxant.base.controller.BaseController;
-import com.gzxant.base.entity.ReturnDTO;
-import com.gzxant.base.vo.DataTable;
-import com.gzxant.entity.shop.goods.ShopGoods;
-import com.gzxant.service.shop.goods.IShopGoodsService;
-import com.gzxant.util.ReturnDTOUtil;
-import io.swagger.annotations.ApiOperation;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
+import com.alibaba.fastjson.JSON;
+import com.gzxant.annotation.SLog;
+import com.gzxant.base.entity.ReturnDTO;
+import com.gzxant.base.vo.DataTable;
+import com.gzxant.service.shop.category.IShopCategoryService;
+import com.gzxant.service.shop.goods.IShopGoodsService;
+import com.gzxant.entity.shop.goods.ShopGoods;
+import com.gzxant.util.ReturnDTOUtil;
+import com.gzxant.base.controller.BaseController;
+
+import io.swagger.annotations.ApiOperation;
 
 /**
  * <p>
  * 商城商品表 前端控制器
  * </p>
  *
- * @author zt
+ * @author xiaoyc
  * @since 2018-05-02
  */
 @Controller
@@ -28,10 +38,13 @@ import java.util.List;
 public class ShopGoodsController extends BaseController {
 	@Autowired
 	private IShopGoodsService shopGoodsService;
+	@Autowired
+	private IShopCategoryService shopCategoryService;
 
 	@ApiOperation(value = "进入商城商品表列表界面", notes = "进入商城商品表列表界面")
 	@GetMapping(value = "")
 	public String list(Model model) {
+		model.addAttribute("categoryTrees", JSON.toJSON(shopCategoryService.getDictTree()).toString());
 		return "/shop/goods/list";
 	}
 
@@ -43,14 +56,14 @@ public class ShopGoodsController extends BaseController {
 	}
 
 	@ApiOperation(value = "获取商城商品表列表数据", notes = "获取商城商品表列表数据:使用约定的DataTable")
-	@RequestMapping(value = "/list")
+	@PostMapping(value = "/list")
 	@ResponseBody
 	public DataTable<ShopGoods> list(@RequestBody DataTable<ShopGoods> dt) {
 		return shopGoodsService.pageSearch(dt);
 	}
 
 	@ApiOperation(value = "添加商城商品表", notes = "添加商城商品表")
-	@RequestMapping(value = "/insert")
+	@PostMapping(value = "/create")
 	@ResponseBody
 	public ReturnDTO create(ShopGoods param) {
 		shopGoodsService.insert(param);
@@ -58,7 +71,7 @@ public class ShopGoodsController extends BaseController {
 	}
 
 	@ApiOperation(value = "编辑商城商品表", notes = "编辑商城商品表")
-	@RequestMapping(value = "/update")
+	@PostMapping(value = "/update")
 	@ResponseBody
 	public ReturnDTO update(ShopGoods param) {
 		shopGoodsService.updateById(param);
@@ -67,7 +80,7 @@ public class ShopGoodsController extends BaseController {
 
 	@SLog("批量删除商城商品表")
 	@ApiOperation(value = "批量删除商城商品表", notes = "批量删除商城商品表")
-	@RequestMapping(value = "/delete")
+	@PostMapping(value = "/delete")
 	@ResponseBody
 	public ReturnDTO delete(@RequestParam("ids") List<Long> ids) {
 		boolean success = shopGoodsService.deleteBatchIds(ids);
