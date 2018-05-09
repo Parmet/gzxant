@@ -61,6 +61,7 @@
         <module>gzxant-food-safety</module>
         <module>gzxant-food-safety-web</module>
         <module>gzxant-food-safety-webback</module>
+        <module>gzxant-portals</module>
     </modules>
 
     <!--全局依赖-->
