@@ -61,6 +61,8 @@
         <module>gzxant-food-safety</module>
         <module>gzxant-food-safety-web</module>
         <module>gzxant-food-safety-webback</module>
+
+        <!-- 官网模块 -->
         <module>gzxant-portals</module>
     </modules>
 
@@ -252,6 +254,12 @@
 			<dependency>
                 <groupId>com.gzxant</groupId>
                 <artifactId>gzxant-common</artifactId>
+                <version>${gzxant.version}</version>
+            </dependency>
+
+			<dependency>
+                <groupId>com.gzxant</groupId>
+                <artifactId>gzxant-portals</artifactId>
                 <version>${gzxant.version}</version>
             </dependency>
 
