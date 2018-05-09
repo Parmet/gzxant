@@ -87,5 +87,4 @@
     load_data( getcolumns(), {});
     //$(".bars").css("width", "100%");
 
-
 </script>
