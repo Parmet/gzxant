@@ -31,7 +31,7 @@ import io.swagger.annotations.ApiOperation;
  * @since 2018-04-21
  */
 @Controller
-@RequestMapping("/shop/order")
+@RequestMapping("/order")
 public class ShopOrderController extends BaseController {
 	@Autowired
 	private IShopOrderService orderService;

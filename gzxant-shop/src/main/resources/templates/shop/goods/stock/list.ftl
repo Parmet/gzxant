@@ -9,22 +9,22 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
+
                                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 form-group">
-                                    <label for="parentSelect" class="control-label">品牌分类</label>
-                                    <select class="form-filter form-control _search" id="parentSelect" name="">
-                                        <option value="0">-- 请选择 --</option>
-                                     <#list brands as brand>
-                                        <option value="${brand.id}">${brand.chineseName}</option>
-                                    </#list>
-                                    </select>
+                                    <label for="nameInput" class="control-label">合计总数</label>
+                                    <input type="text" class="form-filter form-control _search" id="totalStock" name="search_like_totalStock"  />
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 form-group">
-                                    <label for="nameInput" class="control-label">品牌中文名称</label>
-                                    <input type="text" class="form-filter form-control _search" id="nameInput" name="search_like_chineseName"  />
+                                    <label for="nameInput" class="control-label">剩余的总数</label>
+                                    <input type="text" class="form-filter form-control _search" id="ableStock" name="search_like_ableStock"  />
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 form-group">
-                                    <label for="nameInput" class="control-label">品牌英文名称</label>
-                                    <input type="text" class="form-filter form-control _search" id="nameInput" name="search_like_englishName"  />
+                                    <label for="nameInput" class="control-label">冻结的总数</label>
+                                    <input type="text" class="form-filter form-control _search" id="freezeStock" name="search_like_freezeStock"  />
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 form-group">
+                                    <label for="nameInput" class="control-label">存储过期</label>
+                                    <input type="text" class="form-filter form-control _search" id="overStock" name="search_like_overStock"  />
                                 </div>
                             </div>
                         </div>
@@ -65,24 +65,24 @@
                 title: '序号' // 列标题
             },
             {
-                field: 'chineseName',
-                title: '品牌中文名称'
+                field: 'totalStock',
+                title: '合计总数'
             },
             {
-                field: 'englishName',
-                title: '品牌英文名称'
+                field: 'ableStock',
+                title: '剩余的总数'
             },
             {
-                field: 'logo',
-                title: '商标'
+                field: 'freezeStock',
+                title: '冻结的总数'
             },
             {
-                field: 'url',
-                title: '品牌连接'
+                field: 'overStock',
+                title: '存储过期'
             },
             {
-                field: 'remark',
-                title: '备注'
+                field: 'version',
+                title: '版本'
             },
             {
                 title: '操作',

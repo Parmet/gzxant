@@ -127,14 +127,14 @@ function load_data(columns, sorts) {
     $('#exampleTable').bootstrapTable(
         {
             method: 'post', // 服务器数据的请求方式 get or post
-            url: url + "list", // 服务器数据的加载地址
-            //showRefresh : true,
-            //showToggle : true,
-            //showColumns : true,
+            url: url + "list", // 服务器数据的加载地址showColumns : true,
             iconSize: 'outline',
             toolbar: '#exampleToolbar',
             striped: true, // 设置为true会有隔行变色效果
             dataType: "json", // 服务器返回的数据类型
+            //showRefresh : true,
+            //showToggle : true,
+            //
             pagination: true, // 设置为true会在底部显示分页条
             // queryParamsType : "limit",
             // //设置为limit则会发送符合RESTFull格式的参数

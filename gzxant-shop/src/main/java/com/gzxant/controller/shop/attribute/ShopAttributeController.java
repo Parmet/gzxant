@@ -72,17 +72,17 @@ public class ShopAttributeController extends BaseController {
 	/**
 	 * 保存资源信息
 	 *
-	 * @param shopSku
+	 * @param shopAttribute
 	 * @param redirectAttributes
 	 *
 	 * @return
 	 */
 	@PostMapping(value="insert")
-	public String save(@Valid ShopAttribute shopSku, RedirectAttributes redirectAttributes){
-		if (ObjectUtils.isEmpty(shopSku.getId())) {
-			shopSkuService.add(shopSku);
+	public String save(@Valid ShopAttribute shopAttribute, RedirectAttributes redirectAttributes){
+		if (ObjectUtils.isEmpty(shopAttribute.getId())) {
+			shopSkuService.add(shopAttribute);
 		}else {
-			shopSkuService.update(shopSku);
+			shopSkuService.update(shopAttribute);
 		}
 
 		redirectAttributes.addFlashAttribute("message","保存菜单成功");

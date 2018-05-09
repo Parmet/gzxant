@@ -138,7 +138,7 @@ public class ShopProductController extends BaseController {
 
 		model.addAttribute("shopProductSpus", shopProductSpu);
 		model.addAttribute("action", action);
-
+		shopProductSpu.selectById(id);//============
 		return "/shop/product/spu/detail";
 	}
 

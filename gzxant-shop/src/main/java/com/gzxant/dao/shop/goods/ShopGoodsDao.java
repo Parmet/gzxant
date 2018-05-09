@@ -8,7 +8,7 @@ import com.gzxant.base.dao.CrudDao;
   * 商城商品表 Mapper 接口
  * </p>
  *
- * @author xiaoyc
+ * @author zt
  * @since 2018-05-02
  */
 public interface ShopGoodsDao extends CrudDao<ShopGoods> {

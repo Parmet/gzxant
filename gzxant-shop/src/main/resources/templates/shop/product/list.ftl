@@ -23,7 +23,6 @@
 								    <input type="text" class="form-filter form-control _search" id="nameInput" name="search_like_categoryId"  />
 								</div>
 
-
 		                    </div>
 					  	</div>
 					  	<div class="panel-footer">
@@ -87,4 +86,6 @@
 
     load_data( getcolumns(), {});
     //$(".bars").css("width", "100%");
+
+
 </script>
