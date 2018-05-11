@@ -4,13 +4,6 @@ spring:
   freemarker:
     cache: false
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/gzxant?useUnicode=true&characterEncoding=utf8&useSSL=false
-#    username: root
-#    password: admin
-    url: jdbc:mysql://192.168.0.200:3306/gzxant?useUnicode=true&characterEncoding=utf8&useSSL=false
-    username: gzxant
-    password: gzxant1804
     druid:
       validationQuery: SELECT 1
       initialSize: 10
