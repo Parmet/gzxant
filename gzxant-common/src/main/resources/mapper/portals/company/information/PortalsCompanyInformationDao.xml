@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gzxant.dao.portals.company.information.PortalsCompanyInformationDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.gzxant.entity.portals.company.information.PortalsCompanyInformation">
+		<result column="logo" property="logo" />
+		<result column="shuffling" property="shuffling" />
+		<result column="phone" property="phone" />
+		<result column="email" property="email" />
+		<result column="qq" property="qq" />
+		<result column="address" property="address" />
+		<result column="customer_name" property="customerName" />
+		<result column="customer_logo" property="customerLogo" />
+		<result column="customer_address" property="customerAddress" />
+	</resultMap>
+
+</mapper>
