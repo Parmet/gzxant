@@ -227,7 +227,7 @@ function dt_update(id) {
  * 打开详情框
  * @param id
  */
-function dt_update(id) {
+function dt_detail(id) {
     dt_action("详情", "detail/" + id);
 }
 

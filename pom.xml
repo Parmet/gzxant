@@ -42,25 +42,28 @@
    		<!-- 系统模块 -->
         <module>gzxant-common</module> <!-- 系统共用模块 -->
         <module>gzxant-sys</module> <!-- 系统用户权限模块 -->
-        <module>gzxant-web</module> <!-- boot启动类模板 -->
         <module>gzxant-log</module> 
-        <module>gzxant-drools</module> 
         <module>gzxant-activiti</module> 
-        <module>gzxant-wx-applet</module> 
+
+        <!-- 对外api模块 -->
+        <module>gzxant-wx-api</module> 
         
-        <!-- 代码模块，暂时没用 -->
+        <!-- 代码自动生成模块 -->
         <module>gzxant-code</module>
         
-        <!-- 博客模块 -->
-        <module>gzxant-blog</module>
+        <!-- boot启动类模板  port:8081 -->
+        <module>gzxant-web</module> 
         
-        <!-- 商城模块 -->
-        <module>gzxant-shop</module>
-        
-        <!-- 食品安全检测项目模块 -->
+        <!-- 食品安全检测项目模块  port:8082 -->
         <module>gzxant-food-safety</module>
         <module>gzxant-food-safety-web</module>
         <module>gzxant-food-safety-webback</module>
+        
+        <!-- 商城模块  port:8083 -->
+        <module>gzxant-shop</module>
+        
+        <!-- 用车模块  port:8084 -->
+        <module>gzxant-car-booking</module>
     </modules>
 
     <!--全局依赖-->
@@ -263,11 +266,6 @@
 
             <dependency>
                 <groupId>com.gzxant</groupId>
-                <artifactId>gzxant-blog</artifactId>
-                <version>${gzxant.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.gzxant</groupId>
                 <artifactId>gzxant-sys</artifactId>
                 <version>${gzxant.version}</version>
             </dependency>
@@ -286,13 +284,19 @@
 
             <dependency>
                 <groupId>com.gzxant</groupId>
-                <artifactId>gzxant-wx-applet</artifactId>
+                <artifactId>gzxant-wx-api</artifactId>
                 <version>${gzxant.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.gzxant</groupId>
                 <artifactId>gzxant-web</artifactId>
+                <version>${gzxant.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>com.gzxant</groupId>
+                <artifactId>gzxant-car-booking</artifactId>
                 <version>${gzxant.version}</version>
             </dependency>
             
@@ -323,11 +327,6 @@
             <dependency>
                 <groupId>com.gzxant</groupId>
                 <artifactId>gzxant-activiti</artifactId>
-                <version>${gzxant.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.gzxant</groupId>
-                <artifactId>gzxant-drools</artifactId>
                 <version>${gzxant.version}</version>
             </dependency>
 

@@ -3,10 +3,7 @@ package com.gzxant.base.vo;
 import java.io.Serializable;
 
 /**
- * Created by chen on 2017/8/11.
- * <p>
- * Email 122741482@qq.com
- * <p>
+ * Created by ycxiao on 2018/5/10.
  * Describe:
  */
 public class JsTree implements Serializable{
