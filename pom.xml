@@ -39,34 +39,36 @@
 
     <!--系统模板-->
     <modules>
-   		<!-- 系统模块 -->
+        <!-- 系统模块 -->
         <module>gzxant-common</module> <!-- 系统共用模块 -->
         <module>gzxant-sys</module> <!-- 系统用户权限模块 -->
-        <module>gzxant-log</module> 
-        <module>gzxant-activiti</module> 
+        <module>gzxant-log</module>
+        <module>gzxant-activiti</module>
 
         <!-- 对外api模块 -->
-        <module>gzxant-wx-api</module> 
-        
+        <module>gzxant-wx-api</module>
+
         <!-- 代码自动生成模块 -->
         <module>gzxant-code</module>
-        
+
         <!-- boot启动类模板  port:8081 -->
-        <module>gzxant-web</module> 
-        
+        <module>gzxant-web</module>
+
         <!-- 食品安全检测项目模块  port:8082 -->
         <module>gzxant-food-safety</module>
         <module>gzxant-food-safety-web</module>
         <module>gzxant-food-safety-webback</module>
-        
+
         <!-- 商城模块  port:8083 -->
         <module>gzxant-shop</module>
-        
+
         <!-- 用车模块  port:8084 -->
         <module>gzxant-car-booking</module>
-        
+
         <!--  官网管理  port:8085 -->
         <module>gzxant-portals</module>
+
+        <module>gzxant-portals-web</module>
     </modules>
 
     <!--全局依赖-->
@@ -254,7 +256,7 @@
                 <version>${sitemesh.version}</version>
             </dependency>
 
-			<dependency>
+            <dependency>
                 <groupId>com.gzxant</groupId>
                 <artifactId>gzxant-common</artifactId>
                 <version>${gzxant.version}</version>
@@ -289,37 +291,43 @@
                 <artifactId>gzxant-web</artifactId>
                 <version>${gzxant.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>com.gzxant</groupId>
                 <artifactId>gzxant-car-booking</artifactId>
                 <version>${gzxant.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>com.gzxant</groupId>
                 <artifactId>gzxant-portals</artifactId>
                 <version>${gzxant.version}</version>
             </dependency>
-            
+
+            <dependency>
+                <groupId>com.gzxant</groupId>
+                <artifactId>gzxant-portals-web</artifactId>
+                <version>${gzxant.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.gzxant</groupId>
                 <artifactId>gzxant-shop</artifactId>
                 <version>${gzxant.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>com.gzxant</groupId>
                 <artifactId>gzxant-food-safety</artifactId>
                 <version>${gzxant.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>com.gzxant</groupId>
                 <artifactId>gzxant-food-safety-web</artifactId>
                 <version>${gzxant.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>com.gzxant</groupId>
                 <artifactId>gzxant-food-safety-webback</artifactId>

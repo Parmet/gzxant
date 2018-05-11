@@ -2,7 +2,6 @@ package com.gzxant.config.sitemesh;
 
 import org.sitemesh.builder.SiteMeshFilterBuilder;
 import org.sitemesh.config.ConfigurableSiteMeshFilter;
-import org.springframework.beans.factory.annotation.Value;
 
 /**
  * Created by chen on 2017/7/27.
@@ -15,14 +14,14 @@ public class WebSiteMeshFilter extends ConfigurableSiteMeshFilter {
 
     /** 需要装饰的访问路径 */
 
-    private String contentPath="/**,/404.html";
 
+    private String contentPath="/**,/404.html";
     /** 装饰器页面路径 */
 
     private String decoratorPath="/layouts";
 
     /** 不需要装饰的访问路径,多个之间用英文逗号分隔 */
-    private String excludedPaths="/portals/index*, *.js,*.css,/druid/*,/swagger-ui,/login,/**/detail/*,/**/insert,/**/update/*";
+    private String excludedPaths="/**/web/index,*.js,*.css,/druid/*,/swagger-ui,/login,/**/detail/*,/**/insert,/**/update/*";
 
     @Override
     protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
