@@ -2,6 +2,7 @@ package com.gzxant.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.util.Lists;
 import org.assertj.core.util.Strings;
 import org.springframework.stereotype.Service;
@@ -150,6 +151,17 @@ public class SysDictService extends BaseService<SysDictDao, SysDict> implements 
         status.setMessage("删除成功");
         return status;
     }
+
+	@Override
+	public List<SysDict> getSub(String jkey) {
+		List<SysDict> sub = Lists.newArrayList();
+		if (StringUtils.isBlank(jkey)) {
+			return sub;
+		}
+		
+		sub = this.baseMapper.getSub(jkey);
+		return sub;
+	}
 
 
 }

@@ -1,11 +1,10 @@
 server:
-  port: 8084
+  port: 8085
   context-path: /gzxant/portals
 
 spring:
   profiles:
-    active: dev
-
+    active: dev, db-dev
   aop:
     proxy-target-class: true
   freemarker:

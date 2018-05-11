@@ -23,9 +23,15 @@ public interface ISysDictService extends IBaseService<SysDict> {
     boolean update(Long id, String dicKey, String dicValue, String type, String desc, String sort, String invalid);
 
     List<JsTree> getDictTree();
+    
+    /**
+     * 根据jkey获取其子项
+     * @param code
+     * @return
+     */
+    List<SysDict> getSub(String jkey);
 
-
-     PCAjaxVO delete(Long id);
+    PCAjaxVO delete(Long id);
 
 
 }

@@ -1,6 +1,8 @@
 package com.gzxant.dao;
 
 
+import java.util.List;
+
 import com.gzxant.base.dao.TreeDao;
 import com.gzxant.entity.SysDict;
 
@@ -11,5 +13,7 @@ import com.gzxant.entity.SysDict;
  * <p>
  * Describe: 系统数据字典dao
  */
-public interface SysDictDao  extends TreeDao<SysDict>  {
+public interface SysDictDao extends TreeDao<SysDict>  {
+
+	List<SysDict> getSub(String jkey);
 }

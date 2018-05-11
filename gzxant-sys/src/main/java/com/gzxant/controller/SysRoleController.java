@@ -1,5 +1,7 @@
 package com.gzxant.controller;
 
+import java.util.List;
+
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -151,5 +153,16 @@ public class SysRoleController extends BaseController {
         return ReturnDTOUtil.success();
     }
 
+    @SLog("批量删除角色")
+    @ApiOperation(value = "批量删除角色", notes = "批量删除角色")
+    @PostMapping(value = "/delete")
+    @ResponseBody
+    public ReturnDTO delete(@RequestParam("ids") List<Long> ids, ServletRequest request) {
+        boolean success = sysRoleService.deleteBatchIds(ids);
+        if (success) {
+            return ReturnDTOUtil.success();
+        }
+        return ReturnDTOUtil.fail();
 
+    }
 }

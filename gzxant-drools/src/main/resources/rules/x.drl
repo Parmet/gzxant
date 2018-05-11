@@ -1,8 +1,0 @@
-package plausibcheck.adress
-import com.gzxant.fact.User
-rule "sf"
- when
-User(getUserName().equals("d"))
-  then
-	System.out.println("cccccc");
-end

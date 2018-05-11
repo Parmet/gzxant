@@ -59,7 +59,7 @@
                     <#if action !='detail'>
                         <div class="form-actions fluid">
                             <div class="col-md-offset-3 col-md-9">
-                                <button type="submit" class="btn green">保存</button>
+                                <button type="submit" class="btn-green">保存</button>
                             </div>
                         </div>
                     </#if>
@@ -73,6 +73,8 @@
 
 <script src="${rc.contextPath}/js/plugins/jsTree/jstree.js" type="text/javascript"></script>
 <script type="text/javascript">
+	action = "${action}";
+
     var tree = $("#menuTree").jstree({
         "checkbox": {"keep_selected_style": false},
         "core": {
