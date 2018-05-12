@@ -13,19 +13,18 @@ import org.sitemesh.config.ConfigurableSiteMeshFilter;
 public class WebSiteMeshFilter extends ConfigurableSiteMeshFilter {
 
     /** 需要装饰的访问路径 */
-
-
     private String contentPath="/**,/404.html";
+    
     /** 装饰器页面路径 */
-
     private String decoratorPath="/layouts";
 
     /** 不需要装饰的访问路径,多个之间用英文逗号分隔 */
-    private String excludedPaths="/**/web/index,*.js,*.css,/druid/*,/swagger-ui,/login,/**/detail/*,/**/insert,/**/update/*";
+    private String excludedPaths="*.js,*.css,/druid/*,/swagger-ui,/login,/**/detail/*,/**/insert,/**/update/*,/web/main";
 
     @Override
     protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
-
+    	System.out.println("excluded path: " + excludedPaths);
+    	
         // 通过配置文件
         if (contentPath == null) {
             return;
