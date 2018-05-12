@@ -1,15 +1,14 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>gzxant-portals-web</artifactId>
-
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>gzxant-portals-web</name>
 
-    <description>web project for Spring Boot</description>
+    <description>gzxant-portals-web project for Spring Boot</description>
 
     <parent>
         <artifactId>gzxant</artifactId>
@@ -23,14 +22,7 @@
         <java.version>1.8</java.version>
     </properties>
 
-
-
     <dependencies>
-        <dependency>
-            <groupId>org.sitemesh</groupId>
-            <artifactId>sitemesh</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>com.github.drtrang</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
@@ -42,22 +34,28 @@
             <artifactId>gzxant-common</artifactId>
         </dependency>
 
-        <dependency>
+		<dependency>
             <groupId>com.gzxant</groupId>
             <artifactId>gzxant-log</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.gzxant</groupId>
+            <artifactId>gzxant-sys</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.gzxant</groupId>
             <artifactId>gzxant-portals</artifactId>
         </dependency>
-
+	
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
