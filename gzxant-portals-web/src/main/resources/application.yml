@@ -1,6 +1,6 @@
 server:
   port: 8086
-  context-path: /gzxant/portals
+  context-path: /gzxant/
 spring:
   profiles:
     active: dev, db-dev

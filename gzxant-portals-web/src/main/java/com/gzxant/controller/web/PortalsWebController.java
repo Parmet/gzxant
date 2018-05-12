@@ -10,7 +10,7 @@ import com.gzxant.constant.Setting;
 import io.swagger.annotations.ApiOperation;
 
 @Controller
-@RequestMapping("/web")
+@RequestMapping("/portals")
 public class PortalsWebController {
 
     /**
@@ -20,13 +20,13 @@ public class PortalsWebController {
 //    private PortalsCompanyInformationService pc;
 
     @ApiOperation(value = "进入公司官网展示公司信息", notes = "进入公司官网展示公司信息")
-    @RequestMapping(value = "/main", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String list(Model model) {
 //        PortalsCompanyInformation portalsCompanyInformation = pc.selectById(1L);
 //        model.addAttribute("portalsCompanyInformation",portalsCompanyInformation);
     	System.out.println("====123===================================");
     	System.out.println(Setting.SCAN_MAPPER_PATH);
-        return "/portals/main";
+        return "/portals/index";
     }
 
 }

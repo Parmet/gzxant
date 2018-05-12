@@ -10,13 +10,13 @@
 
         <!-- CSS -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:400,700">
-        <link rel="stylesheet" href="portals/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="portals/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="portals/css/animate.css">
-        <link rel="stylesheet" href="portals/css/magnific-popup.css">
-		<link rel="stylesheet" href="portals/css/form-elements.css">
-        <link rel="stylesheet" href="portals/css/style.css">
-        <link rel="stylesheet" href="portals/css/media-queries.css">
+        <link rel="stylesheet" href="${rc.contextPath}/portals/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="${rc.contextPath}/portals/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="${rc.contextPath}/portals/css/animate.css">
+        <link rel="stylesheet" href="${rc.contextPath}/portals/css/magnific-popup.css">
+		<link rel="stylesheet" href="${rc.contextPath}/portals/css/form-elements.css">
+        <link rel="stylesheet" href="${rc.contextPath}/portals/css/style.css">
+        <link rel="stylesheet" href="${rc.contextPath}/portals/css/media-queries.css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -27,10 +27,10 @@
 
         <!-- Favicon and touch icons -->
         <link rel="shortcut icon" href="portals/ico/favicon.png">
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="portals/ico/apple-touch-icon-144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="portals/ico/apple-touch-icon-114-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="portals/ico/apple-touch-icon-72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="portals/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="${rc.contextPath}/portals/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="${rc.contextPath}/portals/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${rc.contextPath}/portals/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="${rc.contextPath}/portals/ico/apple-touch-icon-57-precomposed.png">
 
     </head>
 
@@ -120,9 +120,9 @@
 	            <div class="row">
 	            	<div class="col-sm-6 block-1-left wow fadeInLeft">
 	            		<div class="slider-1-box slider-1-our-process">
-	            			<img class="slider-1-img-active" src="portals/img/process/2.jpg" alt="" data-at2x="portals/img/process/2.jpg">
-	                    	<img src="portals/img/process/1.jpg" alt="" data-at2x="portals/img/process/1.jpg">
-	                    	<img src="portals/img/process/3.jpg" alt="" data-at2x="portals/img/process/3.jpg">
+	            			<img class="slider-1-img-active" src="${rc.contextPath}/portals/img/process/2.jpg" alt="" data-at2x="${rc.contextPath}/portals/img/process/2.jpg">
+	                    	<img src="${rc.contextPath}/portals/img/process/1.jpg" alt="" data-at2x="${rc.contextPath}/portals/img/process/1.jpg">
+	                    	<img src="${rc.contextPath}/portals/img/process/3.jpg" alt="" data-at2x="${rc.contextPath}/portals/img/process/3.jpg">
 	                    	<div class="slider-1-nav"></div>
 	            		</div>
 	            	</div>
@@ -143,16 +143,16 @@
         		<div class="row">
 	            	<div class="col-sm-12 clients wow fadeInUp">
                     	<a href="#">
-                    		<img src="portals/img/clients/1.png" alt="" data-at2x="portals/img/clients/1.png">
+                    		<img src="${rc.contextPath}/portals/img/clients/1.png" alt="" data-at2x="${rc.contextPath}/portals/img/clients/1.png">
                     	</a>
                     	<a href="https://wrapbootstrap.com/theme/areta-agency-portfolio-template-WB0L5XF38?ref=azmind">
-                    		<img src="portals/img/clients/2.png" alt="" data-at2x="portals/img/clients/2.png">
+                    		<img src="${rc.contextPath}/portals/img/clients/2.png" alt="" data-at2x="${rc.contextPath}/portals/img/clients/2.png">
                     	</a>
                     	<a href="https://wrapbootstrap.com/theme/seria-coming-soon-landing-page-WB05D4591?ref=azmind">
-                    		<img src="portals/img/clients/3.png" alt="" data-at2x="portals/img/clients/3.png">
+                    		<img src="${rc.contextPath}/portals/img/clients/3.png" alt="" data-at2x="${rc.contextPath}/portals/img/clients/3.png">
                     	</a>
                     	<a href="https://wrapbootstrap.com/theme/jesis-responsive-app-landing-page-WB085528N?ref=azmind">
-                    		<img src="portals/img/clients/4.png" alt="" data-at2x="portals/img/clients/4.png">
+                    		<img src="${rc.contextPath}/portals/img/clients/4.png" alt="" data-at2x="${rc.contextPath}/portals/img/clients/4.png">
                     	</a>
 	            	</div>
 	            </div>
@@ -207,7 +207,7 @@
 	            <div class="row">
 	            	<div class="col-sm-12 portfolio-masonry">
 		                <div class="portfolio-box design">
-		                	<img src="portals/img/portfolio/1.jpg" alt="" data-at2x="portals/img/portfolio/1.jpg">
+		                	<img src="${rc.contextPath}/portals/img/portfolio/1.jpg" alt="" data-at2x="${rc.contextPath}/portals/img/portfolio/1.jpg">
 		                	<div class="portfolio-box-text-container">
 		                		<div class="portfolio-box-text">
 		                			<p><a href="#">Lorem website</a></p>
@@ -215,7 +215,7 @@
 		                	</div>
 		                </div>
 		                <div class="portfolio-box development">
-		                	<img src="portals/img/portfolio/2.jpg" alt="" data-at2x="portals/img/portfolio/2.jpg">
+		                	<img src="${rc.contextPath}/portals/img/portfolio/2.jpg" alt="" data-at2x="${rc.contextPath}/portals/img/portfolio/2.jpg">
 		                	<div class="portfolio-box-text-container">
 		                		<div class="portfolio-box-text">
 		                			<p><a href="#">Sit amet logo</a></p>
@@ -223,7 +223,7 @@
 		                	</div>
 		                </div>
 		                <div class="portfolio-box branding">
-		                	<img src="portals/img/portfolio/3.jpg" alt="" data-at2x="portals/img/portfolio/3.jpg">
+		                	<img src="${rc.contextPath}/portals/img/portfolio/3.jpg" alt="" data-at2x="${rc.contextPath}/portals/img/portfolio/3.jpg">
 		                	<div class="portfolio-box-text-container">
 		                		<div class="portfolio-box-text">
 		                			<p><a href="#">Ipsum social</a></p>
@@ -231,7 +231,7 @@
 		                	</div>
 		                </div>
 		                <div class="portfolio-box development">
-		                	<img src="portals/img/portfolio/4.jpg" alt="" data-at2x="portals/img/portfolio/4.jpg">
+		                	<img src="${rc.contextPath}/portals/img/portfolio/4.jpg" alt="" data-at2x="${rc.contextPath}/portals/img/portfolio/4.jpg">
 		                	<div class="portfolio-box-text-container">
 		                		<div class="portfolio-box-text">
 		                			<p><a href="#">Etiam processus dynamicus</a></p>
@@ -239,7 +239,7 @@
 		                	</div>
 		                </div>
 		                <div class="portfolio-box design">
-		                	<img src="portals/img/portfolio/5.jpg" alt="" data-at2x="portals/img/portfolio/5.jpg">
+		                	<img src="${rc.contextPath}/portals/img/portfolio/5.jpg" alt="" data-at2x="${rc.contextPath}/portals/img/portfolio/5.jpg">
 		                	<div class="portfolio-box-text-container">
 		                		<div class="portfolio-box-text">
 		                			<p><a href="#">Processus dynamicus logo</a></p>
@@ -247,7 +247,7 @@
 		                	</div>
 		                </div>
 		                <div class="portfolio-box development">
-		                	<img src="portals/img/portfolio/6.jpg" alt="" data-at2x="portals/img/portfolio/6.jpg">
+		                	<img src="${rc.contextPath}/portals/img/portfolio/6.jpg" alt="" data-at2x="${rc.contextPath}/portals/img/portfolio/6.jpg">
 		                	<div class="portfolio-box-text-container">
 		                		<div class="portfolio-box-text">
 		                			<p><a href="#">Mirum est notare</a></p>
@@ -255,7 +255,7 @@
 		                	</div>
 		                </div>
 		                <div class="portfolio-box design">
-		                	<img src="portals/img/portfolio/7.jpg" alt="" data-at2x="portals/img/portfolio/7.jpg">
+		                	<img src="${rc.contextPath}/portals/img/portfolio/7.jpg" alt="" data-at2x="${rc.contextPath}/portals/img/portfolio/7.jpg">
 		                	<div class="portfolio-box-text-container">
 		                		<div class="portfolio-box-text">
 		                			<p><a href="#">March notare site</a></p>
@@ -263,7 +263,7 @@
 		                	</div>
 		                </div>
 		                <div class="portfolio-box development">
-		                	<img src="portals/img/portfolio/8.jpg" alt="" data-at2x="portals/img/portfolio/8.jpg">
+		                	<img src="${rc.contextPath}/portals/img/portfolio/8.jpg" alt="" data-at2x="${rc.contextPath}/portals/img/portfolio/8.jpg">
 		                	<div class="portfolio-box-text-container">
 		                		<div class="portfolio-box-text">
 		                			<p><a href="#">Sit amet logo</a></p>
@@ -271,7 +271,7 @@
 		                	</div>
 		                </div>
 		                <div class="portfolio-box branding">
-		                	<img src="portals/img/portfolio/9.jpg" alt="" data-at2x="portals/img/portfolio/9.jpg">
+		                	<img src="${rc.contextPath}/portals/img/portfolio/9.jpg" alt="" data-at2x="${rc.contextPath}/portals/img/portfolio/9.jpg">
 		                	<div class="portfolio-box-text-container">
 		                		<div class="portfolio-box-text">
 		                			<p><a href="#">Lorem website</a></p>
@@ -279,7 +279,7 @@
 		                	</div>
 		                </div>
 		                <div class="portfolio-box design">
-		                	<img src="portals/img/portfolio/10.jpg" alt="" data-at2x="portals/img/portfolio/10.jpg">
+		                	<img src="${rc.contextPath}/portals/img/portfolio/10.jpg" alt="" data-at2x="${rc.contextPath}/portals/img/portfolio/10.jpg">
 		                	<div class="portfolio-box-text-container">
 		                		<div class="portfolio-box-text">
 		                			<p><a href="#">Mirum est notare</a></p>
@@ -287,7 +287,7 @@
 		                	</div>
 		                </div>
 		                <div class="portfolio-box development">
-		                	<img src="portals/img/portfolio/11.jpg" alt="" data-at2x="portals/img/portfolio/11.jpg">
+		                	<img src="${rc.contextPath}/portals/img/portfolio/11.jpg" alt="" data-at2x="${rc.contextPath}/portals/img/portfolio/11.jpg">
 		                	<div class="portfolio-box-text-container">
 		                		<div class="portfolio-box-text">
 		                			<p><a href="#">Etiam processus social</a></p>
@@ -295,7 +295,7 @@
 		                	</div>
 		                </div>
 		                <div class="portfolio-box branding">
-		                	<img src="portals/img/portfolio/12.jpg" alt="" data-at2x="portals/img/portfolio/12.jpg">
+		                	<img src="${rc.contextPath}/portals/img/portfolio/12.jpg" alt="" data-at2x="${rc.contextPath}/portals/img/portfolio/12.jpg">
 		                	<div class="portfolio-box-text-container">
 		                		<div class="portfolio-box-text">
 		                			<p><a href="#">Sit website logo</a></p>
@@ -324,7 +324,7 @@
 	                    		<a href="">John Doe, johndoe.com</a>
 	                    	</p>
 	                    	<div class="testimonial-single-image">
-	                    		<img src="portals/img/testimonials/1.jpg" alt="" data-at2x="portals/img/testimonials/1.jpg">
+	                    		<img src="${rc.contextPath}/portals/img/testimonials/1.jpg" alt="" data-at2x="${rc.contextPath}/portals/img/testimonials/1.jpg">
 	                    	</div>
 	                    </div>
 	                    <div class="testimonial-single">
@@ -336,7 +336,7 @@
 	                    		<a href="">Jane Jonsson, blog.jane.com</a>
 	                    	</p>
 	                    	<div class="testimonial-single-image">
-	                    		<img src="portals/img/testimonials/2.jpg" alt="" data-at2x="portals/img/testimonials/2.jpg">
+	                    		<img src="${rc.contextPath}/portals/img/testimonials/2.jpg" alt="" data-at2x="${rc.contextPath}/portals/img/testimonials/2.jpg">
 	                    	</div>
 	                    </div>
 	                    <div class="testimonial-single">
@@ -348,7 +348,7 @@
 	                    		<a href="">John Doe, johndoe.com</a>
 	                    	</p>
 	                    	<div class="testimonial-single-image">
-	                    		<img src="portals/img/testimonials/3.jpg" alt="" data-at2x="portals/img/testimonials/3.jpg">
+	                    		<img src="${rc.contextPath}/portals/img/testimonials/3.jpg" alt="" data-at2x="${rc.contextPath}/portals/img/testimonials/3.jpg">
 	                    	</div>
 	                    </div>
 	                    <div class="testimonial-single">
@@ -360,7 +360,7 @@
 	                    		<a href="">Jane Jonsson, blog.jane.com</a>
 	                    	</p>
 	                    	<div class="testimonial-single-image">
-	                    		<img src="portals/img/testimonials/4.jpg" alt="" data-at2x="portals/img/testimonials/4.jpg">
+	                    		<img src="${rc.contextPath}/portals/img/testimonials/4.jpg" alt="" data-at2x="${rc.contextPath}/portals/img/testimonials/4.jpg">
 	                    	</div>
 	                    </div>
 	                </div>
@@ -399,7 +399,7 @@
 	            <div class="row">
 	                <div class="col-sm-4 team-box wow fadeInUp">
 		                <div class="team-photo">
-		                	<img src="portals/img/about/1.jpg" alt="" data-at2x="portals/img/about/1.jpg">
+		                	<img src="${rc.contextPath}/portals/img/about/1.jpg" alt="" data-at2x="${rc.contextPath}/portals/img/about/1.jpg">
 		                </div>
 	                    <h3>John Doe</h3>
 	                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
@@ -411,7 +411,7 @@
 	                </div>
 	                <div class="col-sm-4 team-box wow fadeInDown">
 		                <div class="team-photo">
-		                	<img src="portals/img/about/2.jpg" alt="" data-at2x="portals/img/about/2.jpg">
+		                	<img src="${rc.contextPath}/portals/img/about/2.jpg" alt="" data-at2x="${rc.contextPath}/portals/img/about/2.jpg">
 		                </div>
 	                    <h3>Tim Brown</h3>
 	                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
@@ -423,7 +423,7 @@
 	                </div>
 	                <div class="col-sm-4 team-box wow fadeInUp">
 		                <div class="team-photo">
-		                	<img src="portals/img/about/3.jpg" alt="" data-at2x="portals/img/about/3.jpg">
+		                	<img src="${rc.contextPath}/portals/img/about/3.jpg" alt="" data-at2x="${rc.contextPath}/portals/img/about/3.jpg">
 		                </div>
 	                    <h3>Sarah Red</h3>
 	                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
@@ -452,7 +452,7 @@
 	            </div>
 	            <div class="row">
 	            	<div class="col-sm-12 contact-form wow fadeInLeft">
-	                    <form role="form" action="portals/contact.php" method="post">
+	                    <form role="form" action="${rc.contextPath}/portals/contact.php" method="post">
 	                    	<div class="form-group">
 	                    		<label class="sr-only" for="contact-email">Email</label>
 	                        	<input type="text" name="email" placeholder="Email..." class="contact-email" id="contact-email">
@@ -505,14 +505,14 @@
         
 
         <!-- Javascript -->
-        <script src="portals/js/jquery-1.11.1.min.js"></script>
-        <script src="portals/bootstrap/js/bootstrap.min.js"></script>
-        <script src="portals/js/jquery.backstretch.min.js"></script>
-        <script src="portals/js/wow.min.js"></script>
-        <script src="portals/js/retina-1.1.0.min.js"></script>
-        <script src="portals/js/jquery.magnific-popup.min.js"></script>
-        <script src="portals/js/masonry.pkgd.min.js"></script>
-        <script src="portals/js/scripts.js"></script>
+        <script src="${rc.contextPath}/portals/js/jquery-1.11.1.min.js"></script>
+        <script src="${rc.contextPath}/portals/bootstrap/js/bootstrap.min.js"></script>
+        <script src="${rc.contextPath}/portals/js/jquery.backstretch.min.js"></script>
+        <script src="${rc.contextPath}/portals/js/wow.min.js"></script>
+        <script src="${rc.contextPath}/portals/js/retina-1.1.0.min.js"></script>
+        <script src="${rc.contextPath}/portals/js/jquery.magnific-popup.min.js"></script>
+        <script src="${rc.contextPath}/portals/js/masonry.pkgd.min.js"></script>
+        <script src="${rc.contextPath}/portals/js/scripts.js"></script>
         
         <!--[if lt IE 10]>
             <script src="portals/js/placeholder.js"></script>
