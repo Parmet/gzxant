@@ -22,6 +22,7 @@ function saveForm(form_id) {
         url: url+action,
         data: form.serialize(),// 你的formid
         async: false,
+        dataType : "json",
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             parent.layer.alert(XMLHttpRequest.responseJSON.error);
         },
