@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gzxant.dao.portals.about.me.PortalsAboutMeDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.gzxant.entity.portals.about.me.PortalsAboutMe">
+		<result column="about_me_title" property="aboutMeTitle" />
+		<result column="about_me_content" property="aboutMeContent" />
+		<result column="about_me_img" property="aboutMeImg" />
+		<result column="update_id" property="updateId" />
+	</resultMap>
+
+</mapper>

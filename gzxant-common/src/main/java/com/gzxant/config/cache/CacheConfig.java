@@ -51,6 +51,10 @@ public class CacheConfig {
     private int database;
 
     public RedisManager redisManager() {
+    	System.out.println(host);
+    	System.out.println(port);
+    	System.out.println(database);
+    	System.out.println(password);
         RedisManager redisManager = new RedisManager();
         redisManager.setHost(host);
         redisManager.setPassword(password);
