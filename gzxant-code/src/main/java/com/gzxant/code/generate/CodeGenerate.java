@@ -33,14 +33,20 @@ public class CodeGenerate {
 
 	// --------------变动参数区 start------------------------------------------
 	/* === 表名 === */
-	private static String[] tableNames = {"car_booking_driver"}; //, "shop_order_goods", "shop_order_pay"
+	private static String[] tableNames = {"sys_config"}; //, "shop_order_goods", "shop_order_pay"
 	/* === 开发者 === */
 	public static String author = "ycxiao";
 	/* === 输出目标项目，为空则生成在当前项目中 === */
 	public static String targetProject = "gzxant-car-booking";
 	/* === 准备生成文件["controller", "service", "dao", "entity", "xml"] === */
 	public static List<String> beGenerateFile = new ArrayList<>(
-			Arrays.asList("controller", "service", "dao", "entity", "xml"));
+			Arrays.asList(
+//						  "controller", 
+//						  "service", 
+//						  "dao", 
+						  "entity"
+//						  "xml"
+						  ));
 	// --------------变动参数区 end------------------------------------------
 
 	// --------------数据源配置区 start------------------------------------------
