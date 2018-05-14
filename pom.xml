@@ -65,10 +65,13 @@
         <!-- 用车模块  port:8084 -->
         <module>gzxant-car-booking</module>
 
-        <!--  官网管理  port:8085 -->
-        <module>gzxant-portals</module>
-        <!--  官网  port:8086 -->
+
+        <!--  官网前台  port:8086 -->
         <module>gzxant-portals-web</module>
+        <!--  官网后台  port:8086 -->
+        <module>gzxant-portals-manage</module>
+
+
     </modules>
 
     <!--全局依赖-->
@@ -298,15 +301,16 @@
                 <version>${gzxant.version}</version>
             </dependency>
 
+
             <dependency>
                 <groupId>com.gzxant</groupId>
-                <artifactId>gzxant-portals</artifactId>
+                <artifactId>gzxant-portals-web</artifactId>
                 <version>${gzxant.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.gzxant</groupId>
-                <artifactId>gzxant-portals-web</artifactId>
+                <artifactId>gzxant-portals-manage</artifactId>
                 <version>${gzxant.version}</version>
             </dependency>
 

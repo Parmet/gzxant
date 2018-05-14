@@ -1,6 +1,6 @@
 server:
-  port: 8088
-  context-path: /gzxant
+  port: 8086
+  context-path: /gzxant/portal
 spring:
   profiles:
     active: dev, db-dev
@@ -29,10 +29,10 @@ management:
 logging.level.project.user.UserClient: DEBUG
 
 mybatis:
-  mapper-locations: classpath:mapper/log/**/*.xml
+  mapper-locations: classpath:mapper/portals/**/*.xml, classpath:mapper/sys/**/*.xml, classpath:mapper/log/**/*.xml
   type-aliases-package: com.gzxant.entity
 mybatis-plus:
-  mapper-locations: classpath:mapper/log/**/*.xml
+  mapper-locations: classpath:mapper/portals/**/*.xml, classpath:mapper/sys/**/*.xml, classpath:mapper/log/**/*.xml
   type-aliases-package: com.gzxant.entity
   global-config:
     id-type: 2

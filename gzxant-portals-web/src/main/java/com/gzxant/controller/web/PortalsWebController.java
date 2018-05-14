@@ -20,7 +20,7 @@ public class PortalsWebController {
 //    private PortalsCompanyInformationService pc;
 
     @ApiOperation(value = "进入公司官网展示公司信息", notes = "进入公司官网展示公司信息")
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String list(Model model) {
 //        PortalsCompanyInformation portalsCompanyInformation = pc.selectById(1L);
 //        model.addAttribute("portalsCompanyInformation",portalsCompanyInformation);

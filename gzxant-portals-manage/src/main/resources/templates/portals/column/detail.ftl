@@ -16,7 +16,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">栏目路径<span class="required">*</span></label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" name="columnName" placeholder="请输入栏目路径"
+                        <input type="text" class="form-control" name="columnPath" placeholder="请输入栏目路径"
                                value="${portalsArticle.columnPath}" required aria-required="true"/>
                     </div>
                 </div>
