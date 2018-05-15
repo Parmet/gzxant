@@ -13,4 +13,5 @@ import com.gzxant.entity.portals.message.PortalsMessage;
  */
 public interface PortalsMessageDao extends CrudDao<PortalsMessage> {
 
+    PortalsMessage selectAllMessage();
 }

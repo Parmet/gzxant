@@ -12,5 +12,6 @@ import com.gzxant.base.service.IBaseService;
  * @since 2018-05-10
  */
 public interface IPortalsCompanyInformationService extends IBaseService<PortalsCompanyInformation> {
-	
+
+    PortalsCompanyInformation selectAllPortals();
 }

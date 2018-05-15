@@ -12,4 +12,5 @@ import com.gzxant.entity.portals.article.PortalsArticle;
  */
 public interface PortalsArticleDao extends CrudDao<PortalsArticle> {
 
+    PortalsArticle selectAllArticle();
 }

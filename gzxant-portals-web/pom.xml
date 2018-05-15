@@ -39,6 +39,10 @@
             <artifactId>gzxant-log</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.gzxant</groupId>
+            <artifactId>gzxant-portals-manage</artifactId>
+        </dependency>
 
 
         <dependency>

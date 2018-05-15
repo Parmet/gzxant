@@ -32,11 +32,22 @@ public class PortalsMessage extends DataEntity<PortalsMessage> {
      */
 	private String email;
     /**
+     * qq
+     */
+	private String qq;
+    /**
      * 留言内容
      */
 	@TableField("message_content")
 	private String messageContent;
 
+	public String getQq() {
+		return qq;
+	}
+
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
 
 	public String getName() {
 		return name;
@@ -82,6 +93,7 @@ public class PortalsMessage extends DataEntity<PortalsMessage> {
 			", phone=" + phone +
 			", email=" + email +
 			", messageContent=" + messageContent +
+			", qq=" + qq +
 			"}";
 	}
 }

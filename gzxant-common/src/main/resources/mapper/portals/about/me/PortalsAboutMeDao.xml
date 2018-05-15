@@ -10,4 +10,8 @@
 		<result column="update_id" property="updateId" />
 	</resultMap>
 
+
+	<select id="selectAllAboutMe" resultType="com.gzxant.entity.portals.about.me.PortalsAboutMe">
+		SELECT  * FROM  portals_about_me
+	</select>
 </mapper>

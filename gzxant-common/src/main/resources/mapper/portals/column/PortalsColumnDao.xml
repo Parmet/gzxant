@@ -10,4 +10,8 @@
 		<result column="update_id" property="updateId" />
 	</resultMap>
 
+	<select id="selectAllColumns" resultMap="BaseResultMap">
+		SELECT  * FROM  portals_column
+	</select>
+
 </mapper>

@@ -12,5 +12,6 @@ import com.gzxant.entity.portals.article.PortalsArticle;
  * @since 2018-05-09
  */
 public interface IPortalsArticleService extends IBaseService<PortalsArticle> {
-	
+
+    PortalsArticle selectAllArticle();
 }

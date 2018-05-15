@@ -6,13 +6,12 @@
 	<resultMap id="BaseResultMap" type="com.gzxant.entity.portals.company.information.PortalsCompanyInformation">
 		<result column="logo" property="logo" />
 		<result column="shuffling" property="shuffling" />
-		<result column="phone" property="phone" />
-		<result column="email" property="email" />
-		<result column="qq" property="qq" />
 		<result column="address" property="address" />
-		<result column="customer_name" property="customerName" />
-		<result column="customer_logo" property="customerLogo" />
-		<result column="customer_address" property="customerAddress" />
 	</resultMap>
+
+	<select id="selectAllPortals" resultMap="BaseResultMap">
+		SELECT * FROM portals_company_information
+
+	</select>
 
 </mapper>

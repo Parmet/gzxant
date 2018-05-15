@@ -13,4 +13,5 @@ import com.gzxant.base.dao.CrudDao;
  */
 public interface PortalsAboutMeDao extends CrudDao<PortalsAboutMe> {
 
+    PortalsAboutMe selectAllAboutMe();
 }

@@ -1,6 +1,5 @@
 package com.gzxant.entity.portals.company.information;
 
-import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.gzxant.base.entity.DataEntity;
 
@@ -28,37 +27,21 @@ public class PortalsCompanyInformation extends DataEntity<PortalsCompanyInformat
      */
 	private String shuffling;
     /**
-     * 公司联系电话
-     */
-	private String phone;
-    /**
-     * 公司联系邮箱
-     */
-	private String email;
-    /**
-     * 公司联系qq
-     */
-	private String qq;
-    /**
      * 公司地理位置
      */
 	private String address;
     /**
-     * 公司客户名称
+     * 公司地座右铭
      */
-	@TableField("customer_name")
-	private String customerName;
+	private String portalsMotto;
     /**
-     * 公司客户的logo
+     * 公司地理座右铭内容
      */
-	@TableField("customer_logo")
-	private String customerLogo;
-    /**
-     * 公司客户网站地址
-     */
-	@TableField("customer_address")
-	private String customerAddress;
+	private String mottoContent;
 
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
 
 	public String getLogo() {
 		return logo;
@@ -76,30 +59,6 @@ public class PortalsCompanyInformation extends DataEntity<PortalsCompanyInformat
 		this.shuffling = shuffling;
 	}
 
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getQq() {
-		return qq;
-	}
-
-	public void setQq(String qq) {
-		this.qq = qq;
-	}
-
 	public String getAddress() {
 		return address;
 	}
@@ -108,28 +67,32 @@ public class PortalsCompanyInformation extends DataEntity<PortalsCompanyInformat
 		this.address = address;
 	}
 
-	public String getCustomerName() {
-		return customerName;
+	public String getPortalsMotto() {
+		return portalsMotto;
 	}
 
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
+	public void setPortalsMotto(String portalsMotto) {
+		this.portalsMotto = portalsMotto;
 	}
 
-	public String getCustomerLogo() {
-		return customerLogo;
+	public String getMottoContent() {
+		return mottoContent;
 	}
 
-	public void setCustomerLogo(String customerLogo) {
-		this.customerLogo = customerLogo;
+	public void setMottoContent(String mottoContent) {
+		this.mottoContent = mottoContent;
 	}
 
-	public String getCustomerAddress() {
-		return customerAddress;
-	}
 
-	public void setCustomerAddress(String customerAddress) {
-		this.customerAddress = customerAddress;
+	@Override
+	public String toString() {
+		return "PortalsCompanyInformation{" +
+				"logo='" + logo + '\'' +
+				", shuffling='" + shuffling + '\'' +
+				", address='" + address + '\'' +
+				", portalsMotto='" + portalsMotto + '\'' +
+				", mottoContent='" + mottoContent + '\'' +
+				'}';
 	}
 
 	@Override
@@ -137,18 +100,4 @@ public class PortalsCompanyInformation extends DataEntity<PortalsCompanyInformat
 		return this.id;
 	}
 
-	@Override
-	public String toString() {
-		return "PortalsCompanyInformation{" +
-			"logo=" + logo +
-			", shuffling=" + shuffling +
-			", phone=" + phone +
-			", email=" + email +
-			", qq=" + qq +
-			", address=" + address +
-			", customerName=" + customerName +
-			", customerLogo=" + customerLogo +
-			", customerAddress=" + customerAddress +
-			"}";
-	}
 }

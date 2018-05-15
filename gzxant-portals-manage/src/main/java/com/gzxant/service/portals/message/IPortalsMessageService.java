@@ -12,5 +12,6 @@ import com.gzxant.base.service.IBaseService;
  * @since 2018-05-10
  */
 public interface IPortalsMessageService extends IBaseService<PortalsMessage> {
-	
+    //查询公司联系信息
+    PortalsMessage selectAllMessage();
 }

@@ -6,4 +6,8 @@
 	<resultMap id="BaseResultMap" type="com.gzxant.entity.portals.message.PortalsMessage">
 	</resultMap>
 
+	<select id="selectAllMessage" resultType="com.gzxant.entity.portals.message.PortalsMessage">
+		SELECT  * FROM  portals_message
+	</select>
+
 </mapper>

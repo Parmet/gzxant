@@ -13,4 +13,5 @@ import com.gzxant.entity.portals.company.information.PortalsCompanyInformation;
  */
 public interface PortalsCompanyInformationDao extends BaseDao<PortalsCompanyInformation> {
 
+    PortalsCompanyInformation selectAllPortals();
 }

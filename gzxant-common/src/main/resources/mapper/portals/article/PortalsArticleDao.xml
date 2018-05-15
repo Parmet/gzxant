@@ -15,4 +15,8 @@
 		<result column="author" property="author" />
 	</resultMap>
 
+	<select id="selectAllArticle" resultType="com.gzxant.entity.portals.article.PortalsArticle">
+		SELECT  * FROM  portals_article
+	</select>
+
 </mapper>

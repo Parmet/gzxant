@@ -1,12 +1,11 @@
 package com.gzxant.service.portals.company.information;
 
+import com.gzxant.base.service.impl.BaseService;
+import com.gzxant.dao.portals.company.information.PortalsCompanyInformationDao;
+import com.gzxant.entity.portals.company.information.PortalsCompanyInformation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.gzxant.entity.portals.company.information.PortalsCompanyInformation;
-import com.gzxant.dao.portals.company.information.PortalsCompanyInformationDao;
-import com.gzxant.service.portals.company.information.IPortalsCompanyInformationService;
-import com.gzxant.base.service.impl.BaseService;
 
 /**
  * <p>
@@ -19,5 +18,13 @@ import com.gzxant.base.service.impl.BaseService;
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)
 public class PortalsCompanyInformationService extends BaseService<PortalsCompanyInformationDao, PortalsCompanyInformation> implements IPortalsCompanyInformationService {
-	
+
+
+    @Autowired
+    PortalsCompanyInformationDao pci;
+
+    @Override
+    public PortalsCompanyInformation selectAllPortals() {
+        return pci.selectAllPortals();
+    }
 }

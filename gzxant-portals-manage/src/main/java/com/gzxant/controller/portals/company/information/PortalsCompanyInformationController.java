@@ -84,7 +84,7 @@ public class PortalsCompanyInformationController extends BaseController {
 		//非空判断  Logo和Email不能为空
 		if (param == null
 				|| StringUtils.isBlank(param.getLogo())
-				|| StringUtils.isBlank(param.getEmail())) {
+				|| StringUtils.isBlank(param.getAddress())) {
 			return ReturnDTOUtil.paramError();
 		}
 		portalsCompanyInformationService.updateById(param);

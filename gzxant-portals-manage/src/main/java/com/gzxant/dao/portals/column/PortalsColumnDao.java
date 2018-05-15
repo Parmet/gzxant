@@ -13,4 +13,5 @@ import com.gzxant.base.dao.CrudDao;
  */
 public interface PortalsColumnDao extends CrudDao<PortalsColumn> {
 
+    PortalsColumn selectAllColumns();
 }

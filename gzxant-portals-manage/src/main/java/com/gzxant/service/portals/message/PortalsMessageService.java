@@ -1,12 +1,12 @@
 package com.gzxant.service.portals.message;
 
+import com.gzxant.base.service.impl.BaseService;
+import com.gzxant.dao.portals.message.PortalsMessageDao;
+import com.gzxant.entity.portals.message.PortalsMessage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.gzxant.entity.portals.message.PortalsMessage;
-import com.gzxant.dao.portals.message.PortalsMessageDao;
-import com.gzxant.service.portals.message.IPortalsMessageService;
-import com.gzxant.base.service.impl.BaseService;
 
 /**
  * <p>
@@ -19,5 +19,12 @@ import com.gzxant.base.service.impl.BaseService;
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)
 public class PortalsMessageService extends BaseService<PortalsMessageDao, PortalsMessage> implements IPortalsMessageService {
-	
+
+    @Autowired
+    private  PortalsMessageDao portalsMessageDao;
+
+    @Override
+    public PortalsMessage selectAllMessage() {
+        return portalsMessageDao.selectAllMessage();
+    }
 }

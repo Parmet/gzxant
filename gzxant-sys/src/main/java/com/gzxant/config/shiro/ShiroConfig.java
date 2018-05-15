@@ -1,7 +1,6 @@
 package com.gzxant.config.shiro;
 
-import java.util.LinkedHashMap;
-
+import com.gzxant.shiro.AuthRealm;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -16,7 +15,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.gzxant.shiro.AuthRealm;
+import java.util.LinkedHashMap;
 
 /**
  * shiro的配置类
@@ -65,6 +64,8 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/heapdump/**","anon");
         filterChainDefinitionMap.put("/loggers/**","anon");
         filterChainDefinitionMap.put("/auditevents/**","anon");
+
+        filterChainDefinitionMap.put("/portals/**","anon");
 
 
         filterChainDefinitionMap.put("/layouts/**","anon");

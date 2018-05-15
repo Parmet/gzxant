@@ -12,5 +12,6 @@ import com.gzxant.base.service.IBaseService;
  * @since 2018-05-12
  */
 public interface IPortalsColumnService extends IBaseService<PortalsColumn> {
-	
+
+    PortalsColumn selectAllColumns();
 }
