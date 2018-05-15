@@ -18,7 +18,9 @@ import com.gzxant.base.entity.ReturnDTO;
 import com.gzxant.base.vo.DataTable;
 import com.gzxant.service.car.booking.vehicle.ICarBookingVehicleService;
 import com.gzxant.entity.car.booking.vehicle.CarBookingVehicle;
+import com.gzxant.util.PathUtils;
 import com.gzxant.util.ReturnDTOUtil;
+import com.gzxant.util.StringUtils;
 import com.gzxant.base.controller.BaseController;
 
 import io.swagger.annotations.ApiOperation;
@@ -32,7 +34,7 @@ import io.swagger.annotations.ApiOperation;
  * @since 2018-05-14
  */
 @Controller
-@RequestMapping("/car/booking/vehicle")
+@RequestMapping("/vehicle")
 public class CarBookingVehicleController extends BaseController {
 	@Autowired
 	private ICarBookingVehicleService carBookingVehicleService;
@@ -45,7 +47,19 @@ public class CarBookingVehicleController extends BaseController {
 
 	@ApiOperation(value = "进入车辆信息编辑界面", notes = "进入车辆信息编辑界面")
 	@GetMapping(value = {"/{action}/{id}", "/{action}"})
-	public String detail(@PathVariable("action") String action, Model model) {
+	public String detail(@PathVariable(name = "action") String action,
+			 @PathVariable(name = "id", required = false) String id, Model model) {
+		if (!PathUtils.checkDetailPath(action, id)) {
+			model.addAttribute("msg", "未识别参数");
+			return "/shop/brand/list";
+		}
+		
+		CarBookingVehicle vehicle = null;
+		if (StringUtils.isNumeric(id)) {
+			vehicle = carBookingVehicleService.selectById(id);
+		}
+		
+		model.addAttribute("vehicle", vehicle);
 		model.addAttribute("action", action);
 		return "/car/booking/vehicle/detail";
 	}

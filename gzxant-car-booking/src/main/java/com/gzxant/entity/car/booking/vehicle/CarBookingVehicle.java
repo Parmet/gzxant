@@ -108,12 +108,6 @@ public class CarBookingVehicle extends DataEntity<CarBookingVehicle> {
      */
 	@TableField("insurance_end_date")
 	private Date insuranceEndDate;
-    /**
-     * 更新人
-     */
-	@TableField("update_id")
-	private Long updateId;
-
 
 	public String getNumber() {
 		return number;
@@ -267,14 +261,6 @@ public class CarBookingVehicle extends DataEntity<CarBookingVehicle> {
 		this.insuranceEndDate = insuranceEndDate;
 	}
 
-	public Long getUpdateId() {
-		return updateId;
-	}
-
-	public void setUpdateId(Long updateId) {
-		this.updateId = updateId;
-	}
-
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -302,7 +288,6 @@ public class CarBookingVehicle extends DataEntity<CarBookingVehicle> {
 			", chackEndDate=" + chackEndDate +
 			", insurancePhoto=" + insurancePhoto +
 			", insuranceEndDate=" + insuranceEndDate +
-			", updateId=" + updateId +
 			"}";
 	}
 }
