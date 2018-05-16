@@ -95,8 +95,7 @@
                 </#if>
             </#list>
             </div>
-			
-			 	
+
             <div class="row text-center">
 
             <#list portalsArticle as pa>
