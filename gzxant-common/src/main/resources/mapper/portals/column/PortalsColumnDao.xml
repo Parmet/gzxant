@@ -10,7 +10,7 @@
 		<result column="update_id" property="updateId" />
 	</resultMap>
 
-	<select id="selectAllColumns" resultMap="BaseResultMap">
+	<select id="selectAllColumns" resultType="com.gzxant.entity.portals.column.PortalsColumn">
 		SELECT  * FROM  portals_column
 	</select>
 

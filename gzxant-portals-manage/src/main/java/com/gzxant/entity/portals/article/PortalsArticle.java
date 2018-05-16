@@ -54,8 +54,34 @@ public class PortalsArticle extends DataEntity<PortalsArticle> {
      */
 	private Integer status;
     /**
-     * 作者
+     * 关联栏目id
      */
+	private String columnId;
+
+
+	@TableField(exist = false)
+	private String columnName;
+
+	public String getColumnName() {
+		return columnName;
+	}
+
+	public void setColumnName(String columnName) {
+		this.columnName = columnName;
+	}
+
+	public String getColumnId() {
+		return columnId;
+	}
+
+	public void setColumnId(String columnId) {
+		this.columnId = columnId;
+	}
+
+	/**
+
+	 * 作者
+	 */
 	private String author;
 
 
@@ -148,6 +174,8 @@ public class PortalsArticle extends DataEntity<PortalsArticle> {
 			", allowComment=" + allowComment +
 			", status=" + status +
 			", author=" + author +
+			", columnId=" + columnId +
+			", columnName=" + columnName +
 			"}";
 	}
 }

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * <p>
  * 栏目管理 服务实现类
@@ -23,7 +25,7 @@ public class PortalsColumnService extends BaseService<PortalsColumnDao, PortalsC
     private PortalsColumnDao portalsColumnDao;
 
     @Override
-    public PortalsColumn selectAllColumns() {
+    public List<PortalsColumn> selectAllColumns() {
         return portalsColumnDao.selectAllColumns();
     }
 }

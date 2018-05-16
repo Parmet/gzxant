@@ -17,6 +17,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/portals")
 public class PortalsWebController {
@@ -62,10 +64,10 @@ public class PortalsWebController {
         PortalsCompanyInformation portalsCompanyInformation = portalsCompanyInformationService.selectAllPortals();
 
         //查询栏目
-        PortalsColumn portalsColumn = portalsColumnService.selectAllColumns();
+        List<PortalsColumn> portalsColumn = portalsColumnService.selectAllColumns();
 
         //查询文章
-        PortalsArticle portalsArticle = portalsArticleService.selectAllArticle();
+        List<PortalsArticle> portalsArticle = portalsArticleService.selectAllArticle();
 
 
         //公司的联系方式
@@ -73,6 +75,7 @@ public class PortalsWebController {
 
         //关于我们的信息
         PortalsAboutMe portalsAboutMe = portalsAboutMeService.selectAllAboutMe();
+
 
 
 
@@ -88,7 +91,6 @@ public class PortalsWebController {
         model.addAttribute("portalsAboutMe",portalsAboutMe);
         return "/portals/index";
     }
-
 
 
 }

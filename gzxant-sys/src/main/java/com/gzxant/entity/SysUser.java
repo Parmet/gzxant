@@ -1,16 +1,15 @@
 package com.gzxant.entity;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
-
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gzxant.constant.Global;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by chenjianan on 2016/12/13-20:00.
@@ -28,7 +27,7 @@ public class SysUser extends CompanyLinkEntity<SysUser> {
     private String loginName;// 登录名
     private String password;// 密码
     private String no;        // 工号
-    private String name;    // 姓名
+    private String name;    // 姓名o
     private String email;    // 邮箱
     private String phone;    // 电话
     private String mobile;    // 手机

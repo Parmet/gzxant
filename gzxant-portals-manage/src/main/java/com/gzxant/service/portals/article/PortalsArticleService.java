@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * <p>
  * 官网文章内容 服务实现类
@@ -23,8 +25,9 @@ public class PortalsArticleService extends BaseService<PortalsArticleDao, Portal
     private PortalsArticleDao portalsArticleDao;
 
     @Override
-    public PortalsArticle selectAllArticle() {
+    public List<PortalsArticle> selectAllArticle() {
         //查询文章
         return portalsArticleDao.selectAllArticle();
     }
+
 }

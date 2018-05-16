@@ -51,7 +51,7 @@
                     <div class="container">
                         <div class="row">
                             <div >
-                                 <!-- 超级个体-->
+                                 <!-- 关于我们-->
                                     <h2><b>${portalsCompanyInformation.portalsMotto}</b></h2>
                                     <p><b>${portalsCompanyInformation.portalsMotto}</b></p>
                             </div>
@@ -61,54 +61,27 @@
     </section><!--/#main-slider-->
 
 
-<!-- 栏目表 文章表  -->
-    <section id="our-team">
-        <div class="container">
-
-            <div class="section-header">
-                <!--公司文章栏目   描述该栏目有什么内容    栏目1 服务范围-->
-
-            <#list portalsColumn as pc>
-                <#if pc.columnPath == 1>
-                <h2 class="section-title wow fadeInDown">${pc.columnName}</h2>
-                <p class="wow fadeInDown">${pc.remark}</p>
-                </#if>
-            </#list>
-            </div>
-
-            <div class="row text-center">
-
-
-                <!-- 栏目id  1为服务范围 -->
-              <#list portalsArticle as pa>
-                  <#if pa.columnId == 1>
-                <div class="col-md-3 col-sm-6 col-xs-12" id="div1">
-                    <div class="team-member wow fadeInUp" data-wow-duration="400ms" data-wow-delay="0ms">
-                        <div class="team-img">
-                            <img class="img-responsive" src="${rc.contextPath}/${portalsCompanyInformation.logo}" alt="">
-                        </div>
-
-
-                            <div class="team-info">
-                                <strong>${pa.title}</strong><br>
-                                <p align="left"> <span style="font-size: 10px">
-                                    ${pa.content}
-                                </span></p>
-                            </div>
-                    </div>
-                </div>
-                  </#if>
-              </#list>
-
-
-                </div>
-            </div>
-
-
-
-
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title wow fadeInDown"> 关于我们的情况   title</h2>
+            <p class="wow fadeInDown">  关于我们的备注内容   备注信息   </p>
         </div>
-    </section><!--/#our-team-->
+        <div class="row FeatLayout">
+            <!--  我们的图片   about_me_img-->
+            <div class="col-md-5 Featimg"> <img src="${rc.contextPath}/images/features_img.png" alt="feature" class="img-responsive center-block"></div>
+            <div class="col-md-7">
+                <h2>  文章标题    </h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget risus vitae massa semper aliquam quis mattis quam adipiscing elit. Praesent eget risus vitae massa.</p>
+                <ul class="listarrow">
+                    <li><i class="fa fa-angle-double-right"></i>  文章内容 </li>
+                    <#--<li><i class="fa fa-angle-double-right"></i>Web Secutity</li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
 
     <!--    ======解决方案===项目案例======portals_column==========   2为解决方案-->
 

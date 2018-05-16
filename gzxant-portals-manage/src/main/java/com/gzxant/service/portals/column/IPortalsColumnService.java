@@ -3,6 +3,8 @@ package com.gzxant.service.portals.column;
 import com.gzxant.entity.portals.column.PortalsColumn;
 import com.gzxant.base.service.IBaseService;
 
+import java.util.List;
+
 /**
  * <p>
  * 栏目管理 服务类
@@ -13,5 +15,5 @@ import com.gzxant.base.service.IBaseService;
  */
 public interface IPortalsColumnService extends IBaseService<PortalsColumn> {
 
-    PortalsColumn selectAllColumns();
+    List<PortalsColumn> selectAllColumns();
 }

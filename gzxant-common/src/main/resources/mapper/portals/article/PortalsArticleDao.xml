@@ -13,10 +13,13 @@
 		<result column="allow_comment" property="allowComment" />
 		<result column="status" property="status" />
 		<result column="author" property="author" />
+		<result column="column_id" property="columnId" />
 	</resultMap>
 
-	<select id="selectAllArticle" resultType="com.gzxant.entity.portals.article.PortalsArticle">
-		SELECT  * FROM  portals_article
+	<select id="selectAllArticle"  resultType="com.gzxant.entity.portals.article.PortalsArticle">
+		select (select column_name from portals_column where id = a.column_id) as columnName, a.* from portals_article a ;
 	</select>
+
+
 
 </mapper>
