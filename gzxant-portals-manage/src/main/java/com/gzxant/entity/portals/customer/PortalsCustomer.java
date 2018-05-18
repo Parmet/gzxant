@@ -1,10 +1,10 @@
 package com.gzxant.entity.portals.customer;
 
-import java.io.Serializable;
-
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.gzxant.base.entity.DataEntity;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -19,7 +19,11 @@ public class PortalsCustomer extends DataEntity<PortalsCustomer> {
 
     private static final long serialVersionUID = 1L;
 
-    /**
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	/**
      * 客户名称
      */
 	@TableField("customer_name")

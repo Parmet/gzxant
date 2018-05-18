@@ -73,6 +73,13 @@ public class PortalsCompanyInformationController extends BaseController {
 	@PostMapping(value = "/insert")
 	@ResponseBody
 	public ReturnDTO create(PortalsCompanyInformation param) {
+
+		//非空判断  公司名称和公司地理位置不为空
+		if (param == null
+				|| StringUtils.isBlank(param.getName())
+				|| StringUtils.isBlank(param.getAddress())) {
+			return ReturnDTOUtil.paramError();
+		}
 		portalsCompanyInformationService.insert(param);
 		return ReturnDTOUtil.success();
 	}

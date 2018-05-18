@@ -19,7 +19,11 @@ public class PortalsColumn extends DataEntity<PortalsColumn> {
 
     private static final long serialVersionUID = 1L;
 
-    /**
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	/**
      * 栏目名称
      */
 	@TableField("column_name")

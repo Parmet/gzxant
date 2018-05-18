@@ -3,6 +3,8 @@ package com.gzxant.dao.portals.customer;
 import com.gzxant.entity.portals.customer.PortalsCustomer;
 import com.gzxant.base.dao.CrudDao;
 
+import java.util.List;
+
 /**
  * <p>
   * 客户管理 Mapper 接口
@@ -13,4 +15,5 @@ import com.gzxant.base.dao.CrudDao;
  */
 public interface PortalsCustomerDao extends CrudDao<PortalsCustomer> {
 
+    List<PortalsCustomer> selectAllCustomer();
 }

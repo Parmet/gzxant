@@ -15,11 +15,12 @@
                                value="${portalsAboutMe.aboutMeTitle}" required aria-required="true"/>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="col-sm-3 control-label">关于我们的内容<span class="required">*</span></label>
-                    <div class="col-sm-3">
-                    	<input type="text" class="form-control" name="aboutMeContent" placeholder="请输入关于我们的内容"
-                               value="${portalsAboutMe.aboutMeContent}" required aria-required="true"/>
+                    <div class="col-sm-9">
+                                    <textarea name="aboutMeContent" type="text" class="form-control"
+                                              placeholder="请输入关于我们的内容">${portalsAboutMe.aboutMeContent}</textarea>
                     </div>
                 </div>
 

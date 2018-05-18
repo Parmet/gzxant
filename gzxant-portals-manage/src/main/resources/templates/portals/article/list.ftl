@@ -63,31 +63,35 @@
             },
             {
                 field: 'title',
-                title: '标题'
+                title: '文章标题'
             },
             {
                 field: 'content',
-                title: '内容'
+                title: '文章内容'
             },
             {
                 field: 'type',
-                title: '类型'
+                title: '文章类型'
             },
             {
                 field: 'tags',
-                title: '标签'
+                title: '文章标签'
             },
             {
                 field: 'categories',
-                title: '分类'
+                title: '文章分类'
             },
             {
                 field: 'status',
-                title: '状态'
+                title: '文章状态'
             },
             {
                 field: 'author',
-                title: '作者'
+                title: '文章作者'
+            },
+            {
+                field: 'columnName',
+                title: '文章栏目'
             },
             {
                 title: '操作',

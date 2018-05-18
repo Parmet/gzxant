@@ -83,18 +83,6 @@
                 title: '公司地理位置'
             },
             {
-                field: 'customerName',
-                title: '公司客户名称'
-            },
-            {
-                field: 'customerLogo',
-                title: '客户的logo'
-            },
-            {
-                field: 'customerAddress',
-                title: '客户网站链接地址'
-            },
-            {
                 title: '操作',
                 field: 'id',
                 align: 'center',

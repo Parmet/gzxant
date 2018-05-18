@@ -19,7 +19,11 @@ public class PortalsArticle extends DataEntity<PortalsArticle> {
 
     private static final long serialVersionUID = 1L;
 
-    /**
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	/**
      * 最近修改人id
      */
 	@TableField("update_id")

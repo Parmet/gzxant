@@ -4,7 +4,6 @@ import com.gzxant.base.service.impl.BaseService;
 import com.gzxant.dao.portals.message.PortalsMessageDao;
 import com.gzxant.entity.portals.message.PortalsMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

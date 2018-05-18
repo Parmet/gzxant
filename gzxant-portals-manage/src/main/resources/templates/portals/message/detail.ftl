@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-12">
             <form class="form-horizontal form-bordered" id="gzxantForm">
-                <input type="hidden" name="id" value="${portalsMessage.id}" />
+                <input type="hidden" name="id" value="${portalsMessage.id}"/>
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">姓名<span class="required">*</span></label>
@@ -28,13 +28,15 @@
                     </div>
                 </div>
 
+
                 <div class="form-group">
                     <label class="col-sm-3 control-label">留言内容<span class="required">*</span></label>
-                    <div class="col-sm-3">
-                        <input type="text" class="form-control" name="messageContent" placeholder="请输入留言内容"
-                               value="${portalsMessage.messageContent}" required aria-required="true"/>
+                    <div class="col-sm-9">
+                                    <textarea name="messageContent" type="text" class="form-control"
+                                              placeholder="请输入官网文章内容">${portalsMessage.messageContent}</textarea>
                     </div>
                 </div>
+
 
 
             	<#if action != 'detail'>

@@ -2,28 +2,44 @@
     <div class="row">
         <div class="col-sm-12">
             <form class="form-horizontal form-bordered" id="gzxantForm">
-
+                <input type="hidden" name="id" value="${portalsArticles.id}" />
+                <input type="hidden" name="id" value="${portalsColumn.id}" />
                 <div class="form-group">
                     <label class="col-sm-3 control-label">官网文章标题<span class="required">*</span></label>
                     <div class="col-sm-3">
                     	<input type="text" class="form-control" name="title" placeholder="请输入官网文章标题"
-                               value="${portalsArticle.title}" required aria-required="true"/>
+                               value="${portalsArticles.title}" required aria-required="true"/>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">官网文章内容<span class="required">*</span></label>
-                    <div class="col-sm-3">
-                    	<input type="text" class="form-control" name="content" placeholder="请输入官网文章内容"
-                               value="${portalsArticle.content}" required aria-required="true"/>
+                    <div class="col-sm-9">
+                                    <textarea name="aboutMeContent" type="text" class="form-control"
+                                              placeholder="请输入官网文章内容">${portalsArticles.content}</textarea>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">栏目<span class="required">*</span></label>
+
+
+                    <div class="col-sm-3">
+                        <select name="columnId" class="form-control">
+                             <#list portalsColumn as pc>
+                                 <option value="${pc.id}">${pc.columnName}</option>
+                             </#list>
+                        </select>
+                    </div>
+
+                </div>
+
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">官网文章类型<span class="required">*</span></label>
                     <div class="col-sm-3">
                     	<input type="text" class="form-control" name="type" placeholder="请输入官网文章官网文章类型"
-                               value="${portalsArticle.type}" required aria-required="true"/>
+                               value="${portalsArticles.type}" required aria-required="true"/>
                     </div>
                 </div>
 

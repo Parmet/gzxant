@@ -17,4 +17,5 @@ public interface IPortalsArticleService extends IBaseService<PortalsArticle> {
 
     List<PortalsArticle> selectAllArticle();
 
+
 }

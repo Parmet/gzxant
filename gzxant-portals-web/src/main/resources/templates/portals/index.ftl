@@ -16,7 +16,7 @@
     <script src="${rc.contextPath}/js/html5shiv.js"></script>
     <script src="${rc.contextPath}/js/respond.min.js"></script>
     <![endif]-->       
-    <link rel="shortcut icon" href="${rc.contextPath}/img/ico/favicon.ico">
+    <link rel="shortcut icon" href="${rc.contextPath}/${portalsCompanyInformation.logo}">
 
     <style type="text/css">
 
@@ -33,15 +33,28 @@
         <nav id="main-nav" class="navbar navbar-default navbar-fixed-top" role="banner">
             <div class="container" >
 
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">
+                        <img src="${rc.contextPath}/${portalsCompanyInformation.logo}" alt="logo" height="90" width="90"></a>
+                </div>
+
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
                         <li class="scroll active"><a href="#home">蚂蚁首页</a></li>
-						<li class="scroll"><a href="#features">关于我们</a></li>
+						<li class="scroll"><a href="#features">服务范围</a></li>
                         <li class="scroll"><a href="#services">项目案例</a></li>
-                        <li class="scroll"><a href="#about">新闻资讯</a></li>
-                        <li class="scroll"><a href="#pricing">联系我们</a></li>
+                        <li class="scroll"><a href="#Pricing">客户管理</a></li>
+                        <li class="scroll"><a href="#our-team">新闻栏目</a></li>
+                        <li class="scroll"><a href="#contact-us">关于我们</a></li>
                     </ul>
                 </div>
+
             </div><!--/.container-->
         </nav><!--/nav-->
     </header><!--/header-->
@@ -62,7 +75,7 @@
 
 
 <!-- 栏目表 文章表  -->
-    <section id="our-team">
+    <section id="features">
         <div class="container">
 
             <div class="section-header">
@@ -104,15 +117,12 @@
                 </div>
             </div>
 
-
-
-
         </div>
     </section><!--/#our-team-->
 
-    <!--    ======解决方案===项目案例======portals_column==========   2为解决方案-->
 
-    <section id="our-team">
+    <!--    ======解决方案===项目案例======portals_column==========   2为解决方案-->
+    <section id="services">
         <div class="container">
             <div class="section-header">
             <#list portalsColumn as pc>
@@ -122,12 +132,9 @@
                 </#if>
             </#list>
             </div>
-			
-			 	
             <div class="row text-center">
-
             <#list portalsArticle as pa>
-                <#if pa.columnId == 1>
+                <#if pa.columnId == 2>
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="team-member wow fadeInUp" data-wow-duration="400ms" data-wow-delay="0ms">
                         <div class="team-img">
@@ -141,31 +148,66 @@
                 </div>
                 </#if>
             </#list>
-
             </div>
-
-
-
         </div>
     </section><!--/#our-team-->
 
 
+    <!--客户管理-->
+    <section id="Pricing" >
+        <div class="container">
+            <div class="section-header">
+                <!-- 客户管理   portals_customer  columnName:栏目标题   remark:栏目标题的描述-->
+        <#list portalsColumn as pc>
+            <#if pc.columnPath == 4>
+                <h2 class="section-title wow fadeInDown">${pc.columnName}</h2>
+                <p class="wow fadeInDown">${pc.remark}</p>
+            </#if>
+        </#list>
+            </div>
+
+          <div class="row text-center">
+
+            <#list portalsCustomer as pc>
+                    <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="0ms">
+                        <div class="media service-box">
+                            <div class="pull-left">
+                                <#--<i class="fa fa-futbol-o"></i>-->
+                                <img src="${rc.contextPath}/${pc.customerLogo}" height="80" width="80">
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">${pc.customerName}</h4><br>
+                                <p> </p>
+                                <a href="${pc.customerAddress}"><p>${pc.customerContent} </p></a>
+
+                            </div>
+                        </div>
+                    </div>
+            </#list>
+
+
+            </div><!--/.row-->
+        </div><!--/.container-->
+    </section><!--/#services-->
+
+
+
     <!-- portals_column    新闻栏目 -->
-    <section class="testimonial-area" id="testimonial">
+    <section id="our-team">
+    <section class="testimonial-area" id="news">
 			<div class="container">
 				<div class="section-header">
                 <#list portalsColumn as pc>
-                    <#if pc.columnPath == 1>
+                    <#if pc.columnPath == 3>
                         <h2 class="section-title wow fadeInDown">${pc.columnName}</h2>
                         <p class="wow fadeInDown">${pc.remark}</p>
                     </#if>
                 </#list>
             </div>
 
-
-
                 <div class="row">
             <#list portalsArticle as pa >
+                <#if pa.columnId == 3>
 					<div class="col-md-4">
                         <div class="single-testimonial animate_fade_in" style="opacity: 1; right: 0px;">
                             <div class="row">
@@ -184,14 +226,24 @@
 							</div>
 						</div>
 
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <img src="${rc.contextPath}/${portalsCompanyInformation.logo}" alt="client" width="80" height="80">
+                            </div>
+                            <div class="col-xs-9 half-gutter">
+                                <h5>John Bond</h5>
+                                <h6>Lorem Ipsuis simply</h6>
+                            </div>
+                        </div>
+
+
 					</div>
+                </#if>
             </#list>
 				</div>
-
-
-
 			</div>
 		</section>
+    </section>
 
     <section id="contact-us">
         <div class="container">
@@ -204,8 +256,7 @@
 
 
     <!-- portalsMessage  -->
-    <section id="contact">
-        
+    <section id="contact-us">
         <div class="container">
             <div class="container contact-info">
                 <div class="row">
@@ -224,7 +275,7 @@
                     <div class="col-sm-8 col-md-8">
                         <div class="contact-form">
                        
-                            <form id="main-contact-form" name="contact-form" method="post" action="/gzxant/customer/insert">
+                            <form id="main-contact-form" name="contact-form" method="post" action="/gzxant/save">
                                 <div class="form-group">
                                     <input type="text" name="name" class="form-control" placeholder="姓名" required>
                                 </div>

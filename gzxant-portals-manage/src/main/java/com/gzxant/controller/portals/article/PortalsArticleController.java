@@ -6,6 +6,7 @@ import com.gzxant.base.entity.ReturnDTO;
 import com.gzxant.base.vo.DataTable;
 import com.gzxant.entity.portals.article.PortalsArticle;
 import com.gzxant.service.portals.article.IPortalsArticleService;
+import com.gzxant.service.portals.column.IPortalsColumnService;
 import com.gzxant.util.PathUtils;
 import com.gzxant.util.ReturnDTOUtil;
 import com.gzxant.util.StringUtils;
@@ -31,6 +32,10 @@ public class PortalsArticleController extends BaseController {
 	@Autowired
 	private IPortalsArticleService portalsArticleService;
 
+	//栏目
+	@Autowired
+    private IPortalsColumnService portalsColumnService;
+
 	@ApiOperation(value = "进入官网文章内容列表界面", notes = "进入官网文章内容列表界面")
 	@GetMapping(value = "")
 	public String list(Model model) {
@@ -51,7 +56,10 @@ public class PortalsArticleController extends BaseController {
 			portalsArticle = portalsArticleService.selectById(id);
 		}
 
+
 		model.addAttribute("portalsArticles", portalsArticle);
+		//查询栏目
+		model.addAttribute("portalsColumn", portalsColumnService.selectAllColumns());
 		model.addAttribute("action", action);
 		return "/portals/article/detail";
 	}

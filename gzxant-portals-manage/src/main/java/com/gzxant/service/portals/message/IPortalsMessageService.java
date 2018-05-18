@@ -3,6 +3,8 @@ package com.gzxant.service.portals.message;
 import com.gzxant.entity.portals.message.PortalsMessage;
 import com.gzxant.base.service.IBaseService;
 
+import java.util.List;
+
 /**
  * <p>
  * 联系我们 服务类

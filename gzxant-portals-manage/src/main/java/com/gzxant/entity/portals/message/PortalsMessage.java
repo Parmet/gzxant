@@ -1,6 +1,5 @@
 package com.gzxant.entity.portals.message;
 
-import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.gzxant.base.entity.DataEntity;
 
@@ -19,7 +18,11 @@ public class PortalsMessage extends DataEntity<PortalsMessage> {
 
     private static final long serialVersionUID = 1L;
 
-    /**
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	/**
      * 姓名
      */
 	private String name;
@@ -38,7 +41,6 @@ public class PortalsMessage extends DataEntity<PortalsMessage> {
     /**
      * 留言内容
      */
-	@TableField("message_content")
 	private String messageContent;
 
 	public String getQq() {

@@ -3,6 +3,8 @@ package com.gzxant.dao.portals.message;
 import com.gzxant.base.dao.CrudDao;
 import com.gzxant.entity.portals.message.PortalsMessage;
 
+import java.util.List;
+
 /**
  * <p>
   * 联系我们 Mapper 接口
@@ -13,5 +15,5 @@ import com.gzxant.entity.portals.message.PortalsMessage;
  */
 public interface PortalsMessageDao extends CrudDao<PortalsMessage> {
 
-    PortalsMessage selectAllMessage();
+   PortalsMessage selectAllMessage();
 }

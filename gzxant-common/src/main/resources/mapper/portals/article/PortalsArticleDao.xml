@@ -20,6 +20,20 @@
 		select (select column_name from portals_column where id = a.column_id) as columnName, a.* from portals_article a ;
 	</select>
 
-
+	<select id="selectPage"  resultType="com.gzxant.entity.portals.article.PortalsArticle">
+		SELECT
+		a.*,
+		(select
+		column_name
+		from
+		portals_column
+		where
+		id = a.column_id) as columnName
+		FROM
+			portals_article as a
+		<where>
+			${ew.sqlSegment}
+		</where>
+	</select>
 
 </mapper>

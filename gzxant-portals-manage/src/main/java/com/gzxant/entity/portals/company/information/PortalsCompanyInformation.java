@@ -27,6 +27,10 @@ public class PortalsCompanyInformation extends DataEntity<PortalsCompanyInformat
      */
 	private String shuffling;
     /**
+     * 公司名称
+     */
+	private String name;
+    /**
      * 公司地理位置
      */
 	private String address;
@@ -38,6 +42,28 @@ public class PortalsCompanyInformation extends DataEntity<PortalsCompanyInformat
      * 公司地理座右铭内容
      */
 	private String mottoContent;
+
+	/**
+	 * 公司唯一标识
+	 * @return
+	 */
+	private String code;
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
@@ -92,6 +118,7 @@ public class PortalsCompanyInformation extends DataEntity<PortalsCompanyInformat
 				", address='" + address + '\'' +
 				", portalsMotto='" + portalsMotto + '\'' +
 				", mottoContent='" + mottoContent + '\'' +
+				", code='" + code + '\'' +
 				'}';
 	}
 

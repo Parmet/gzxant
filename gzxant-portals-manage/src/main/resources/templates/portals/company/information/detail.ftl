@@ -11,23 +11,11 @@
             	<input type="hidden" name="shuffling" value="/img/log9.png" />
                 </#if>
 
-                <#if portalsCompanyInformation.customerLogo == null>
-            	<input type="hidden" name="customerLogo" value="/img/log9.png" />
-                </#if>
-
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">公司官网电话<span class="required">*</span></label>
+                    <label class="col-sm-3 control-label">公司名称<span class="required">*</span></label>
                     <div class="col-sm-3">
-                    	<input type="text" class="form-control" name="phone" placeholder="请输入公司官网电话"
-                               value="${portalsCompanyInformation.phone}" required aria-required="true"/>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">公司官网邮箱<span class="required">*</span></label>
-                    <div class="col-sm-3">
-                    	<input type="text" class="form-control" name="email" placeholder="请输入公司官网邮箱"
-                               value="${portalsCompanyInformation.email}" required aria-required="true"/>
+                    	<input type="text" class="form-control" name="name" placeholder="请输入公司名称"
+                               value="${portalsCompanyInformation.name}" required aria-required="true"/>
                     </div>
                 </div>
 
@@ -158,15 +146,6 @@
                 </div>
 
 
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">公司官网qq联系方式<span class="required">*</span></label>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control" name="qq" placeholder="请输入公司官网qq联系方式"
-                                   value="${portalsCompanyInformation.qq}" required aria-required="true"/>
-                        </div>
-                    </div>
-
                     <div class="form-group">
                         <label class="col-sm-3 control-label">公司地理位置<span class="required">*</span></label>
                         <div class="col-sm-3">
@@ -175,85 +154,21 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">公司合作客户名称<span class="required">*</span></label>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control" name="customerName" placeholder="请输入公司合作客户名称"
-                                   value="${portalsCompanyInformation.customerName}" required aria-required="true"/>
-                        </div>
-                    </div>
-
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">公司合作客户logo</label>
+                    <label class="col-sm-3 control-label">公司座右铭标题<span class="required">*</span></label>
                     <div class="col-sm-3">
-                        <div id="localImag" style="margin-left:15px;">
-                            <div class="img_box" id="imgBox">
-                                <img id="imgshowdiv" style="width: 60px" src="${rc.contextPath}${portalsCompanyInformation.customerLogo}"
-                                     onerror="javascript:customerLogoErrimg()"  class="img_file img-rounded"/>
-                            </div>
-                        </div>
+                        <input type="text" class="form-control" name="portalsMotto" placeholder="请输入公司座右铭标题"
+                               value="${portalsCompanyInformation.portalsMotto}" required aria-required="true"/>
                     </div>
-                <#if action !='detail'>
-                    <script src="${rc.contextPath}/js/plugins/dropzone/dropzone.min.js"></script>
-                    <link href="${rc.contextPath}/css/plugins/dropzone/dropzone.css" rel="stylesheet">
-                    <div class="col-sm-4">
-                        <div id="customerLogoDropzone" class="dropzone"></div>
-                    </div>
-                    <script type="text/javascript">
-                        // --------------------------图片上传-------------------------------------------------- //
-                        Dropzone.autoDiscover = false;
-                        var customerLogoDropzone = new Dropzone("div#customerLogoDropzone", {
-                            url: "/file/upload/customerLogo",
-                            filesizeBase: 1024,//定义字节算法 默认1000
-                            maxFiles: 2,//最大文件数量
-                            maxFilesize: 100, //MB
-                            fallback: function () {
-                                layer.alert('暂不支持您的浏览器上传!');
-                            },
-                            uploadMultiple: false,
-                            addRemoveLinks: true,
-                            dictFileTooBig: '您的文件超过' + 100 + 'MB!',
-                            dictInvalidInputType: '不支持您上传的类型',
-                            dictMaxFilesExceeded: '您的文件超过1个!',
-                            init: function () {
-                                this.on('queuecomplete', function (files) {
-                                    // layer.alert('上传成功');
-                                });
-                                this.on('success', function (uploadimfo, result) {
-                                    console.info(result);
-                                    $("#photophotoCustomerLogo").val(result.message[0].s_url);
-                                    $("#imgshowdivCustomerLogo").attr('src', result.message[0].s_url);
-                                    layer.alert('上传成功');
-                                });
-                                this.on('error', function (a, errorMessage, result) {
-                                    if (!result) {
-                                        layer.alert(result.error || '上传失败');
-                                    }
-                                });
-                                this.on('maxfilesreached', function () {
-                                    this.removeAllFiles(true);
-                                    layer.alert('文件数量超出限制');
-                                });
-                                this.on('removedfile', function () {
-                                    $("#photoCustomerLogo").val("${portalsCompanyInformation.customerLogo}");
-                                    $("#imgshowdivCustomerLogo").attr('src', "${portalsCompanyInformation.customerLogo}");
-                                    layer.alert('删除成功');
-                                });
-
-                            }
-                        });
-                    </script>
-                </#if>
-
                 </div>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">公司合作客户网站地址<span class="required">*</span></label>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control" name="customerAddress" placeholder="请输入公司合作客户网站地址"
-                                   value="${portalsCompanyInformation.customerAddress}" required aria-required="true"/>
-                        </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">公司座右铭内容<span class="required">*</span></label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="mottoContent" placeholder="请输入公司座右铭内容"
+                               value="${portalsCompanyInformation.mottoContent}" required aria-required="true"/>
                     </div>
+                </div>
 
             	<#if action != 'detail'>
                 <div class="form-actions fluid">
