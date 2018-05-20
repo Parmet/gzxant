@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gzxant.dao.qualification.QualificationDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.gzxant.entity.qualification.Qualification">
+		<result column="title" property="title" />
+		<result column="instructions" property="instructions" />
+		<result column="name" property="name" />
+		<result column="phone" property="phone" />
+		<result column="enterprise" property="enterprise" />
+		<result column="card" property="card" />
+		<result column="email" property="email" />
+		<result column="brand_agent" property="brandAgent" />
+		<result column="provinces" property="provinces" />
+		<result column="code" property="code" />
+	</resultMap>
+
+
+	<select id="selectByCode" resultType="com.gzxant.entity.qualification.Qualification">
+
+		select * FROM qualification WHERE code = #{param}
+
+	</select>
+
+</mapper>

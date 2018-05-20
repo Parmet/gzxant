@@ -23,11 +23,11 @@
     </properties>
 
     <dependencies>
-    	<dependency>
+        <dependency>
             <groupId>org.sitemesh</groupId>
             <artifactId>sitemesh</artifactId>
         </dependency>
-    
+
         <dependency>
             <groupId>com.github.drtrang</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
@@ -43,7 +43,7 @@
             <groupId>com.gzxant</groupId>
             <artifactId>gzxant-log</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>com.gzxant</groupId>
             <artifactId>gzxant-sys</artifactId>
@@ -53,7 +53,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
 
     </dependencies>
 
