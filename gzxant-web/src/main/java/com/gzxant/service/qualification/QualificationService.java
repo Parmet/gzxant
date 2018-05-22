@@ -42,6 +42,11 @@ public class QualificationService extends BaseService<QualificationDao, Qualific
         return qualification;
     }
 
+    @Override
+    public Qualification selectByPhone(String phone) {
+        return baseMapper.selectByPhone(phone);
+    }
+
 
     //根据指定长度生成字母和数字的随机数
     //0~9的ASCII为48~57

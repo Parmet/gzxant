@@ -15,6 +15,16 @@
 
 
       <form class="form-horizontal form-bordered" id="gzxantForm">
+          <input type="hidden" name="id" value="${article.id}" />
+
+          <div class="form-group">
+              <label class="col-sm-3 control-label">标题<span class="required">*</span></label>
+              <div class="col-sm-3">
+                  <input type="text" class="form-control" name="name" placeholder="请输入标题"
+                         value="${article.name}" required aria-required="true" id="name"/>
+              </div>
+          </div>
+
       <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor" style="margin:0 50px">
           <div class="btn-group">
               <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b class="caret"></b></a>
@@ -67,18 +77,19 @@
           <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
       </div>
       <div id="editor" style="margin:0 50px" >
-          输入内容
+          ${article.articleContent}
       </div>
 
       <div class="form-actions fluid">
           <div class="col-sm-5">
-              <button type="button" onclick="saveForm()" class="btn btn-success btn-block m-t-25">提交</button>
+              <button type="button" onclick="saveContent()" class="btn btn-success btn-block m-t-25">提交</button>
           </div>
       </div>
 
       </form>
 
-      <script type="text/javascript" >
+
+<script type="text/javascript" >
           action = "${action}";
           function  cusFunction() {
               //console.info("提交之前，最后执行自定义的函数");
@@ -91,8 +102,11 @@
           /**
            * 提交表单
            */
-          function saveForm(form_id) {
-              cusFunction(); // 回调一个自定义方法，比如修改提交参数。每个form表单都必须定义
+          function saveContent(form_id) {
+              var content = $('#editor').cleanHtml();
+
+              var params1=  $('#name').val();
+
               var form;
               if (validate.isEmpty(form_id)) {
                   form = $('#' + form_id);
@@ -104,7 +118,7 @@
                   cache: true,
                   type: "POST",
                   url: url+action,
-                  data: form.serialize(),// 你的formid
+                  data: {articleContent : content,name : params1},// 你的formid
                   async: false,
                   dataType : "json",
                   error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -188,6 +202,6 @@
               xhr.send(form);
               return xhr.responseText;
           };
-      </script>
+</script>
 
 

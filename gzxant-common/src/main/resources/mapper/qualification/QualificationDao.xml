@@ -18,9 +18,13 @@
 
 
 	<select id="selectByCode" resultType="com.gzxant.entity.qualification.Qualification">
-
-		select * FROM qualification WHERE code = #{param}
-
+		select * FROM qualification WHERE code = #{code}
 	</select>
+	<select id="selectByPhone" resultType="com.gzxant.entity.qualification.Qualification">
+		select * FROM qualification WHERE phone = #{phone}
+	</select>
+
+
+
 
 </mapper>

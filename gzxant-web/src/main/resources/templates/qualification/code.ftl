@@ -59,7 +59,7 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-sm-12">
-            <form class="form-horizontal form-bordered" id="gzxantForm">
+            <form class="form-horizontal form-bordered" id="gzxantForm" method="get">
 
 
                 <div class="form-group">

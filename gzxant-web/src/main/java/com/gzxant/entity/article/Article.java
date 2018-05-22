@@ -1,9 +1,9 @@
 package com.gzxant.entity.article;
 
-import java.io.Serializable;
-
 import com.baomidou.mybatisplus.annotations.TableField;
-import com.gzxant.base.entity.BaseEntity;
+import com.gzxant.base.entity.DataEntity;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -13,7 +13,7 @@ import com.gzxant.base.entity.BaseEntity;
  * @author zt
  * @since 2018-05-22
  */
-public class Article extends BaseEntity<Article> {
+public class Article extends DataEntity<Article> {
 
     private static final long serialVersionUID = 1L;
 

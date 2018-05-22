@@ -16,4 +16,6 @@ public interface IQualificationService extends IBaseService<Qualification> {
     void qualification(Qualification param);
 
     Qualification selectByCode(String param);
+
+    Qualification selectByPhone(String param);
 }

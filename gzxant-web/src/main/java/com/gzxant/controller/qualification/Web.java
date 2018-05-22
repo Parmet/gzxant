@@ -24,6 +24,7 @@ public class Web {
     private IArticleService articleService;
 
 
+
 //用户填写认证信息并保存
     @ApiOperation(value = "进入资格认证列表界面", notes = "进入资格认证列表界面")
     @GetMapping(value = "")
@@ -38,12 +39,17 @@ public class Web {
     @ResponseBody
     public ReturnDTO create(Qualification param) {
         //非空判断  姓名,身份证号,邮箱,电话不能空
+        //不能重复提交
         if (param == null
                 || StringUtils.isBlank(param.getName())
                 || StringUtils.isBlank(param.getCard())
                 || StringUtils.isBlank(param.getEmail())
                 || StringUtils.isBlank(param.getPhone())) {
             return ReturnDTOUtil.paramError();
+        }
+        Qualification qualification = qualificationService.selectByPhone(param.getPhone());
+        if(qualification == null){
+            return ReturnDTOUtil.paramError("号码已认证");
         }
         qualificationService.insert(param);
         return ReturnDTOUtil.success();
@@ -52,9 +58,14 @@ public class Web {
 
     //富文本编辑
     @ApiOperation(value = "进入word", notes = "进入word")
-    @GetMapping(value = "/word")
-    public String select(Model model) {
-
+    @GetMapping(value = {"/{action}/{id}", "/{action}"})
+    public String detail(@PathVariable(name = "action") String action,
+                         @PathVariable(name = "id", required = false) String id, Model model) {
+        Article article = null;
+        if (StringUtils.isNumeric(id)) {
+            article = articleService.selectById(2L);
+        }
+        model.addAttribute("article", article);
         model.addAttribute("action","insert");
         return "/qualification/word";
     }
@@ -80,21 +91,34 @@ public class Web {
     @GetMapping(value = "/select")
     public String worde(Model model) {
 
-        model.addAttribute("action","save");
+        model.addAttribute("action","detail");
         return "/qualification/code";
     }
 
     @ApiOperation(value = "授权编码查询", notes = "授权编码查询")
-    @PostMapping(value = "/select/save")
+    @PostMapping(value = "/select/certification")
     @ResponseBody
-    public String save(String param) {
+    public ReturnDTO select(String param,Model model) {
         //非空判断  授权编码不能为空
         if (param == null
                 || StringUtils.isBlank(param)) {
-            return "没有该授权编码";
+            return ReturnDTOUtil.paramError("授权编码不能为空");
         }
-        qualificationService.selectByCode(param);
-        return param;
+        Qualification qualification = qualificationService.selectByCode(param);
+        model.addAttribute("qualification",qualification);
+        return ReturnDTOUtil.success();
+    }
+
+    @ApiOperation(value = "详情页", notes = "详情页")
+    @GetMapping(value = "/detail/{code}")
+    public String qualificationDetail(@PathVariable(name = "code") String code, Model model) {
+        if (code == null || StringUtils.isBlank(code)) {
+            model.addAttribute("msg", "授权编号有误");
+            return "/qualification/code";
+        }
+        Qualification qualification = qualificationService.selectByCode(code);
+        model.addAttribute("qualification",qualification);
+        return "/qualification/detail";
     }
 
 }

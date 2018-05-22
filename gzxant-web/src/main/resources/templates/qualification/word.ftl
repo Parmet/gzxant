@@ -20,7 +20,6 @@
   </head>
   <body>
 
-  //工具栏的定义
   <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
       <div class="btn-group">
           <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b class="caret"></b></a>
@@ -72,9 +71,9 @@
       </div>
       <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
   </div>
-  //文本输入区域
   <div id="editor">
-      输入内容&hellip;
+  ${article.articleContent}
+
   </div>
 
 

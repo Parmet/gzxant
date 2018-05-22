@@ -43,7 +43,7 @@ public class ArticleController extends BaseController {
 
         Article article = null;
 		if (StringUtils.isNumeric(id)) {
-			article = article.selectById(id);
+			article = articleService.selectById(id);
 		}
 		model.addAttribute("action", "insert");
 		model.addAttribute("article", article);
@@ -63,7 +63,7 @@ public class ArticleController extends BaseController {
 	}
 
 	@ApiOperation(value = "添加文章", notes = "添加文章")
-	@PostMapping(value = "/insert")
+	@PostMapping(value = "/add/insert")
 	@ResponseBody
 	public ReturnDTO create(Article param) {
 		//非空判断  文章名称,文章内容不为空

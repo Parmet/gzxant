@@ -14,6 +14,7 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface QualificationDao extends BaseDao<Qualification> {
 
-    Qualification selectByCode(@Param("param") String param);
+    Qualification selectByCode(@Param("code") String code);
 
+    Qualification selectByPhone(@Param("phone")String phone);
 }
