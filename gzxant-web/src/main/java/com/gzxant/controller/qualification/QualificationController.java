@@ -88,7 +88,7 @@ public class QualificationController extends BaseController {
 	//=================资格 认证  生成一个随机数,字母加数字,并保存到code中========================
 
 
-	@ApiOperation(value = "授权资格认证", notes = "授权资格认证")
+	@ApiOperation(value = "授权资格认证通过", notes = "授权资格认证通过")
 	@PostMapping(value = "/update")
 	@ResponseBody
 	public ReturnDTO update(Qualification param) {
@@ -97,9 +97,26 @@ public class QualificationController extends BaseController {
 				|| param.getId().intValue() < 0) {
 			return ReturnDTOUtil.paramError();
 		}
-		//qualificationService.updateById(param);
+		//1 为通过  0 为不通过
+		param.setState(1);
 		qualificationService.qualification(param);
+		return ReturnDTOUtil.success();
+	}
 
+
+	@ApiOperation(value = "授权资格认证不通过", notes = "授权资格认证不通过")
+	@PostMapping(value = "/not")
+	@ResponseBody
+	public ReturnDTO not(Qualification param) {
+		System.out.println(param.getId()+"===============================");
+		//非空判断
+		if (param == null || param.getId() == null
+				|| param.getId().intValue() < 0) {
+			return ReturnDTOUtil.paramError();
+		}
+		//1 为通过  0 为不通过
+		param.setState(0);
+		qualificationService.updateById(param);
 		return ReturnDTOUtil.success();
 	}
 

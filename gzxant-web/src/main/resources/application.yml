@@ -3,7 +3,7 @@ server:
   context-path: /gzxant/web
 spring:
   profiles:
-    active: local, db-local
+    active: dev, db-dev
   aop:
     proxy-target-class: true
   freemarker:

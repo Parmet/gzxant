@@ -58,7 +58,22 @@ public class Qualification extends DataEntity<Qualification> {
      * 授权编码
      */
 	private String code;
+	/**
+	 * 状态  1通过  0 不通过
+	 */
+	private int state;
 
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
 
 	public String getTitle() {
 		return title;

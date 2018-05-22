@@ -3,8 +3,6 @@
         <div class="col-sm-12">
             <form class="form-horizontal form-bordered" id="gzxantForm">
             	<input type="hidden" name="id" value="${qualification.id}" />
-
-
                 <div class="form-group">
                     <label class="col-sm-3 control-label">姓名<span class="required">*</span></label>
                     <div class="col-sm-3">
@@ -60,13 +58,20 @@
                                value="${qualification.provinces}" required aria-required="true"/>
                     </div>
                 </div>
-            	<#if qualification.code != null>
+
+                <#if qualification.code == null>
                 <div class="form-actions fluid">
-                    <div class="col-sm-12">
-                        <button type="button" onclick="saveForm()" class="btn btn-success btn-block m-t-25">授权</button>
+                    <div class="col-sm-5">
+                        <button type="button" onclick="saveForm()" class="btn btn-success btn-block m-t-25">通过</button>
                     </div>
                 </div>
-            	</#if>
+
+                    <div class="form-actions fluid">
+                        <div class="col-sm-5">
+                            <button type="button" onclick="notForm()" class="btn btn-success btn-block m-t-25">不通过</button>
+                        </div>
+                    </div>
+                </#if>
             </form>
 
 		</div>
@@ -75,6 +80,50 @@
 
 
 <script type="text/javascript">
+
+    /**
+     * 提交表单
+     */
+    function notForm(form_id) {
+        cusFunction(); // 回调一个自定义方法，比如修改提交参数。每个form表单都必须定义
+        var form;
+        if (validate.isEmpty(form_id)) {
+            form = $('#' + form_id);
+        } else {
+            form = $('#gzxantForm');
+        }
+
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: url+"not",
+            data: form.serialize(),// 你的formid
+            async: false,
+            dataType : "json",
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                parent.layer.alert(XMLHttpRequest.responseJSON.error);
+            },
+            beforeSend: function () {
+                start_request_load();
+            }, complete: function () {
+                stop_request_load();
+            },
+            success: function (data) {
+                if (data.code == 200) {
+                    parent.re_load();
+                    var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                    parent.layer.close(index);
+                    parent.layer.msg("操作成功");
+                } else {
+                    parent.layer.alert(data.error)
+                }
+
+            }
+        });
+    }
+
+
+
 	action = "${action}";
     function  cusFunction() {
         //console.info("提交之前，最后执行自定义的函数");

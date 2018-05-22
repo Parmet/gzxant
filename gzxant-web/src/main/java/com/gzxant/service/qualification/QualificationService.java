@@ -24,10 +24,15 @@ public class QualificationService extends BaseService<QualificationDao, Qualific
     @Override
     @Transactional(readOnly = false)
     public void qualification(Qualification param) {
-        //随机生成指定位数,字母加数字,加大小写
-        param.setCode(randomNumber(8));
+        //随机生成指定位数,字母加数字,加大小写   开头为大写N:然后随机生成6位
+        String sb="N";
+        //随机生成6位
+        int intFlag = (int)(Math.random() * 1000000);
+        sb +=intFlag;
+
+        param.setCode(sb);
         //保存认证人信息
-        baseMapper.insert(param);
+        baseMapper.updateById(param);
     }
 
     @Override
@@ -42,8 +47,9 @@ public class QualificationService extends BaseService<QualificationDao, Qualific
     //0~9的ASCII为48~57
     //A~Z的ASCII为65~90
     //a~z的ASCII为97~122
-    public  String randomNumber(int leng) {
+    public  static String randomNumber(int leng) {
         StringBuilder sb=new StringBuilder();
+        sb.append("N");
         Random rand=new Random();//随机用以下三个随机生成器
         Random randdata=new Random();
         int data=0;
@@ -57,17 +63,25 @@ public class QualificationService extends BaseService<QualificationDao, Qualific
                     data=randdata.nextInt(10);//仅仅会生成0~9
                     sb.append(data);
                     break;
-                case 1:
-                    data=randdata.nextInt(26)+65;//保证只会产生65~90之间的整数
-                    sb.append((char)data);
-                    break;
-                case 2:
-                    data=randdata.nextInt(26)+97;//保证只会产生97~122之间的整数
-                    sb.append((char)data);
-                    break;
+//                case 1:
+//                    data=randdata.nextInt(26)+65;//保证只会产生65~90之间的整数
+//                    sb.append((char)data);
+//                    break;
+//                case 2:
+//                    data=randdata.nextInt(26)+97;//保证只会产生97~122之间的整数
+//                    sb.append((char)data);
+//                    break;
             }
         }
         String result=sb.toString();
         return result;
+    }
+
+
+    public static void main(String[] args) {
+        String sb="N";
+        int intFlag = (int)(Math.random() * 1000000);
+        sb +=intFlag;
+        System.out.println(sb);
     }
 }
