@@ -91,7 +91,7 @@
 		toolbar: {
 			id: "goodsToolbar",
 			auto: true,
-			exclude: []
+			exclude_btn: []
 		},
 		data: {
     		columns : getcolumns()

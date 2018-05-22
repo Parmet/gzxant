@@ -55,9 +55,8 @@
         <module>gzxant-web</module>
 
         <!-- 食品安全检测项目模块  port:8082 -->
-        <module>gzxant-food-safety</module>
-        <module>gzxant-food-safety-web</module>
-        <module>gzxant-food-safety-webback</module>
+        <module>gzxant-equipment</module>
+        <module>gzxant-equipment-manage</module>
 
         <!-- 商城模块  port:8083 -->
         <module>gzxant-shop</module>
@@ -196,6 +195,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
+        
+        <!-- 热部署模块 -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-devtools</artifactId>
+		    <optional>true</optional> <!-- 这个需要为 true 热部署才有效 -->
+		</dependency>
     </dependencies>
 
 
@@ -322,19 +328,13 @@
 
             <dependency>
                 <groupId>com.gzxant</groupId>
-                <artifactId>gzxant-food-safety</artifactId>
+                <artifactId>gzxant-equipment</artifactId>
                 <version>${gzxant.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.gzxant</groupId>
-                <artifactId>gzxant-food-safety-web</artifactId>
-                <version>${gzxant.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.gzxant</groupId>
-                <artifactId>gzxant-food-safety-webback</artifactId>
+                <artifactId>gzxant-equipment-manage</artifactId>
                 <version>${gzxant.version}</version>
             </dependency>
 

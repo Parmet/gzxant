@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>gzxant-wx-applet</artifactId>
+    <artifactId>gzxant-wx-api</artifactId>
 
     <dependencies>
         <dependency>

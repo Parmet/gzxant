@@ -65,8 +65,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/heapdump/**","anon");
         filterChainDefinitionMap.put("/loggers/**","anon");
         filterChainDefinitionMap.put("/auditevents/**","anon");
-
-
+        
         filterChainDefinitionMap.put("/layouts/**","anon");
         filterChainDefinitionMap.put("/attach/**","anon");
 

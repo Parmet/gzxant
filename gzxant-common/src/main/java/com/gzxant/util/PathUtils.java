@@ -22,19 +22,20 @@ public class PathUtils {
 		String classPath="",rootPath  = "";
 		try {
 			//防止有空格,%20等的出现
-			classPath = URLDecoder.decode(PathUtils.class.getClassLoader().getResource("/").getPath(),"utf-8");
+			classPath = URLDecoder.decode(PathUtils.class.getClassLoader().getResource("").getPath(),"utf-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
+		
 		if(!"".equals(classPath)){
 			//windows下
 			if("\\".equals(File.separator)){
-				rootPath  = classPath.substring(1,classPath.indexOf("/WEB-INF/classes"));
+				rootPath  = classPath.substring(1,classPath.indexOf("/target/classes"));
 				rootPath = rootPath.replace("/", "\\");
 			}
 			//linux下
 			if("/".equals(File.separator)){
-				rootPath  = classPath.substring(0,classPath.indexOf("/WEB-INF/classes"));
+				rootPath  = classPath.substring(0,classPath.indexOf("/target/classes"));
 				rootPath = rootPath.replace("\\", "/");
 			}
 		}
