@@ -34,7 +34,7 @@ public class QualificationController extends BaseController {
 	@ApiOperation(value = "进入资格认证列表界面", notes = "进入资格认证列表界面")
 	@GetMapping(value = "")
 	public String list(Model model) {
-		return "/qualification/list";
+		return "/qualification/manage/list";
 	}
 
 	@ApiOperation(value = "进入资格认证编辑界面", notes = "进入资格认证编辑界面")
@@ -43,7 +43,7 @@ public class QualificationController extends BaseController {
 						 @PathVariable(name = "id", required = false) String id, Model model) {
 		if (!PathUtils.checkDetailPath(action, id)) {
 			model.addAttribute("msg", "未识别参数");
-			return "/qualification/list";
+			return "/qualification/manage/list";
 		}
 
 		Qualification qualification = null;
@@ -52,7 +52,7 @@ public class QualificationController extends BaseController {
 		}
 		model.addAttribute("qualification", qualification);
 		model.addAttribute("action", action);
-		return "/qualification/detail";
+		return "/qualification/manage/detail";
 	}
 
 	@ApiOperation(value = "获取资格认证列表数据", notes = "获取资格认证列表数据:使用约定的DataTable")
@@ -64,6 +64,7 @@ public class QualificationController extends BaseController {
 				|| dt.getPageSize() < 0) {
 			dt = new DataTable<>();
 		}
+		
 		return qualificationService.pageSearch(dt);
 	}
 
@@ -93,12 +94,11 @@ public class QualificationController extends BaseController {
 	@ResponseBody
 	public ReturnDTO update(Qualification param) {
 		//非空判断
-		if (param == null || param.getId() == null
-				|| param.getId().intValue() < 0) {
+		if (param == null || param.getId() == null) {
 			return ReturnDTOUtil.paramError();
 		}
 		//1 为通过  0 为不通过
-		param.setState(1);
+		param.setState("Y");
 		qualificationService.qualification(param);
 		return ReturnDTOUtil.success();
 	}
@@ -108,20 +108,15 @@ public class QualificationController extends BaseController {
 	@PostMapping(value = "/not")
 	@ResponseBody
 	public ReturnDTO not(Qualification param) {
-		System.out.println(param.getId()+"===============================");
 		//非空判断
-		if (param == null || param.getId() == null
-				|| param.getId().intValue() < 0) {
+		if (param == null || param.getId() == null) {
 			return ReturnDTOUtil.paramError();
 		}
 		//1 为通过  0 为不通过
-		param.setState(0);
+		param.setState("N");
 		qualificationService.updateById(param);
 		return ReturnDTOUtil.success();
 	}
-
-
-
 
 	@SLog("批量删除资格认证")
 	@ApiOperation(value = "批量删除资格认证", notes = "批量删除资格认证")
@@ -131,8 +126,12 @@ public class QualificationController extends BaseController {
 		if (ids == null || ids.isEmpty()) {
 			return ReturnDTOUtil.paramError();
 		}
-		boolean success = qualificationService.deleteBatchIds(ids);
-		if (success) {
+		List<Qualification> datas = qualificationService.selectBatchIds(ids);
+		for (Qualification data : datas) {
+			data.setDelFlag("N");
+		}
+		
+		if (qualificationService.updateAllColumnBatchById(datas)) {
 			return ReturnDTOUtil.success();
 		}
 		return ReturnDTOUtil.fail();

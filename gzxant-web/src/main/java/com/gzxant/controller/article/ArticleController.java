@@ -45,9 +45,9 @@ public class ArticleController extends BaseController {
 		if (StringUtils.isNumeric(id)) {
 			article = articleService.selectById(id);
 		}
-		model.addAttribute("action", "insert");
+		model.addAttribute("action", action);
 		model.addAttribute("article", article);
-		return "/article/detail";
+		return "/article/" + action;
 	}
 
 	@ApiOperation(value = "获取文章列表数据", notes = "获取文章列表数据:使用约定的DataTable")
@@ -63,7 +63,7 @@ public class ArticleController extends BaseController {
 	}
 
 	@ApiOperation(value = "添加文章", notes = "添加文章")
-	@PostMapping(value = "/add/insert")
+	@PostMapping(value = "/add")
 	@ResponseBody
 	public ReturnDTO create(Article param) {
 		//非空判断  文章名称,文章内容不为空
@@ -72,6 +72,7 @@ public class ArticleController extends BaseController {
 				|| StringUtils.isBlank(param.getArticleContent())) {
 			return ReturnDTOUtil.paramError();
 		}
+		
 		articleService.insert(param);
 		return ReturnDTOUtil.success();
 	}
@@ -85,6 +86,7 @@ public class ArticleController extends BaseController {
 				|| param.getId().intValue() < 0) {
 			return ReturnDTOUtil.paramError();
 		}
+		
 		articleService.updateById(param);
 		return ReturnDTOUtil.success();
 	}

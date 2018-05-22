@@ -70,7 +70,7 @@ public class AuthRealm extends AuthorizingRealm {
                     sysUser.getPassword().substring(16), ByteSource.Util.bytes(salt),
                     getName());
         } else {
-            logger.info(sysUser.getName()+"登录失败");
+            logger.info(loginName+"登录失败");
             throw new UnknownAccountException();
         }
     }

@@ -1,12 +1,14 @@
 package com.gzxant.service.qualification;
 
-import com.gzxant.base.service.impl.BaseService;
-import com.gzxant.dao.qualification.QualificationDao;
-import com.gzxant.entity.qualification.Qualification;
+import java.util.Random;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Random;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.gzxant.base.service.impl.BaseService;
+import com.gzxant.dao.qualification.QualificationDao;
+import com.gzxant.entity.qualification.Qualification;
 
 /**
  * <p>
@@ -24,12 +26,22 @@ public class QualificationService extends BaseService<QualificationDao, Qualific
     @Override
     @Transactional(readOnly = false)
     public void qualification(Qualification param) {
-        //随机生成指定位数,字母加数字,加大小写   开头为大写N:然后随机生成6位
+        // 1. 前缀
         String sb="N";
-        //随机生成6位
-        int intFlag = (int)(Math.random() * 1000000);
-        sb +=intFlag;
-
+        
+        // 2. 从609545开始自增，数据库第一条数据为N609545
+        Long start = 123L;
+        
+        // 3. 去数据库中已通过数据的数量
+        EntityWrapper<Qualification> ew = new EntityWrapper<>();
+        ew.setEntity(new Qualification());
+        ew.where("state='Y'");
+        Integer count = this.baseMapper.selectCount(ew);
+        if (count == null) {
+        	count = 0;
+        }
+        
+        sb = sb + String.valueOf(start.longValue() + count.longValue());
         param.setCode(sb);
         //保存认证人信息
         baseMapper.updateById(param);

@@ -59,19 +59,19 @@ public class Qualification extends DataEntity<Qualification> {
      */
 	private String code;
 	/**
-	 * 状态  1通过  0 不通过
+	 * 状态  Y 通过, N 不通过, 
 	 */
-	private int state;
+	private String state;
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
 	}
 
-	public int getState() {
+	public String getState() {
 		return state;
 	}
 
-	public void setState(int state) {
+	public void setState(String state) {
 		this.state = state;
 	}
 

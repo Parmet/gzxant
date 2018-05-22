@@ -59,7 +59,7 @@
                     </div>
                 </div>
 
-                <#if qualification.code == null>
+                <#if qualification.state == null>
                 <div class="form-actions fluid">
                     <div class="col-sm-5">
                         <button type="button" onclick="saveForm()" class="btn btn-success btn-block m-t-25">通过</button>
@@ -69,6 +69,12 @@
                     <div class="form-actions fluid">
                         <div class="col-sm-5">
                             <button type="button" onclick="notForm()" class="btn btn-success btn-block m-t-25">不通过</button>
+                        </div>
+                    </div>
+                <#else>
+                <div class="form-actions fluid">
+                        <div class="col-sm-5">
+                            <button type="button" onclick="back()" class="btn btn-success btn-block m-t-25">返回</button>
                         </div>
                     </div>
                 </#if>
@@ -81,6 +87,10 @@
 
 <script type="text/javascript">
 
+	function back() {
+		window.location.reload();
+	}
+	
     /**
      * 提交表单
      */
