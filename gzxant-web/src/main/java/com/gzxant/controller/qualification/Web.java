@@ -50,10 +50,6 @@ public class Web {
     }
 
 
-
-
-
-
     //富文本编辑
     @ApiOperation(value = "进入word", notes = "进入word")
     @GetMapping(value = "/word")

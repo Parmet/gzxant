@@ -45,7 +45,7 @@ public class ArticleController extends BaseController {
 		if (StringUtils.isNumeric(id)) {
 			article = article.selectById(id);
 		}
-		model.addAttribute("action", action);
+		model.addAttribute("action", "insert");
 		model.addAttribute("article", article);
 		return "/article/detail";
 	}
