@@ -37,7 +37,7 @@
 
 <style type="text/css">
 .code-content {
-	background-color: brown;
+	background-color: #ac5537;
 	padding: 20px;
 	border-radius: 10px;
 }
