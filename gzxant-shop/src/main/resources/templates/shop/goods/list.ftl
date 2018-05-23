@@ -91,11 +91,12 @@
 		toolbar: {
 			id: "goodsToolbar",
 			auto: true,
-			exclude: []
 		},
-		data: {
-    		columns : getcolumns()
-    	}
+		table : {
+			data: {
+	    		columns : getcolumns()
+	    	}
+		}
 	});
 
     var form = $('#categoryForm'), id = 0, pid = 0, text;
