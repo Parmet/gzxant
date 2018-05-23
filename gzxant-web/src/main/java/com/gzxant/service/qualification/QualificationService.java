@@ -27,10 +27,10 @@ public class QualificationService extends BaseService<QualificationDao, Qualific
     @Transactional(readOnly = false)
     public void qualification(Qualification param) {
         // 1. 前缀
-        String sb="N";
+        String sb="GZZJ";
         
-        // 2. 从609545开始自增，数据库第一条数据为N609545
-        Long start = 123L;
+        // 2. 从37682开始自增，数据库第一条数据为GZZJ37682
+        Long start = 37682L;
         
         // 3. 去数据库中已通过数据的数量
         EntityWrapper<Qualification> ew = new EntityWrapper<>();
