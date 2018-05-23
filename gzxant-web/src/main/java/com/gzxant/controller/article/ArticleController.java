@@ -40,14 +40,20 @@ public class ArticleController extends BaseController {
 	@GetMapping(value = {"/{action}/{id}", "/{action}"})
 	public String detail(@PathVariable(name = "action") String action,
 						 @PathVariable(name = "id", required = false) String id, Model model) {
-
+       if (!action.equals("add")
+			   && !action.equals("update")
+			   && !action.equals("detail")
+			   && !action.equals("add")){
+			return "404";
+	   }
         Article article = null;
 		if (StringUtils.isNumeric(id)) {
 			article = articleService.selectById(id);
 		}
+
 		model.addAttribute("action", action);
 		model.addAttribute("article", article);
-		return "/article/" + action;
+		return "/article/"+ action;
 	}
 
 	@ApiOperation(value = "获取文章列表数据", notes = "获取文章列表数据:使用约定的DataTable")

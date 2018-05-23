@@ -1,16 +1,5 @@
 package com.gzxant.controller.qualification;
 
-import java.util.Date;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.gzxant.base.entity.ReturnDTO;
 import com.gzxant.entity.article.Article;
@@ -19,8 +8,13 @@ import com.gzxant.service.article.IArticleService;
 import com.gzxant.service.qualification.IQualificationService;
 import com.gzxant.util.ReturnDTOUtil;
 import com.gzxant.util.StringUtils;
-
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 
 @Controller
 @RequestMapping("")
@@ -87,9 +81,7 @@ public class Web {
     public String wordDetail(@PathVariable(name = "action") String action,
                          @PathVariable(name = "id", required = false) String id, Model model) {
         Article article = null;
-        if (StringUtils.isNumeric(id)) {
             article = articleService.selectById(2L);
-        }
         model.addAttribute("article", article);
         model.addAttribute("action","insert");
         return "/qualification/web/word";

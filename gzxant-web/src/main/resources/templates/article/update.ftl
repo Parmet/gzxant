@@ -67,7 +67,7 @@
           <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
       </div>
       <div id="editor" style="margin:0 50px" >
-          输入内容
+          ${article.articleContent}
       </div>
 
       <div class="form-actions fluid">

@@ -13,9 +13,9 @@
 <div class="row">
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
 		<input type="text" class="form-control" name="name" id="name"
-			placeholder="请输入标题" required aria-required="true" value="${qualification.name}" />
+			placeholder="请输入标题" required aria-required="true" value="${article.name}" />
 	</div>
-</div>
+</div id="editor" style="margin:0 50px">
       	${article.articleContent}
 </div>
 
@@ -29,7 +29,9 @@
 <script src="http://cdn.bootcss.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
 <script src="${rc.contextPath}/wysiwyg/bootstrap-wysiwyg.js"></script>
 <script>
-
+    $(function () {
+        $('#editor').wysiwyg();
+    })
 function back() {
 	window.history.back();
 }

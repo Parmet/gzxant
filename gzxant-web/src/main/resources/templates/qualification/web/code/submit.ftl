@@ -45,6 +45,11 @@
 .form-content label {
 	color: white;
 }
+.align-center{
+    margin:0 auto; /* 居中 这个是必须的，，其它的属性非必须 */
+    width:500px; /* 给个宽度 顶到浏览器的两边就看不出居中效果了 */
+    text-align:center; /* 文字等内容居中 */
+}
 </style>
 </head>
 
@@ -54,7 +59,7 @@
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
 				<p style="font-size: 12px;">
-					<b>说明：</b><span style="color:darkgray;">本页面为藏灸文化学院培训文化培训过的企业，并且取得毕业合格证书，由广州藏医文化研究有限公司亲自颁发授权证书为“藏灸技术”治疗服务中心的企业认领资料审核页面</span>
+                    <b>说明：</b><span><font color="#999999"> 本页面为藏灸文化学院培训文化培训过的企业，并且取得毕业合格证书，由广州藏医文化研究有限公司亲自颁发授权证书为“藏灸技术”治疗服务中心的企业认领资料审核页面</font></span>
 				</p>
 			</div>
 		</div>
@@ -106,9 +111,9 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-actions fluid">
+				<div class="form-actions fluid" style="margin-top:40px;">
 					<div class="col-sm-12">
-						<button type="button" onclick="submitCode();" class="btn btn-info btn-block">提交</button>
+						<button type="button" onclick="submitCode();" class="btn btn-info btn-block align-center" style="width:140px;height:40px;">提交</button>
 					</div>
 				</div>
 			</div>
