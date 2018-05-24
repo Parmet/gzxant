@@ -1,9 +1,10 @@
 package com.gzxant.entity.article;
 
+import java.io.Serializable;
+import java.util.Date;
+
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.gzxant.base.entity.DataEntity;
-
-import java.io.Serializable;
 
 /**
  * <p>
@@ -26,6 +27,11 @@ public class Article extends DataEntity<Article> {
      * 文章名称
      */
 	private String name;
+	
+	private String state;
+	
+	@TableField("push_time")
+	private Date pushTime;
 
 
 	public String getArticleContent() {
@@ -42,6 +48,22 @@ public class Article extends DataEntity<Article> {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public Date getPushTime() {
+		return pushTime;
+	}
+
+	public void setPushTime(Date pushTime) {
+		this.pushTime = pushTime;
 	}
 
 	@Override

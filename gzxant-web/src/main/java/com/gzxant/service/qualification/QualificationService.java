@@ -94,11 +94,4 @@ public class QualificationService extends BaseService<QualificationDao, Qualific
         return result;
     }
 
-
-    public static void main(String[] args) {
-        String sb="N";
-        int intFlag = (int)(Math.random() * 1000000);
-        sb +=intFlag;
-        System.out.println(sb);
-    }
 }

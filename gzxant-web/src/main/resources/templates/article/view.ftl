@@ -9,29 +9,24 @@
       <script src="${rc.contextPath}/js/bootstrap.min.js"></script>
       <script src="${rc.contextPath}/wysiwyg/bootstrap-wysiwyg.js"></script>
       <script src="${rc.contextPath}/wysiwyg/external/google-code-prettify/prettify.js"></script>
-<div class="container">
-<div class="row">
-	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-		<input type="text" class="form-control" name="name" id="name"
-			placeholder="请输入标题" required aria-required="true" value="${article.name}" />
+	<div id="editor" style="margin:30px 30px">
+	      	${article.articleContent}
 	</div>
-</div id="editor" style="margin:0 50px">
-      	${article.articleContent}
-</div>
 
 <div class="container-fluid">
-	<div class="col-sm-8">
-	</div>
-    <div class="col-sm-4">
-    	<button type="button" onclick="back()" class="btn btn-info m-t-25">返回</button>
+	<div class="col-sm-5"></div>
+    <div class="col-sm-2">
+    	<button type="button" onclick="back()" class="btn btn-info" style="margin-top:20px">返回</button>
     </div>
+    <div class="col-sm-5"></div>
 </div>
 <script src="http://cdn.bootcss.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
 <script src="${rc.contextPath}/wysiwyg/bootstrap-wysiwyg.js"></script>
 <script>
     $(function () {
-        $('#editor').wysiwyg();
-    })
+        //$('#editor').wysiwyg();
+    });
+    
 function back() {
 	window.history.back();
 }

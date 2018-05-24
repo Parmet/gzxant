@@ -24,9 +24,9 @@
           <div class="btn-group">
               <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="icon-text-height"></i>&nbsp;<b class="caret"></b></a>
               <ul class="dropdown-menu">
-                  <li><a data-edit="fontSize 5"><font size="5">Huge</font></a></li>
-                  <li><a data-edit="fontSize 3"><font size="3">Normal</font></a></li>
-                  <li><a data-edit="fontSize 1"><font size="1">Small</font></a></li>
+                  <li><a data-edit="fontSize 5"><font size="5">一级标题</font></a></li>
+                  <li><a data-edit="fontSize 3"><font size="3">二级标题</font></a></li>
+                  <li><a data-edit="fontSize 1"><font size="1">正文</font></a></li>
               </ul>
           </div>
           <div class="btn-group">

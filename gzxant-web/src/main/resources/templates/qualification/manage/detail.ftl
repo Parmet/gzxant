@@ -60,23 +60,32 @@
                 </div>
 
                 <#if qualification.state == null>
-                <div class="form-actions fluid">
-                    <div class="col-sm-5">
-                        <button type="button" onclick="saveForm()" class="btn btn-success btn-block m-t-25">通过</button>
-                    </div>
-                </div>
-
-                    <div class="form-actions fluid">
-                        <div class="col-sm-5">
+	                <div class="form-actions fluid">
+	                    <div class="col-sm-4">
+	                        <button type="button" onclick="saveForm()" class="btn btn-success btn-block m-t-25">通过</button>
+	                    </div>
+                        <div class="col-sm-4">
                             <button type="button" onclick="notForm()" class="btn btn-success btn-block m-t-25">不通过</button>
                         </div>
-                    </div>
-                <#else>
-                <div class="form-actions fluid">
-                        <div class="col-sm-5">
+                        <div class="col-sm-4">
                             <button type="button" onclick="back()" class="btn btn-success btn-block m-t-25">返回</button>
                         </div>
                     </div>
+                <#elseif qualification.state == 'N'>
+               		<div class="form-actions fluid">
+	                    <div class="col-sm-6">
+	                        <button type="button" onclick="saveForm()" class="btn btn-success btn-block m-t-25">审核通过</button>
+	                    </div>
+                        <div class="col-sm-6">
+                            <button type="button" onclick="back()" class="btn btn-success btn-block m-t-25">返回</button>
+                        </div>
+	                </div>
+                <#else>
+                	<div class="form-actions fluid">
+                        <div class="col-sm-12">
+                            <button type="button" onclick="back()" class="btn btn-success btn-block m-t-25">返回</button>
+                        </div>
+	                </div>
                 </#if>
             </form>
 

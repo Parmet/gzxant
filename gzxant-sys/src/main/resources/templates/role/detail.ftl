@@ -59,7 +59,7 @@
                     <#if action !='detail'>
                         <div class="form-actions fluid">
                             <div class="col-md-offset-3 col-md-9">
-                                <button type="submit" class="btn-green">保存</button>
+                                <button type="submit" class="btn btn-green">保存</button>
                             </div>
                         </div>
                     </#if>

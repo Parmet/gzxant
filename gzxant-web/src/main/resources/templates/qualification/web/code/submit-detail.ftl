@@ -48,13 +48,13 @@
 </style>
 </head>
 
-<body>
+<body style="background-color: #f0f0f0">
 	<div class="container-fluid"
 		style="background-color: aliceblue; padding: 10px;">
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
 				<p style="font-size: 12px;">
-					<b>说明：</b><span style="color:darkgray;">本页面为藏灸文化学院培训文化培训过的企业，并且取得毕业合格证书，由广州藏医文化研究有限公司亲自颁发授权证书为“藏灸技术”治疗服务中心的企业认领资料审核页面</span>
+					<b>说明：</b><span style="color:darkgray;">本页面为藏灸文化学院培训文化培训过的企业，并且取得毕业合格证书，由广州藏医文化研究有限公司亲自颁发授权证书为“藏灸技术”治疗服务中心的企业认领资料</span>
 				</p>
 			</div>
 		</div>
@@ -67,7 +67,7 @@
 
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
 					<input type="text" class="form-control" name="phone"
-						placeholder="请输入电话" required aria-required="true" value="${qualification.phone}" readonly="readonly"/>
+						placeholder="请输入电话" required aria-required="true" value="${qualification.phone?substring(0, 7)}xxxx" readonly="readonly"/>
 				</div>
 			</div>
 
@@ -79,7 +79,7 @@
 
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
 					<input type="text" class="form-control" name="card"
-						placeholder="请输入身份证号码" required aria-required="true" value="${qualification.card}" readonly="readonly"/>
+						placeholder="请输入身份证号码" required aria-required="true" value="${qualification.card?substring(0, 7)}xxxxxxxxxxx" readonly="readonly"/>
 				</div>
 			</div>
 

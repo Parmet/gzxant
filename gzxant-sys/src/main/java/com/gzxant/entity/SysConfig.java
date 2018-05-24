@@ -1,35 +1,54 @@
 package com.gzxant.entity;
 
+import java.io.Serializable;
+
 import org.hibernate.validator.constraints.Length;
 
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gzxant.base.entity.TreeEntity;
 
 /**
- * Created by chen on 2017/4/10.
  * <p>
- * Email 122741482@qq.com
- * <p>
- * Describe: 系统配置实体类
+ * 系统配置sys_dict
+ * </p>
+ *
+ * @author ycxiao
+ * @since 2018-05-14
  */
 @TableName("sys_config")
-public class SysConfig {
+public class SysConfig extends TreeEntity<SysConfig> {
 
-    /**
-     * 删除标记（Y：正常；N：删除；A：审核；）
-     */
-    private String delFlag;
-    /**
-     * 备注
-     */
-    private String remark;
-    /**
-     * int(11) NULL排序
-     */
-    private Integer sort;
+    private static final long serialVersionUID = 1L;
 
     private String jkey; //varchar(64) NULLkey
     private String jvalue; //varchar(1000) NULLvalue
+    private String value; //varchar(1000) NULLvalue
+
+    private String type;
+
+    @TableField(exist = false)
+    protected String name;
+
+    @Override
+    public String getName() {
+        return name;
+    }
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * 是否有效 Y 表示是   N表示否
+     */
+    private String invalid;
+
+    /**
+     * varchar(64)NULL所在公司id
+     */
+    @TableField(value = "sys_company_id")
+    private String sysCompanyId;
 
     @Length(min = 0, max = 64, message = "key长度必须介于 1 和 64 之间")
     public String getJkey() {
@@ -49,35 +68,58 @@ public class SysConfig {
         this.jvalue = jvalue;
     }
 
-    @Length(min = 0, max = 500, message = "备注信息长度必须介于 1 和 500 之间")
-    public String getRemark() {
-        return remark;
+    @Length(min = 0, max = 64, message = "公司id长度必须介于 1 和 64 之间")
+    public String getSysCompanyId() {
+        return sysCompanyId;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-
-    @JsonIgnore
-    @Length(min = 1, max = 1)
-    public String getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(String delFlag) {
-        this.delFlag = delFlag;
+    public void setSysCompanyId(String sysCompanyId) {
+        this.sysCompanyId = sysCompanyId;
     }
 
 
-    @Length(min = 0, max = 11, message = "排序长度必须介于 1 和 11 之间")
-    public Integer getSort() {
-        return sort;
+    @Length(min = 0, max = 1, message = "类型长度为1")
+    public String getType() {
+        return type;
     }
 
-    public void setSort(Integer sort) {
-        this.sort = sort;
+    public void setType(String type) {
+        this.type = type;
     }
 
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 
+    @Length(min = 0, max = 1, message = "是否启动长度为1")
+    public String getInvalid() {
+        return invalid;
+    }
+
+    public void setInvalid(String invalid) {
+        this.invalid = invalid;
+    }
+    
+	public String getValue() {
+		return value;
+	}
+	public void setValue(String value) {
+		this.value = value;
+	}
+	
+	@Override
+	public String toString() {
+		return "SysConfig{" +
+			", parentId=" + parentId +
+			", jkey=" + jkey +
+			", jvalue=" + jvalue +
+			", sort=" + sort +
+			", path=" + path +
+			", sysCompanyId=" + sysCompanyId +
+			", icon=" + icon +
+			", type=" + type +
+			", invalid=" + invalid +
+			"}";
+	}
 }

@@ -1,6 +1,6 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: 192.168.0.200:3306/gzxant_web?useUnicode=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://120.78.177.54:3306/gzxant?useUnicode=true&characterEncoding=utf8
     username: gzxant
     password: gzxant1804

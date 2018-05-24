@@ -1,9 +1,9 @@
 server:
-  port: 8091
+  port: 8090
   context-path: /gzxant/web
 spring:
   profiles:
-    active: dev, db-dev
+    active: pro, db-pro
   aop:
     proxy-target-class: true
   freemarker:
@@ -29,10 +29,10 @@ management:
 logging.level.project.user.UserClient: DEBUG
 
 mybatis:
-  mapper-locations: classpath:mapper/sys/**/*.xml, classpath:mapper/log/**/*.xml
+  mapper-locations: classpath:mapper/sys/**/*.xml, classpath:mapper/log/**/*.xml, classpath:mapper/article/**/*.xml, classpath:mapper/qualification/**/*.xml
   type-aliases-package: com.gzxant.entity
 mybatis-plus:
-  mapper-locations: classpath:mapper/sys/**/*.xml, classpath:mapper/log/**/*.xml
+  mapper-locations: classpath:mapper/sys/**/*.xml, classpath:mapper/log/**/*.xml, classpath:mapper/article/**/*.xml, classpath:mapper/qualification/**/*.xml
   type-aliases-package: com.gzxant.entity
   global-config:
     id-type: 2

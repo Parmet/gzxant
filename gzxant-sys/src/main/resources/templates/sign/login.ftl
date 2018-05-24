@@ -35,11 +35,11 @@
 
                 <p class="m-t-md">欢迎登录gzxant后台管理系统</p>
                 <div class="form-group">
-                    <input type="text" id="username" name="username" class="form-control uname" placeholder="用户名" value="admin"/>
+                    <input type="text" id="username" name="username" class="form-control uname" placeholder="用户名" value="gzxant"/>
                 </div>
                 <div class="form-group">
                     <input type="password" id="password" name="password" class="form-control pword m-b" placeholder="密码"
-                           value="admin"/>
+                           value="gzxant"/>
                 </div>
 
 
@@ -50,7 +50,7 @@
                             class="m-icon-swapright m-icon-white"></i></button>
                 </div>
 
-            <#--<button class="btn btn-success btn-block">登录</button>-->
+            <!--<button class="btn btn-success btn-block">登录</button>-->
             </form>
         </div>
     </div>

@@ -67,6 +67,7 @@ public class ShiroConfig {
 
         filterChainDefinitionMap.put("/plugins/dist/**","anon");
         filterChainDefinitionMap.put("/code/**","anon");
+        filterChainDefinitionMap.put("/word/**","anon");
 
 
         filterChainDefinitionMap.put("/layouts/**","anon");

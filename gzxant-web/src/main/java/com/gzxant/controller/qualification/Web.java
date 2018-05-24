@@ -1,20 +1,29 @@
 package com.gzxant.controller.qualification;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.gzxant.base.entity.ReturnDTO;
+import com.gzxant.base.vo.DataTable;
 import com.gzxant.entity.article.Article;
 import com.gzxant.entity.qualification.Qualification;
 import com.gzxant.service.article.IArticleService;
 import com.gzxant.service.qualification.IQualificationService;
 import com.gzxant.util.ReturnDTOUtil;
 import com.gzxant.util.StringUtils;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import io.swagger.annotations.ApiOperation;
 
 @Controller
 @RequestMapping("")
@@ -59,7 +68,7 @@ public class Web {
         .or("state is null");
         int count = qualificationService.selectCount(ew);
         if(count > 0){
-            return ReturnDTOUtil.custom(201, "该手机号已提交认证申请，请勿重复提交！");
+            return ReturnDTOUtil.custom(201, "该手机号已提交认领申请，请勿重复提交！");
         }
         
         // 3. 保存数据
@@ -77,18 +86,28 @@ public class Web {
 
     //富文本编辑
     @ApiOperation(value = "进入word", notes = "进入word")
-    @GetMapping(value = {"/word/{action}/{id}", "/{action}"})
-    public String wordDetail(@PathVariable(name = "action") String action,
-                         @PathVariable(name = "id", required = false) String id, Model model) {
-        Article article = null;
-            article = articleService.selectById(2L);
-        model.addAttribute("article", article);
+    @GetMapping(value = "/word")
+    public String wordDetail(Model model) {
+    	DataTable<Article> dt = new DataTable<>();
+    	dt.setPageNumber(1);
+    	dt.setPageSize(10);
+    	
+    	Map<String, Object> searchMap = new HashMap<>();
+    	searchMap.put("search_eq_state", "Y");
+    	dt.setSearchParams(searchMap);
+    	
+    	Map<String, String> sortMap = new HashMap<>();
+    	sortMap.put("push_time", "desc");
+    	dt.setSorts(sortMap);
+    	
+    	DataTable<Article> article = articleService.pageSearch(dt);
+        model.addAttribute("article", article.getRows().get(0));
         model.addAttribute("action","insert");
         return "/qualification/web/word";
     }
 
 
-//查询授权编码
+    //查询授权编码
     @ApiOperation(value = "进入查询列表界面", notes = "进入查询列表界面")
     @GetMapping(value = "/code/select")
     public String queryCode(Model model) {
@@ -109,6 +128,11 @@ public class Web {
         ew.where("code={0}", code)
         .andNew("state='Y'");
         Qualification qualification = qualificationService.selectOne(ew);
+        if (qualification == null || qualification.getId() == null) {
+        	model.addAttribute("msg", "该授权编号不存在！");
+        	model.addAttribute("code", code);
+            return "/qualification/web/code/query";
+        }
         model.addAttribute("qualification",qualification);
         return "/qualification/web/code/submit-detail";
     }

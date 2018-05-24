@@ -177,7 +177,7 @@
 
 
     <div id="icon_add_div" class="modal fade" tabindex="-1" aria-hidden="true" style="height: 1000px">
-        <div class="modal-dialog" style="width:900px;">
+        <div class="modal-dialog" style="width:900px;z-index:2050;">
             <div class="modal-content">
                 <div class="modal-header" style="border-bottom:none;">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>

@@ -34,7 +34,7 @@
           <ul class="dropdown-menu">
           <li><a data-edit="fontSize 5"><font size="5">一级标题</font></a></li>
           <li><a data-edit="fontSize 3"><font size="3">二级标题</font></a></li>
-          <li><a data-edit="fontSize 1"><font size="1">三级标题</font></a></li>
+          <li><a data-edit="fontSize 1"><font size="1">正文</font></a></li>
           </ul>
       </div>
       <div class="btn-group">
@@ -87,7 +87,7 @@
 	</div>
     <div class="col-sm-4">
     	<button type="button" onclick="back()" class="btn btn-info m-t-25">返回</button>
-        <button type="button" onclick="saveContent()" class="btn btn-success m-t-25">提交</button>
+        <button type="submit" class="btn btn-success m-t-25">提交</button>
     </div>
 </div>
 <script src="http://cdn.bootcss.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
@@ -104,6 +104,9 @@ form.validate({
         name: {
             required: true,
         }
+    },
+    submitHandler: function () {
+    	saveContent();
     }
 });
 
