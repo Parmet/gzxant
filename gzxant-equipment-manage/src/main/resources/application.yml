@@ -19,11 +19,6 @@ spring:
     request-context-attribute: rc
     charset: UTF-8
 
-sitemesh:
-  contentPath: /*
-  decoratorPath: classpath:/layouts/default.jsp
-  excludedPaths: /js/*,/assets/*,/css/*
-
 management:
   security:
     enabled: false

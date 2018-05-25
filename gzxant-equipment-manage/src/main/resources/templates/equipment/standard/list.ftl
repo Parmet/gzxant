@@ -110,7 +110,6 @@
 	
 	    return c;
 	}
-
 	var standardTable = $("#standardTable").iTable({
 		toolbar : {
 			id : "standardToolbar",

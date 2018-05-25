@@ -16,7 +16,7 @@ import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.apache.pdfbox.tools.imageio.ImageIOUtil;
 
-import com.gzxant.util.image.ImageUtil;
+import com.gzxant.util.image.ocr.huawei.ImageUtil;
 
 /**
  * pdf 工具
