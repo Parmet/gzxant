@@ -57,7 +57,7 @@
            <img src="${rc.contextPath}/img/medicine/logo.png" height="90" width="90">
        </div >
        <div class="align-center" style="margin-top:20px;font-size: 20px;">
-           <strong><font color="#f0f8ff">藏神学院官方授权查询平台</font></strong>
+           <strong><font color="#f0f8ff">藏灸学院官方授权查询平台</font></strong>
        </div>
 	</div>
 

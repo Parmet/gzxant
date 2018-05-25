@@ -46,10 +46,6 @@
                 checkbox: true
             },
             {
-                field: 'id', // 列字段名
-                title: '序号' // 列标题
-            },
-            {
                 field: 'name',
                 title: '姓名'
             },
@@ -62,23 +58,36 @@
                 title: '企业'
             },
             {
-                field: 'brandAgent',
-                title: '目前经营的品牌或代理'
+                field: 'createDate',
+                title: '申请时间',
+                formatter: function (value, row, index) {
+                    return datetimeFormat(value);
+                }
+            },
+            {
+                field: 'verifyDate',
+                title: '审核时间',
+                formatter: function (value, row, index) {
+                	if (!value) {
+                		return "-";
+                	}
+                    return datetimeFormat(value);
+                }
             },
             {
                 field: 'state',
                 title: '审核状态',
                 formatter: function (value, row, index) {
-                	if (value == "-") {
-	                    return "未审核"; 
+                	if (!value) {
+	                    return "<span style='color:#f8ac59'>未审核</span>"; 
                 	}
                 	
                 	if (value == "Y") {
-                		return "已通过"; 
+                		return "<span style='color:green'>已通过</span>"; 
                 	}
 					
                 	if (value == "N") {
-                		return "未通过"; 
+                		return "<span style='color:red'>未通过</span>"; 
                 	}
 				}
             },
@@ -98,6 +107,64 @@
         return c;
     }
 
-    load_data( getcolumns(), {});
+    load_data( getcolumns(), {"createDate": "desc"});
     //$(".bars").css("width", "100%");
+    
+    function datetimeFormat(longTypeDate){  
+	    var datetimeType = "";  
+	    var date = new Date();  
+	    date.setTime(longTypeDate);  
+	    datetimeType+= date.getFullYear();   //年  
+	    datetimeType+= "-" + getMonth(date); //月   
+	    datetimeType += "-" + getDay(date);   //日  
+	    datetimeType+= "&nbsp;&nbsp;" + getHours(date);   //时  
+	    datetimeType+= ":" + getMinutes(date);      //分
+	    datetimeType+= ":" + getSeconds(date);      //分
+	    return datetimeType;
+	} 
+	//返回 01-12 的月份值   
+	function getMonth(date){  
+	    var month = "";  
+	    month = date.getMonth() + 1; //getMonth()得到的月份是0-11  
+	    if(month<10){  
+	        month = "0" + month;  
+	    }  
+	    return month;  
+	}  
+	//返回01-30的日期  
+	function getDay(date){  
+	    var day = "";  
+	    day = date.getDate();  
+	    if(day<10){  
+	        day = "0" + day;  
+	    }  
+	    return day;  
+	}
+	//返回小时
+	function getHours(date){
+	    var hours = "";
+	    hours = date.getHours();
+	    if(hours<10){  
+	        hours = "0" + hours;  
+	    }  
+	    return hours;  
+	}
+	//返回分
+	function getMinutes(date){
+	    var minute = "";
+	    minute = date.getMinutes();
+	    if(minute<10){  
+	        minute = "0" + minute;  
+	    }  
+	    return minute;  
+	}
+	//返回秒
+	function getSeconds(date){
+	    var second = "";
+	    second = date.getSeconds();
+	    if(second<10){  
+	        second = "0" + second;  
+	    }  
+	    return second;  
+	}
 </script>

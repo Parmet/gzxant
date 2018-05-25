@@ -52,9 +52,8 @@ public class Web {
         // 1. 非空判断  姓名,身份证号,邮箱,电话不能空
         if (param == null
             || StringUtils.isBlank(param.getName())
-            || StringUtils.isBlank(param.getCard())
-            || StringUtils.isBlank(param.getEmail())
-            || StringUtils.isBlank(param.getPhone())) {
+            || StringUtils.isBlank(param.getPhone())
+            || StringUtils.isBlank(param.getEnterprise())) {
             return ReturnDTOUtil.paramError();
         }
 //        Qualification qualification = qualificationService.selectByPhone(param.getPhone());

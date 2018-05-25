@@ -54,7 +54,7 @@
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
 				<p style="font-size: 12px;">
-					<b>说明：</b><span style="color:darkgray;">本页面为藏灸文化学院培训文化培训过的企业，并且取得毕业合格证书，由广州藏医文化研究有限公司亲自颁发授权证书为“藏灸技术”治疗服务中心的企业认领资料</span>
+					<b>说明：</b><span style="color:darkgray;">广州藏灸文化研究有限公司“藏灸”技术治疗服务中心官方认证页面</span>
 				</p>
 			</div>
 		</div>
@@ -62,36 +62,36 @@
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
 					<input type="text" class="form-control" name="name"
-						placeholder="请输入姓名" required aria-required="true" value="${qualification.name}" readonly="readonly"/>
+						placeholder="姓名" required aria-required="true" value="${qualification.name}" readonly="readonly"/>
 				</div>
 
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
 					<input type="text" class="form-control" name="phone"
-						placeholder="请输入电话" required aria-required="true" value="${qualification.phone?substring(0, 7)}xxxx" readonly="readonly"/>
+						placeholder="电话" required aria-required="true" value="${qualification.phone?substring(0, 7)}xxxx" readonly="readonly"/>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
 					<input type="text" class="form-control" name="enterprise"
-						placeholder="请输入企业" required aria-required="true" value="${qualification.enterprise}" readonly="readonly"/>
+						placeholder="企业" required aria-required="true" value="${qualification.enterprise}" readonly="readonly"/>
 				</div>
 
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
 					<input type="text" class="form-control" name="card"
-						placeholder="请输入身份证号码" required aria-required="true" value="${qualification.card?substring(0, 7)}xxxxxxxxxxx" readonly="readonly"/>
+						placeholder="身份证号码" required aria-required="true" value="<#if qualification?? && (qualification.card != '')>${qualification.card?substring(0, 7)}xxxxxxxxxxx</#if>" readonly="readonly"/>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
 					<input type="email" class="form-control" name="email"
-						placeholder="请输入邮箱" required aria-required="true" value="${qualification.email}" readonly="readonly"/>
+						placeholder="邮箱" required aria-required="true" value="${qualification.email}" readonly="readonly"/>
 				</div>
 
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
 					<input type="text" class="form-control" name="brandAgent"
-						placeholder="请输入目前经营的品牌或代理" required aria-required="true" value="${qualification.brandAgent}" readonly="readonly"/>
+						placeholder="目前经营的品牌或代理" required aria-required="true" value="${qualification.brandAgent}" readonly="readonly"/>
 				</div>
 			</div>
 

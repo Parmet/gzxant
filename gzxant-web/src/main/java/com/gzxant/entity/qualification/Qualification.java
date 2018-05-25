@@ -1,9 +1,10 @@
 package com.gzxant.entity.qualification;
 
+import java.io.Serializable;
+import java.util.Date;
+
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.gzxant.base.entity.DataEntity;
-
-import java.io.Serializable;
 
 /**
  * <p>
@@ -62,6 +63,12 @@ public class Qualification extends DataEntity<Qualification> {
 	 * 状态  Y 通过, N 不通过, 
 	 */
 	private String state;
+	
+	/**
+	 * 审核时间
+	 */
+	@TableField("verify_date")
+	private Date verifyDate;
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
@@ -155,6 +162,13 @@ public class Qualification extends DataEntity<Qualification> {
 		this.code = code;
 	}
 
+	public Date getVerifyDate() {
+		return verifyDate;
+	}
+
+	public void setVerifyDate(Date verifyDate) {
+		this.verifyDate = verifyDate;
+	}
 
 	@Override
 	protected Serializable pkVal() {

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -99,6 +100,7 @@ public class QualificationController extends BaseController {
 		}
 		//1 为通过  0 为不通过
 		param.setState("Y");
+		param.setVerifyDate(new Date());
 		qualificationService.qualification(param);
 		return ReturnDTOUtil.success();
 	}
@@ -114,6 +116,7 @@ public class QualificationController extends BaseController {
 		}
 		//1 为通过  0 为不通过
 		param.setState("N");
+		param.setVerifyDate(new Date());
 		qualificationService.updateById(param);
 		return ReturnDTOUtil.success();
 	}

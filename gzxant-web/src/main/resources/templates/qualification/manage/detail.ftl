@@ -4,7 +4,7 @@
             <form class="form-horizontal form-bordered" id="gzxantForm">
             	<input type="hidden" name="id" value="${qualification.id}" />
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">姓名<span class="required">*</span></label>
+                    <label class="col-sm-3 control-label">姓名</label>
                     <div class="col-sm-3">
                     	<input type="text" class="form-control" name="name" placeholder="请输入姓名"
                                value="${qualification.name}" required aria-required="true"/>
@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">电话<span class="required">*</span></label>
+                    <label class="col-sm-3 control-label">电话</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" name="phone" placeholder="请输入电话"
                                value="${qualification.phone}" required aria-required="true"/>
@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">企业<span class="required">*</span></label>
+                    <label class="col-sm-3 control-label">企业</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" name="enterprise" placeholder="请输入企业"
                                value="${qualification.enterprise}" required aria-required="true"/>
@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">身份证号码<span class="required">*</span></label>
+                    <label class="col-sm-3 control-label">身份证号码</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" name="card" placeholder="请输入身份证号码"
                                value="${qualification.card}" required aria-required="true"/>
@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">邮箱<span class="required">*</span></label>
+                    <label class="col-sm-3 control-label">邮箱</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" name="email" placeholder="请输入邮箱"
                                value="${qualification.email}" required aria-required="true"/>
@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">目前经营的品牌或代理<span class="required">*</span></label>
+                    <label class="col-sm-3 control-label">目前经营的品牌或代理</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" name="brandAgent" placeholder="请输入目前经营的品牌或代理"
                                value="${qualification.brandAgent}" required aria-required="true"/>
@@ -52,7 +52,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">省份<span class="required">*</span></label>
+                    <label class="col-sm-3 control-label">省份</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" name="provinces" placeholder="请输入省份"
                                value="${qualification.provinces}" required aria-required="true"/>
@@ -111,6 +111,8 @@
         } else {
             form = $('#gzxantForm');
         }
+        
+        $("button").attr("disabled", true); 
 
         $.ajax({
             cache: true,
@@ -120,7 +122,8 @@
             async: false,
             dataType : "json",
             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                parent.layer.alert(XMLHttpRequest.responseJSON.error);
+                layer.alert(XMLHttpRequest.responseJSON.error);
+                $("button").attr("disabled", false);
             },
             beforeSend: function () {
                 start_request_load();
@@ -129,12 +132,10 @@
             },
             success: function (data) {
                 if (data.code == 200) {
-                    parent.re_load();
-                    var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-                    parent.layer.close(index);
-                    parent.layer.msg("操作成功");
+                	back();
                 } else {
-                    parent.layer.alert(data.error)
+                    layer.alert(data.error)
+                	$("button").attr("disabled", false);
                 }
 
             }

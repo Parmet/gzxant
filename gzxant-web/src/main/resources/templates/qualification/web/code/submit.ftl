@@ -54,7 +54,7 @@
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
 				<p style="font-size: 12px;">
-					<b>说明：</b><span style="color:darkgray;">本页面为藏灸文化学院培训文化培训过的企业，并且取得毕业合格证书，由广州藏医文化研究有限公司亲自颁发授权证书为“藏灸技术”治疗服务中心的企业认领资料审核页面</span>
+					<b>说明：</b><span style="color:darkgray;">广州藏灸文化研究有限公司“藏灸”技术治疗服务中心官方认证页面</span>
 				</p>
 			</div>
 		</div>
@@ -79,19 +79,19 @@
 
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
 					<input type="text" class="form-control" name="card"
-						placeholder="请输入身份证号码" required aria-required="true" />
+						placeholder="请输入身份证号码" />
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
 					<input type="email" class="form-control" name="email"
-						placeholder="请输入邮箱" required aria-required="true" />
+						placeholder="请输入邮箱" />
 				</div>
 
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
 					<input type="text" class="form-control" name="brandAgent"
-						placeholder="请输入目前经营的品牌或代理" required aria-required="true" />
+						placeholder="请输入目前经营的品牌或代理" />
 				</div>
 			</div>
 
@@ -100,8 +100,7 @@
 					<div style="position: relative;">
 						<!-- container -->
 						<input readonly type="text" data-toggle="city-picker"
-							class="form-control" name="provinces" required
-							aria-required="true" />
+							class="form-control" name="provinces" />
 					</div>
 				</div>
 			</div>
@@ -184,15 +183,11 @@
                 phone: true
         	},
             card: {
-                required: true,
                 isIdCardNo: true
             },
             email:{
-                required:true,
                 email:true
             }
-
-
         },
         messages: {
             name:{
@@ -202,7 +197,6 @@
                 card: "请输入正确的身份证号码"
             },
             email:{
-                required: "<font color=red>请输入一个Email地址</fond>",
                 email: "请输入一个有效的Email地址"
             }
         },
