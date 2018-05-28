@@ -3,7 +3,6 @@ package com.gzxant.service.equipment.standard;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.gzxant.base.service.impl.BaseService;
 import com.gzxant.dao.equipment.standard.EquipmentStandardDao;
 import com.gzxant.entity.equipment.standard.EquipmentStandard;
+import com.gzxant.entity.equipment.standard.item.EquipmentStandardItem;
 import com.gzxant.util.FileUtils;
 import com.gzxant.util.StringUtils;
 
@@ -30,93 +30,87 @@ public class EquipmentStandardService extends BaseService<EquipmentStandardDao, 
 	
 	@Override
 	public Map<String, Object> parse(String txtPath) {
-		Map<String, Object> map = new HashMap<>();
-		
 		// 读取txtpath下所有txt文件
 		List<File> files = FileUtils.getFiles(txtPath);
+		
+		EquipmentStandard info = new EquipmentStandard();
+		List<String> txts = new ArrayList<>();
+		Map<String, ArrayList<String>> items = new HashMap<>();
 		for (int i = 0; i < files.size(); i++) {
 			File file = files.get(i);
-			// 保存基本信息到map
 			// 读取首页的名称、编号、发布时间、实施时间
 			if (i == 0 && file.getName().contains(String.valueOf(i))) {
-				map.putAll(parseHome(file));
+				info = parseInfo(file, files.get(i + 1));
 				continue;
 			}
 			
-			// 读取第二页的原版本编号、原版本名称
-			if (i == 1 && file.getName().contains(String.valueOf(i))) {
-				map.putAll(parseSecond(file));
-				continue;
+			List<String> curTxts = FileUtils.readFileTxt(file);
+			// 删除第一行的编号
+			if (curTxts.get(0).startsWith("GB")) {
+				curTxts.remove(0);
+				txts.addAll(curTxts);
 			}
-			
-			// 循环读取剩余页面的鉴别试验、测定实验的设备、耗材
-			map.putAll(parseItem(file));
 		}
 		
-		// 识别耗材设备，查找父级
-		// 保存鉴别试验、测定实验到map
-		// 保存设备、耗材到map
-		
+		items = parseItem(txts);
 		return null;
 	}
 	
-	private Map<String, Object> parseHome(File file) {
-		Map<String, Object> map = new HashMap<>();
-		List<String> txts = FileUtils.getFileTxt(file);
+	private EquipmentStandard parseInfo(File homePage, File secondPage) {
+		EquipmentStandard stand = new EquipmentStandard();
+		// 读取第一个文件
+		List<String> txts = FileUtils.readFileTxt(homePage);
+		txts.addAll(FileUtils.readFileTxt(secondPage));
 		String txt = "";
 		for (int i = 0; i < txts.size(); i++) {
 			txt = txts.get(i);
+			// 读取编号、名字
 			if (txt.trim().contains("GB")) {
-				map.put("number", txt.trim());
+				stand.setNumber(txt.trim());
 				String firstCategory = txts.get(i + 1).trim();
 				if (StringUtils.isNotBlank(firstCategory)
-					&& firstCategory.endsWith("国家标准")) {
-					map.put("firstCategory", firstCategory);
-					map.put("secondCategory", txts.get(i + 2).trim());
-					map.put("name", txts.get(i + 3).trim());
+					&& firstCategory.contains("国家标准")) { 
+					String secondCategory = txts.get(i + 2).trim();
+					
+					stand.setFirstCategory(firstCategory);
+					stand.setSecondCategory(secondCategory);
+					stand.setName(firstCategory 
+							+ secondCategory 
+							+ txts.get(i + 3).trim());
 				}
 			}
 			
+			// 读取发布时间
 			if (txt.contains("-") && txt.contains("发布")) {
-				map.put("publishDate", txt.trim().substring(0, 10));
+				stand.setPublishDate(txt.trim().substring(0, 10));
 			}
 			
+			// 读取实施时间
 			if (txt.contains("-") && txt.contains("实施")) {
-				map.put("implementDate", txt.trim().substring(0, 10));
+				stand.setImplementDate(txt.trim().substring(0, 10));
 			}
-		}
-		
-		return map;
-	}
-	
-	private Map<String, Object> parseSecond(File file) {
-		Map<String, Object> map = new HashMap<>();
-		List<String> txts = FileUtils.getFileTxt(file);
-		String txt = "";
-		for (int i = 0; i < txts.size(); i++) {
-			txt = txts.get(i);
+			
+			// 读取就标准编号
 			if (txt.contains("代替") && txt.contains("GB")) {
 				txt = txt.substring(txt.indexOf("GB"), txt.length());
 				String oldNumber = txt.substring(0, txt.indexOf("《"));
-				String oldName = txt.substring(txt.indexOf("《"), txt.length());
-				map.put("oldNumber", oldNumber);
-				map.put("oldName", oldName);
-				return map;
+				//String oldName = txt.substring(txt.indexOf("《"), txt.length());
+				stand.setOldStand(oldNumber);
 			}
 		}
 		
-		return map;
+		return stand;
 	}
 	
-	private Map<String, Object> parseItem(File file) {
-		Map<String, Object> map = new HashMap<>();
-		List<String> txts = FileUtils.getFileTxt(file);
+	private Map<String, ArrayList<String>> parseItem(List<String> txts) {
+		Map<String, ArrayList<String>> map = new HashMap<>();
 		String txt = "";
+		// 识别耗材设备，查找父级
+		// 保存鉴别试验、测定实验到map
+		// 保存设备、耗材到map
 		for (int i = 0; i < txts.size(); i++) {
 			txt = txts.get(i);
-			if () {
-				
-			}
+			
 		}
 		
 		return map;

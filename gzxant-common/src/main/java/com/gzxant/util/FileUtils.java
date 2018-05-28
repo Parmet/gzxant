@@ -22,8 +22,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.gzxant.service.equipment.standard.EquipmentStandardService.PARSE_TYPE;
-
 import net.coobird.thumbnailator.Thumbnails;
 
 /**
@@ -236,7 +234,7 @@ public class FileUtils {
 		return fileList;
 	}
 
-	public static List<String> getFileTxt(File file) {
+	public static List<String> readFileTxt(File file) {
 		if(file == null || !file.exists()){
 			return new ArrayList<>();
 		}
