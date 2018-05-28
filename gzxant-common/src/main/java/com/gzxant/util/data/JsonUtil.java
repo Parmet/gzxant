@@ -1,13 +1,15 @@
-package com.gzxant.util;
+package com.gzxant.util.data;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.collections4.KeyValue;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.JSONLibDataFormatSerializer;
 import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-
-import java.util.List;
-import java.util.Map;
 
 public class JsonUtil {
 	private static final SerializeConfig config;  
@@ -33,6 +35,8 @@ public class JsonUtil {
     public static String toJSONNoFeatures(Object object) {  
         return JSON.toJSONString(object, config);  
     }  
+      
+  
   
     public static Object toBean(String text) {  
         return JSON.parse(text);  
@@ -58,8 +62,19 @@ public class JsonUtil {
     }  
   
     /**  
+     * 将javabean转化为序列化的json字符串  
+     * @param keyvalue  
+     * @return  
+     */  
+    public static Object beanToJson(KeyValue keyvalue) {  
+        String textJson = JSON.toJSONString(keyvalue);  
+        Object objectJson  = JSON.parse(textJson);  
+        return objectJson;  
+    }  
+      
+    /**  
      * 将string转化为序列化的json字符串  
-     * @param text
+     * @param keyvalue  
      * @return  
      */  
     public static Object textToJson(String text) {  
@@ -86,6 +101,4 @@ public class JsonUtil {
         String s = JSONObject.toJSONString(m);  
         return s;  
     }  
-
 }
-

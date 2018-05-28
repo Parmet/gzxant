@@ -1,6 +1,7 @@
 package com.gzxant.controller.equipment.standard;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,9 +79,7 @@ public class EquipmentStandardController extends BaseController {
 		path = PathUtils.getRootPath() + path;
 		String txtPath = PDFUtil.pdf2Txt(path);
 		
-		standard.setName("");
-		standard.setTxtUrl(txtPath);
-		standardService.insertOrUpdate(standard);
+		Map<String, Object> standardData = standardService.parse(txtPath);
 		
 		return ReturnDTOUtil.success();
 	}

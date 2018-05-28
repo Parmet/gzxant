@@ -16,7 +16,7 @@ import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.apache.pdfbox.tools.imageio.ImageIOUtil;
 
-import com.gzxant.util.image.ocr.huawei.ImageUtil;
+import com.gzxant.util.image.ocr.aliyun.ImageUtils;
 
 /**
  * pdf 工具
@@ -39,16 +39,17 @@ public class PDFUtil {
 		
 		// 1. pdf 分页转成图片
 		List<String> imgs = pdf2Img(pdfPath);
-		List<String> txts = new ArrayList<>();
+		String imgStr = "";
 		
 		// 2. 将图片转成文字
-		for (String img : imgs) {
-			txts.add(ImageUtil.img2Str(img));
+		String txtPath = getTxtPath(pdfPath);
+		for (int i = 0; i < imgs.size(); i++) {
+			imgStr = ImageUtils.img2Str(imgs.get(i));
+			String curTextPath = txtPath + File.separator + i + ".txt";
+			writeContent2Txt(imgStr, curTextPath);
 		}
 		
 		// 3. 保存到文件
-		String txtPath = getTxtPath(pdfPath);
-		writeContent2Txt(txts, txtPath);
 		return txtPath;
 	}
 	
@@ -60,24 +61,13 @@ public class PDFUtil {
 	 */
 	private static String getTxtPath(String pdfPath) {
 		// 根据pdf名称生成目录
-		String savePath = pdfPath.substring(0, pdfPath.length() - 4);
+		String savePath = pdfPath.substring(0, pdfPath.length() - 4) + File.separator + "txt";
 		File saveFile = new File(savePath);
 		if(!saveFile.exists() && !saveFile.isDirectory()){
 			saveFile.mkdirs();
 		}
 		
-		// txt文件名称统一为content.txt
-		String filePath = savePath + "content.txt";
-		File file = new File(filePath);
-		if (!file.exists()) {
-			try {
-				file.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return filePath;
+		return savePath;
 	}
 
 	/**
@@ -85,16 +75,22 @@ public class PDFUtil {
 	 * @param al
 	 * @param file
 	 */
-	private static void writeContent2Txt(List<String> al, String file) {
+	private static void writeContent2Txt(String al, String file) {
 		File f = new File(file);
+		if (!f.exists()) {
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
         BufferedWriter bw = null;
         
 		try {
 			bw = new BufferedWriter(new FileWriter(f));
-	        for (int i = 0 ; i < al.size() ; i++) {
-				bw.write(al.get(i));
-				bw.newLine();
-	        }
+			bw.write(al);
+			bw.newLine();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -134,8 +130,9 @@ public class PDFUtil {
 			for (PDPage page : document.getPages())
 			{
 				BufferedImage bim = pdfRenderer.renderImageWithDPI(pageCounter, 600, ImageType.RGB);
-				ImageIOUtil.writeImage(bim, savePath + "/" + (pageCounter++) + ".png", 600);
-				results.add(savePath + "/" + pageCounter + ".png");
+				ImageIOUtil.writeImage(bim, savePath + File.separator + (pageCounter) + ".jpg", 600);
+				results.add(savePath + File.separator + pageCounter + ".jpg");
+				pageCounter = pageCounter + 1;
 			}
 
 			document.close();
@@ -146,5 +143,10 @@ public class PDFUtil {
 		}
 		
 		return results;
+	}
+	
+	public static void main(String[] args) {
+		String path = "F:\\gzxant\\file\\项目\\设备检测\\需求文档\\标准pdf\\GB 1886.25-2016 食品安全国家标准 食品添加剂 柠檬酸钠.pdf";
+		PDFUtil.pdf2Txt(path);
 	}
 }

@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.gzxant.base.entity.ReturnDTO;
 import com.gzxant.constant.Setting;
+import com.gzxant.shiro.GzxantSysUser;
 import com.gzxant.util.FileUtils;
 import com.gzxant.util.ReturnDTOUtil;
 
@@ -83,13 +84,13 @@ public class FileController {
             fileName = fileName + "/" + path;
         }
 
-        String savePath = fileName + "/" + type + "/" + uuid + "." + fileExt;//附件路径+类型（头像、附件等）+名称+扩展名
+        String savePath = fileName + File.separator + type + File.separator + GzxantSysUser.id() + File.separator + file.getName() + "." + fileExt;//附件路径+类型（头像、附件等）+名称+扩展名
         File localFile = FileUtils.saveFileToDisk(file, savePath); //保存到磁盘
 
         String thumbnailName = "";
         if (FileUtils.getImageFormat(fileExt)) {
             //创建缩略图
-            thumbnailName = fileName + "/" + type + "/s/" + uuid + "." + fileExt;//附件路径+类型（头像、附件等）+s(文件夹)+名称+扩展名
+            thumbnailName = fileName + File.separator + type + File.separator + GzxantSysUser.id() + File.separator + "s" + File.separator + file.getName() + "." + fileExt;//附件路径+类型（头像、附件等）+s(文件夹)+名称+扩展名
             FileUtils.createThumbnail(localFile, thumbnailName);
         }
 

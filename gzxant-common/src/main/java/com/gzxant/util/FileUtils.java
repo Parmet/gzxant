@@ -1,20 +1,28 @@
 package com.gzxant.util;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.gzxant.service.equipment.standard.EquipmentStandardService.PARSE_TYPE;
 
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -28,6 +36,7 @@ import net.coobird.thumbnailator.Thumbnails;
 public class FileUtils {
 
     private static Logger logger = LoggerFactory.getLogger(FileUtils.class);
+    
     /**
      * 获取附件名称 13位时间戳+5位随机数
      *
@@ -138,7 +147,31 @@ public class FileUtils {
         }
     }
 
-
+    /**
+	 * 
+	 * @param al
+	 * @param file
+	 */
+	public static void writeContent2Txt(List<String> al, String file) {
+		File f = new File(file);
+        BufferedWriter bw = null;
+        
+		try {
+			bw = new BufferedWriter(new FileWriter(f));
+	        for (int i = 0 ; i < al.size() ; i++) {
+				bw.write(al.get(i));
+				bw.newLine();
+	        }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        
+        try {
+			bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
     /**
      * 通过响应输出流实现文件下载
@@ -183,4 +216,44 @@ public class FileUtils {
             }
         }
     }
+
+	public static List<File> getFiles(String path) {
+		// 目标集合fileList
+		List<File> fileList = new ArrayList<File>();
+		File file = new File(path);
+		if (file.isDirectory()) {
+			File[] files = file.listFiles();
+			for (File fileIndex : files) {
+				// 如果这个文件是目录，则进行递归搜索
+				if (fileIndex.isDirectory()) {
+					getFiles(fileIndex.getPath());
+				} else {
+					// 如果文件是普通文件，则将文件句柄放入集合中
+					fileList.add(fileIndex);
+				}
+			}
+		}
+		return fileList;
+	}
+
+	public static List<String> getFileTxt(File file) {
+		if(file == null || !file.exists()){
+			return new ArrayList<>();
+		}
+		
+		List<String> list = new ArrayList<>();
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(file));//构造一个BufferedReader类来读取文件
+            String s = null;
+            while((s = br.readLine()) != null){//使用readLine方法，一次读一行
+            	list.add(s);
+            }
+            
+            br.close();    
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+		return list;
+	}
 }

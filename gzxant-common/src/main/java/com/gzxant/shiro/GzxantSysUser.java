@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
 
-import com.gzxant.util.JsonUtil;
+import com.gzxant.util.data.JsonUtil;
 
 /**
  * Created by chen on 2017/7/28.
