@@ -33,20 +33,20 @@ public class CodeGenerate {
 
 	// --------------变动参数区 start------------------------------------------
 	/* === 表名 === */
-	private static String[] tableNames = {"article"}; //, "shop_order_goods", "shop_order_pay"
+	private static String[] tableNames = {"attribute_category"}; //, "shop_order_goods", "shop_order_pay"
 	/* === 开发者 === */
 	public static String author = "zt";
 	/* === 输出目标项目，为空则生成在当前项目中 === */
-	public static String targetProject = "gzxant-web";
+	public static String targetProject = "gzxant-wx-shop";
 	/* === 准备生成文件["controller", "service", "dao", "entity", "xml"] === */
 	public static List<String> beGenerateFile = new ArrayList<>(
 			Arrays.asList("controller", "service", "dao", "entity", "xml"));
 	// --------------变动参数区 end------------------------------------------
 
 	// --------------数据源配置区 start------------------------------------------
-	public static String url = "jdbc:mysql://192.168.0.200:3306/gzxant_web?useUnicode=true&characterEncoding=utf8&useSSL=false";
-	public static String name = "gzxant";
-	public static String passWord = "gzxant1804";
+	public static String url = "jdbc:mysql://localhost:3306/weixin_shop?useUnicode=true&characterEncoding=utf8&useSSL=false";
+	public static String name = "root";
+	public static String passWord = "admin";
 	public static String driver = "com.mysql.jdbc.Driver";
 	// --------------数据源配置区 end------------------------------------------
 

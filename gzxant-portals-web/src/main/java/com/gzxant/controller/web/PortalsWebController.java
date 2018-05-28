@@ -33,26 +33,21 @@ public class PortalsWebController {
      @Autowired
      private PortalsCompanyInformationService portalsCompanyInformationService;
 
-
     /**
      * 公司信息栏目
      */
      @Autowired
      private PortalsColumnService portalsColumnService;
-
     /**
      * 公司文章
      */
     @Autowired
     private PortalsArticleService portalsArticleService;
-
-
     /**
      * 公司联系方式
      */
     @Autowired
     private PortalsMessageService portalsMessageService;
-
     /**
      * 关于我们的信息
      */
@@ -64,11 +59,8 @@ public class PortalsWebController {
     @Autowired
     private PortalsCustomerService portalsCustomerService;
 
-
-
-
     @ApiOperation(value = "进入公司官网展示公司信息", notes = "进入公司官网展示公司信息")
-    @GetMapping(value = "/{code}" )
+    @GetMapping(value = "/" )
     public String list(Model model, @PathVariable String code) {
         //判断公司唯一编码不能为空
         if (code == null || StringUtils.isBlank(code)){
@@ -80,16 +72,11 @@ public class PortalsWebController {
         //查询公司所有的信息
         PortalsCompanyInformation portalsCompanyInformation = portalsCompanyInformationService.selectById(code);
 
-
-
-
-
         //查询栏目
         List<PortalsColumn> portalsColumn = portalsColumnService.selectAllColumns();
 
         //查询文章
         List<PortalsArticle> portalsArticle = portalsArticleService.selectAllArticle();
-
 
         //公司的联系方式
         PortalsMessage portalsMessage =  portalsMessageService.selectAllMessage();
@@ -97,10 +84,8 @@ public class PortalsWebController {
         //关于我们的信息
         PortalsAboutMe portalsAboutMe = portalsAboutMeService.selectAllAboutMe();
 
-
         //公司客户信息
         List<PortalsCustomer> portalsCustomer = portalsCustomerService.selectAllCustomer();
-
 
         //公司信息
         model.addAttribute("portalsCompanyInformation",portalsCompanyInformation);

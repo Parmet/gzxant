@@ -48,6 +48,7 @@ public class PortalsArticleController extends BaseController {
 						 @PathVariable(name = "id", required = false) String id, Model model) {
 		if (!PathUtils.checkDetailPath(action, id)) {
 			model.addAttribute("msg", "未识别参数");
+
 			return "/portals/article/list";
 		}
 
