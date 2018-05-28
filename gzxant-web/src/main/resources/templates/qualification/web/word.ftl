@@ -29,9 +29,7 @@
     <script src="${rc.contextPath}/wysiwyg/external/google-code-prettify/prettify.js"></script>
 </head>
 
-<body style="background-color: #f0f0f0">
-	<div id="editor" style="margin:30px 30px; height: 100vh; min-height : 100vh; overflow: auto;">
-	      	${article.articleContent}
-	</div>
+<body style="background-color: #f0f0f0;margin: 5px;">
+${article.articleContent}
 </body>
 </html>
