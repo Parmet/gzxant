@@ -36,10 +36,22 @@
 <script src="${rc.contextPath}/plugins/dist/js/city-picker.js"></script>
 
 <style type="text/css">
+html, body {
+	width: 100%;
+}
+
+body {
+	background: url(${rc.contextPath}/img/medicine/bg0.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
 .code-content {
 	background-color: #ac5537;
 	padding: 20px;
 	border-radius: 10px;
+	opacity: 0.9;
+	box-shadow: 5px 5px 5px #888888;
 }
 
 .form-content label {
@@ -48,9 +60,14 @@
 </style>
 </head>
 
-<body style="background-color: #f0f0f0;">
+<body>
 	<div class="container-fluid"
 		style="padding: 10px;">
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="text-align: center;">
+				<img src="${rc.contextPath}/img/medicine/yp_logo.png" style="width: 200px; height: 188px; margin: 0 auto;"/>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
 				<p style="font-size: 12px;">
@@ -62,40 +79,46 @@
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
 					<input type="text" class="form-control" name="name"
-						placeholder="请输入姓名" required aria-required="true" />
+						placeholder="请输入姓名（必填）" required aria-required="true" />
 				</div>
 
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
 					<input type="number" class="form-control" name="phone"
-						placeholder="请输入电话" required aria-required="true" />
+						placeholder="请输入电话（必填）" required aria-required="true" />
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
 					<input type="text" class="form-control" name="enterprise"
-						placeholder="请输入企业" required aria-required="true" />
+						placeholder="请输入企业（必填）" required aria-required="true" />
+				</div>
+				
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+					<input type="text" class="form-control" name="code"
+						placeholder="请输入已认领的授权编号" />
 				</div>
 
+			</div>
+
+			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
 					<input type="text" class="form-control" name="card"
 						placeholder="请输入身份证号码" />
 				</div>
-			</div>
-
-			<div class="row">
+			
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
 					<input type="email" class="form-control" name="email"
 						placeholder="请输入邮箱" />
 				</div>
+			</div>
 
+			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
 					<input type="text" class="form-control" name="brandAgent"
 						placeholder="请输入目前经营的品牌或代理" />
 				</div>
-			</div>
-
-			<div class="row">
+				
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
 					<div style="position: relative;">
 						<!-- container -->
@@ -104,15 +127,12 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="form-actions fluid">
-					<div class="col-sm-12">
-						<button type="submit" class="btn btn-info btn-block">提交</button>
-					</div>
-				</div>
+			<div style="width: 100%; position: fixed; bottom: 5px; left:0;">
+				<button type="submit" style="margin: 0 auto; width: 80%" class="btn btn-info btn-block">提交</button>
 			</div>
 		</form>
 	</div>
+	<div style="width: 100%; height: 100px;"></div>
 
 	<script type="text/javascript">
 	action = "${action}";
@@ -137,13 +157,12 @@
                 if (data.code == 200) {
                     layer.msg("提交成功！");
                 } else {
-                    layer.alert(data.error)
+                    layer.alert(data.error);
                 }
 
             }
         });
     }
-
 
     jQuery.validator.addMethod("phone", function(value, element) {
         var length = value.length;
@@ -162,7 +181,39 @@
         var tel = /^[0-9]{6}$/;
         return this.optional(element) || (tel.test(value));
     }, "请正确填写您的邮政编码");
-    // ---------------------
+    
+    // 编号验证
+    jQuery.validator.addMethod("checkNumber", function(value, element, param) {
+    	if (value == '') {
+    		return true;
+    	}
+    	
+    	var _this = this;
+    	var flag = false;
+    	$.ajax({
+            cache: true,
+            type: "get",
+            url: url+"check",
+            data: {code : $("input[name=code]").val()},// 你的formid
+            async: false,
+            dataType : "json",
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+            	layer.msg("操作失败，请重试");
+            	flag = false;
+            },
+            success: function (data) {
+                if (data.code == 200) {
+                	flag = true;
+                } else {
+                	layer.msg(data.error);
+	                flag = false;
+                }
+            }
+        });
+    	
+    	return flag;
+    }, $.validator.format("如有疑问请联系认证机构，电话：020-87221933"));
+    
     // -----form表单验证-------------------------------------------------- //
     var form = $('#gzxantForm');
     var error = $('.alert-danger', form);
@@ -181,6 +232,9 @@
             phone:{
                 required: true,
                 phone: true
+        	},
+        	code : {
+        		checkNumber : true
         	},
             card: {
                 isIdCardNo: true

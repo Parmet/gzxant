@@ -14,6 +14,10 @@
                                     <label for="nameInput" class="control-label">认证人姓名</label>
                                     <input type="text" class="form-filter form-control _search" id="nameInput" name="search_like_name"  />
                                 </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 form-group">
+                                    <label for="phoneInput" class="control-label">联系电话</label>
+                                    <input type="text" class="form-filter form-control _search" id="phoneInput" name="search_like_phone"  />
+                                </div>
                             </div>
                         </div>
                         <div class="panel-footer">

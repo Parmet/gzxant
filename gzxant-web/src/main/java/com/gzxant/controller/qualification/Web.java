@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.gzxant.annotation.SLog;
 import com.gzxant.base.entity.ReturnDTO;
 import com.gzxant.base.vo.DataTable;
 import com.gzxant.entity.article.Article;
@@ -37,7 +38,7 @@ public class Web {
 
 
 
-//用户填写认证信息并保存
+    //用户填写认证信息并保存
     @ApiOperation(value = "进入资格认证列表界面", notes = "进入资格认证列表界面")
     @GetMapping(value = "/code")
     public String submitCode(Model model) {
@@ -130,10 +131,26 @@ public class Web {
         if (qualification == null || qualification.getId() == null) {
         	model.addAttribute("msg", "该授权编号不存在！");
         	model.addAttribute("code", code);
-            return "/qualification/web/code/query";
         }
         model.addAttribute("qualification",qualification);
         return "/qualification/web/code/submit-detail";
     }
+    
+	@ApiOperation(value = "校验编号正确性", notes = "校验编号正确性")
+	@GetMapping(value = "/code/check")
+	@ResponseBody
+	public ReturnDTO checkCode(String code) {
+		if (StringUtils.isBlank(code)) {
+			return ReturnDTOUtil.fail();
+		}
+		
+		code = code.trim();
+		String msg = qualificationService.checkCode(code);
+		if (StringUtils.isBlank(msg)) {
+			return ReturnDTOUtil.success();
+		}
+		
+		return ReturnDTOUtil.custom(-1, msg);
+	}
 
 }

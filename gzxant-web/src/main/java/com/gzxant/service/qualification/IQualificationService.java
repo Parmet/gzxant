@@ -13,9 +13,16 @@ import com.gzxant.entity.qualification.Qualification;
  */
 public interface IQualificationService extends IBaseService<Qualification> {
 
-    void qualification(Qualification param);
-
     Qualification selectByCode(String param);
 
     Qualification selectByPhone(String param);
+
+    /**
+     * 参数正确则返回空字符串
+     * 
+     * @param code
+     * @return
+     */
+    String checkCode(String code);
+
 }
