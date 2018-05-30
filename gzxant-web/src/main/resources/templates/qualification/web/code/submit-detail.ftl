@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>资质认领</title>
+<title>藏灸技术资质认领</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" href="${rc.contextPath}/favicon.ico">
 <link href="${rc.contextPath}/css/bootstrap.min.css"
@@ -40,103 +40,74 @@ html, body {
 	width: 100%;
 }
 
-/*body {*/
-    /*background-size: cover;*/
-    /*background-repeat: no-repeat;*/
-    /*content: "";*/
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*left: 0;*/
-    /*z-index: -1;!*-1 可以当背景*!*/
-    /*-webkit-filter: blur(3px);*/
-    /*filter: blur(3px);
-    <#--style="background: url('${rc.contextPath}/img/medicine/bg0.jpg') no-repeat; background-size:100% 100%;"-->
-
-    */
-/*}*/
-#box{
-    width:200px;
-    height:200px;
-    background:url(${rc.contextPath}/img/medicine/bg0.jpg);
-    opacity:0.5;
-    filter:"alpha(opacity=50)";
-    -ms-filter:"alpha(opacity=50)"; /* 旧版IE */
+body {
+	background: url(${rc.contextPath}/img/medicine/bg1.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
 }
 
-
-
-
-
-
+.code-head {
+	background-color: #a40001;
+	padding: 20px;
+}
 
 .code-content {
 	background-color: #ffffff;
-
+	border-radius: 20px;
+	width: 80%;
+	margin: 40px auto;
 	padding: 20px;
-	border-radius: 10px;
-	opacity: 0.9;
-	box-shadow: 5px 5px 5px #888888;
-	width: 600px;
-	height: 300px;
-
 }
 
 .form-content label {
-	color: white;
+	color: black;
 }
 
 .align-center{
     margin:0 auto; /* 居中 这个是必须的，，其它的属性非必须 */
     text-align:center; /* 文字等内容居中 */
 }
+
+.modal-box {
+	background-color: #EAEAEA;
+	background-size: cover;
+	position: absolute;
+	opacity: 0.7;
+	width: 100%;
+	height: 100vh;
+	z-index: -2;
+}
 </style>
 </head>
 
-<body  style="background: url('${rc.contextPath}/img/medicine/bg0.jpg') no-repeat;
-		background-size:100% 150%; background-repeat:repeat;">
-
-
-<div class="container-fluid"
-		style="padding: 10px;">
-
-        <div class="row" style="background-color: #b40202">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="text-align: center;">
-                <img src="${rc.contextPath}/img/logo.png" style="width: 200px; height: 188px; margin: 0 auto;"/>
-            </div>
-            <div class="align-center" style="margin-top:50px;font-size: 40px;">
-                <strong><font color="#f0f8ff">藏灸学院官方授权查询平台</font></strong>
-            </div>
-        </div>
-		<br>
-		<br>
-		<br>
-
-		<form class="code-content form-horizontal align-center"  id="gzxantForm">
-            <br>
-            <br>
-			<div class="form-group align-center">
-				<label for="nameLabel" class="col-sm-2 control-label" style="color: black;">姓名:</label>
-				<div class="col-sm-10">
-					<label id="nameLabel" style="font-weight:200" class="align-center">${qualification.name}</label>
-				</div>
-			</div>
-            <br>
-            <br>
-			<div class="form-group align-center">
-				<label for="enterpriseLabel" class="col-sm-2 control-label" style="color: black;">企业:</label>
-				<div class="col-sm-10">
-					<label id="enterpriseLabel" style="font-weight:200" class="align-center">${qualification.enterprise}</label>
-				</div>
-			</div>
-
-
-            <div class="align-center" style="margin-top:140px;font-size: 20px; color: black">
-                <font>说明：该企业已获得 “藏灸” 技术治疗服务中心官方授权!</font><br>
-                广州藏灸文化研究有限公司
-            </div>
-		</form>
+<body>
+	<div class="modal-box"></div>
+	<div class="code-head" >
+       <div class="align-center" style="margin-bottom:20px;">
+           <img src="${rc.contextPath}/img/medicine/logo.png" height="90" width="90">
+       </div >
+       <div class="align-center" style="margin-top:20px;font-size: 20px;">
+           <strong><font color="#f0f8ff">藏灸学院官方授权查询平台</font></strong>
+       </div>
 	</div>
 
+	<div class="container-fluid code-content">
+		<div class="content-modal"></div>
+		<label>姓名：</label> 
+		<label style="margin-left: 30px;">${qualification.name}</label>
+		<br />
+		<br />
+		<label>企业：</label>
+		<label style="margin-left: 30px;">${qualification.enterprise}</label>
+	</div>
+
+	<p class="align-center" style="font-size: 12px; margin-top: 30px;">说明：该企业已获得“藏灸”技术治疗服务中心官方授权！</p>
+	<p class="align-center" style="font-size: 12px;">广州藏灸文化研究有限公司</p>
+
+	<div class="align-center" style="margin-top: 60px;">
+		<button type="button" onclick="back();" class="btn btn-info align-center"
+			style="background-color: #a40001; border-color: #a40001; width: 50%">返回</button>
+	</div>
 
 	<script type="text/javascript">
 	action = "${action}";

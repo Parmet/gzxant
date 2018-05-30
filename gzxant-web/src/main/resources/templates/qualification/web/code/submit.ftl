@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>资质认领</title>
+<title>藏灸技术资质认领</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" href="${rc.contextPath}/favicon.ico">
 <link href="${rc.contextPath}/css/bootstrap.min.css"
@@ -41,103 +41,105 @@ html, body {
 }
 
 body {
-	background: url(${rc.contextPath}/img/medicine/bg0.jpg);
+	background: url(${rc.contextPath}/img/medicine/bg1.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 }
 
 .code-content {
-	background-color: #b40202;
+	background-color: #a40001;
 	padding: 20px;
 	border-radius: 10px;
-	opacity: 0.9;
 	box-shadow: 5px 5px 5px #888888;
 }
 
 .form-content label {
 	color: white;
 }
+
+.logo-box {
+	/* background-color: #b40202; */
+	background-color: #a40001;
+}
+
+.modal-box {
+	background-color: #EAEAEA;
+	background-size: cover;
+	position: absolute;
+	opacity: 0.7;
+	width: 100%;
+	height: 125vh;
+	z-index: -1;
+}
 </style>
 </head>
 
 <body>
-	<div class="container-fluid"
-		style="padding: 10px;">
-		<div class="row" style="background-color: #b40202">
+	<div class="modal-box"></div>
+	<div class="container-fluid text-center">
+		<div class="row logo-box">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="text-align: center;">
 				<img src="${rc.contextPath}/img/medicine/yp_logo.png" style="width: 200px; height: 188px; margin: 0 auto;"/>
 			</div>
 		</div>
+		<p style="font-size: 12px; margin-top: 10px;">说明：“藏灸”技术治疗服务中心官方资质认领页面</p>
+		<p style="font-size: 12px;">广州藏灸文化研究有限公司</p>
 		<div class="row">
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-				<p style="font-size: 12px;">
-					<b>说明：</b><span style="color:darkgray;">广州藏灸文化研究有限公司“藏灸”技术治疗服务中心官方认证页面</span>
-				</p>
-			</div>
-		</div>
-		<form class="code-content" id="gzxantForm">
-			<div class="row">
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-					<input type="text" class="form-control" name="name"
-						placeholder="请输入姓名（必填）" required aria-required="true" />
-				</div>
-
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-					<input type="number" class="form-control" name="phone"
-						placeholder="请输入电话（必填）" required aria-required="true" />
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-					<input type="text" class="form-control" name="enterprise"
-						placeholder="请输入企业（必填）" required aria-required="true" />
-				</div>
+			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+			<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 				
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-					<input type="text" class="form-control" name="code"
-						placeholder="请输入已认领的授权编号" />
-				</div>
-
-			</div>
-
-			<div class="row">
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-					<input type="text" class="form-control" name="card"
-						placeholder="请输入身份证号码" />
-				</div>
-			
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-					<input type="email" class="form-control" name="email"
-						placeholder="请输入邮箱" />
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-					<input type="text" class="form-control" name="brandAgent"
-						placeholder="请输入目前经营的品牌或代理" />
-				</div>
-				
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-					<div style="position: relative;">
-						<!-- container -->
-						<input readonly type="text" data-toggle="city-picker"
-							class="form-control" name="provinces" />
+				<form id="gzxantForm">
+					<div class="code-content">
+						<div class="form-group">
+							<input type="text" class="form-control" name="name"
+								placeholder="请输入姓名（必填）" required aria-required="true" />
+						</div>
+		
+						<div class="form-group">
+							<input type="number" class="form-control" name="phone"
+								placeholder="请输入电话（必填）" required aria-required="true" />
+						</div>
+		
+						<div class="form-group">
+							<input type="text" class="form-control" name="enterprise"
+								placeholder="请输入企业（必填）" required aria-required="true" />
+						</div>
+						
+						<div class="form-group">
+							<input type="text" class="form-control" name="code"
+								placeholder="请输入已认领的授权编号" />
+						</div>
+		
+						<div class="form-group">
+							<input type="text" class="form-control" name="card"
+								placeholder="请输入身份证号码" />
+						</div>
+					
+						<div class="form-group">
+							<input type="email" class="form-control" name="email"
+								placeholder="请输入邮箱" />
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" name="brandAgent"
+								placeholder="请输入目前经营的品牌或代理" />
+						</div>
+						
+						<div class="form-group">
+							<div style="position: relative;">
+								<!-- container -->
+								<input readonly type="text" data-toggle="city-picker"
+									class="form-control" name="provinces" />
+							</div>
+						</div>
 					</div>
-				</div>
+					<div style="width: 100%;">
+						<button type="submit" style="margin: 20px auto; width: 70%; background-color: #a40001;border-color:#a40001; " class="btn btn-info btn-block">提交</button>
+					</div>
+				</form>
 			</div>
-			<div style="width: 100%; position: fixed; bottom: 5px; left:0;">
-				<button type="submit" style="margin: 0 auto; width: 300px;background-color: #b40202; font-size:50px" class="btn btn-info btn-block">认证提交</button>
-			</div>
-
-            <#--<div class="align-center" style="margin-top:60px;">-->
-                <#--<button type="submit" class="btn btn-info btn-block align-center" style="background-color: #b40202;width:300px;">提交</button>-->
-            <#--</div>-->
-
-		</form>
+			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+		</div>
 	</div>
-	<div style="width: 100%; height: 100px;"></div>
 
 	<script type="text/javascript">
 	action = "${action}";

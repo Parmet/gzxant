@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>资质认领</title>
+<title>藏灸技术授权查询</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" href="${rc.contextPath}/favicon.ico">
 <link href="${rc.contextPath}/css/bootstrap.min.css" rel="stylesheet">
@@ -35,8 +35,18 @@
 <script src="${rc.contextPath}/plugins/dist/js/city-picker.js"></script>
 
 <style type="text/css">
+html, body {
+	width: 100%;
+}
+
+body {
+	background: url(${rc.contextPath}/img/medicine/bg1.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
 .code-content {
-	background-color: #b40202;
+	background-color: #a40001;
 	padding: 20px;
 }
 
@@ -48,37 +58,50 @@
     margin:0 auto; /* 居中 这个是必须的，，其它的属性非必须 */
     text-align:center; /* 文字等内容居中 */
 }
+
+.modal-box {
+	background-color: #EAEAEA;
+	background-size: cover;
+	position: absolute;
+	opacity: 0.7;
+	width: 100%;
+	height: 100vh;
+	z-index: -1;
+}
 </style>
 </head>
 
-<body style="background-color: #f0f0f0">
+<body>
+	<div class="modal-box"></div>
 	<div class="code-content" >
        <div class="align-center" style="margin-bottom:20px;">
-           <img src="${rc.contextPath}/img/logo.png" height="170" width="170">
+           <img src="${rc.contextPath}/img/medicine/logo.png" height="90" width="90">
        </div >
-       <div class="align-center" style="margin-top:20px;font-size: 40px;">
+       <div class="align-center" style="margin-top:20px;font-size: 20px;">
            <strong><font color="#f0f8ff">藏灸学院官方授权查询平台</font></strong>
        </div>
 	</div>
 
 	<form id="gzxantForm">
 		<div class="container-fluid">
-		    <div class="form-group align-center" style="margin-top:30px;">
-		           <label class="control-label"><font color="#545454">授权编号（区分大小写）</font></label>
-		             <input type="text" class="form-control align-center" name="code" id="name"
-		                    placeholder="请输入授权编号" required aria-required="true" value="${code}" style="width:700px; height: 70px;font-size: 38px;"/>
+			<div class="row">
+				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+				<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+				    <div class="form-group align-center" style="margin-top:30px;">
+				           <label class="control-label"><font color="black">授权编号（区分大小写）</font></label>
+				           <input type="text" class="form-control" name="code" id="name"
+				                    placeholder="请输入授权编号" required aria-required="true" value="${code}" />
+				    </div>
+				    <div class="align-center" style="margin-top:60px;">
+				        <button type="submit" class="btn btn-info align-center" style="background-color: #a40001;border-color:#a40001; width:70%">查询</button>
+				    </div>
+				</div>
+				<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
 		    </div>
-		    <div class="align-center" style="margin-top:60px;">
-		        <button type="submit" class="btn btn-info btn-block align-center" style="background-color: #b40202;width:300px;">查询</button>
-		    </div>
-
-            <div class="align-center" style="margin-top:40px;font-size: 20px;">
-                <font>说明：“藏灸” 技术治疗服务中心官方授权查询页面 </font><br>
-                广州藏灸文化研究有限公司
-            </div>
 	    </div>
     </form>
-
+	<p class="align-center" style="font-size: 12px; margin-top: 30px;">说明：“藏灸”技术治疗服务中心官方资质查询页面</p>
+	<p class="align-center" style="font-size: 12px;">广州藏灸文化研究有限公司</p>
 	<script type="text/javascript">
 	action = "${action}";
     function  cusFunction() {
