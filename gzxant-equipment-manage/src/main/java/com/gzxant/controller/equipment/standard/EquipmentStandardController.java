@@ -1,5 +1,7 @@
 package com.gzxant.controller.equipment.standard;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,9 +26,11 @@ import com.gzxant.base.vo.DataTable;
 import com.gzxant.entity.equipment.standard.EquipmentStandard;
 import com.gzxant.service.equipment.standard.IEquipmentStandardService;
 import com.gzxant.service.equipment.standard.category.IEquipmentStandardCategoryService;
+import com.gzxant.util.FileUtils;
 import com.gzxant.util.PathUtils;
 import com.gzxant.util.ReturnDTOUtil;
 import com.gzxant.util.pdf.PDFUtil;
+import com.gzxant.vo.equipment.standard.EquipmentStandardVO;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -75,13 +80,31 @@ public class EquipmentStandardController extends BaseController {
 			return ReturnDTOUtil.fail();
 		}
 		
-		String path = standard.getPdfUrl();
-		path = PathUtils.getRootPath() + path;
-		String txtPath = PDFUtil.pdf2Txt(path);
+		logger.debug("PDF转换开始");
+		long start = System.currentTimeMillis();
 		
-		Map<String, Object> standardData = standardService.parse(txtPath);
+		Map<String, Object> map = new HashMap<>();
 		
-		return ReturnDTOUtil.success();
+		// pdf 转 txt
+		String pdfPath = standard.getPdfUrl();
+		pdfPath = PathUtils.getRootPath() + pdfPath;
+		String txtPath = PDFUtil.pdf2Txt(pdfPath);
+		
+		// 读取txt的内容，返回页面
+		List<String> txts = FileUtils.readFileTxt(new File(txtPath));
+		logger.debug("pdf 转 txt 完成");
+		
+		// pdf转图片
+		List<String> imgs = PDFUtil.pdf2Img(pdfPath);
+		logger.debug("pdf 转 图片 完成");
+		
+		long end = System.currentTimeMillis();
+		
+		logger.debug("转换完成，共用时：" + (end - start));
+		map.put("txtPath", txtPath);
+		map.put("txts", txts);
+		map.put("imgs", imgs);
+		return ReturnDTOUtil.success(map);
 	}
  
 	@ApiOperation(value = "获取标准表列表数据", notes = "获取标准表列表数据:使用约定的DataTable")
@@ -94,16 +117,17 @@ public class EquipmentStandardController extends BaseController {
 	@ApiOperation(value = "添加标准表", notes = "添加标准表")
 	@PostMapping(value = "/create")
 	@ResponseBody
-	public ReturnDTO create(EquipmentStandard param) {
-		standardService.insert(param);
+	public ReturnDTO create(@ModelAttribute EquipmentStandardVO param) {
+		System.out.println(param);
+//		standardService.insert(param);
 		return ReturnDTOUtil.success();
 	}
 
 	@ApiOperation(value = "编辑标准表", notes = "编辑标准表")
 	@PostMapping(value = "/update")
 	@ResponseBody
-	public ReturnDTO update(EquipmentStandard param) {
-		standardService.updateById(param);
+	public ReturnDTO update(EquipmentStandardVO param) {
+//		standardService.updateById(param);
 		return ReturnDTOUtil.success();
 	}
 

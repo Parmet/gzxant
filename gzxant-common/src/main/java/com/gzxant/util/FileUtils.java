@@ -216,6 +216,10 @@ public class FileUtils {
     }
 
 	public static List<File> getFiles(String path) {
+		return getFiles(path, "");
+	}
+	
+	public static List<File> getFiles(String path, String suffix) {
 		// 目标集合fileList
 		List<File> fileList = new ArrayList<File>();
 		File file = new File(path);
@@ -227,7 +231,12 @@ public class FileUtils {
 					getFiles(fileIndex.getPath());
 				} else {
 					// 如果文件是普通文件，则将文件句柄放入集合中
-					fileList.add(fileIndex);
+					if (StringUtils.isNotBlank(suffix) 
+						&& fileIndex.getName().endsWith(suffix)) {
+						fileList.add(fileIndex);
+					} else {
+						fileList.add(fileIndex);
+					}
 				}
 			}
 		}
@@ -253,5 +262,10 @@ public class FileUtils {
         }
         
 		return list;
+	}
+	
+	public static void main(String[] args) {
+		File file = new File("D:\\Programment\\Java\\Service\\redis64-3.0.501\\redis-server.pdb");
+		System.out.println(file.getName());
 	}
 }

@@ -38,14 +38,6 @@ public class EquipmentStandard extends DataEntity<EquipmentStandard> {
      */
 	private String number;
     /**
-     * 排序
-     */
-	private Integer sort;
-    /**
-     * 分类图标
-     */
-	private String icon;
-    /**
      * 旧标准
      */
 	@TableField("old_stand")
@@ -120,22 +112,6 @@ public class EquipmentStandard extends DataEntity<EquipmentStandard> {
 
 	public void setNumber(String number) {
 		this.number = number;
-	}
-
-	public Integer getSort() {
-		return sort;
-	}
-
-	public void setSort(Integer sort) {
-		this.sort = sort;
-	}
-
-	public String getIcon() {
-		return icon;
-	}
-
-	public void setIcon(String icon) {
-		this.icon = icon;
 	}
 
 	public String getOldStand() {
@@ -222,8 +198,6 @@ public class EquipmentStandard extends DataEntity<EquipmentStandard> {
 			", categoryId=" + categoryId +
 			", path=" + categoryPath +
 			", number=" + number +
-			", sort=" + sort +
-			", icon=" + icon +
 			", oldStand=" + oldStand +
 			", publishDate=" + publishDate +
 			", uploadDate=" + uploadDate +

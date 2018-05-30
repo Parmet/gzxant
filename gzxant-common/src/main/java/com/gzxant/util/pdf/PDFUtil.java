@@ -14,6 +14,7 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.encryption.InvalidPasswordException;
 import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.pdfbox.tools.imageio.ImageIOUtil;
 
 import com.gzxant.util.image.ocr.aliyun.ImageUtils;
@@ -25,6 +26,28 @@ import com.gzxant.util.image.ocr.aliyun.ImageUtils;
  * @since 2018-05-21
  */
 public class PDFUtil {
+	
+	/**
+	 * pdf 转文字
+	 * 
+	 * @param pdfPath
+	 * @return
+	 */
+	public static String pdf2Str(String pdfPath) {
+		StringBuffer buff = new StringBuffer();
+		PDDocument document = null;
+		try {
+			document = PDDocument.load(new File(pdfPath));
+			PDFTextStripper stripper = new PDFTextStripper();
+//			stripper.addOperator(op);
+			buff.append(stripper.getText(document));
+			document.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return buff.toString();
+	}
 
 	/**
 	 * pdf转txt文件
@@ -37,19 +60,25 @@ public class PDFUtil {
 			return "";
 		}
 		
-		// 1. pdf 分页转成图片
-		List<String> imgs = pdf2Img(pdfPath);
-		String imgStr = "";
+		// pdf 分页转成图片
+//		List<String> imgs = pdf2Img(pdfPath);
+//		String imgStr = "";
 		
-		// 2. 将图片转成文字
+		// 1. pdf 提取文字
+		String txts = pdf2Str(pdfPath);
+		
+		// 2. 保存
 		String txtPath = getTxtPath(pdfPath);
-		for (int i = 0; i < imgs.size(); i++) {
-			imgStr = ImageUtils.img2Str(imgs.get(i));
-			String curTextPath = txtPath + File.separator + i + ".txt";
-			writeContent2Txt(imgStr, curTextPath);
-		}
+		writeContent2Txt(txts, txtPath);
 		
-		// 3. 保存到文件
+		// 将图片转成文字
+//		String txtPath = getTxtPath(pdfPath);
+//		for (int i = 0; i < imgs.size(); i++) {
+//			imgStr = ImageUtils.img2Str(imgs.get(i));
+//			String curTextPath = txtPath + File.separator + i + ".txt";
+//			writeContent2Txt(imgStr, curTextPath);
+//		}
+		
 		return txtPath;
 	}
 	
@@ -61,12 +90,13 @@ public class PDFUtil {
 	 */
 	private static String getTxtPath(String pdfPath) {
 		// 根据pdf名称生成目录
-		String savePath = pdfPath.substring(0, pdfPath.length() - 4) + File.separator + "txt";
+		String savePath = pdfPath.substring(0, pdfPath.length() - 4) + File.separator;
 		File saveFile = new File(savePath);
 		if(!saveFile.exists() && !saveFile.isDirectory()){
 			saveFile.mkdirs();
 		}
 		
+		savePath = savePath + "content.txt";
 		return savePath;
 	}
 
@@ -143,10 +173,5 @@ public class PDFUtil {
 		}
 		
 		return results;
-	}
-	
-	public static void main(String[] args) {
-		String path = "F:\\gzxant\\file\\项目\\设备检测\\需求文档\\标准pdf\\GB 1886.25-2016 食品安全国家标准 食品添加剂 柠檬酸钠.pdf";
-		PDFUtil.pdf2Txt(path);
 	}
 }
