@@ -47,7 +47,7 @@ body {
 }
 
 .code-content {
-	background-color: #ac5537;
+	background-color: #b40202;
 	padding: 20px;
 	border-radius: 10px;
 	opacity: 0.9;
@@ -63,7 +63,7 @@ body {
 <body>
 	<div class="container-fluid"
 		style="padding: 10px;">
-		<div class="row">
+		<div class="row" style="background-color: #b40202">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="text-align: center;">
 				<img src="${rc.contextPath}/img/medicine/yp_logo.png" style="width: 200px; height: 188px; margin: 0 auto;"/>
 			</div>
@@ -128,8 +128,13 @@ body {
 				</div>
 			</div>
 			<div style="width: 100%; position: fixed; bottom: 5px; left:0;">
-				<button type="submit" style="margin: 0 auto; width: 80%" class="btn btn-info btn-block">提交</button>
+				<button type="submit" style="margin: 0 auto; width: 300px;background-color: #b40202; font-size:50px" class="btn btn-info btn-block">认证提交</button>
 			</div>
+
+            <#--<div class="align-center" style="margin-top:60px;">-->
+                <#--<button type="submit" class="btn btn-info btn-block align-center" style="background-color: #b40202;width:300px;">提交</button>-->
+            <#--</div>-->
+
 		</form>
 	</div>
 	<div style="width: 100%; height: 100px;"></div>

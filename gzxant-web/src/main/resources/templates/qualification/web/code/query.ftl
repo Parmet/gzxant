@@ -36,7 +36,7 @@
 
 <style type="text/css">
 .code-content {
-	background-color: #ac5537;
+	background-color: #b40202;
 	padding: 20px;
 }
 
@@ -54,9 +54,9 @@
 <body style="background-color: #f0f0f0">
 	<div class="code-content" >
        <div class="align-center" style="margin-bottom:20px;">
-           <img src="${rc.contextPath}/img/medicine/logo.png" height="90" width="90">
+           <img src="${rc.contextPath}/img/logo.png" height="170" width="170">
        </div >
-       <div class="align-center" style="margin-top:20px;font-size: 20px;">
+       <div class="align-center" style="margin-top:20px;font-size: 40px;">
            <strong><font color="#f0f8ff">藏灸学院官方授权查询平台</font></strong>
        </div>
 	</div>
@@ -65,12 +65,17 @@
 		<div class="container-fluid">
 		    <div class="form-group align-center" style="margin-top:30px;">
 		           <label class="control-label"><font color="#545454">授权编号（区分大小写）</font></label>
-		             <input type="text" class="form-control" name="code" id="name"
-		                    placeholder="请输入授权编号" required aria-required="true" value="${code}" />
+		             <input type="text" class="form-control align-center" name="code" id="name"
+		                    placeholder="请输入授权编号" required aria-required="true" value="${code}" style="width:700px; height: 70px;font-size: 38px;"/>
 		    </div>
 		    <div class="align-center" style="margin-top:60px;">
-		        <button type="submit" class="btn btn-info btn-block align-center">查询</button>
+		        <button type="submit" class="btn btn-info btn-block align-center" style="background-color: #b40202;width:300px;">查询</button>
 		    </div>
+
+            <div class="align-center" style="margin-top:40px;font-size: 20px;">
+                <font>说明：“藏灸” 技术治疗服务中心官方授权查询页面 </font><br>
+                广州藏灸文化研究有限公司
+            </div>
 	    </div>
     </form>
 
