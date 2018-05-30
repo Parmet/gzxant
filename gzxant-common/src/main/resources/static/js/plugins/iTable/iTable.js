@@ -112,7 +112,7 @@
 	};
 
 	iTable.prototype.init = function(options) {
-		_options = $.extend({}, _default, options);
+		_options = $.extend(true, {}, _default, options);
 
 		this.bulidHtml();
 		this.listen();
@@ -163,13 +163,15 @@
 			}
 
 			var _include_btn = _options.toolbar.btn.include;
-			for(var i = 0; i < _include_btn.length; i++) {
-				var btn = _include_btn[i];
-				html.push(
-					'<button type="button" id="' + btn.id + '" class="btn ' + btn.className + '" style="margin-left: 10px;">',
-					'<i class="' + btn.icon + '" aria-hidden="true"></i>',
-					' ' + btn.title,
+			if (_include_btn) {
+				for(var i = 0; i < _include_btn.length; i++) {
+					var btn = _include_btn[i];
+					html.push(
+							'<button type="button" id="' + btn.id + '" class="btn ' + btn.className + '" style="margin-left: 10px;">',
+							'<i class="' + btn.icon + '" aria-hidden="true"></i>',
+							' ' + btn.title,
 					'</button>');
+				}
 			}
 
 			html.push('</div>', '</div>');
@@ -212,10 +214,12 @@
 		}
 
 		var _include_btn = _options.toolbar.btn.include;
-		for(var i = 0; i < _include_btn.length; i++) {
-			var btn = _include_btn[i];
-			$("#" + _options.toolbar.id).find("#" + btn.id)
-				.bind("click", btn.click);
+		if (_include_btn) {
+			for(var i = 0; i < _include_btn.length; i++) {
+				var btn = _include_btn[i];
+				$("#" + _options.toolbar.id).find("#" + btn.id)
+					.bind("click", btn.click);
+			}
 		}
 	}
 
@@ -390,15 +394,15 @@
 	};
 
 	iTable.prototype.dt_insert = function() {
-		this.dt_action("新增", _options.toolbar.btn.dt_insert.url);
+		this.dt_action("新增", _options.toolbar.btn.dt_insert.url, _options.toolbar.btn.dt_insert.open_type);
 	};
 
 	iTable.prototype.dt_update = function(id) {
-		this.dt_action("编辑", _options.table.btn.update.url + "/" + id);
+		this.dt_action("编辑", _options.table.btn.update.url + "/" + id, _options.table.btn.update.open_type);
 	};
 
 	iTable.prototype.dt_detail = function(id) {
-		this.dt_action("详情", _options.table.btn.detail.url + "/" + id);
+		this.dt_action("详情", _options.table.btn.detail.url + "/" + id, _options.table.btn.detail.open_type);
 	};
 
 	iTable.prototype.dt_action = function(title, action, opent_type) {
@@ -411,7 +415,10 @@
 		// } else {
 		//     btn = "关闭";
 		// }
-		if (opent_type == 1) {
+		layer.alert(opent_type);
+		if (opent_type == 2) {
+			window.location.href = url + action
+		} else {
 			var initSelect2 = "<script type='text/javascript'>$('.select2').select2();</script>";
 			$.get(url + action, {}, function(html) {
 				layer.open({
@@ -429,8 +436,6 @@
 					}
 				});
 			}, "html");
-		} else if (opent_type == 2) {
-			window.location.href = url + action
 		}
 	};
 

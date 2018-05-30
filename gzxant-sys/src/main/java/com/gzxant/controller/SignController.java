@@ -1,10 +1,13 @@
 package com.gzxant.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gzxant.base.controller.BaseController;
+import com.gzxant.entity.SysConfig;
+import com.gzxant.service.ISysConfigService;
 
 /**
  * Created by chen on 2017/7/14.
@@ -25,8 +30,13 @@ import com.gzxant.base.controller.BaseController;
  */
 @Controller
 public class SignController extends BaseController{
+	
+	@Autowired
+	private ISysConfigService configService;
+	
+	private List<SysConfig> configs;
 
-    /**
+	/**
      *  空地址请求
      * @param model
      * @param request
@@ -36,7 +46,7 @@ public class SignController extends BaseController{
     public String index(Model model, HttpServletRequest request) {
         model.addAttribute("base", request.getContextPath());
         Subject s = SecurityUtils.getSubject();
-        return s.isRemembered() || s.isAuthenticated() ? "redirect:index" : "sign/login";
+        return s.isRemembered() || s.isAuthenticated() ? "redirect:index" : getConfig("LOGIN_URL");
     }
 
 
@@ -48,7 +58,7 @@ public class SignController extends BaseController{
      */
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(HttpServletRequest request, RedirectAttributes redirectAttributes) {
-        return "home/index";
+        return getConfig("INDEX_URL");
     }
 
 
@@ -62,7 +72,7 @@ public class SignController extends BaseController{
     public String login(Model model, HttpServletRequest request) {
         model.addAttribute("base", request.getContextPath());
         Subject s = SecurityUtils.getSubject();
-        return s.isRemembered() || s.isAuthenticated() ? "redirect:index" : "sign/login";
+        return s.isRemembered() || s.isAuthenticated() ? "redirect:index" : getConfig("LOGIN_URL");
     }
 
 
@@ -88,9 +98,20 @@ public class SignController extends BaseController{
         }
         
         model.addAttribute("base", request.getContextPath());
-        return "sign/login";
+        return getConfig("LOGIN_URL");
     }
 
-
-
+    public String getConfig(String code) {
+    	if (configs == null || configs.isEmpty()) {
+    		configs = configService.getSub("SYS_LOGIN");
+    	}
+    	
+    	for (SysConfig config : configs) {
+			if (config.getJkey().equals(code)) {
+				return config.getValue();
+			}
+		}
+    	
+		return "";
+    }
 }

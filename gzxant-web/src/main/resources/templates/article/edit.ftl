@@ -9,12 +9,13 @@
       <script src="${rc.contextPath}/js/bootstrap.min.js"></script>
       <script src="${rc.contextPath}/wysiwyg/bootstrap-wysiwyg.js"></script>
       <script src="${rc.contextPath}/wysiwyg/external/google-code-prettify/prettify.js"></script>
+<form id="gzxantForm">
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 form-group"></div>
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
 			<div class="form-group">
-                <input type="text" class="form-control" name="name" id="name" placeholder="请输入标题" value="${qualification.name}" style="height:30px;margin-top:20px;" required aria-required="true"/>
+                <input type="text" class="form-control" name="name" id="name" placeholder="请输入标题" value="${article.name}" style="height:30px;margin-top:20px;" required aria-required="true"/>
             </div>
 		</div>
 		<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 form-group"></div>
@@ -34,7 +35,7 @@
           <ul class="dropdown-menu">
           <li><a data-edit="fontSize 5"><font size="5">一级标题</font></a></li>
           <li><a data-edit="fontSize 3"><font size="3">二级标题</font></a></li>
-          <li><a data-edit="fontSize 1"><font size="1">三级标题</font></a></li>
+          <li><a data-edit="fontSize 1"><font size="1">正文</font></a></li>
           </ul>
       </div>
       <div class="btn-group">
@@ -59,7 +60,7 @@
 		  <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="icon-link"></i></a>
 		    <div class="dropdown-menu input-append">
 			    <input class="span2" placeholder="URL" type="text" data-edit="createLink"/>
-			    <button class="btn" type="button">Add</button>
+			    <button class="btn" type="button">添加</button>
         </div>
         <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="icon-cut"></i></a>
 
@@ -87,9 +88,10 @@
 	</div>
     <div class="col-sm-4">
     	<button type="button" onclick="back()" class="btn btn-info m-t-25">返回</button>
-        <button type="button" onclick="saveContent()" class="btn btn-success m-t-25">提交</button>
+        <button type="submit" class="btn btn-success m-t-25">提交</button>
     </div>
 </div>
+</form>
 <script src="http://cdn.bootcss.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
 <script src="${rc.contextPath}/wysiwyg/bootstrap-wysiwyg.js"></script>
 <script>
@@ -104,6 +106,9 @@ form.validate({
         name: {
             required: true,
         }
+    },
+    submitHandler: function () {
+    	saveContent();
     }
 });
 
@@ -114,8 +119,9 @@ function back() {
  * 提交表单
  */
 function saveContent() {
-	layer.alert($("#editor").html());
-	layer.alert($("#name").val());
+	var load_index = layer.open({
+		type: 3
+	});
     $.ajax({
         cache: true,
         type: "POST",
@@ -124,9 +130,10 @@ function saveContent() {
         	articleContent : $("#editor").html(),
         	name : $("#name").val()
         },// 你的formid
-        async: false,
+        async: true,
         dataType : "json",
         error: function (XMLHttpRequest, textStatus, errorThrown) {
+        	layer.close(load_index);
             layer.alert(XMLHttpRequest.responseJSON.error);
         },
         beforeSend: function () {
@@ -136,8 +143,10 @@ function saveContent() {
         },
         success: function (data) {
         	if (data.code == 200) {
+        		layer.close(load_index);
                 layer.msg("保存成功！");
             } else {
+            	layer.close(load_index);
                 layer.alert(data.error)
             }
         }

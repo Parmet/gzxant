@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,32 +38,49 @@ public class ArticleController extends BaseController {
 	}
 
 	@ApiOperation(value = "进入文章编辑界面", notes = "进入文章编辑界面")
-	@GetMapping(value = {"/{action}/{id}", "/{action}"})
+	@GetMapping(value = { "/{action}/{id}", "/{action}" })
 	public String detail(@PathVariable(name = "action") String action,
-						 @PathVariable(name = "id", required = false) String id, Model model) {
-       if (!action.equals("add")
-			   && !action.equals("update")
-			   && !action.equals("detail")
-			   && !action.equals("add")){
+			@PathVariable(name = "id", required = false) String id, Model model) {
+		if (!action.equals("add") && !action.equals("edit") && !action.equals("view")) {
 			return "404";
-	   }
-        Article article = null;
+		}
+		Article article = null;
 		if (StringUtils.isNumeric(id)) {
 			article = articleService.selectById(id);
 		}
 
 		model.addAttribute("action", action);
 		model.addAttribute("article", article);
-		return "/article/"+ action;
+		return "/article/" + action;
+	}
+
+	@ApiOperation(value = "文章发布", notes = "文章发布")
+	@PostMapping(value = "/push/{state}/{id}")
+	@ResponseBody
+	public ReturnDTO push(@PathVariable(name = "state") String state,
+			@PathVariable(name = "id") String id, Model model) {
+		if (StringUtils.isBlank(state)
+			|| (!state.equals("Y") && !state.equals("N"))
+			|| StringUtils.isBlank(id)) {
+			return ReturnDTOUtil.paramError();
+		}
+		
+		Article article = articleService.selectById(id);
+		if (article == null || article.getId() == null) {
+			return ReturnDTOUtil.custom(405, "非法请求");
+		}
+		
+		article.setState(state);
+		article.setPushTime(new Date());
+		articleService.updateById(article);
+		return ReturnDTOUtil.success();
 	}
 
 	@ApiOperation(value = "获取文章列表数据", notes = "获取文章列表数据:使用约定的DataTable")
 	@PostMapping(value = "/list")
 	@ResponseBody
 	public DataTable<Article> list(@RequestBody DataTable<Article> dt) {
-		if (dt == null
-				|| dt.getPageNumber() < 0
-				|| dt.getPageSize() < 0) {
+		if (dt == null || dt.getPageNumber() < 0 || dt.getPageSize() < 0) {
 			dt = new DataTable<>();
 		}
 		return articleService.pageSearch(dt);
@@ -72,27 +90,24 @@ public class ArticleController extends BaseController {
 	@PostMapping(value = "/add")
 	@ResponseBody
 	public ReturnDTO create(Article param) {
-		//非空判断  文章名称,文章内容不为空
-		if (param == null
-				|| StringUtils.isBlank(param.getName())
-				|| StringUtils.isBlank(param.getArticleContent())) {
+		// 非空判断 文章名称,文章内容不为空
+		if (param == null || StringUtils.isBlank(param.getName()) || StringUtils.isBlank(param.getArticleContent())) {
 			return ReturnDTOUtil.paramError();
 		}
-		
+
 		articleService.insert(param);
 		return ReturnDTOUtil.success();
 	}
 
 	@ApiOperation(value = "编辑文章", notes = "编辑文章")
-	@PostMapping(value = "/update")
+	@PostMapping(value = "/edit/{id}")
 	@ResponseBody
 	public ReturnDTO update(Article param) {
-		//非空判断
-		if (param == null || param.getId() == null
-				|| param.getId().intValue() < 0) {
+		// 非空判断
+		if (param == null || param.getId() == null) {
 			return ReturnDTOUtil.paramError();
 		}
-		
+
 		articleService.updateById(param);
 		return ReturnDTOUtil.success();
 	}
@@ -105,7 +120,14 @@ public class ArticleController extends BaseController {
 		if (ids == null || ids.isEmpty()) {
 			return ReturnDTOUtil.paramError();
 		}
-		boolean success = articleService.deleteBatchIds(ids);
+
+		List<Article> datas = articleService.selectBatchIds(ids);
+		for (Article article : datas) {
+			article.setDelFlag("N");
+			article.setState("N");
+		}
+
+		boolean success = articleService.updateAllColumnBatchById(datas);
 		if (success) {
 			return ReturnDTOUtil.success();
 		}

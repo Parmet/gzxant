@@ -23,11 +23,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.alibaba.fastjson.JSON;
 import com.gzxant.annotation.SLog;
 import com.gzxant.base.controller.BaseController;
+import com.gzxant.base.entity.ReturnDTO;
 import com.gzxant.base.vo.DataTable;
 import com.gzxant.entity.SysOffice;
 import com.gzxant.entity.SysUser;
 import com.gzxant.service.ISysOfficeService;
 import com.gzxant.service.ISysUserOfficeService;
+import com.gzxant.util.ReturnDTOUtil;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -142,10 +144,10 @@ public class SysOfficeController extends BaseController {
      * @param id
      * @return
      */
-/*    @PostMapping(value="disable/{id}")
+    @PostMapping(value="disable/{id}")
     @ResponseBody
     public ReturnDTO disable(@PathVariable("id") Long id){
-        sysOfficeService.disableOffice(id);
+        sysOfficeService.deleteById(id);
         return ReturnDTOUtil.success();
-    }*/
+    }
 }

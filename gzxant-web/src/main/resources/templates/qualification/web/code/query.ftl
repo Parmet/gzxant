@@ -38,56 +38,52 @@
 .code-content {
 	background-color: #ac5537;
 	padding: 20px;
-	border-radius: 10px;
 }
 
 .control-label {
 	color: white;
 }
 
-
 .align-center{
     margin:0 auto; /* 居中 这个是必须的，，其它的属性非必须 */
-    width:500px; /* 给个宽度 顶到浏览器的两边就看不出居中效果了 */
     text-align:center; /* 文字等内容居中 */
 }
 </style>
 </head>
 
-<body>
-	<div class="container-fluid"
-		style="background-color: #ac5537; ">
-		<div class="code-content" >
-            <div class="align-center" style="margin-bottom:20px;">
-                <img src="${rc.contextPath}/img/logo.jpg" height="90" width="90">
-            </div >
-            <div class="align-center" style="margin-top:20px;">
-                <strong> <p style="font-size: 20px;" ><font color="#f0f8ff">藏神学院官方授权查询平台</font></p></strong>
-            </div>
-		</div>
-    </div>
+<body style="background-color: #f0f0f0">
+	<div class="code-content" >
+       <div class="align-center" style="margin-bottom:20px;">
+           <img src="${rc.contextPath}/img/medicine/logo.png" height="90" width="90">
+       </div >
+       <div class="align-center" style="margin-top:20px;font-size: 20px;">
+           <strong><font color="#f0f8ff">藏灸学院官方授权查询平台</font></strong>
+       </div>
+	</div>
 
-
-    <div class="container-fluid"
-         style="background-color: #C1C1C1;">
-        <div class="row">
-             <div class="form-group align-center" style="margin-top:30px;">
-                   <label class="control-label"><font color="#545454">授权编号（区分大小写）</font></label>
-                     <input type="text" class="form-control" name="code" id="name"
-                            placeholder="请输入授权编号" required aria-required="true" />
-            </div>
-            <div class="align-center" style="margin-top:60px;">
-                <button onclick="queryCode()" class="btn btn-info btn-block align-center" style="width:140px;height:40px;">查询</button>
-            </div>
-        </div>
-    </div>
+	<form id="gzxantForm">
+		<div class="container-fluid">
+		    <div class="form-group align-center" style="margin-top:30px;">
+		           <label class="control-label"><font color="#545454">授权编号（区分大小写）</font></label>
+		             <input type="text" class="form-control" name="code" id="name"
+		                    placeholder="请输入授权编号" required aria-required="true" value="${code}" />
+		    </div>
+		    <div class="align-center" style="margin-top:60px;">
+		        <button type="submit" class="btn btn-info btn-block align-center">查询</button>
+		    </div>
+	    </div>
+    </form>
 
 	<script type="text/javascript">
 	action = "${action}";
     function  cusFunction() {
         //console.info("提交之前，最后执行自定义的函数");
     }
-
+	
+    var msg = "${msg}";
+    if (msg != "") {
+    	layer.msg(msg);
+    }
 
     // --------------------------form表单验证-------------------------------------------------- //
     var form = $('#gzxantForm');
@@ -97,12 +93,12 @@
         errorClass: 'error',
         focusInvalid: true,
         rules: {
-        	parentId: {
-                required: true,
-            },
             code: {
                 required: true
             }
+        },
+        submitHandler: function () {
+        	queryCode();
         }
     });
 

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -87,8 +88,6 @@ public class QualificationController extends BaseController {
 
 
 	//=================资格 认证  生成一个随机数,字母加数字,并保存到code中========================
-
-
 	@ApiOperation(value = "授权资格认证通过", notes = "授权资格认证通过")
 	@PostMapping(value = "/update")
 	@ResponseBody
@@ -97,12 +96,31 @@ public class QualificationController extends BaseController {
 		if (param == null || param.getId() == null) {
 			return ReturnDTOUtil.paramError();
 		}
-		//1 为通过  0 为不通过
-		param.setState("Y");
-		qualificationService.qualification(param);
+		
+		qualificationService.updateById(param);
 		return ReturnDTOUtil.success();
 	}
 
+	@ApiOperation(value = "授权资格认证通过", notes = "授权资格认证通过")
+	@PostMapping(value = "/pass")
+	@ResponseBody
+	public ReturnDTO pass(Qualification param) {
+		//非空判断
+		if (param == null || param.getId() == null) {
+			return ReturnDTOUtil.paramError();
+		}
+		
+		String msg = qualificationService.checkCode(param.getCode().trim());
+		if (StringUtils.isNotBlank(msg)) {
+			return ReturnDTOUtil.custom(-1, msg);
+		}
+		
+		//Y 为通过  N 为不通过
+		param.setState("Y");
+		param.setVerifyDate(new Date());
+		qualificationService.updateById(param);
+		return ReturnDTOUtil.success();
+	}
 
 	@ApiOperation(value = "授权资格认证不通过", notes = "授权资格认证不通过")
 	@PostMapping(value = "/not")
@@ -112,8 +130,10 @@ public class QualificationController extends BaseController {
 		if (param == null || param.getId() == null) {
 			return ReturnDTOUtil.paramError();
 		}
-		//1 为通过  0 为不通过
+		
+		//Y 为通过  N 为不通过
 		param.setState("N");
+		param.setVerifyDate(new Date());
 		qualificationService.updateById(param);
 		return ReturnDTOUtil.success();
 	}
@@ -126,6 +146,7 @@ public class QualificationController extends BaseController {
 		if (ids == null || ids.isEmpty()) {
 			return ReturnDTOUtil.paramError();
 		}
+		
 		List<Qualification> datas = qualificationService.selectBatchIds(ids);
 		for (Qualification data : datas) {
 			data.setDelFlag("N");
@@ -135,5 +156,23 @@ public class QualificationController extends BaseController {
 			return ReturnDTOUtil.success();
 		}
 		return ReturnDTOUtil.fail();
+	}
+	
+	@SLog("校验编号正确性")
+	@ApiOperation(value = "校验编号正确性", notes = "校验编号正确性")
+	@PostMapping(value = "/check")
+	@ResponseBody
+	public ReturnDTO checkCode(String code) {
+		if (StringUtils.isBlank(code)) {
+			return ReturnDTOUtil.fail();
+		}
+		
+		code = code.trim();
+		String msg = qualificationService.checkCode(code);
+		if (StringUtils.isBlank(msg)) {
+			return ReturnDTOUtil.success();
+		}
+		
+		return ReturnDTOUtil.custom(-1, msg);
 	}
 }
