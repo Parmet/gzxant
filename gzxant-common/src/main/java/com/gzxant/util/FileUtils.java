@@ -10,7 +10,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -188,7 +187,9 @@ public class FileUtils {
             }else{
                 downloadName=fileLocal.substring(fileLocal.lastIndexOf("/")+1);
             }
-            response.setHeader("content-disposition","attachment;filename="+ URLEncoder.encode(downloadName,"UTF-8"));
+            
+            response.setHeader("content-disposition","attachment;filename=" + new String(downloadName.getBytes("gbk"),"iso-8859-1"));//URLEncoder.encode(downloadName, "UTF-8")
+            response.setCharacterEncoding("UTF-8"); 
             in=new FileInputStream(fileLocal);
             int len=0;
             byte buffer[]=new byte[1024];
@@ -262,10 +263,5 @@ public class FileUtils {
         }
         
 		return list;
-	}
-	
-	public static void main(String[] args) {
-		File file = new File("D:\\Programment\\Java\\Service\\redis64-3.0.501\\redis-server.pdb");
-		System.out.println(file.getName());
 	}
 }

@@ -1,6 +1,5 @@
 attach_path: /gzxant/attach/
 
-
 spring:
   datasource:
     druid:
@@ -18,10 +17,9 @@ spring:
       maxOpenPreparedStatements: 100
 
   redis:
-    database: 1
-    host: 192.168.0.200
+    host: 127.0.0.1
     port: 6379
-    password: 123456
+    password: gzxant
     pool:
       max-active: 8
       max-wait: -1

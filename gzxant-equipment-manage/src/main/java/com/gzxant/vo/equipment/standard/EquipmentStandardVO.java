@@ -16,14 +16,14 @@ import com.gzxant.entity.equipment.standard.EquipmentStandard;
 public class EquipmentStandardVO implements Serializable {
     private static final long serialVersionUID = 1L;
     
-    private EquipmentStandard info;
+    private List<EquipmentStandard> info;
     private List<EquipmentStandardItemVO> item;
 
-	public EquipmentStandard getInfo() {
+	public List<EquipmentStandard> getInfo() {
 		return info;
 	}
 
-	public void setInfo(EquipmentStandard info) {
+	public void setInfo(List<EquipmentStandard> info) {
 		this.info = info;
 	}
 

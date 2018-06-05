@@ -9,7 +9,6 @@
         <version>1.5.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-
     <!--本项目顶层-->
     <groupId>com.gzxant</groupId>
     <artifactId>gzxant</artifactId>

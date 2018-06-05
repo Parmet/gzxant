@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 
 import com.gzxant.constant.Global;
+import com.gzxant.constant.Setting;
 
 /**
  * 获取路径工具类
@@ -16,6 +17,7 @@ import com.gzxant.constant.Global;
 public class PathUtils {
 	/**
 	 * 获取项目的绝对路径
+	 * 如果是jar包，则返回jar目录
 	 * @return 项目的绝对路径
 	 */
 	public static String getRootPath() {
@@ -91,4 +93,9 @@ public class PathUtils {
 		
 		return true;
 	}
+	
+	public static String getUploadPath() {
+		return Setting.BASEFLODER + File.separator + "equipment" + File.separator + "manage";
+	}
+	
 }

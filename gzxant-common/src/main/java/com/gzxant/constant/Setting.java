@@ -1,5 +1,9 @@
 package com.gzxant.constant;
 
+import java.io.File;
+
+import org.springframework.stereotype.Component;
+
 /**
  * Created by chen on 2017/9/4.
  * <p>
@@ -7,6 +11,7 @@ package com.gzxant.constant;
  * <p>
  * Describe: 系统的参数设置，后面要放到数据库和缓存中。
  */
+@Component("setting")
 public class Setting {
 	/**
 	 * 启动类扫描mapper文件路径
@@ -16,7 +21,7 @@ public class Setting {
     /**
      * 文件根目录
      */
-    public static final String BASEFLODER = "attach";
+    public static final String BASEFLODER = File.separator + "app" + File.separator + "attach";
     
     /**
      * excel 目录

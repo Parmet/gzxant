@@ -52,6 +52,10 @@ public class FileController {
     		return ;
     	}
     	
+    	if (path.contains("|")) {
+    		path = path.replace("|", File.separator);
+    	}
+    	
     	File file = new File(path);
     	
     	FileInputStream inputStream = new FileInputStream(file);
@@ -67,6 +71,10 @@ public class FileController {
         stream.close();
     }
 
+    public String getUploadPath() {
+		return null;
+    }
+    
     @ApiOperation(value = "后台删除文件", notes = "后台删除文件")
     @PostMapping(value = "/delete")
     @ResponseBody
@@ -104,23 +112,25 @@ public class FileController {
         return ReturnDTOUtil.success(rt);
     }
 
-    private Map upload(String type,String path,MultipartFile file){
+    private Map upload(String type, String path, MultipartFile file){
         String uuid = FileUtils.createFileName();//创建文件名称
 
         String fileExt = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1).toLowerCase();//扩展名
 
-        String fileName = Setting.BASEFLODER;
+        String fileName = PathUtils.getUploadPath();
         if (StringUtils.isNotBlank(path)) {
-            fileName = fileName + "/" + path;
+        	fileName = fileName.replace("/", File.separator);
+        	fileName = fileName.replace("\\", File.separator);
+            fileName = fileName + File.separator + path;
         }
         
-        String savePath = fileName + File.separator + type + File.separator + GzxantSysUser.id() + File.separator + file.getOriginalFilename();//附件路径+类型（头像、附件等）+名称+扩展名
+        String savePath = fileName + File.separator + type + File.separator + GzxantSysUser.id() + File.separator + uuid + "." + fileExt;//附件路径+类型（头像、附件等）+名称+扩展名
         File localFile = FileUtils.saveFileToDisk(file, savePath); //保存到磁盘
 
         String thumbnailName = "";
         if (FileUtils.getImageFormat(fileExt)) {
             //创建缩略图
-            thumbnailName = fileName + File.separator + type + File.separator + GzxantSysUser.id() + File.separator + "s" + File.separator + file.getOriginalFilename();//附件路径+类型（头像、附件等）+s(文件夹)+名称+扩展名
+            thumbnailName = fileName + File.separator + type + File.separator + GzxantSysUser.id() + File.separator + "s" + File.separator + uuid + "." + fileExt;//附件路径+类型（头像、附件等）+s(文件夹)+名称+扩展名
             FileUtils.createThumbnail(localFile, thumbnailName);
         }
 
@@ -129,8 +139,8 @@ public class FileController {
         rt.put("uuid", uuid);
         rt.put("path", Setting.BASEFLODER);
         rt.put("ext", fileExt);
-        rt.put("url", "/" + savePath);
-        rt.put("s_url", "/" + thumbnailName);
+        rt.put("url", savePath);
+        rt.put("s_url", thumbnailName);
         rt.put("date", DateUtils.getCurDateTime());
 
         logger.info("上传的文件地址为 fileName={}", savePath);
@@ -148,4 +158,5 @@ public class FileController {
         
         return contentType;
     }
+    
 }

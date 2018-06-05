@@ -2,9 +2,14 @@ server:
   port: 8082
   context-path: /gzxant/equipment
 
+attach_path: F:/gzxant/attach/
+
 spring:
   profiles:
     active: dev, db-dev
+    
+  redis:
+    database: 0
 
   aop:
     proxy-target-class: true

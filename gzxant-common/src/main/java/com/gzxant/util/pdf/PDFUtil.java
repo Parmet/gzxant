@@ -159,8 +159,8 @@ public class PDFUtil {
 			int pageCounter = 0;
 			for (PDPage page : document.getPages())
 			{
-				BufferedImage bim = pdfRenderer.renderImageWithDPI(pageCounter, 600, ImageType.RGB);
-				ImageIOUtil.writeImage(bim, savePath + File.separator + (pageCounter) + ".jpg", 600);
+				BufferedImage bim = pdfRenderer.renderImageWithDPI(pageCounter, 500, ImageType.RGB);
+				ImageIOUtil.writeImage(bim, savePath + File.separator + (pageCounter) + ".jpg", 500);
 				results.add(savePath + File.separator + pageCounter + ".jpg");
 				pageCounter = pageCounter + 1;
 			}

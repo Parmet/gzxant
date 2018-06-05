@@ -82,6 +82,9 @@
 					<a href="#import" aria-controls="import" role="tab" data-toggle="tab">导入标准</a>
 				</li>
 				<li role="presentation">
+					<a href="#pdf" aria-controls="pdf" role="tab" data-toggle="tab">PDF源文件</a>
+				</li>
+				<li role="presentation">
 					<a href="#info" aria-controls="info" role="tab" data-toggle="tab">基本信息</a>
 				</li>
 				<li role="presentation">
@@ -135,6 +138,24 @@
 						</div>
 					</div>
 				</div>
+				<div role="tabpanel" class="tab-pane" id="pdf">
+					<div class="panel panel-default">
+			  			<div class="panel-body">
+			  				<div id="pdf_box" class="pdf_box">
+				  				<span>请上传PDF文件</span>
+				  			</div>
+						</div>
+						<div class="panel-footer">
+		  					<div class = "row">
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<button type="button" onclick="back()" class="btn btn-success pull-left">返回</button>
+									<button type="button" onclick="nextStep()" class="btn btn-success pull-right" style="margin-left: 10px;">下一步</button>
+									<button type="button" onclick="lastStep()" class="btn btn-success pull-right">上一步</button>
+		  						</div>
+		  					</div>
+		  				</div>
+					</div>
+				</div>
 				<div role="tabpanel" class="tab-pane" id="info">
 					<div class="panel panel-default">
 		  				<div class="panel-body">
@@ -146,7 +167,7 @@
 		  					</div>
 		  					<div class = "row">
 		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-		  							<label for="number_input" class="control-label">国家编号<span class="required">*</span></label>
+		  							<label for="number_input" class="control-label">标准编号（格式：GB 2018.01-1995）<span class="required">*</span></label>
 		                            <input type="text" class="form-filter form-control" id="number_input" name="number" />
 		  						</div>
 		  					</div>
@@ -158,25 +179,25 @@
 		  					</div>
 		  					<div class = "row">
 		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-		  							<label for="second_category_input" class="control-label">二级标准分类<span class="required">*</span></label>
+		  							<label for="second_category_input" class="control-label">二级标准分类</label>
 		                            <input type="text" class="form-filter form-control" id="second_category_input" name="secondCategory" />
 		  						</div>
 		  					</div>
 		  					<div class = "row">
 		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-		  							<label for="old_stand_input" class="control-label">原标准编号<span class="required">*</span></label>
+		  							<label for="old_stand_input" class="control-label">原标准编号（格式：GB 2018.01-1995）<span class="required">*</span></label>
 		                            <input type="text" class="form-filter form-control" id="old_stand_input" name="oldStand" />
 		  						</div>
 		  					</div>
 		  					<div class = "row">
 		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-		  							<label for="publish_date_input" class="control-label">发布时间<span class="required">*</span></label>
+		  							<label for="publish_date_input" class="control-label">发布时间（格式：2008-01-01）<span class="required">*</span></label>
 		                            <input type="text" class="form-filter form-control" id="publish_date_input" name="publishDate" />
 		  						</div>
 		  					</div>
 		  					<div class = "row">
 		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-		  							<label for="implement_date_input" class="control-label">实施时间<span class="required">*</span></label>
+		  							<label for="implement_date_input" class="control-label">实施时间（格式：2008-01-01）<span class="required">*</span></label>
 		                            <input type="text" class="form-filter form-control" id="implement_date_input" name="implementDate" />
 		  						</div>
 		  					</div>
@@ -185,7 +206,7 @@
 		  					<div class = "row">
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 									<button type="button" onclick="back()" class="btn btn-success pull-left">返回</button>
-									<button type="button" onclick="nextStep()" class="btn btn-success pull-right" style="margin-left: 10px;">下一步</button>
+									<button type="button" onclick="infoNextStep()" class="btn btn-success pull-right" style="margin-left: 10px;">下一步</button>
 									<button type="button" onclick="lastStep()" class="btn btn-success pull-right">上一步</button>
 		  						</div>
 		  					</div>
@@ -223,6 +244,7 @@
 		  				</div>
 		  			</div>
 				</div>
+				
 			</div>
 		</div>
 		
@@ -231,9 +253,7 @@
 				<li role="presentation" class="active">
 					<a href="#txt" aria-controls="txt" role="tab" data-toggle="tab">解析结果</a>
 				</li>
-				<li role="presentation">
-					<a href="#pdf" aria-controls="pdf" role="tab" data-toggle="tab">PDF源文件</a>
-				</li>
+
 			</ul>
 
 			<!-- Tab panes -->
@@ -247,36 +267,157 @@
 						</div>
 					</div>
 				</div>
-				<div role="tabpanel" class="tab-pane" id="pdf">
-					<div class="panel panel-default">
-			  			<div class="panel-body">
-			  				<div id="pdf_box" class="pdf_box">
-				  				<span>请上传PDF文件</span>
-				  			</div>
-						</div>
-					</div>
-				</div>
+				
 			</div>
 		</div>
 	</div>
+	
 </div>
 <script type="text/javascript">
+
+	$('[name=number]').blur(function () {
+		checkNumber();
+	});
+	
+	function checkNumber() {
+		var number = $('[name=number]').val().trim();
+		var reg = "^GB [0-9]+\.?[0-9]+\-[0-9]+\.?[0-9]+$";
+		var regExp = new RegExp(reg);
+		var flag = true;
+		if(regExp.test(number)){
+			$.ajax({
+				type: 'GET',
+			    url: base_url + "/back/standard/check",
+			    async: false,
+			    data: {
+					number : number
+				},
+			    success: function (data) {
+			    	if (data.code != 200) {
+			    		layer.msg(data.error);
+			    		flag = false;
+			    	} else {
+			    		flag = true;
+			    	}
+			    	
+			    }, 
+			    error: function (XMLHttpRequest, textStatus, errorThrown) {
+		            layer.alert(XMLHttpRequest.responseJSON.error);
+		            flag = false;
+		        }
+			});
+		} else {
+			flag = false;
+		}
+		
+		return flag;
+	}
+
+	function infoNextStep() {
+		var info = getInfo();
+		if (info.name == '') {
+			layer.msg("请填写标准名称!");
+			return false;
+		}
+		
+		if (info.firstCategory == '') {
+			layer.msg("请填写一级标准分类!");
+			return false;
+		}
+		
+		if (info.number == '') {
+			layer.msg("请填写标准编号!");
+			return false;
+		} else {
+			var reg = "^GB [0-9]+\.?[0-9]+\-[0-9]+\.?[0-9]+$";
+			var regExp = new RegExp(reg);
+			if(!regExp.test(info.number)){
+			　　layer.msg("标准编号格式不正确，正确格式为：GB 2757-2012 或  GB 5413.34-2010");
+			　　return false;
+			}
+		}
+		
+		if (info.oldStand == '') {
+			layer.msg("请填写原标准编号!");
+			return false;
+		} else {
+			var reg = "^GB [0-9]+\.?[0-9]+\-[0-9]+\.?[0-9]+$";
+			var regExp = new RegExp(reg);
+			if(!regExp.test(info.oldStand)){
+			　　layer.msg("原标准编号格式不正确，正确格式为：GB 2757-2012 或  GB 5413.34-2010");
+			　　return false;
+			}
+		}
+		
+		if (info.publishDate == '') {
+			layer.msg("请填写发布时间!");
+			return false;
+		} else {
+			var reg = "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$";
+			var regExp = new RegExp(reg);
+			if(!regExp.test(info.publishDate)){
+			　　layer.msg("发布时间格式不正确，正确格式为：2008-01-01");
+			　　return false;
+			}
+		}
+		 
+		if (info.implementDate == '') {
+			layer.msg("请填写实施时间!");
+			return false;
+		} else {
+			var reg = "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$";
+			var regExp = new RegExp(reg);
+			if(!regExp.test(info.implementDate)){
+			　　layer.msg("实施时间格式不正确，正确格式为：2008-01-01");
+			　　return false;
+			}
+		}
+		
+		nextStep();
+	}
+	
 	var txt_url, upload_date;
 	function saveStandard() {
+		if (!checkNumber()) {
+			return ;
+		}
+		
 		var data = {
-			info: getInfo(),
-			item: getItems()
+			"info": getInfo(),
+			"item": getItems()
 		};
 		
+		if (data.item.length <= 0) {
+			layer.msg("请填写检测项信息");
+			return ;
+		}
+		
+		if (data.info.pdfUrl == "") {
+			layer.msg("请上传PDF文件");
+			return ;
+		}
+		
+		if (data.info.txtUrl == "") {
+			layer.msg("PDF文件解析错误，请重新上传PDF文件");
+			return ;
+		}
+		
+		data = JSON.stringify(data);
 		console.log(data);
 		$.ajax({
 		    type: 'POST',
-		    dataType:'json',
 		    url: base_url + "/back/standard/create",
 		    async: true,
-		    data: data,
+		    data: {
+		    	data : data
+		    },
 		    success: function (data) {
-		    	layer.msg("保存成功");
+		    	if (data.code == 200) {
+			    	layer.msg("保存成功");
+			    	window.location.href = url.split("import")[0];
+		    	} else {
+		    		layer.msg("保存失败");
+		    	}
 			},
 			error: function (XMLHttpRequest, textStatus, errorThrown) {
 	            layer.alert(XMLHttpRequest.responseJSON.error);
@@ -286,16 +427,16 @@
 	
 	function getInfo() {
 		var info = {
-			name: $('[name=name]').val(),
-			firstCategory: $('[name=firstCategory]').val(),
-			secondCategory: $('[name=secondCategory]').val(),
-			number: $('[name=number]').val(),
-			oldStand: $('[name=oldStand]').val(),
-			pdfUrl: $("#uploadUrl").val(),
-			txtUrl: txt_url,
-			publishDate: $('[name=publishDate]').val(),
-			uploadDate: upload_date,
-			implementDate: $('[name=implementDate]').val()
+			"name": $('[name=name]').val().trim(),
+			"firstCategory": $('[name=firstCategory]').val().trim(),
+			"secondCategory": $('[name=secondCategory]').val().trim(),
+			"number": $('[name=number]').val().trim(),
+			"oldStand": $('[name=oldStand]').val().trim(),
+			"pdfUrl": $("#uploadUrl").val().trim(),
+			"txtUrl": txt_url,
+			"publishDate": $('[name=publishDate]').val().trim(),
+			"uploadDate": upload_date,
+			"implementDate": $('[name=implementDate]').val().trim()
 		}
 		
 		return info;
@@ -305,17 +446,20 @@
 		var items = [];
 		var item_divs = $("#item-box").children();
 		item_divs.each(function(index, item_div) {
-			items.push({
-				name: getItemName(item_div),
-				sub: getItemSub(item_div)
-			});
+			var item_name = getItemName(item_div);
+			if (item_name != "") {
+				items.push({
+					"name": item_name,
+					"sub": getItemSub(item_div)
+				});
+			}
 		});
 		
 		return items;
 	}
 
 	function getItemName(item_div) {
-		return $(item_div).find(".panel-heading").find("input").val();
+		return $(item_div).find(".panel-heading").find("input").val().trim();
 	}
 	
 	function getItemSub(item_div) {
@@ -323,17 +467,21 @@
 		var materials = $(item_div).find(".panel-body").children("div[data-type='耗材']").find('input');
 		var equipments = $(item_div).find(".panel-body").children("div[data-type='设备']").find('input');
 		materials.each(function(index, item) {
-			subs.push({
-				name: $(item).val(),
-				type: "MATERIAL" // MATERIAL: 耗材， EQUIPMENT：设备
-			});
+			if ($(item).val().trim() != "") {
+				subs.push({
+					"name": $(item).val().trim(),
+					"type": "M" // M: 耗材， E：设备
+				});
+			}
 		});
 		
 		equipments.each(function(index, item) {
-			subs.push({
-				name: $(item).val(),
-				type: "EQUIPMENT" // MATERIAL: 耗材， EQUIPMENT：设备
-			});
+			if ($(item).val().trim() != "") {
+				subs.push({
+					"name": $(item).val().trim(),
+					"type": "E" // M: 耗材， E：设备
+				});
+			}
 		});
 		
 		return subs;
@@ -407,9 +555,9 @@
 				clearTimeout(t);
 				progress(0, 100);
 				$("#txt_box").html("");
-				$("#txt_box").html("PDF上传成功，正在解析中&nbsp;<img src='${rc.contextPath}/img/loading-upload.gif' />");
+				$("#txt_box").html("PDF上传成功，正在解析中&nbsp;<img src='${rc.contextPath}/img/loading-upload.gif' style='width:auto;' />");
 				$("#pdf_box").html("");
-				$("#pdf_box").html("PDF上传成功，正在解析中&nbsp;<img src='${rc.contextPath}/img/loading-upload.gif' />");
+				$("#pdf_box").html("PDF上传成功，正在解析中&nbsp;<img src='${rc.contextPath}/img/loading-upload.gif' style='width:auto;' />");
 				
 				$("#uploadUrl").val(result.message[0].url);
 				upload_date = result.message[0].date;
@@ -447,7 +595,7 @@
 							$.each(imgs, function (index, item){
 								html = html + '<div class="row">';
 								html = html + '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">';
-								html = html + '<img src="' + base_url + '/file/image?path=' + encodeURIComponent(item) + '" />';
+								html = html + '<img src="' + base_url + '/file/image?path=' + encodeURIComponent(item) + '" />'; //
 								//html = html + '----' + index + '----------------------------------------------------------------------------';
 								html = html + '</div>';
 								html = html + '</div>';
@@ -458,13 +606,19 @@
 							layer.msg("解析成功，结果仅供参考");
 							clearTimeout(t);
 							progress(100, 101);
+						} else {
+							layer.msg("PDF文件解析错误，请重新上传PDF文件");
+							$("#txt_box").html("");
+							$("#txt_box").html("PDF文件解析错误，请重新上传PDF文件!");
+							$("#pdf_box").html("");
+							$("#pdf_box").html("PDF文件解析错误，请重新上传PDF文件!");
 						}
 					},
 					error: function (XMLHttpRequest, textStatus, errorThrown) {
 						$("#txt_box").html("");
-						$("#txt_box").html("系统繁忙，请重试!");
+						$("#txt_box").html("PDF文件解析错误，请重新上传PDF文件!");
 						$("#pdf_box").html("");
-						$("#pdf_box").html("系统繁忙，请重试!");
+						$("#pdf_box").html("PDF文件解析错误，请重新上传PDF文件!");
 			            layer.alert(XMLHttpRequest.responseJSON.error);
 			        }
 				});
@@ -514,7 +668,7 @@
 		cur_page = $(page_id);
 		var tar_input;
 		cur_page.find("input").each(function() {
-			if ($.trim($(this).val()) == "") {
+			if ($.trim($(this).val().trim()) == "") {
 				tar_input = $(this);
 				return false;
 			}
@@ -528,7 +682,7 @@
 	});
 	
 	function itemClick(obj) {
-		if ($(obj).parent().prev().find("input").val() == '') {
+		if ($(obj).parent().prev().find("input").val().trim() == '') {
 			layer.msg("请选择或填写检测项");
 			return ;
 		}

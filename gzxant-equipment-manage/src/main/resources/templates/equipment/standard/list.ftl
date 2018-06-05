@@ -27,7 +27,8 @@
 	        <div class="ibox">
 	            <div class="ibox-body">
 			    	<div id="standardToolbar" role="group">
-			    		<input type="hidden" class="form-filter form-control _search" id="path" name="search_like_category_path" value="0," />
+			    		<input type="hidden" class="form-filter form-control _search" id="path" name="search_like_category_path" value="0." />
+			    		<input type="hidden" class="form-filter form-control _search" id="del-flag" name="search_eq_del_flag" value="Y"  />
 			    		<div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                                 <label for="numberInput" class="control-label">国家编号</label>
@@ -57,10 +58,6 @@
 	    var c = [
 	        {
 	            checkbox: true
-	        },
-	        {
-	            field: 'id', // 列字段名
-	            title: '序号' // 列标题
 	        },
 	        {
 	            field: 'name',
@@ -104,7 +101,7 @@
 	            title: '操作',
 	            align: 'center',
 	            formatter: function (value, row, index) {
-	                return dt_edit_button(row)+dt_detail_button(row)+dt_delete_button(row);
+	                return dt_detail_button(row)+dt_delete_button(row);
 				}
 	        }];
 	
@@ -153,7 +150,7 @@
         id = selectd.node.id;
         pid = selectd.node.parent;
         text = selectd.node.text;
-        $('#path').val(id + ",");
+        $('#path').val(id + ".");
         standardTable.re_load();
     });
     

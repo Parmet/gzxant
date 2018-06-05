@@ -32,9 +32,6 @@ public class EquipmentStandardItem extends DataEntity<EquipmentStandardItem> {
      * 排序
      */
 	private Integer sort;
-	@TableField("update_id")
-	private Long updateId;
-
 
 	public String getName() {
 		return name;
@@ -60,14 +57,6 @@ public class EquipmentStandardItem extends DataEntity<EquipmentStandardItem> {
 		this.sort = sort;
 	}
 
-	public Long getUpdateId() {
-		return updateId;
-	}
-
-	public void setUpdateId(Long updateId) {
-		this.updateId = updateId;
-	}
-
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -79,7 +68,6 @@ public class EquipmentStandardItem extends DataEntity<EquipmentStandardItem> {
 			"name=" + name +
 			", standId=" + standId +
 			", sort=" + sort +
-			", updateId=" + updateId +
 			"}";
 	}
 }

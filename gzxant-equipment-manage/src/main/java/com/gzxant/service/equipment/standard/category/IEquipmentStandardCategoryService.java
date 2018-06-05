@@ -20,4 +20,6 @@ public interface IEquipmentStandardCategoryService extends IBaseService<Equipmen
 	List<JsTree> getDictTree();
 
 	PCAjaxVO delete(Long id);
+
+	EquipmentStandardCategory insertSingle(EquipmentStandardCategory category);
 }
