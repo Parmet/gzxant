@@ -2,5 +2,5 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://120.78.177.54:3306/gzxant_equipment?useUnicode=true&characterEncoding=utf8
-    username: gzxant
-    password: gzxant1804
+    username: gzxant.admin
+    password: 2018gzxant

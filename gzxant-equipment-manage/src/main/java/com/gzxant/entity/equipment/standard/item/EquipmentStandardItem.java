@@ -26,8 +26,8 @@ public class EquipmentStandardItem extends DataEntity<EquipmentStandardItem> {
     /**
      * 关联标准分类id
      */
-	@TableField("stand_id")
-	private Long standId;
+	@TableField("standard_id")
+	private Long standardId;
     /**
      * 排序
      */
@@ -41,12 +41,12 @@ public class EquipmentStandardItem extends DataEntity<EquipmentStandardItem> {
 		this.name = name;
 	}
 
-	public Long getStandId() {
-		return standId;
+	public Long getStandardId() {
+		return standardId;
 	}
 
-	public void setStandId(Long standId) {
-		this.standId = standId;
+	public void setStandardId(Long standardId) {
+		this.standardId = standardId;
 	}
 
 	public Integer getSort() {
@@ -66,7 +66,7 @@ public class EquipmentStandardItem extends DataEntity<EquipmentStandardItem> {
 	public String toString() {
 		return "EquipmentStandardItem{" +
 			"name=" + name +
-			", standId=" + standId +
+			", standId=" + standardId +
 			", sort=" + sort +
 			"}";
 	}

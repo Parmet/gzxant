@@ -17,8 +17,6 @@ import org.apache.pdfbox.rendering.PDFRenderer;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.pdfbox.tools.imageio.ImageIOUtil;
 
-import com.gzxant.util.image.ocr.aliyun.ImageUtils;
-
 /**
  * pdf 工具
  * 

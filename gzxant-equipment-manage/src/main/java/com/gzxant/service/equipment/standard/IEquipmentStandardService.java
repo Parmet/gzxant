@@ -1,10 +1,12 @@
 package com.gzxant.service.equipment.standard;
 
-import com.gzxant.entity.equipment.standard.EquipmentStandard;
-
+import java.util.List;
 import java.util.Map;
 
 import com.gzxant.base.service.IBaseService;
+import com.gzxant.entity.equipment.shop.product.EquipmentShopProduct;
+import com.gzxant.entity.equipment.standard.EquipmentStandard;
+import com.gzxant.entity.equipment.standard.item.EquipmentStandardItem;
 
 /**
  * <p>
@@ -18,4 +20,7 @@ public interface IEquipmentStandardService extends IBaseService<EquipmentStandar
 
 	Map<String, Object> parse(String txtPath);
 	
+	Map<EquipmentStandard, Map<EquipmentStandardItem, List<EquipmentShopProduct>>> getDataMapById(String id);
+
+	void deleteItemsById(Long id);
 }

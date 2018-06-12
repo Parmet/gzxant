@@ -12,5 +12,4 @@ import com.gzxant.base.dao.CrudDao;
  * @since 2018-05-17
  */
 public interface EquipmentStandardDao extends CrudDao<EquipmentStandard> {
-
 }

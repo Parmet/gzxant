@@ -105,17 +105,12 @@
 		  					</div>
 		  					<div class = "row">
 		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-		  							<label for="first_category_input" class="control-label" style="width: 30%;">一级标准分类：</label><span>${standard.name?split(" ")[0]}</span>
+		  							<label for="first_category_input" class="control-label" style="width: 30%;">标准大类：</label><span>${standard.name?split(" ")[0]}</span>
 		  						</div>
 		  					</div>
 		  					<div class = "row">
 		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-		  							<label for="second_category_input" class="control-label" style="width: 30%;">二级标准分类：</label><span>${standard.name?split(" ")[1]}</span>
-		  						</div>
-		  					</div>
-		  					<div class = "row">
-		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-		  							<label for="old_stand_input" class="control-label" style="width: 30%;">原标准编号：</label><span>${standard.oldStand}</span>
+		  							<label for="second_category_input" class="control-label" style="width: 30%;">标准类别：</label><span>${standard.name?split(" ")[1]}</span>
 		  						</div>
 		  					</div>
 		  					<div class = "row">
@@ -134,6 +129,38 @@
 		  							<a onclick="downloadPDF()"><img src="${rc.contextPath}\img\pdf-download.jpg" style="width:50px; height: auto;" /></a>
 		  						</div>
 		  					</div>
+		  					<table class="table" id="replace_table">
+				  				<thead>
+				  					<tr>
+				  						<th>代替标准编号</th>
+				  					</tr>
+				  				</thead>
+				  				<tbody>
+			  						<#list standard.replaceStandard?split(",") as code>
+			  						<#if (code != "")>
+				  					<tr>
+			  							<td>${code}</td>
+			  						</tr>
+			  						</#if>
+		  							</#list>
+				  				</tbody>
+							</table>
+							<table class="table" id="import_table">
+				  				<thead>
+				  					<tr>
+				  						<th>引用标准编号</th>
+				  					</tr>
+				  				</thead>
+				  				<tbody>
+			  						<#list standard.importStandard?split(",") as code>
+				  					<#if (code != "")>
+				  					<tr>
+			  							<td>${code}</td>
+			  						</tr>
+			  						</#if>
+		  							</#list>
+				  				</tbody>
+							</table>
 		  				</div>
 		  				<div class="panel-footer">
 		  					<div class = "row">
@@ -147,36 +174,52 @@
 				<div role="tabpanel" class="tab-pane" id="content">
 					<div class="panel panel-default">
 						<div id="item-box" class="panel-body" style="height:400px;overflow: scroll;">
-							<#list items?keys as item>
+							<#list standard.items as item>
 							<div class="panel panel-success">
 								<div class="panel-heading form-group">
-									<span>${item}</span>
+									<span>${item.name}</span>
 									<a class="pull-right a_add" onclick="changeItem(this)"><span class="glyphicon glyphicon-chevron-up"></span></a>
 								</div>
 								<div class="panel-body form-group">
-									<#if (items[item]?split("|")[0] != '')>
-									<div class="card box_shadow" data-type="耗材">
-										<div class="form-group">
-											<p style="font-size: 16px;"><b>耗材</b></p>
-											<ul style="text-align: left;">
-												<#list items[item]?split("|")[0]?split(",") as sub>
-												<li>${sub}</li>
-												</#list>
-											</ul>
-										</div>
-									</div>
+									<#if (item.materials?size > 0)>
+									<table class="table">
+										<thead>
+											<tr>
+												<th width="10%">耗材</th>
+												<th width="45%">名称</th>
+												<th width="45%">属性</th>
+											</tr>
+										</thead>
+										<tbody>
+											<#list item.materials as sub>
+											<tr>
+												<td style="text-align:center;"></td>
+												<td>${sub.name}</td>
+												<td>${sub.remark}</td>
+											</tr>
+											</#list>
+										</tbody>
+									</table>
 									</#if>
-									<#if (items[item]?split("|")[1] != '')>
-									<div class="card box_shadow" data-type="设备">
-										<div class="form-group">
-											<p style="font-size: 16px;"><b>设备</b></p>
-											<ul style="text-align: left;">
-												<#list items[item]?split("|")[1]?split(",") as sub>
-												<li>${sub}</li>
-												</#list>
-											</ul>
-										</div>
-									</div>
+									<#if (item.equipments?size > 0)>
+									<table class="table">
+										<thead>
+											<tr>
+												<th width="10%">设备</th>
+												<th width="45%">名称</th>
+												<th width="45%">属性</th>
+											</tr>
+										</thead>
+										<tbody>
+											<#list item.equipments as sub>
+											<tr>
+												<td style="text-align:center;"></td>
+												<td>${sub.name}</td>
+												<td>${sub.remark}</td>
+											</tr>
+											</#list>
+										</tbody>
+									</table>
 									</#if>
 								</div>
 							</div>
@@ -191,7 +234,6 @@
 		  				</div>
 		  			</div>
 				</div>
-				
 			</div>
 		</div>
 		
@@ -202,7 +244,7 @@
 </div>
 <script type="text/javascript">
 	function downloadPDF() {
-		var url = '${standard.pdfUrl}';
+		var url = '${standard.pdfUrl?replace("\\", "\\\\")?replace("/", "//")}';
 		url = base_url + "/back/standard/download?pdfUrl=" + encodeURIComponent(url) 
 				+ "&name=" + encodeURIComponent("${standard.number} ${standard.name}");
 		window.open(url);

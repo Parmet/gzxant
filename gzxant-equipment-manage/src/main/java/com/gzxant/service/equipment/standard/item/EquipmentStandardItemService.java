@@ -34,22 +34,6 @@ public class EquipmentStandardItemService extends BaseService<EquipmentStandardI
 	@Autowired
 	private IEquipmentStandardItemProductService itemProductService;
 	
-	@Override
-	@Transactional(readOnly = false)
-	public List<EquipmentStandardItem> insert(EquipmentStandard standard, Map<String, List<EquipmentShopProduct>> itemMap) {
-		List<EquipmentStandardItem> items = new ArrayList<>();
-		for (String name : itemMap.keySet()) {
-			EquipmentStandardItem item = new EquipmentStandardItem();
-			item.setName(name);
-			item.setStandId(standard.getId());
-			items.add(item);
-		}
-		
-		insertBatch(items);
-		
-		return items;
-	}
-	
 	@Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
 	@Override
 	public void saveItemProducts(List<EquipmentStandardItem> items, List<EquipmentShopProduct> products,
@@ -68,17 +52,19 @@ public class EquipmentStandardItemService extends BaseService<EquipmentStandardI
 		}
 		
 		// product 名称和实体的对应map
-		Map<String, Long> productMap = new HashMap<>();
+		Map<String, EquipmentShopProduct> productMap = new HashMap<>();
 		for (EquipmentShopProduct product : products) {
-			productMap.put(product.getName(), product.getId());
+			productMap.put(product.getName(), product);
 		}
 		
 		for (EquipmentStandardItem item : items) {
 			if (itemProductNameMap.containsKey(item.getName())) {
 				for (String productName : itemProductNameMap.get(item.getName())) {
 					EquipmentStandardItemProduct itemProduct = new EquipmentStandardItemProduct();
+					EquipmentShopProduct product = productMap.get(productName);
 					itemProduct.setItemId(item.getId());
-					itemProduct.setProductId(productMap.get(productName));
+					itemProduct.setProductId(product.getId());
+					itemProduct.setRemark(product.getRemark());
 					itemProducts.add(itemProduct);
 				}
 			}

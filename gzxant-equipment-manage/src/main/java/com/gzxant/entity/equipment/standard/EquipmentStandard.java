@@ -23,6 +23,11 @@ public class EquipmentStandard extends DataEntity<EquipmentStandard> {
      * 标准名称
      */
 	private String name;
+	 /**
+     * 关联分类父级id
+     */
+	@TableField("english_name")
+	private String englishName;
     /**
      * 关联分类父级id
      */
@@ -38,10 +43,15 @@ public class EquipmentStandard extends DataEntity<EquipmentStandard> {
      */
 	private String number;
     /**
-     * 旧标准
+     * 替代标准
      */
-	@TableField("old_stand")
-	private String oldStand;
+	@TableField("replace_standard")
+	private String replaceStandard;
+	/**
+     * 引用标准
+     */
+	@TableField("import_standard")
+	private String importStandard;
 	/**
 	 * pdf上传路径
 	 */
@@ -52,6 +62,16 @@ public class EquipmentStandard extends DataEntity<EquipmentStandard> {
 	 */
 	@TableField("txt_url")
 	private String txtUrl;
+	/**
+	 * img生成路径
+	 */
+	@TableField("imgs_path")
+	private String imgsPath;
+	/**
+	 * pdf页面数
+	 */
+	@TableField("page_size")
+	private String pageSize;
     /**
      * 发布时间
      */
@@ -72,15 +92,15 @@ public class EquipmentStandard extends DataEntity<EquipmentStandard> {
      */
 	private String state;
 	/**
-	 * 第一分类
+	 * 标准大类
 	 */
 	@TableField(exist = false)
-	private String firstCategory;
+	private String category;
 	/**
-	 * 第二分类
+	 * 标准类别
 	 */
 	@TableField(exist = false)
-	private String secondCategory;
+	private String type;
 	
 	public String getName() {
 		return name;
@@ -114,12 +134,20 @@ public class EquipmentStandard extends DataEntity<EquipmentStandard> {
 		this.number = number;
 	}
 
-	public String getOldStand() {
-		return oldStand;
+	public String getReplaceStandard() {
+		return replaceStandard;
 	}
 
-	public void setOldStand(String oldStand) {
-		this.oldStand = oldStand;
+	public void setReplaceStandard(String replaceStandard) {
+		this.replaceStandard = replaceStandard;
+	}
+
+	public String getImportStandard() {
+		return importStandard;
+	}
+
+	public void setImportStandard(String importStandard) {
+		this.importStandard = importStandard;
 	}
 
 	public String getPdfUrl() {
@@ -170,20 +198,44 @@ public class EquipmentStandard extends DataEntity<EquipmentStandard> {
 		this.state = state;
 	}
 
-	public String getFirstCategory() {
-		return firstCategory;
+	public String getCategory() {
+		return category;
 	}
 
-	public void setFirstCategory(String firstCategory) {
-		this.firstCategory = firstCategory;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
-	public String getSecondCategory() {
-		return secondCategory;
+	public String getType() {
+		return type;
 	}
 
-	public void setSecondCategory(String secondCategory) {
-		this.secondCategory = secondCategory;
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getImgsPath() {
+		return imgsPath;
+	}
+
+	public void setImgsPath(String imgsPath) {
+		this.imgsPath = imgsPath;
+	}
+
+	public String getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(String pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public String getEnglishName() {
+		return englishName;
+	}
+
+	public void setEnglishName(String englishName) {
+		this.englishName = englishName;
 	}
 
 	@Override
@@ -193,16 +245,9 @@ public class EquipmentStandard extends DataEntity<EquipmentStandard> {
 
 	@Override
 	public String toString() {
-		return "EquipmentStandard{" +
-			"name=" + name +
-			", categoryId=" + categoryId +
-			", path=" + categoryPath +
-			", number=" + number +
-			", oldStand=" + oldStand +
-			", publishDate=" + publishDate +
-			", uploadDate=" + uploadDate +
-			", implementDate=" + implementDate +
-			", state=" + state +
-			"}";
+		return "EquipmentStandard [name=" + name + ", categoryId=" + categoryId + ", categoryPath=" + categoryPath
+				+ ", number=" + number + ", replaceStandard=" + replaceStandard + ", importStandard=" + importStandard
+				+ ", pdfUrl=" + pdfUrl + ", txtUrl=" + txtUrl + ", publishDate=" + publishDate + ", uploadDate="
+				+ uploadDate + ", implementDate=" + implementDate + ", state=" + state + "]";
 	}
 }

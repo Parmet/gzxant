@@ -72,14 +72,14 @@
 	        },
 	        {
 	            field: 'name',
-	            title: '一级标准分类',
+	            title: '标准大类',
 	            formatter: function (value, row, index) {
 	            	return value.split(" ")[0];
 	            }
 	        },
 	        {
 	            field: 'name',
-	            title: '二级标准分类',
+	            title: '标准类别',
 	            formatter: function (value, row, index) {
 	            	return value.split(" ")[1];
 	            }
@@ -101,12 +101,19 @@
 	            title: '操作',
 	            align: 'center',
 	            formatter: function (value, row, index) {
-	                return dt_detail_button(row)+dt_delete_button(row);
+	            	var edit_btn = '<a class="btn btn-primary btn-sm" href="#" mce_href="#" title="编辑" onclick="updateStandard(\''
+	    				+ row.id + '\')"><i class="fa fa-edit"></i></a> ';
+	                return dt_detail_button(row)+edit_btn+dt_delete_button(row);
 				}
 	        }];
 	
 	    return c;
 	}
+	
+	function updateStandard(id) {
+		window.location.href = url + "jupdate/" + id;
+	}
+	
 	var standardTable = $("#standardTable").iTable({
 		toolbar : {
 			id : "standardToolbar",

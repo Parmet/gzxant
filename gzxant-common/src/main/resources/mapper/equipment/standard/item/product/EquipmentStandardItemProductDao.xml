@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gzxant.dao.equipment.standard.item.product.EquipmentStandardItemProductDao">
-
-	<!-- 通用查询映射结果 -->
-	<resultMap id="BaseResultMap" type="com.gzxant.entity.equipment.standard.item.product.EquipmentStandardItemProduct">
-		<id column="item_id" property="itemId" />
-		<result column="product_id" property="productId" />
-		<result column="sort" property="sort" />
-	</resultMap>
+	<select id="selectByStandradId" resultType="com.gzxant.entity.equipment.standard.item.product.EquipmentStandardItemProduct">
+		SELECT 
+			ip.item_id,
+			i.name AS itemName, 
+			ip.product_id;
+			(SELECT p.name FROM equipment_shop_product p 
+				where ip.product_id = p.id) AS productName, 
+			ip.remark
+		FROM equipment_standard_item i
+		LEFT JOIN equipment_standard_item_product ip ON i.id = ip.item_id
+		WHERE i.stand_id = #{id}
+		ORDER BY ip.item_id;
+	</select>
 
 </mapper>

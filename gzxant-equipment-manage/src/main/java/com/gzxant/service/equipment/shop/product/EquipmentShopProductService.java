@@ -2,9 +2,7 @@ package com.gzxant.service.equipment.shop.product;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -71,18 +69,13 @@ public class EquipmentShopProductService extends BaseService<EquipmentShopProduc
 
 	@Override
 	@Transactional(readOnly = false)
-	public List<EquipmentShopProduct> insert(Map<String, List<EquipmentShopProduct>> itemMap) {
-		// 所有产品
-		List<EquipmentShopProduct> products = new ArrayList<>();
+	public List<EquipmentShopProduct> insert(List<EquipmentShopProduct> products) {
+		
 		// 已存在的产品数据
 		List<EquipmentShopProduct> existsProducts = new ArrayList<>();
 		// 准备插入的产品数据
 		List<EquipmentShopProduct> insertProducts = new ArrayList<>();
 		
-		// 获取所有产品
-		for (List<EquipmentShopProduct> list : itemMap.values()) {
-			products.addAll(list);
-		}
 		
 		// 查询已存在的数据，并保存名称到list
 		existsProducts = selectExistsProduct(products);

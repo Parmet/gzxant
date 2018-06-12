@@ -1,11 +1,9 @@
 package com.gzxant.service.equipment.shop.product;
 
-import com.gzxant.entity.equipment.shop.product.EquipmentShopProduct;
-
 import java.util.List;
-import java.util.Map;
 
 import com.gzxant.base.service.IBaseService;
+import com.gzxant.entity.equipment.shop.product.EquipmentShopProduct;
 
 /**
  * <p>
@@ -21,6 +19,6 @@ public interface IEquipmentShopProductService extends IBaseService<EquipmentShop
 
 	List<Long> getIds(List<EquipmentShopProduct> existsProductexistsProduct);
 
-	List<EquipmentShopProduct> insert(Map<String, List<EquipmentShopProduct>> itemMap);
+	List<EquipmentShopProduct> insert(List<EquipmentShopProduct> products);
 	
 }

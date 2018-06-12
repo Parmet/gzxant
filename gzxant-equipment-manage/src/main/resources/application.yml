@@ -6,7 +6,7 @@ attach_path: F:/gzxant/attach/
 
 spring:
   profiles:
-    active: dev, db-dev
+    active: pro, db-pro
     
   redis:
     database: 0

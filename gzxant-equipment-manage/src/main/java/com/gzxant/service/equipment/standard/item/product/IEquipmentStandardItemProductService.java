@@ -1,6 +1,9 @@
 package com.gzxant.service.equipment.standard.item.product;
 
 import com.gzxant.entity.equipment.standard.item.product.EquipmentStandardItemProduct;
+
+import java.util.List;
+
 import com.gzxant.base.service.IBaseService;
 
 /**
@@ -12,5 +15,7 @@ import com.gzxant.base.service.IBaseService;
  * @since 2018-05-31
  */
 public interface IEquipmentStandardItemProductService extends IBaseService<EquipmentStandardItemProduct> {
+
+	List<EquipmentStandardItemProduct> selectByStandradId(String id);
 	
 }

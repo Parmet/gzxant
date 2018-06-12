@@ -3,7 +3,6 @@ package com.gzxant.controller.equipment.standard;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -22,28 +21,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.gzxant.annotation.SLog;
 import com.gzxant.base.controller.BaseController;
 import com.gzxant.base.entity.ReturnDTO;
 import com.gzxant.base.vo.DataTable;
+import com.gzxant.dto.equipment.standard.EquipmentStandardDTO;
+import com.gzxant.dto.equipment.standard.EquipmentStandardItemDTO;
+import com.gzxant.dto.equipment.standard.EquipmentStandardProductDTO;
 import com.gzxant.entity.equipment.shop.product.EquipmentShopProduct;
 import com.gzxant.entity.equipment.standard.EquipmentStandard;
 import com.gzxant.entity.equipment.standard.category.EquipmentStandardCategory;
 import com.gzxant.entity.equipment.standard.item.EquipmentStandardItem;
-import com.gzxant.entity.equipment.standard.item.product.EquipmentStandardItemProduct;
+import com.gzxant.service.ISysDictService;
 import com.gzxant.service.equipment.shop.product.IEquipmentShopProductService;
 import com.gzxant.service.equipment.standard.IEquipmentStandardService;
 import com.gzxant.service.equipment.standard.category.IEquipmentStandardCategoryService;
 import com.gzxant.service.equipment.standard.item.IEquipmentStandardItemService;
-import com.gzxant.service.equipment.standard.item.product.IEquipmentStandardItemProductService;
 import com.gzxant.util.FileUtils;
 import com.gzxant.util.ReturnDTOUtil;
 import com.gzxant.util.data.JsonUtil;
 import com.gzxant.util.pdf.PDFUtil;
-import com.gzxant.vo.equipment.standard.EquipmentStandardVO;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -65,9 +63,9 @@ public class EquipmentStandardController extends BaseController {
 	@Autowired
 	private IEquipmentStandardItemService itemService;
 	@Autowired
-	private IEquipmentStandardItemProductService itemProductService;
-	@Autowired
 	private IEquipmentShopProductService productService;
+	@Autowired
+	private ISysDictService dictService;
 	
 	@ApiOperation(value = "进入标准表列表界面", notes = "进入标准表列表界面")
 	@GetMapping(value = "")
@@ -75,68 +73,53 @@ public class EquipmentStandardController extends BaseController {
 		model.addAttribute("categoryTrees", JSON.toJSONString(categoryService.getDictTree()));
 		return "/equipment/standard/list";
 	}
+	
+	@ApiOperation(value = "进入标准表编辑界面", notes = "进入标准表编辑界面")
+	@GetMapping(value = "/jupdate/{id}")
+	public String toUpdate(@PathVariable("id") String id, Model model) {
+		if (StringUtils.isBlank(id)) {
+			return "redirect:/back/standard/";
+		}
+		
+		Map<EquipmentStandard, Map<EquipmentStandardItem, List<EquipmentShopProduct>>> standardMap = 
+				standardService.getDataMapById(id);
+		if (standardMap == null) {
+			return "redirect:/back/standard/";
+		}
+		
+		EquipmentStandard standardData = standardMap.keySet().iterator().next();
+		EquipmentStandardDTO standard = parseStandard(standardData);
+		List<EquipmentStandardItemDTO> items = parseItems(standardMap.get(standardData));
+		standard.setItems(items);
+		
+		List<String> txts = FileUtils.readFileTxt(new File(standard.getTxtUrl()));
+		model.addAttribute("types", dictService.getSub("STANDARD_TYPE"));
+		model.addAttribute("standard", standard);
+		model.addAttribute("txts", txts);
+		return "/equipment/standard/update";
+	}
 
 	@ApiOperation(value = "进入标准表编辑界面", notes = "进入标准表编辑界面")
 	@GetMapping(value = "/detail/{id}")
 	public String detail(@PathVariable("id") String id, Model model) {
-		EquipmentStandard standard = standardService.selectById(id);
-		if (standard == null || standard.getId() == null) {
-			return "404";
+		Map<EquipmentStandard, Map<EquipmentStandardItem, List<EquipmentShopProduct>>> standardMap = 
+				standardService.getDataMapById(id);
+		if (standardMap == null) {
+			return "redirect:/back/standard/";
 		}
 		
-		if (StringUtils.isNotBlank(standard.getPdfUrl())) {
-			standard.setPdfUrl(standard.getPdfUrl().replace(File.separator, "|"));
-		}
-		
-		EntityWrapper<EquipmentStandardItem> itemEw = new EntityWrapper<>();
-		itemEw.setEntity(new EquipmentStandardItem());
-		itemEw.where("stand_id={0}", id);
-		List<EquipmentStandardItem> items = itemService.selectList(itemEw);
-		Map<String, String> itemProductMap = new HashMap<>();
-		for (EquipmentStandardItem item : items) {
-			EntityWrapper<EquipmentStandardItemProduct> itemProductEw = new EntityWrapper<>();
-			itemProductEw.setEntity(new EquipmentStandardItemProduct());
-			itemProductEw.where("item_id={0}", item.getId());
-			List<EquipmentStandardItemProduct> itemProducts = itemProductService.selectList(itemProductEw);
-			
-			List<Long> productIds = new ArrayList<>();
-			for (EquipmentStandardItemProduct itemProduct : itemProducts) {
-				productIds.add(itemProduct.getProductId());
-			}
-			
-			List<EquipmentShopProduct> products = productService.selectBatchIds(productIds);
-			String productNames = "";
-			String eProductNames = "";
-			String mProductNames = "";
-			for (EquipmentShopProduct product : products) {
-				if (product.getType().equals("E")) {
-					eProductNames = eProductNames + product.getName() + ",";
-				} else if (product.getType().equals("M")) {
-					mProductNames = mProductNames + product.getName() + ",";
-				}
-			}
-			
-			if (StringUtils.isNotBlank(mProductNames)) {
-				mProductNames = mProductNames.substring(0, mProductNames.length() - 1);
-			}
-			
-			if (StringUtils.isNotBlank(eProductNames)) {
-				eProductNames.substring(0, eProductNames.length() - 1);
-			}
-			
-			productNames = mProductNames + "|" + eProductNames;
-			
-			itemProductMap.put(item.getName(), productNames);
-		}
-		
+		EquipmentStandard standardData = standardMap.keySet().iterator().next();
+		EquipmentStandardDTO standard = parseStandard(standardData);
+		List<EquipmentStandardItemDTO> items = parseItems(standardMap.get(standardData));
+		standard.setItems(items);
 		model.addAttribute("standard", standard);
-		model.addAttribute("items", itemProductMap);
 		return "/equipment/standard/detail";
 	}
 	
 	@ApiOperation(value = "进入标准表导入界面", notes = "进入标准表导入界面")
 	@GetMapping(value = "/import")
 	public String toImport(Model model) {
+		model.addAttribute("types", dictService.getSub("STANDARD_TYPE"));
 		return "/equipment/standard/import";
 	}
 	
@@ -201,97 +184,93 @@ public class EquipmentStandardController extends BaseController {
 	@PostMapping(value = "/create")
 	@ResponseBody
 	public ReturnDTO create(String data) {
-		if (StringUtils.isBlank(data)) {
+		EquipmentStandardDTO standardData = parseData(data);
+		if (standardData == null) {
 			return ReturnDTOUtil.fail();
 		}
 		
-		Map map = JsonUtil.stringToCollect(data);
 		// 解析标准信息
-		EquipmentStandard standard = parseStandard(map);
+		EquipmentStandard standard = parseStandard(standardData);
 		
 		// 解析分类并保存数据
-		EquipmentStandardCategory category = parseCategory(standard);
+		EquipmentStandardCategory category = parseCategory(standardData);
 		
 		// 保存标准信息
-		String name = standard.getFirstCategory();
-		if (StringUtils.isNotBlank(standard.getSecondCategory())) {
-			name = name + " " + standard.getSecondCategory(); 
-		} 
-		
-		name = name + " " + standard.getName();
+		String name = standard.getCategory() + " " + standard.getType() + " " + standard.getName();
 		standard.setName(name);
 		standard.setCategoryId(category.getId());
 		standard.setCategoryPath(category.getPath());
 		standardService.insert(standard);
 		
 		// 解析检验项，以及检验项的耗材、设备
-		Map<String, List<EquipmentShopProduct>> itemMap = parseItems(map);
-		List<EquipmentStandardItem> items = itemService.insert(standard, itemMap);
-		List<EquipmentShopProduct> products = productService.insert(itemMap);
+		Map<String, List<EquipmentShopProduct>> itemMap = parseItems(standardData);
+		List<EquipmentStandardItem> items = getItems(standard, itemMap);
+		itemService.insertBatch(items);
+		
+		// 所有产品
+		List<EquipmentShopProduct> products = new ArrayList<>();
+		for (List<EquipmentShopProduct> list : itemMap.values()) {
+			products.addAll(list);
+		}
+		
+		products = productService.insert(products);
 		itemService.saveItemProducts(items, products, itemMap);
 		
+		// 增加关联信息的备注后清空产品的备注
+		for (EquipmentShopProduct product : products) {
+			product.setRemark("");
+		}
+		
+		productService.updateBatchById(products);
 		return ReturnDTOUtil.success();
 	}
 
-	private Map<String, List<EquipmentShopProduct>> parseItems(Map map) {
-		Map<String, List<EquipmentShopProduct>> itemMap = new HashMap<>();
-		JSONArray items = (JSONArray) map.get("item");
-		for (Iterator iterator = items.iterator(); iterator.hasNext();) {
-			JSONObject item = (JSONObject) iterator.next();
-			List<EquipmentShopProduct> products = new ArrayList<>();
-			
-			JSONArray subs = (JSONArray) item.get("sub");
-			for (Iterator iterator2 = subs.iterator(); iterator2.hasNext();) {
-				JSONObject sub = (JSONObject) iterator2.next();
-				EquipmentShopProduct product = new EquipmentShopProduct();
-				product.setBrandsId(0L);
-				product.setCategoryId(0L);
-				product.setName(sub.getString("name").trim());
-				product.setType(sub.getString("type").trim());
-				products.add(product);
-			}
-			
-			itemMap.put(item.getString("name").trim(), products);
-		}
-		
-		return itemMap;
-	}
-
-	private EquipmentStandardCategory parseCategory(EquipmentStandard standard) {
-		EquipmentStandardCategory category = new EquipmentStandardCategory();
-		category.setParentId(0L);
-		category.setName(standard.getFirstCategory());
-		category = categoryService.insertSingle(category);
-		if (StringUtils.isNoneBlank(standard.getSecondCategory())) {
-			EquipmentStandardCategory secondCategory = new EquipmentStandardCategory();
-			secondCategory.setParentId(category.getId());
-			secondCategory.setName(standard.getSecondCategory());
-			category = categoryService.insertSingle(secondCategory);
-		}
-		
-		return category;
-	}
-
-	private EquipmentStandard parseStandard(Map map) {
-		JSONObject info = (JSONObject) map.get("info");
-		EquipmentStandard standard = new EquipmentStandard();
-		standard.setName(info.getString("name").trim());
-		standard.setFirstCategory(info.getString("firstCategory").trim());
-		standard.setSecondCategory(info.getString("secondCategory").trim());
-		standard.setNumber(info.getString("number").trim());
-		standard.setOldStand(info.getString("oldStand").trim());
-		standard.setPdfUrl(info.getString("pdfUrl").trim());
-		standard.setTxtUrl(info.getString("txtUrl").trim());
-		standard.setPublishDate(info.getString("publishDate").trim());
-		standard.setUploadDate(info.getString("uploadDate").trim());
-		standard.setImplementDate(info.getString("implementDate").trim());
-		return standard;
+	private EquipmentStandardDTO parseData(String data) {
+		EquipmentStandardDTO dto = JsonUtil.toBean(data, EquipmentStandardDTO.class);
+		return dto;
 	}
 
 	@ApiOperation(value = "编辑标准表", notes = "编辑标准表")
 	@PostMapping(value = "/update")
 	@ResponseBody
-	public ReturnDTO update(EquipmentStandardVO param) {
+	public ReturnDTO update(String data) {
+		EquipmentStandardDTO standardData = parseData(data);
+		if (standardData == null || StringUtils.isBlank(standardData.getId())) {
+			return ReturnDTOUtil.fail();
+		}
+		
+		// 解析标准信息 保存标准信息
+		EquipmentStandard standard = parseStandard(standardData);
+		EquipmentStandardCategory category = parseCategory(standardData);
+		String name = standard.getCategory() + " " + standard.getType() + " " + standard.getName();
+		standard.setName(name);
+		standard.setCategoryId(category.getId());
+		standard.setCategoryPath(category.getPath());
+		standardService.updateById(standard);
+		
+		// 删除检验项、以及检验项与商品的关联
+		standardService.deleteItemsById(standard.getId());
+		
+		// 解析检验项，以及检验项的耗材、设备
+		Map<String, List<EquipmentShopProduct>> itemMap = parseItems(standardData);
+		List<EquipmentStandardItem> items = getItems(standard, itemMap);
+		itemService.insertBatch(items);
+		
+		// 所有产品
+		List<EquipmentShopProduct> products = new ArrayList<>();
+		for (List<EquipmentShopProduct> list : itemMap.values()) {
+			products.addAll(list);
+		}
+		
+		products = productService.insert(products);
+		itemService.saveItemProducts(items, products, itemMap);
+		
+		// 增加关联信息的备注后清空产品的备注
+		for (EquipmentShopProduct product : products) {
+			product.setRemark("");
+		}
+		
+		productService.updateBatchById(products);
 		return ReturnDTOUtil.success();
 	}
 
@@ -311,7 +290,7 @@ public class EquipmentStandardController extends BaseController {
 		}
 		return ReturnDTOUtil.fail();
 	}
-	
+
 	@ApiOperation(value = "校验标准是否存在", notes = "校验标准是否存在")
 	@GetMapping(value = "/check")
 	@ResponseBody
@@ -323,10 +302,143 @@ public class EquipmentStandardController extends BaseController {
 		EntityWrapper<EquipmentStandard> ew = new EntityWrapper<>();
 		ew.setEntity(new EquipmentStandard());
 		ew.where("number={0}", number);
- 		if (standardService.selectCount(ew) > 0) {
- 			return ReturnDTOUtil.custom(201, "该标准已存在，请核实！");
- 		}
- 		
+		if (standardService.selectCount(ew) > 0) {
+			return ReturnDTOUtil.custom(201, "该标准已存在，请核实！");
+		}
+		
 		return ReturnDTOUtil.success();
+	}
+
+	private List<EquipmentStandardItem> getItems(EquipmentStandard standard, Map<String, List<EquipmentShopProduct>> itemMap) {
+		List<EquipmentStandardItem> items = new ArrayList<>();
+		for (String name : itemMap.keySet()) {
+			EquipmentStandardItem item = new EquipmentStandardItem();
+			item.setName(name);
+			item.setStandardId(standard.getId());
+			items.add(item);
+		}
+		
+		return items;
+	}
+
+	private Map<String, List<EquipmentShopProduct>> parseItems(EquipmentStandardDTO standardData) {
+		Map<String, List<EquipmentShopProduct>> itemMap = new HashMap<>();
+		for (EquipmentStandardItemDTO item : standardData.getItems()) {
+			List<EquipmentShopProduct> products = new ArrayList<>();
+			for (EquipmentStandardProductDTO sub : item.getMaterials()) {
+				EquipmentShopProduct product = new EquipmentShopProduct();
+				product.setBrandsId(0L);
+				product.setCategoryId(0L);
+				product.setName(sub.getName().trim());
+				product.setType(sub.getType().trim());
+				product.setRemark(sub.getRemark().trim());
+				products.add(product);
+			}
+			
+			for (EquipmentStandardProductDTO sub : item.getEquipments()) {
+				EquipmentShopProduct product = new EquipmentShopProduct();
+				product.setBrandsId(0L);
+				product.setCategoryId(0L);
+				product.setName(sub.getName().trim());
+				product.setType(sub.getType().trim());
+				product.setRemark(sub.getRemark().trim());
+				products.add(product);
+			}
+			
+			itemMap.put(item.getName().trim(), products);
+		}
+		
+		return itemMap;
+	}
+
+	private EquipmentStandardCategory parseCategory(EquipmentStandardDTO standardData) {
+		EquipmentStandardCategory category = new EquipmentStandardCategory();
+		category.setParentId(0L);
+		category.setName(standardData.getCategory());
+		category = categoryService.insertSingle(category);
+		if (StringUtils.isNoneBlank(standardData.getType())) {
+			EquipmentStandardCategory secondCategory = new EquipmentStandardCategory();
+			secondCategory.setParentId(category.getId());
+			secondCategory.setName(standardData.getType());
+			category = categoryService.insertSingle(secondCategory);
+		}
+		
+		return category;
+	}
+
+	private EquipmentStandard parseStandard(EquipmentStandardDTO standardData) {
+		EquipmentStandard standard = new EquipmentStandard();
+		if (StringUtils.isNotBlank(standardData.getId())) {
+			standard.setId(Long.parseLong(standardData.getId()));
+		}
+		if (StringUtils.isNotBlank(standardData.getEnglishName())) {
+			standard.setEnglishName(standardData.getEnglishName().trim());
+		}
+		if (StringUtils.isNotBlank(standardData.getReplaceStandard())) {
+			standard.setReplaceStandard(standardData.getReplaceStandard().trim());
+		}
+		if (StringUtils.isNotBlank(standardData.getImportStandard())) {
+			standard.setImportStandard(standardData.getImportStandard().trim());
+		}
+		standard.setName(standardData.getName().trim());
+		standard.setNumber(standardData.getNumber().trim());
+		standard.setCategory(standardData.getCategory().trim());
+		standard.setType(standardData.getType().trim());
+		standard.setPdfUrl(standardData.getPdfUrl().trim());
+		standard.setTxtUrl(standardData.getTxtUrl().trim());
+		standard.setPageSize(standardData.getPageSize().trim());
+		standard.setImgsPath(standardData.getImgsPath().trim());
+		standard.setPublishDate(standardData.getPublishDate());
+		standard.setUploadDate(standardData.getUploadDate());
+		standard.setImplementDate(standardData.getImplementDate());
+		return standard;
+	}
+
+	private EquipmentStandardDTO parseStandard(EquipmentStandard standardData) {
+		EquipmentStandardDTO standard = new EquipmentStandardDTO();
+		standard.setId(standardData.getId().toString());
+		standard.setName(standardData.getName());
+		standard.setEnglishName(standardData.getEnglishName());
+		standard.setNumber(standardData.getNumber());
+		standard.setReplaceStandard(standardData.getReplaceStandard());
+		standard.setImportStandard(standardData.getImportStandard());
+		standard.setPdfUrl(standardData.getPdfUrl());
+		standard.setTxtUrl(standardData.getTxtUrl());
+		standard.setImgsPath(standardData.getImgsPath());
+		standard.setPageSize(standardData.getPageSize());
+		standard.setPublishDate(standardData.getPublishDate());
+		standard.setUploadDate(standardData.getUploadDate());
+		standard.setImplementDate(standardData.getImplementDate());
+		return standard;
+	}
+
+	private List<EquipmentStandardItemDTO> parseItems(Map<EquipmentStandardItem, List<EquipmentShopProduct>> map) {
+		List<EquipmentStandardItemDTO> items = new ArrayList<>();
+		for (EquipmentStandardItem item : map.keySet()) {
+			EquipmentStandardItemDTO itemDto = new EquipmentStandardItemDTO();
+			itemDto.setName(item.getName());
+			List<EquipmentStandardProductDTO> materials = new ArrayList<>();
+			List<EquipmentStandardProductDTO> equipments = new ArrayList<>();
+			for (EquipmentShopProduct sub : map.get(item)) {
+				EquipmentStandardProductDTO subDto = new EquipmentStandardProductDTO();
+				subDto.setName(sub.getName());
+				subDto.setType(sub.getType());
+				subDto.setRemark(sub.getRemark());
+				if (sub.getType().equals("M")) {
+					materials.add(subDto);
+				} else if (sub.getType().equals("E")) {
+					equipments.add(subDto);
+				}
+			}
+			
+			itemDto.setMaterials(materials);
+			itemDto.setEquipments(equipments);
+			items.add(itemDto);
+		}
+		
+		return items;
+	}
+	
+	public static void main(String[] args) {
 	}
 }

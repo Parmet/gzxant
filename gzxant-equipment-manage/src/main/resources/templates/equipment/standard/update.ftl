@@ -78,9 +78,6 @@
 		<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
 			<!-- Nav tabs -->
 			<ul id="standardTab" class="nav nav-tabs" role="tablist">
-				<li role="presentation" class="active">
-					<a href="#import" aria-controls="import" role="tab" data-toggle="tab">导入标准</a>
-				</li>
 				<li role="presentation">
 					<a href="#pdf" aria-controls="pdf" role="tab" data-toggle="tab">PDF源文件</a>
 				</li>
@@ -94,55 +91,11 @@
 		
 			<!-- Tab panes -->
 			<div class="tab-content">
-				<div role="tabpanel" class="tab-pane active" id="import">
-					<div class="panel panel-default">
-		  				<div class="panel-body">
-		  					<div class="row">
-		  						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-		  						</div>
-			  					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-									<div id="pdfDropzone" class="dropzone"></div>
-									<input type="hidden" id="uploadUrl" name="uploadUrl" value="${vehicle.uploadUrl}" /> 
-								</div>
-								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-		  						</div>
-							</div>
-							<div class="row">
-			  					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-									<div class="progress" style="margin-top:10px;">
-										<div class="progress-bar progress-bar-success progress-bar-striped active" 
-											id="importProgress"
-											role="progressbar" aria-valuenow="0" 
-											aria-valuemin="0" aria-valuemax="100" 
-											style="min-width: 2em;">0%</div>
-									</div>
-								</div>
-							</div>
-							<div class="row" style="margin-top:20px;">
-								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-									<p><b>操作说明：</b></p>
-									<ol>
-										<li>数据导入必须按照国家发布的标准模板里面的格式；</li>
-										<li>必须使用指定的浏览器，chrome（谷歌）、火狐、IE9+。</li>
-									</ol>
-		  						</div>
-		  					</div>
-						</div>
-						<div class="panel-footer">
-		  					<div class="row">
-								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-									<button type="button" onclick="back()" class="btn btn-success pull-left">返回</button>
-									<button type="button" onclick="nextStep()" class="btn btn-success pull-right">下一步</button>
-		  						</div>
-		  					</div>
-						</div>
-					</div>
-				</div>
-				<div role="tabpanel" class="tab-pane" id="pdf">
+				<div role="tabpanel" class="tab-pane active" id="pdf">
 					<div class="panel panel-default">
 			  			<div class="panel-body">
 			  				<div id="pdf_box" class="pdf_box">
-				  				<span>请上传PDF文件</span>
+			  				
 				  			</div>
 						</div>
 						<div class="panel-footer">
@@ -150,7 +103,6 @@
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 									<button type="button" onclick="back()" class="btn btn-success pull-left">返回</button>
 									<button type="button" onclick="nextStep()" class="btn btn-success pull-right" style="margin-left: 10px;">下一步</button>
-									<button type="button" onclick="lastStep()" class="btn btn-success pull-right">上一步</button>
 		  						</div>
 		  					</div>
 		  				</div>
@@ -163,7 +115,8 @@
 		  					<div class = "row">
 		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
 		  							<label for="number_input" class="control-label">标准编号&nbsp;<span class="required">*</span></label>
-		                            <input onclick="addTxt(this);" type="text" class="form-filter form-control" id="number_input" name="number" placeholder="格式：GB 2018.01-1995 或 GB/T 2018.01-1995" />
+		                            <input onclick="addTxt(this);" type="text" class="form-filter form-control" id="number_input" 
+		                            	name="number" placeholder="格式：GB 2018.01-1995 或 GB/T 2018.01-1995" value="${standard.number}" disabled="disabled" />
 		  						</div>
 		  					</div>
 		  					<div class = "row">
@@ -172,7 +125,7 @@
 		  							<select id="type_input" name="type" class="select2" style="width:100%;">
 		  								<option value="">请选择</option>
 		  								<#list types as type>
-		  									<option value="${type.jvalue}">${type.jvalue}</option>
+		  									<option value="${type.jvalue}" <#if (standard.name?split(" ")?size == 3) && (standard.name?split(" ")[1] == type.jvalue)>selected="selected"</#if>>${type.jvalue}</option>
 		  								</#list>
 		  							</select>
 		  						</div>
@@ -180,31 +133,31 @@
 		  					<div class = "row">
 		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
 		  							<label for="category_input" class="control-label">标准大类&nbsp;<span class="required">*</span></label>
-		                            <input onclick="addTxt(this);" type="text" class="form-filter form-control" id="category_input" name="category" placeholder="请输入标准名称" />
+		                            <input onclick="addTxt(this);" type="text" class="form-filter form-control" id="category_input" name="category" placeholder="请输入标准名称" value="${standard.name?split(" ")[0]}" />
 		  						</div>
 		  					</div>
 		  					<div class = "row">
 		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
 		  							<label for="name_input" class="control-label">标准名称&nbsp;<span class="required">*</span></label>
-		                            <input onclick="addTxt(this);" type="text" class="form-filter form-control" id="name_input" name="name" placeholder="请输入标准名称" />
+		                            <input onclick="addTxt(this);" type="text" class="form-filter form-control" id="name_input" name="name" placeholder="请输入标准名称" value="${standard.name?split(" ")[standard.name?split(" ")?size - 1]}" />
 		  						</div>
 		  					</div>
 		  					<div class = "row">
 		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
 		  							<label for="english_name_input" class="control-label">英文名称</label>
-		                            <input onclick="addTxt(this);" type="text" class="form-filter form-control" id="english_name_input" name="englishName" placeholder="请输入英文名称" />
+		                            <input onclick="addTxt(this);" type="text" class="form-filter form-control" id="english_name_input" name="englishName" placeholder="请输入英文名称" value="${standard.englishName}" />
 		  						</div>
 		  					</div>
 		  					<div class = "row">
 		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
 		  							<label for="publish_date_input" class="control-label">发布时间&nbsp;<span class="required">*</span></label>
-		                            <input onclick="addTxt(this);" type="text" class="form-filter form-control" id="publish_date_input" name="publishDate" placeholder="格式：2008-01-01" />
+		                            <input onclick="addTxt(this);" type="text" class="form-filter form-control" id="publish_date_input" name="publishDate" placeholder="格式：2008-01-01" value="${standard.publishDate}" />
 		  						</div>
 		  					</div>
 		  					<div class = "row">
 		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
 		  							<label for="implement_date_input" class="control-label">实施时间&nbsp;<span class="required">*</span></label>
-		                            <input onclick="addTxt(this);" type="text" class="form-filter form-control" id="implement_date_input" name="implementDate" placeholder="格式：2008-01-01" />
+		                            <input onclick="addTxt(this);" type="text" class="form-filter form-control" id="implement_date_input" name="implementDate" placeholder="格式：2008-01-01" value="${standard.implementDate}" />
 		  						</div>
 		  					</div>
 			  				<table class="table" id="replace_table">
@@ -215,7 +168,24 @@
 				  					</tr>
 				  				</thead>
 				  				<tbody>
+			  						<#if standard.replaceStandard?? && (standard.replaceStandard != "")>
+			  						<#list standard.replaceStandard?split(",") as code>
 				  					<tr>
+			  							<td style="text-align:center;">
+				  						<#if (code != "")>
+			  								<a style="color:red;" onclick="removeTrInput(this)"><span class="glyphicon glyphicon-remove"></span></a>
+			  							<#else>
+			  								<a onclick="addTrInuput(this)"><span class="glyphicon glyphicon-plus span_tip"></span></a>
+			  							</#if>
+			  							</td>
+			  							<td>
+			  								<input onclick="addTxt(this);" type="text" class="form-filter form-control" id="replace_standard_input" onblur="checkNumberByObj(this);"
+			  									name="replaceStandard" placeholder="格式：GB 2018.01-1995 或 GB/T 2018.01-1995" value="${code}" />
+			  							</td>
+			  						</tr>
+		  							</#list>
+		  							<#else>
+		  							<tr>
 			  							<td style="text-align:center;">
 			  								<a onclick="addTrInuput(this)"><span class="glyphicon glyphicon-plus span_tip"></span></a>
 			  							</td>
@@ -223,7 +193,8 @@
 			  								<input onclick="addTxt(this);" type="text" class="form-filter form-control" id="replace_standard_input" onblur="checkNumberByObj(this);"
 			  									name="replaceStandard" placeholder="格式：GB 2018.01-1995 或 GB/T 2018.01-1995" />
 			  							</td>
-			  						</tr>
+		  							</tr>
+		  							</#if>
 				  				</tbody>
 							</table>
 							<table class="table" id="import_table">
@@ -234,7 +205,24 @@
 				  					</tr>
 				  				</thead>
 				  				<tbody>
+				  					<#if standard.replaceStandard?? && (standard.replaceStandard != "")>
+			  						<#list standard.replaceStandard?split(",") as code>
 				  					<tr>
+			  							<td style="text-align:center;">
+				  						<#if (code != "")>
+			  								<a style="color:red;" onclick="removeTrInput(this)"><span class="glyphicon glyphicon-remove"></span></a>
+			  							<#else>
+			  								<a onclick="addTrInuput(this)"><span class="glyphicon glyphicon-plus span_tip"></span></a>
+			  							</#if>
+			  							</td>
+			  							<td>
+			  								<input onclick="addTxt(this);" type="text" class="form-filter form-control" id="import_standnard_input" onblur="checkNumberByObj(this);"
+				  									name="importStandard" placeholder="格式：GB 2018.01-1995 或 GB/T 2018.01-1995" value="${code}" />
+			  							</td>
+			  						</tr>
+		  							</#list>
+		  							<#else>
+		  							<tr>
 			  							<td style="text-align:center;">
 			  								<a onclick="addTrInuput(this)"><span class="glyphicon glyphicon-plus span_tip"></span></a>
 			  							</td>
@@ -243,6 +231,7 @@
 			  									name="importStandard" placeholder="格式：GB 2018.01-1995 或 GB/T 2018.01-1995" />
 			  							</td>
 			  						</tr>
+		  							</#if>
 				  				</tbody>
 							</table>
 							</form>
@@ -262,6 +251,105 @@
 					<div class="panel panel-default">
 						<form id="item_form" action="#">
 						<div id="item-box" class="panel-body" style="height:500px;overflow: scroll;">
+							<#if standard.items?? && (standard.items?size > 0)>
+							<#list standard.items as item>
+							<div class="panel panel-success">
+								<div class="panel-heading form-group">
+									<input onclick="addTxt(this);" type="text" class="form-control btn_inline" style="color:black;" placeholder="请选择输入检验项" value="${item.name}" />
+									<a class="pull-right a_del" onclick="removeItem(this)"><span class="glyphicon glyphicon-remove"></span></a>
+									<a class="pull-right a_add" onclick="addItem(this)"><span class="glyphicon glyphicon-plus"></span></a>
+									<a class="pull-right a_add" onclick="changeItem(this)"><span class="glyphicon glyphicon-chevron-up"></span></a>
+								</div>
+								<div class="panel-body">
+									<table class="table">
+										<thead>
+											<tr>
+												<th>耗材</th>
+												<th>名称（如：无水甲醇。请勿填写编号）</th>
+												<th>属性</th>
+											</tr>
+										</thead>
+										<tbody>
+											<#if item.materials?? && (item.materials?size > 0)>
+					  						<#list item.materials as material>
+						  					<tr>
+					  							<td style="text-align:center;">
+						  						<#if (material_index+1 == item.materials?size)>
+					  								<a onclick="addTrInuput(this)"><span class="glyphicon glyphicon-plus span_tip"></span></a>
+					  							<#else>
+					  								<a style="color:red;" onclick="removeTrInput(this)"><span class="glyphicon glyphicon-remove"></span></a>
+					  							</#if>
+					  							</td>
+					  							<td>
+													<input onclick="addTxt(this);" type="text" data-name="material_name" class="form-filter form-control" placeholder="请选择输入耗材名称" value="${material.name}" />
+												</td>
+												<td>
+													<input onclick="addTxt(this);" type="text" data-name="material_remark" class="form-filter form-control"  placeholder="" value="${material.remark}" />
+												</td>
+					  						</tr>
+				  							</#list>
+				  							<#else>
+				  							<tr>
+												<td style="text-align:center;">
+													<a onclick="addTrInuput(this)"><span class="glyphicon glyphicon-plus span_tip"></span></a>
+												</td>
+												<td>
+													<input onclick="addTxt(this);" type="text" data-name="material_name" class="form-filter form-control"  placeholder="请选择输入耗材名称"/>
+												</td>
+												<td>
+													<input onclick="addTxt(this);" type="text" data-name="material_remark" class="form-filter form-control"  placeholder=""/>
+												</td>
+											</tr>
+				  							</#if>
+										</tbody>
+									</table>
+									<table class="table">
+										<thead>
+											<tr>
+												<th>设备</th>
+												<th>名称（如：锥形瓶。请勿填写编号）</th>
+												<th>属性</th>
+											</tr>
+										</thead>
+										<tbody>
+											<#if item.equipments?? && (item.equipments?size > 0)>
+					  						<#list item.equipments as equipment>
+						  					<tr>
+					  							<td style="text-align:center;">
+						  						<#if (equipment_index+1 == item.equipments?size)>
+					  								<a onclick="addTrInuput(this)"><span class="glyphicon glyphicon-plus span_tip"></span></a>
+					  							<#else>
+					  								<a style="color:red;" onclick="removeTrInput(this)"><span class="glyphicon glyphicon-remove"></span></a>
+					  							</#if>
+					  							</td>
+					  							<td>
+													<input onclick="addTxt(this);" type="text" data-name="equipment_name" class="form-filter form-control" placeholder="请选择输入设备名称" value="${equipment.name}" />
+												</td>
+												<td>
+													<input onclick="addTxt(this);" type="text" data-name="equipment_remark" class="form-filter form-control"  placeholder=""value="${equipment.remark}" />
+												</td>
+					  						</tr>
+				  							</#list>
+				  							<#else>
+				  							<tr>
+												<td style="text-align:center;">
+													<a onclick="addTrInuput(this)"><span class="glyphicon glyphicon-plus span_tip"></span></a>
+												</td>
+												<td>
+													<input onclick="addTxt(this);" type="text" data-name="equipment_name" class="form-filter form-control"  placeholder="请选择输入设备名称"/>
+												</td>
+												<td>
+													<input onclick="addTxt(this);" type="text" data-name="equipment_remark" class="form-filter form-control"  placeholder=""/>
+												</td>
+											</tr>
+				  							</#if>
+										</tbody>
+									</table>
+									
+								</div>
+							</div>
+							</#list>
+							<#else>
 							<div class="panel panel-success">
 								<div class="panel-heading form-group">
 									<input onclick="addTxt(this);" type="text" class="form-control btn_inline" style="color:black;" placeholder="请选择输入检验项" />
@@ -317,6 +405,7 @@
 									
 								</div>
 							</div>
+							</#if>
 						</div>
 						</form>
 						<div class="panel-footer">
@@ -346,7 +435,13 @@
 					<div class="panel panel-default">
 			  			<div class="panel-body">
 				  			<div id="txt_box" class="txt_box">
-				  				<span>请上传PDF文件</span>
+				  				<#list txts as txt>
+				  				<div class="row">
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<input type="checkbox" style="margin: 5px;" value="${txt}"/><a onclick="clickTxt(this);">${txt}</a>
+								</div>
+								</div>
+				  				</#list>
 				  			</div>
 						</div>
 					</div>
@@ -358,6 +453,26 @@
 	
 </div>
 <script type="text/javascript">
+	var html = "";
+	<#list 0..(standard.pageSize?number - 1) as i>
+		html = html + '<div class="row">';
+		html = html + '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">';
+		html = html + '<img src="' + base_url + '/file/image?path=' + encodeURIComponent("${standard.imgsPath?replace('\\', '\\\\')?replace('/', '//')}${i}.jpg") + '" />'; //
+		html = html + '</div>';
+		html = html + '</div>';
+	</#list>
+	$("#pdf_box").html("");
+	$("#pdf_box").html(html);
+
+	function clickTxt(obj) {
+		var checkbox_dom = $(obj).prev(":checkbox")
+		if (checkbox_dom.is(':checked')) {
+			checkbox_dom.removeAttr("checked");
+		} else {
+			checkbox_dom.prop("checked", true);
+		}
+	}
+	
 	function addTrInuput(obj) {
 		var tr_dom = $(obj).parent("td").parent("tr");
 		tr_dom = tr_dom.after(tr_dom.clone(true));
@@ -477,29 +592,27 @@
 		}
 	}
 	
-	var txt_url, imgs_path, upload_date, page_size;
 	function saveStandard() {
 		var load_index = layer.load(1, {shade: [0.8, '#000']});
 		var data = {
+			"id": "${standard.id}",
 			"name": $('[name=name]').val().trim(),
-			"englishName": $('[name=englishName]').val().trim(),
 			"number": $('[name=number]').val().trim(),
 			"category": $('[name=category]').val().trim(),
 			"type": $('[name=type]').val().trim(),
 			"replaceStandard": getReplaceStandard(),
 			"importStandard": getImportStandard(),
-			"pdfUrl": $("#uploadUrl").val().trim(),
-			"txtUrl": txt_url,
-			"imgsPath": imgs_path,
-			"pageSize": page_size,
+			"pdfUrl": "${standard.pdfUrl?replace('\\', '\\\\')?replace('/', '//')}",
+			"txtUrl": "${standard.txtUrl?replace('\\', '\\\\')?replace('/', '//')}",
+			"imgsPath": "${standard.imgsPath?replace('\\', '\\\\')?replace('/', '//')}",
+			"pageSize": "${standard.pageSize}",
 			"publishDate": $('[name=publishDate]').val().trim(),
-			"uploadDate": upload_date,
+			"uploadDate": "${standard.uploadDate}",
 			"implementDate": $('[name=implementDate]').val().trim(),
 			"items": getItems()
 		};
 		
-		if (!checkNumber(data.number) 
-			|| !checNnumberExists(data.number)) {
+		if (!checkNumber(data.number)) {
 			layer.close(load_index);
 			return ;
 		}
@@ -524,10 +637,9 @@
 		
 		data = JSON.stringify(data);
 		console.log(data);
-		
 		$.ajax({
 		    type: 'POST',
-		    url: base_url + "/back/standard/create",
+		    url: base_url + "/back/standard/update",
 		    async: true,
 		    data: {
 		    	data: data
@@ -535,7 +647,7 @@
 		    success: function (data) {
 		    	if (data.code == 200) {
 			    	layer.msg("保存成功");
-			    	window.location.href = url.split("import")[0];
+			    	window.location.href = url.split("jupdate")[0];
 		    	} else {
 		    		layer.close(load_index);
 		    		layer.msg("保存失败");
@@ -648,165 +760,11 @@
     function back() {
     	layer.confirm('您有未保存数据，是否继续返回', {
     		yes: function(index, layero){
-    			window.location.href = url.split("import")[0];
+    			window.location.href = url.split("jupdate")[0];
     		}
     	});
     }
     
-    var t;
-    function progress(num, tar) {
-    	if (num < 0 || num > 100) {
-    		return ;
-    	}
-    	
-    	if (num === tar) {
-    		clearTimeout(t);
-            return;
-        } 
-    	
-        t = setTimeout(function() {
-        	$("#importProgress").css("width", num + "%");
-        	$("#importProgress").html("");
-        	$("#importProgress").html(num + "%");
-        	progress(++num, tar);
-        }, 300);
-    }
-    
-	// --------------------------图片上传-------------------------------------------------- //
-	Dropzone.autoDiscover = false;
-	var licenseDropzone = new Dropzone("div#pdfDropzone", {
-		url : base_url + "/file/upload/pdf",
-		filesizeBase : 1024,//定义字节算法 默认1000
-		maxFiles : 2,//最大文件数量
-		maxFilesize : 100, //MB
-		fallback : function() {
-			layer.alert('暂不支持您的浏览器上传!');
-		},
-		uploadMultiple : false,
-		addRemoveLinks : true,
-		acceptedFiles: "application/pdf",
-		dictDefaultMessage : '点击上传标准',
-		dictFileTooBig : '您的文件超过' + 100 + 'MB!',
-		dictInvalidInputType : '不支持您上传的类型',
-		dictMaxFilesExceeded : '您的文件超过1个!',
-		init : function() {
-			this.on('queuecomplete', function(files) {
-				// layer.alert('上传成功');
-			});
-			
-			this.on('success', function(uploadimfo, result) {
-				clearTimeout(t);
-				progress(0, 100);
-				$("#txt_box").html("");
-				$("#txt_box").html("PDF上传成功，正在解析中&nbsp;<img src='${rc.contextPath}/img/loading-upload.gif' style='width:auto;' />");
-				$("#pdf_box").html("");
-				$("#pdf_box").html("PDF上传成功，正在解析中&nbsp;<img src='${rc.contextPath}/img/loading-upload.gif' style='width:auto;' />");
-				
-				$("#uploadUrl").val(result.message[0].url);
-				upload_date = result.message[0].date;
-				
-				$.ajax({
-				    type: 'POST',
-				    url: url,
-				    async: true,
-				    data: {
-						pdfUrl : result.message[0].url
-					},
-				    success: function (data) {
-						if (data.code == 200) {
-							txt_url = data.message.txtPath;
-							var txts = data.message.txts;
-							var imgs = data.message.imgs;
-							var html = "";
-							$.each(txts, function (index, item){
-								html = html + '<div class="row">';
-								html = html + '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">';
-								html = html + '<input type="checkbox" style="margin: 5px;" value="' + item +'"/>';//class="fa fa-plus-square"
-								html = html + '<a onclick="clickTxt(this);">';
-								html = html + item;
-								html = html + '</a>';
-								html = html + '</div>';
-								html = html + '</div>';
-							});
-							
-							if (imgs.length > 0) {
-								imgs_path = imgs[0].substring(0, imgs[0].indexOf('0.jpg'));
-								page_size = imgs.length;
-							}
-							
-							$("#txt_box").html("");
-							$("#txt_box").html(html);
-							html = "";
-							$.each(imgs, function (index, item){
-								html = html + '<div class="row">';
-								html = html + '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">';
-								html = html + '<img src="' + base_url + '/file/image?path=' + encodeURIComponent(item) + '" />'; //
-								//html = html + '----' + index + '----------------------------------------------------------------------------';
-								html = html + '</div>';
-								html = html + '</div>';
-							});
-							
-							$("#pdf_box").html("");
-							$("#pdf_box").html(html);
-							layer.msg("解析成功，结果仅供参考");
-							clearTimeout(t);
-							progress(100, 101);
-						} else {
-							layer.msg("PDF文件解析错误，请重新上传PDF文件");
-							$("#txt_box").html("");
-							$("#txt_box").html("PDF文件解析错误，请重新上传PDF文件!");
-							$("#pdf_box").html("");
-							$("#pdf_box").html("PDF文件解析错误，请重新上传PDF文件!");
-						}
-					},
-					error: function (XMLHttpRequest, textStatus, errorThrown) {
-						$("#txt_box").html("");
-						$("#txt_box").html("PDF文件解析错误，请重新上传PDF文件!");
-						$("#pdf_box").html("");
-						$("#pdf_box").html("PDF文件解析错误，请重新上传PDF文件!");
-			            layer.alert(XMLHttpRequest.responseJSON.error);
-			        }
-				});
-			});
-			
-			this.on('error', function(a, errorMessage, result) {
-				if (!result) {
-					layer.alert(result.error || '上传失败');
-				}
-			});
-			
-			this.on('maxfilesreached', function() {
-				this.removeAllFiles(true);
-				$("#txt_box").html("");
-				$("#txt_box").html("请上传PDF文件");
-				$("#pdf_box").html("");
-				$("#pdf_box").html("请上传PDF文件");
-				progress(0, 1);
-				layer.alert('文件数量超出限制');
-			});
-			
-			this.on('removedfile', function() {
-				$("#txt_box").html("");
-				$("#txt_box").html("请上传PDF文件");
-				$("#pdf_box").html("");
-				$("#pdf_box").html("请上传PDF文件");
-				$("#uploadUrl").val("${standard.uploadUrl}");
-				progress(0, 1);
-				layer.alert('删除成功');
-				window.location.reload();
-			});
-		}
-	});
-	
-	function clickTxt(obj) {
-		var checkbox_dom = $(obj).prev(":checkbox")
-		if (checkbox_dom.is(':checked')) {
-			checkbox_dom.removeAttr("checked");
-		} else {
-			checkbox_dom.prop("checked", true);
-		}
-	}
-	
 	function addTxt(obj) {
 		var txt = getTxt();
 		if (txt != "") {
@@ -869,6 +827,11 @@
 		copy_box.find("span.glyphicon-remove").each(function(){
 			$(this).parent("a").parent("td").parent("tr").remove();
 		});
+		
+		if (copy_box.children(".panel-body").css("display") == 'none') {
+			copy_box.children(".panel-body").show();
+			$(obj).children("span").attr("class", "glyphicon glyphicon-chevron-up");
+		}
 	}
 	
 	function changeItem(obj) {

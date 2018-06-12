@@ -45,8 +45,6 @@ public class SysDictController extends BaseController {
         return "dict/list";
     }
 
-
-
     /**
      * 保存数据
      *

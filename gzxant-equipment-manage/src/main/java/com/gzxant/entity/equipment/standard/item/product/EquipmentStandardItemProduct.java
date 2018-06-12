@@ -27,6 +27,12 @@ public class EquipmentStandardItemProduct extends DataEntity<EquipmentStandardIt
     @TableField("product_id")
 	private Long productId;
 	private Integer sort;
+	
+	@TableField(exist = false)
+	private String itemName;
+	
+	@TableField(exist = false)
+	private String productName;
 
 	public Long getItemId() {
 		return itemId;
@@ -50,6 +56,22 @@ public class EquipmentStandardItemProduct extends DataEntity<EquipmentStandardIt
 
 	public void setSort(Integer sort) {
 		this.sort = sort;
+	}
+	
+	public String getItemName() {
+		return itemName;
+	}
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
 	@Override
