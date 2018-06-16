@@ -597,6 +597,7 @@
 		var data = {
 			"id": "${standard.id}",
 			"name": $('[name=name]').val().trim(),
+			"englishName": $('[name=englishName]').val().trim(),
 			"number": $('[name=number]').val().trim(),
 			"category": $('[name=category]').val().trim(),
 			"type": $('[name=type]').val().trim(),

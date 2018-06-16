@@ -68,7 +68,8 @@
 	        },
 	        {
 	            field: 'number',
-	            title: '国家编号'
+	            title: '国家编号',
+	            width: '130px'
 	        },
 	        {
 	            field: 'name',
@@ -86,20 +87,24 @@
 	        },
 	        {
 	            field: 'publishDate',
-	            title: '发布时间'
+	            title: '发布时间',
+	            width: '100px'
 	        },
 	        {
 	            field: 'implementDate',
-	            title: '实施时间'
+	            title: '实施时间',
+	            width: '100px'
 	        },
 	        {
 	            field: 'uploadDate',
-	            title: '上传时间'
+	            title: '上传时间',
+	            width: '100px'
 	        },
 	        {
 	            field: 'id',
 	            title: '操作',
 	            align: 'center',
+	            width: '130px',
 	            formatter: function (value, row, index) {
 	            	var edit_btn = '<a class="btn btn-primary btn-sm" href="#" mce_href="#" title="编辑" onclick="updateStandard(\''
 	    				+ row.id + '\')"><i class="fa fa-edit"></i></a> ';
