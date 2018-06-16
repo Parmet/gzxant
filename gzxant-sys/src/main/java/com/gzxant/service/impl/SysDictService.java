@@ -162,6 +162,31 @@ public class SysDictService extends BaseService<SysDictDao, SysDict> implements 
 		sub = this.baseMapper.getSub(jkey);
 		return sub;
 	}
+    @Override
+    public List<SysDict> getDictTree(String jkey) {
+        List<SysDict> sub = Lists.newArrayList();
+        if (StringUtils.isBlank(jkey)) {
+            return sub;
+        }
 
+        sub = this.baseMapper.getSub(jkey);
+        return sub;
+    }
+    private  List<JsTree> getSysDictParseJsTree( List<SysDict> sysDicts){
+        List<JsTree> jts = Lists.newArrayList();
+        for (SysDict sysDict : sysDicts) {
+            JsTree jt = new JsTree();
+            jt.setId(sysDict.getId().toString());
+            jt.setParent( "#");
+            jt.setText(sysDict.getJvalue());
+            if ("C".equals(sysDict.getType())) {
+                jt.setIcon("fa fa-home");
+            } else {
+                jt.setIcon("glyphicon glyphicon-tint");
+            }
+            jts.add(jt);
+        }
+        return jts;
+    }
 
 }
