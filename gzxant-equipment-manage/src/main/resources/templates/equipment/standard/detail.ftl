@@ -94,44 +94,39 @@
 					<div class="panel panel-default">
 		  				<div class="panel-body">
 		  					<div class="row">
-		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-		  							<label for="name_input" class="control-label" style="width: 30%;">标准名称：</label><span>${standard.name?split(" ")[standard.name?split(" ")?size - 1]}</span>
-		  						</div>
+		  						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><p>标准名称：</p></div>
+		  						<div class="col-lg-9 col-md-9col-sm-9 col-xs-9"><p>${standard.name}</p></div>
 		  					</div>
 		  					<div class="row">
-		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-		  							<label for="name_input" class="control-label" style="width: 30%;">英文名称：</label><span>${standard.englishName}</span>
-		  						</div>
+		  						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><p>英文名称：</p></div>
+		  						<div class="col-lg-9 col-md-9col-sm-9 col-xs-9"><p>${standard.englishName}</p></div>
 		  					</div>
 		  					<div class = "row">
-		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-		  							<label for="number_input" class="control-label" style="width: 30%;">标准编号：</label><span>${standard.number}</span>
-		  						</div>
+		  						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><p>标准编号：</p></div>
+		  						<div class="col-lg-9 col-md-9col-sm-9 col-xs-9"><p>${standard.number}</p></div>
 		  					</div>
 		  					<div class = "row">
-		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-		  							<label for="first_category_input" class="control-label" style="width: 30%;">标准大类：</label><span>${standard.name?split(" ")[0]}</span>
-		  						</div>
+		  						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><p>标准大类：</p></div>
+		  						<div class="col-lg-9 col-md-9col-sm-9 col-xs-9"><p>${standard.category}</p></div>
 		  					</div>
 		  					<div class = "row">
-		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-		  							<label for="second_category_input" class="control-label" style="width: 30%;">标准类别：</label><span>${standard.name?split(" ")[1]}</span>
-		  						</div>
+		  						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><p>标准类别：</p></div>
+		  						<div class="col-lg-9 col-md-9col-sm-9 col-xs-9"><p>${standard.type}</p></div>
 		  					</div>
 		  					<div class = "row">
-		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-		  							<label for="publish_date_input" class="control-label" style="width: 30%;">发布时间：</label><span>${standard.publishDate}</span>
-		  						</div>
+		  						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><p>发布时间：</p></div>
+		  						<div class="col-lg-9 col-md-9col-sm-9 col-xs-9"><p>${standard.publishDate}</p></div>
 		  					</div>
 		  					<div class = "row">
-		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-		  							<label for="implement_date_input" class="control-label" style="width: 30%;">实施时间：</label><span>${standard.implementDate}</span>
-		  						</div>
+		  						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><p>实施时间：</p></div>
+		  						<div class="col-lg-9 col-md-9col-sm-9 col-xs-9"><p>${standard.implementDate}</p></div>
 		  					</div>
 		  					<div class = "row">
-		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-		  							<label for="implement_date_input" class="control-label" style="width: 30%;">PDF文件：</label>
-		  							<a onclick="downloadPDF()"><img src="${rc.contextPath}\img\pdf-download.jpg" style="width:50px; height: auto;" /></a>
+		  						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><p style="line-height: 40px;">实施时间：</p></div>
+		  						<div class="col-lg-9 col-md-9col-sm-9 col-xs-9">
+		  							<a onclick="downloadPDF()">
+		  								<img src="${rc.contextPath}\img\pdf-download.jpg" style="width:50px; height: auto;" />
+		  							</a>
 		  						</div>
 		  					</div>
 		  					<table class="table" id="replace_table">
@@ -251,7 +246,7 @@
 	function downloadPDF() {
 		var url = '${standard.pdfUrl?replace("\\", "\\\\")?replace("/", "//")}';
 		url = base_url + "/back/standard/download?pdfUrl=" + encodeURIComponent(url) 
-				+ "&name=" + encodeURIComponent("${standard.number} ${standard.name}");
+				+ "&name=" + encodeURIComponent("${standard.number} ${standard.category} ${standard.type} ${standard.name}");
 		window.open(url);
 	}
 

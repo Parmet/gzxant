@@ -162,7 +162,7 @@
 		  					<form id="info_form" action="#">
 		  					<div class = "row">
 		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-		  							<label for="number_input" class="control-label">标准编号&nbsp;<span class="required">*</span></label>
+		  							<label for="number_input" class="control-label">标准编号（格式：GB 2018.01-1995 或 GB/T 2018.01-1995）&nbsp;<span class="required">*</span></label>
 		                            <input onclick="addTxt(this);" type="text" class="form-filter form-control" id="number_input" name="number" placeholder="格式：GB 2018.01-1995 或 GB/T 2018.01-1995" />
 		  						</div>
 		  					</div>
@@ -180,7 +180,7 @@
 		  					<div class = "row">
 		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
 		  							<label for="category_input" class="control-label">标准大类&nbsp;<span class="required">*</span></label>
-		                            <input onclick="addTxt(this);" type="text" class="form-filter form-control" id="category_input" name="category" placeholder="请输入标准名称" />
+		                            <input onclick="addTxt(this);" type="text" class="form-filter form-control" id="category_input" name="category" placeholder="请输入标准大类" />
 		  						</div>
 		  					</div>
 		  					<div class = "row">
@@ -197,13 +197,13 @@
 		  					</div>
 		  					<div class = "row">
 		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-		  							<label for="publish_date_input" class="control-label">发布时间&nbsp;<span class="required">*</span></label>
+		  							<label for="publish_date_input" class="control-label">发布时间（格式：2008-01-01）&nbsp;<span class="required">*</span></label>
 		                            <input onclick="addTxt(this);" type="text" class="form-filter form-control" id="publish_date_input" name="publishDate" placeholder="格式：2008-01-01" />
 		  						</div>
 		  					</div>
 		  					<div class = "row">
 		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-		  							<label for="implement_date_input" class="control-label">实施时间&nbsp;<span class="required">*</span></label>
+		  							<label for="implement_date_input" class="control-label">实施时间（格式：2008-01-01）&nbsp;<span class="required">*</span></label>
 		                            <input onclick="addTxt(this);" type="text" class="form-filter form-control" id="implement_date_input" name="implementDate" placeholder="格式：2008-01-01" />
 		  						</div>
 		  					</div>
@@ -211,7 +211,7 @@
 				  				<thead>
 				  					<tr>
 				  						<th></th>
-				  						<th>代替标准编号</th>
+				  						<th>代替标准编号（格式：GB 2018.01-1995 或 GB/T 2018.01-1995）</th>
 				  					</tr>
 				  				</thead>
 				  				<tbody>
@@ -230,7 +230,7 @@
 				  				<thead>
 				  					<tr>
 				  						<th></th>
-				  						<th>引用标准编号</th>
+				  						<th>引用标准编号（格式：GB 2018.01-1995 或 GB/T 2018.01-1995）</th>
 				  					</tr>
 				  				</thead>
 				  				<tbody>
@@ -504,12 +504,12 @@
 			return ;
 		}
 		
-		if (data.items.length <= 0) {
+/* 		if (data.items.length <= 0) {
 			layer.close(load_index);
 			layer.msg("请填写检测项信息");
 			return ;
 		}
-		
+ */		
 		if (data.pdfUrl == "") {
 			layer.close(load_index);
 			layer.msg("请上传PDF文件");
@@ -676,15 +676,15 @@
 	Dropzone.autoDiscover = false;
 	var licenseDropzone = new Dropzone("div#pdfDropzone", {
 		url : base_url + "/file/upload/pdf",
-		filesizeBase : 1024,//定义字节算法 默认1000
-		maxFiles : 2,//最大文件数量
-		maxFilesize : 100, //MB
+		filesizeBase : 1024,// 定义字节算法 默认1000
+		maxFiles : 2,// 最大文件数量
+		maxFilesize : 200, // MB
 		fallback : function() {
 			layer.alert('暂不支持您的浏览器上传!');
 		},
 		uploadMultiple : false,
 		addRemoveLinks : true,
-		acceptedFiles: "application/pdf",
+		acceptedFiles : "application/pdf",
 		dictDefaultMessage : '点击上传标准',
 		dictFileTooBig : '您的文件超过' + 100 + 'MB!',
 		dictInvalidInputType : '不支持您上传的类型',

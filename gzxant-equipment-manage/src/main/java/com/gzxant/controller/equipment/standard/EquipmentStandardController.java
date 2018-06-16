@@ -71,6 +71,7 @@ public class EquipmentStandardController extends BaseController {
 	@GetMapping(value = "")
 	public String toList(Model model) {
 		model.addAttribute("categoryTrees", JSON.toJSONString(categoryService.getDictTree()));
+		model.addAttribute("types", dictService.getSub("STANDARD_TYPE"));
 		return "/equipment/standard/list";
 	}
 	
@@ -196,8 +197,6 @@ public class EquipmentStandardController extends BaseController {
 		EquipmentStandardCategory category = parseCategory(standardData);
 		
 		// 保存标准信息
-		String name = standard.getCategory() + " " + standard.getType() + " " + standard.getName();
-		standard.setName(name);
 		standard.setCategoryId(category.getId());
 		standard.setCategoryPath(category.getPath());
 		standardService.insert(standard);
@@ -205,6 +204,9 @@ public class EquipmentStandardController extends BaseController {
 		// 解析检验项，以及检验项的耗材、设备
 		Map<String, List<EquipmentShopProduct>> itemMap = parseItems(standardData);
 		List<EquipmentStandardItem> items = getItems(standard, itemMap);
+		if (items.isEmpty()) {
+			return ReturnDTOUtil.success();
+		}
 		itemService.insertBatch(items);
 		
 		// 所有产品
@@ -213,6 +215,9 @@ public class EquipmentStandardController extends BaseController {
 			products.addAll(list);
 		}
 		
+		if (products.isEmpty()) {
+			return ReturnDTOUtil.success();
+		}
 		products = productService.insert(products);
 		itemService.saveItemProducts(items, products, itemMap);
 		
@@ -241,12 +246,13 @@ public class EquipmentStandardController extends BaseController {
 		
 		// 解析标准信息 保存标准信息
 		EquipmentStandard standard = parseStandard(standardData);
+		if (standard == null) {
+			return ReturnDTOUtil.fail();
+		}
 		EquipmentStandardCategory category = parseCategory(standardData);
-		String name = standard.getCategory() + " " + standard.getType() + " " + standard.getName();
-		standard.setName(name);
 		standard.setCategoryId(category.getId());
 		standard.setCategoryPath(category.getPath());
-		standardService.updateById(standard);
+		standardService.updateAllColumnById(standard);
 		
 		// 删除检验项、以及检验项与商品的关联
 		standardService.deleteItemsById(standard.getId());
@@ -254,12 +260,20 @@ public class EquipmentStandardController extends BaseController {
 		// 解析检验项，以及检验项的耗材、设备
 		Map<String, List<EquipmentShopProduct>> itemMap = parseItems(standardData);
 		List<EquipmentStandardItem> items = getItems(standard, itemMap);
+		if (items.isEmpty()) {
+			return ReturnDTOUtil.success();
+		}
+		
 		itemService.insertBatch(items);
 		
 		// 所有产品
 		List<EquipmentShopProduct> products = new ArrayList<>();
 		for (List<EquipmentShopProduct> list : itemMap.values()) {
 			products.addAll(list);
+		}
+		
+		if (products.isEmpty()) {
+			return ReturnDTOUtil.success();
 		}
 		
 		products = productService.insert(products);
@@ -369,21 +383,18 @@ public class EquipmentStandardController extends BaseController {
 	private EquipmentStandard parseStandard(EquipmentStandardDTO standardData) {
 		EquipmentStandard standard = new EquipmentStandard();
 		if (StringUtils.isNotBlank(standardData.getId())) {
-			standard.setId(Long.parseLong(standardData.getId()));
+			standard = standardService.selectById(standardData.getId());
+			if (standard == null || standard.getId() == null) {
+				return null;
+			}
 		}
-		if (StringUtils.isNotBlank(standardData.getEnglishName())) {
-			standard.setEnglishName(standardData.getEnglishName().trim());
-		}
-		if (StringUtils.isNotBlank(standardData.getReplaceStandard())) {
-			standard.setReplaceStandard(standardData.getReplaceStandard().trim());
-		}
-		if (StringUtils.isNotBlank(standardData.getImportStandard())) {
-			standard.setImportStandard(standardData.getImportStandard().trim());
-		}
+		standard.setEnglishName(standardData.getEnglishName().trim());
+		standard.setReplaceStandard(standardData.getReplaceStandard().trim());
+		standard.setImportStandard(standardData.getImportStandard().trim());
 		standard.setName(standardData.getName().trim());
 		standard.setNumber(standardData.getNumber().trim());
-		standard.setCategory(standardData.getCategory().trim());
-		standard.setType(standardData.getType().trim());
+		standard.setCategoryName(standardData.getCategory().trim());
+		standard.setTypeName(standardData.getType().trim());
 		standard.setPdfUrl(standardData.getPdfUrl().trim());
 		standard.setTxtUrl(standardData.getTxtUrl().trim());
 		standard.setPageSize(standardData.getPageSize().trim());
@@ -399,6 +410,8 @@ public class EquipmentStandardController extends BaseController {
 		standard.setId(standardData.getId().toString());
 		standard.setName(standardData.getName());
 		standard.setEnglishName(standardData.getEnglishName());
+		standard.setCategory(standardData.getCategoryName());
+		standard.setType(standardData.getTypeName());
 		standard.setNumber(standardData.getNumber());
 		standard.setReplaceStandard(standardData.getReplaceStandard());
 		standard.setImportStandard(standardData.getImportStandard());
@@ -437,8 +450,5 @@ public class EquipmentStandardController extends BaseController {
 		}
 		
 		return items;
-	}
-	
-	public static void main(String[] args) {
 	}
 }

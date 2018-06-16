@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -14,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.gzxant.base.service.impl.BaseService;
 import com.gzxant.dao.equipment.standard.item.EquipmentStandardItemDao;
 import com.gzxant.entity.equipment.shop.product.EquipmentShopProduct;
-import com.gzxant.entity.equipment.standard.EquipmentStandard;
 import com.gzxant.entity.equipment.standard.item.EquipmentStandardItem;
 import com.gzxant.entity.equipment.standard.item.product.EquipmentStandardItemProduct;
 import com.gzxant.service.equipment.standard.item.product.IEquipmentStandardItemProductService;
@@ -34,42 +32,40 @@ public class EquipmentStandardItemService extends BaseService<EquipmentStandardI
 	@Autowired
 	private IEquipmentStandardItemProductService itemProductService;
 	
+	/**
+	 * @param items 数据库的检验项
+	 * @param productDatas 数据库的产品数据
+	 * @param itemMap 页面传递的检验项结构数据
+	 */
 	@Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
 	@Override
-	public void saveItemProducts(List<EquipmentStandardItem> items, List<EquipmentShopProduct> products,
+	public void saveItemProducts(List<EquipmentStandardItem> itemDatas, 
+			List<EquipmentShopProduct> productDatas, 
 			Map<String, List<EquipmentShopProduct>> itemMap) {
 		// 保存关联
 		List<EquipmentStandardItemProduct> itemProducts = new ArrayList<>();
-		// item 和 product 名称的对应map
-		Map<String, List<String>> itemProductNameMap = new HashMap<>();
-		for (String itemName : itemMap.keySet()) {
-			List<String> productNames = new ArrayList<>();
-			for (EquipmentShopProduct product : itemMap.get(itemName)) {
-				productNames.add(product.getName());
-			}
-			
-			itemProductNameMap.put(itemName, productNames);
-		}
 		
 		// product 名称和实体的对应map
-		Map<String, EquipmentShopProduct> productMap = new HashMap<>();
-		for (EquipmentShopProduct product : products) {
-			productMap.put(product.getName(), product);
+		Map<String, EquipmentShopProduct> productDataMap = new HashMap<>();
+		for (EquipmentShopProduct product : productDatas) {
+			productDataMap.put(product.getName(), product);
 		}
 		
-		for (EquipmentStandardItem item : items) {
-			if (itemProductNameMap.containsKey(item.getName())) {
-				for (String productName : itemProductNameMap.get(item.getName())) {
+		for (EquipmentStandardItem item : itemDatas) {
+			if (itemMap.containsKey(item.getName())) {
+				for (EquipmentShopProduct product : itemMap.get(item.getName())) {
 					EquipmentStandardItemProduct itemProduct = new EquipmentStandardItemProduct();
-					EquipmentShopProduct product = productMap.get(productName);
+					EquipmentShopProduct productData = productDataMap.get(product.getName());
 					itemProduct.setItemId(item.getId());
-					itemProduct.setProductId(product.getId());
+					itemProduct.setProductId(productData.getId());
 					itemProduct.setRemark(product.getRemark());
 					itemProducts.add(itemProduct);
 				}
 			}
 		}
 		
-		itemProductService.insertBatch(itemProducts);
+		if (!itemProducts.isEmpty()) {
+			itemProductService.insertBatch(itemProducts);
+		}
 	}
 }

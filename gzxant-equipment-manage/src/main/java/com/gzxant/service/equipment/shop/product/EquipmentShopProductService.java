@@ -76,7 +76,6 @@ public class EquipmentShopProductService extends BaseService<EquipmentShopProduc
 		// 准备插入的产品数据
 		List<EquipmentShopProduct> insertProducts = new ArrayList<>();
 		
-		
 		// 查询已存在的数据，并保存名称到list
 		existsProducts = selectExistsProduct(products);
 		List<String> existsProductNames = new ArrayList<>();

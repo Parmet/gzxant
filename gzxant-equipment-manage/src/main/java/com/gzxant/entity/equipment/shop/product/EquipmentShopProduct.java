@@ -15,7 +15,7 @@ import com.gzxant.base.entity.DataEntity;
  * @since 2018-05-17
  */
 @TableName("equipment_shop_product")
-public class EquipmentShopProduct extends DataEntity<EquipmentShopProduct> {
+public class EquipmentShopProduct extends DataEntity<EquipmentShopProduct> implements Cloneable {
 
     private static final long serialVersionUID = 1L;
 
@@ -41,9 +41,6 @@ public class EquipmentShopProduct extends DataEntity<EquipmentShopProduct> {
      * 商品类型(M:材料， E:设备)
      */
 	private String type;
-	@TableField("update_id")
-	private Long updateId;
-
 
 	public String getName() {
 		return name;
@@ -85,14 +82,6 @@ public class EquipmentShopProduct extends DataEntity<EquipmentShopProduct> {
 		this.type = type;
 	}
 
-	public Long getUpdateId() {
-		return updateId;
-	}
-
-	public void setUpdateId(Long updateId) {
-		this.updateId = updateId;
-	}
-
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -108,5 +97,9 @@ public class EquipmentShopProduct extends DataEntity<EquipmentShopProduct> {
 			", type=" + type +
 			", updateId=" + updateId +
 			"}";
+	}
+	
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 }

@@ -87,8 +87,8 @@ public class EquipmentStandardService extends BaseService<EquipmentStandardDao, 
 					&& firstCategory.contains("国家标准")) { 
 					String secondCategory = txts.get(i + 2).trim();
 					
-					stand.setCategory(firstCategory);
-					stand.setType(secondCategory);
+					stand.setCategoryName(firstCategory);
+					stand.setTypeName(secondCategory);
 					stand.setName(firstCategory 
 							+ secondCategory 
 							+ txts.get(i + 3).trim());
@@ -134,6 +134,7 @@ public class EquipmentStandardService extends BaseService<EquipmentStandardDao, 
 	public Map<EquipmentStandard, Map<EquipmentStandardItem, List<EquipmentShopProduct>>> getDataMapById(
 			String id) {
 		Map<EquipmentStandard, Map<EquipmentStandardItem, List<EquipmentShopProduct>>> map = new HashMap<>();
+		Map<EquipmentStandardItem, List<EquipmentShopProduct>> itemProductMap = new HashMap<>();
 		if (StringUtils.isBlank(id)) {
 			return null;
 		}
@@ -146,14 +147,28 @@ public class EquipmentStandardService extends BaseService<EquipmentStandardDao, 
 		
 		// 检验项信息
 		List<EquipmentStandardItem> items = itemService.selectList(Condition.create().eq("standard_id", id));
+		if (items == null || items.isEmpty()) {
+			map.put(standard, itemProductMap);
+			return map;
+		}
+		
 		Map<Long, EquipmentStandardItem> itemMap = new HashMap<>();
 		for (EquipmentStandardItem item : items) {
+			map.put(standard, itemProductMap);
 			itemMap.put(item.getId(), item);
 		}
 		
 		// 检验项和耗材设备关联信息
 		Set<Long> itemIds = itemMap.keySet();
 		List<EquipmentStandardItemProduct> itemProducts = itemProductService.selectList(Condition.create().in("item_id", itemIds));
+		if (itemProducts == null || itemProducts.isEmpty()) {
+			for (EquipmentStandardItem item : items) {
+				itemProductMap.put(item, new ArrayList<>());
+			}
+			
+			map.put(standard, itemProductMap);
+			return map;
+		}
 		
 		// 耗材设备信息
 		List<Long> productIds = new ArrayList<>();
@@ -167,7 +182,6 @@ public class EquipmentStandardService extends BaseService<EquipmentStandardDao, 
 		}
 		
 		// 检验项和耗材设备关联信息
-		Map<EquipmentStandardItem, List<EquipmentShopProduct>> itemProductMap = new HashMap<>();
 		for (EquipmentStandardItemProduct itemProduct : itemProducts) {
 			EquipmentStandardItem key = itemMap.get(itemProduct.getItemId());
 			List<EquipmentShopProduct> curItemProducts = null;
@@ -177,10 +191,15 @@ public class EquipmentStandardService extends BaseService<EquipmentStandardDao, 
 				curItemProducts = new ArrayList<>();
 			}
 			
-			EquipmentShopProduct product = productMap.get(itemProduct.getProductId());
-			product.setRemark(itemProduct.getRemark());
-			curItemProducts.add(product);
-			itemProductMap.put(key, curItemProducts);
+			EquipmentShopProduct product;
+			try {
+				product = (EquipmentShopProduct) (productMap.get(itemProduct.getProductId())).clone();
+				product.setRemark(itemProduct.getRemark());
+				curItemProducts.add(product);
+				itemProductMap.put(key, curItemProducts);
+			} catch (CloneNotSupportedException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		map.put(standard, itemProductMap);
@@ -195,6 +214,10 @@ public class EquipmentStandardService extends BaseService<EquipmentStandardDao, 
 		}
 		
 		List<EquipmentStandardItem> oldItems = itemService.selectList(Condition.create().eq("standard_id", id));
+		if (oldItems == null || oldItems.isEmpty()) {
+			return ;
+		}
+		
 		List<Long> itemIds = new ArrayList<>();
 		for (EquipmentStandardItem item : oldItems) {
 			itemIds.add(item.getId());

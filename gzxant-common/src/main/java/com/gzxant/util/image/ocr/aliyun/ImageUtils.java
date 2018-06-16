@@ -96,8 +96,8 @@ public class ImageUtils {
 	    return encoder.encode(data);
 	}
 	
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		ImageUtils.img2Str("F:\\gzxant\\file\\项目\\设备检测\\需求文档\\标准pdf\\image\\0001.jpg");
-	}
+	}*/
 
 }

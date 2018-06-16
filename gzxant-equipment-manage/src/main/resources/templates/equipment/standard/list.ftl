@@ -61,10 +61,7 @@
 	        },
 	        {
 	            field: 'name',
-	            title: '名称',
-	            formatter: function (value, row, index) {
-	            	return value.split(" ")[2];
-	            }
+	            title: '名称'
 	        },
 	        {
 	            field: 'number',
@@ -72,18 +69,12 @@
 	            width: '130px'
 	        },
 	        {
-	            field: 'name',
-	            title: '标准大类',
-	            formatter: function (value, row, index) {
-	            	return value.split(" ")[0];
-	            }
+	            field: 'categoryName',
+	            title: '标准大类'
 	        },
 	        {
-	            field: 'name',
-	            title: '标准类别',
-	            formatter: function (value, row, index) {
-	            	return value.split(" ")[1];
-	            }
+	            field: 'typeName',
+	            title: '标准类别'
 	        },
 	        {
 	            field: 'publishDate',

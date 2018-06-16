@@ -8,6 +8,11 @@ spring:
   profiles:
     active: dev, db-dev
     
+  http:
+    multipart:
+      maxFileSize: 200Mb
+      maxRequestSize: 200Mb
+  
   redis:
     database: 0
 

@@ -94,13 +94,13 @@ public class EquipmentStandard extends DataEntity<EquipmentStandard> {
 	/**
 	 * 标准大类
 	 */
-	@TableField(exist = false)
-	private String category;
+	@TableField("category_name")
+	private String categoryName;
 	/**
 	 * 标准类别
 	 */
-	@TableField(exist = false)
-	private String type;
+	@TableField("type_name")
+	private String typeName;
 	
 	public String getName() {
 		return name;
@@ -198,20 +198,20 @@ public class EquipmentStandard extends DataEntity<EquipmentStandard> {
 		this.state = state;
 	}
 
-	public String getCategory() {
-		return category;
+	public String getCategoryName() {
+		return categoryName;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
-	public String getType() {
-		return type;
+	public String getTypeName() {
+		return typeName;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
 	}
 
 	public String getImgsPath() {
