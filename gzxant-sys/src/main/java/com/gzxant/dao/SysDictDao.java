@@ -4,6 +4,7 @@ package com.gzxant.dao;
 import java.util.List;
 
 import com.gzxant.base.dao.TreeDao;
+import com.gzxant.base.vo.JsTree;
 import com.gzxant.entity.SysDict;
 
 /**

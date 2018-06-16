@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gzxant.dao.equipment.food.article.EquipmentFoodArticleDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.gzxant.entity.equipment.food.article.EquipmentFoodArticle">
+		<result column="enterprise_name" property="enterpriseName" />
+		<result column="enterprise_address" property="enterpriseAddress" />
+		<result column="sampling_name" property="samplingName" />
+		<result column="province" property="province" />
+		<result column="food_name" property="foodName" />
+		<result column="specifications" property="specifications" />
+		<result column="samplingtype" property="samplingtype" />
+		<result column="food_type" property="foodType" />
+		<result column="produce_date" property="produceDate" />
+		<result column="food_classification" property="foodClassification" />
+		<result column="classification" property="classification" />
+		<result column="announcement" property="announcement" />
+		<result column="sampling_produce" property="samplingProduce" />
+		<result column="announcement_date" property="announcementDate" />
+		<result column="trademark" property="trademark" />
+		<result column="sampling_result" property="samplingResult" />
+		<result column="detect_produce" property="detectProduce" />
+		<result column="batch_number" property="batchNumber" />
+		<result column="produce_source_name" property="produceSourceName" />
+		<result column="title" property="title" />
+		<result column="Sampling" property="Sampling" />
+		<result column="update_id" property="updateId" />
+	</resultMap>
+
+</mapper>
