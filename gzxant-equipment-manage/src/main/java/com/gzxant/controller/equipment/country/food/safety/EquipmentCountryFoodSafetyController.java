@@ -2,8 +2,6 @@ package com.gzxant.controller.equipment.country.food.safety;
 
 import java.util.List;
 
-import com.gzxant.entity.SysUser;
-import com.gzxant.service.ISysDictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,12 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gzxant.annotation.SLog;
+import com.gzxant.base.controller.BaseController;
 import com.gzxant.base.entity.ReturnDTO;
 import com.gzxant.base.vo.DataTable;
-import com.gzxant.service.equipment.country.food.safety.IEquipmentCountryFoodSafetyService;
 import com.gzxant.entity.equipment.country.food.safety.EquipmentCountryFoodSafety;
+import com.gzxant.service.ISysDictService;
+import com.gzxant.service.equipment.country.food.safety.IEquipmentCountryFoodSafetyService;
 import com.gzxant.util.ReturnDTOUtil;
-import com.gzxant.base.controller.BaseController;
 
 import io.swagger.annotations.ApiOperation;
 
