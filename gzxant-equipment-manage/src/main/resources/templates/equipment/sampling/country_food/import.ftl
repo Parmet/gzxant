@@ -3,7 +3,6 @@
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
-
                     <form class="form-horizontal form-bordered" id="gzxantForm">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">文章标题：<span class="required">*</span></label>
@@ -85,13 +84,13 @@
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">分类：<span class="required">*</span></label>
-                            <div class="col-sm8">
-                                <#--<select id="type_input" name="${type.jvalue}" class="form-control" >-->
-                                    <#--<option value="">请选择</option>-->
-		  								<#--<#list foodType as type>-->
-		  									<#--<option value="${type.jvalue}">${type.jvalue}</option>-->
-                                        <#--</#list>-->
-                                <#--</select>-->
+                            <div class="col-sm-8">
+                                <select id="type_input" name="${type.jvalue}" class="form-control" >
+                                    <option value="">请选择</option>
+	  								<#list foodType as type>
+	  									<option value="${type.jvalue}">${type.jvalue}</option>
+                                    </#list>
+                                </select>
                             </div>
                         </div>
 
@@ -127,7 +126,7 @@
 
                         <div class="form-actions fluid">
                             <div class="col-md-offset-3 col-md-9">
-                                <button type="submit" class="btn btn-green">保存</button>
+                                <button type="submit" class="btn btn-success">保存</button>
                             </div>
                         </div>
 

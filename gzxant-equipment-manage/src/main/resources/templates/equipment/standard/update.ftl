@@ -122,7 +122,7 @@
 		  					<div class = "row">
 		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
 		  							<label for="type_input" class="control-label">标准类别&nbsp;<span class="required">*</span></label>
-		  							<select id="type_input" name="type" class="select2" style="width:100%;">
+		  							<select id="type_input" name="type" class="form-control" style="width:100%;">
 		  								<option value="">请选择</option>
 		  								<#list types as type>
 		  									<option value="${type.jvalue}" <#if (standard.type??) && (standard.type == type.jvalue)>selected="selected"</#if>>${type.jvalue}</option>

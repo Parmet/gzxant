@@ -91,7 +91,7 @@
 	};
 
 	iTable.prototype.init = function(options) {
-		_options = $.extend({}, _default, options);
+		_options = $.extend(true, {}, _default, options);
 
 		this.bulidHtml();
 		this.listen();

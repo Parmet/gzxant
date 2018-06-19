@@ -15,20 +15,11 @@
 <div class="wrapper wrapper-content animated fadeInRight">
 <!--数据列表-->
 <div class="row" style="margin-right: 0!important;">
-
-    <#--<div class="col-sm-2">-->
-        <#--<div type="hidden" class="portlet box green-haze" style="padding: 15px">-->
-            <#--<div class="portlet-body" id="samplingType"></div>-->
-        <#--</div>-->
-    <#--</div>-->
-
     <div class="col-sm-12">
     	<div class="col-sm-12">
 	        <div class="ibox">
 	            <div class="ibox-body">
 			    	<div id="standardToolbar" role="group">
-			    		<#--<input type="hidden" class="form-filter form-control _search" id="path" name="search_like_category_path" value="0." />-->
-			    		<#--<input type="hidden" class="form-filter form-control _search" id="del-flag" name="search_eq_del_flag" value="Y"  />-->
 			    		<div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                                 <label for="numberInput" class="control-label">标称生产企业名称</label>
@@ -42,7 +33,7 @@
                             <div class = "row">
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                                     <label for="type_input" class="control-label">抽检类型&nbsp;</label>
-                                    <select id="type_input" name="search_eq_sampling_type" class="select2 _search" style="width:100%;">
+                                    <select id="type_input" name="search_eq_sampling_type" class="form-control _search" style="width:100%;">
                                         <option value="">请选择</option>
                                         <option value="国家食品安全监督抽检(合格)">国家食品安全监督抽检(合格)</option>
                                         <option value="国家食品安全监督抽检(不合格)">国家食品安全监督抽检(不合格)</option>
@@ -50,7 +41,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                                     <label for="type_input" class="control-label">食品类型&nbsp;</label>
-                                    <select id="type_input" name="search_eq_food_type" class="select2 _search" style="width:100%;">
+                                    <select id="type_input" name="search_eq_food_type" class="form-control _search" style="width:100%;">
                                         <option value="">请选择</option>
 		  								<#list foodType as type>
 		  									<option value="${type.jvalue}">${type.jvalue}</option>
@@ -89,17 +80,11 @@
 	        },
 	        {
 	            field: 'foodName',
-	            title: '食品名称',
-	            // formatter: function (value, row, index) {
-	            // 	return value.split(" ")[0];
-	            // }
+	            title: '食品名称'
 	        },
 	        {
 	            field: 'foodType',
-	            title: '分类',
-	            // formatter: function (value, row, index) {
-	            // 	return value.split(" ")[1];
-	            // }
+	            title: '分类'
 	        },
 	        {
 	            field: 'province',
@@ -123,45 +108,15 @@
 	    return c;
 	}
 	
-	function updateStandard(id) {
-		window.location.href = url + "jupdate/" + id;
-	}
-	
 	var standardTable = $("#standardTable").iTable({
 		toolbar : {
 			id : "standardToolbar",
-			auto : true,
-			include_btn : []
+			auto : true
 		},
 		data : {
 			columns : getColumns()
 		}
 	});
 
-    <#--$("#samplingType").jstree({-->
-        <#--"core": {-->
-            <#--"animation": 0,-->
-            <#--"themes": {-->
-                <#--theme: "classic",-->
-                <#--"dots": true,-->
-                <#--"icons": true-->
-            <#--},-->
-            <#--"check_callback": true,-->
-            <#--'data': ${samplingTypes!''}-->
-        <#--},-->
-        <#--"types": {-->
-            <#--"default": {-->
-                <#--"valid_children": ["default", "file"]-->
-            <#--}-->
-        <#--},-->
-        <#--"plugins": ["types", "wholerow"]-->
-    <#--}).on("select_node.jstree", function (node, selectd) {-->
-        <#--id = selectd.node.id;-->
-        <#--pid = selectd.node.parent;-->
-        <#--text = selectd.node.text;-->
-        <#--$('#path').val(id + ".");-->
-        <#--standardTable.re_load();-->
-    <#--});-->
-    
 </script>
 

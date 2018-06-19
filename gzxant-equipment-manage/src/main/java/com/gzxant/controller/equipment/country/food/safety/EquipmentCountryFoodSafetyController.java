@@ -66,11 +66,9 @@ public class EquipmentCountryFoodSafetyController extends BaseController {
 	}
 	@ApiOperation(value = "进入国家食品安全监督抽检(合格)编辑界面", notes = "进入国家食品安全监督抽检(合格)编辑界面")
 	@GetMapping(value = "/insert")
-	public String importDate( Model model) {
-//		EquipmentCountryFoodSafety equipmentCountryFoodSafety = equipmentCountryFoodSafetyService.selectById(Integer.parseInt(id));
-////		model.addAttribute("action", action);
-////		model.addAttribute("foodType", dictService.getDictTree("FOOD_TYPE"));
-//		model.addAttribute("equipmentCountryFoodSafety", equipmentCountryFoodSafety);
+	public String importDate(Model model) {
+		model.addAttribute("action", "import");
+		model.addAttribute("foodType", dictService.getDictTree("FOOD_TYPE"));
 		return "/equipment/sampling/country_food/import";
 	}
 
