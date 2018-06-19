@@ -104,9 +104,7 @@
 		  						</div>
 		  					</div>
 		  					<div class = "row">
-		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-		  							<label for="number_input" class="control-label" style="width: 30%;">标准编号：</label><span>${standard.number}</span>
-		  						</div>
+		  						c
 		  					</div>
 		  					<div class = "row">
 		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">

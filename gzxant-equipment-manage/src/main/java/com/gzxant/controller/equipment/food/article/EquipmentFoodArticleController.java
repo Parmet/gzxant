@@ -48,14 +48,14 @@ public class EquipmentFoodArticleController extends BaseController {
 		//logger.info("======================================"+JSON.toJSONString(dictService.getDictTrees("SAMPLING_TYPE")));
 		model.addAttribute("samplingTypes", dictService.getDictTree("SAMPLING_TYPE"));
 		model.addAttribute("foodType", dictService.getDictTree("FOOD_TYPE"));
-		return "/equipment/article/list";
+		return "/equipment/sampling/list";
 	}
 
 	@ApiOperation(value = "进入抽检食品文章表编辑界面", notes = "进入抽检食品文章表编辑界面")
 	@GetMapping(value = "/detail/{action}")
 	public String detail(@PathVariable("action") String action, Model model) {
 		model.addAttribute("action", action);
-		return "/equipment/article/detail";
+		return "/equipment/sampling/detail";
 	}
 
 	@ApiOperation(value = "获取抽检食品文章表列表数据", notes = "获取抽检食品文章表列表数据:使用约定的DataTable")

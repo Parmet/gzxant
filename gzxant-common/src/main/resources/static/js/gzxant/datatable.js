@@ -248,7 +248,7 @@ function dt_action(title, action) {
 //	}
 	
 	// var initSelect2 = "";//"<script type='text/javascript'>$('.select2').select2();</script>";
-    var initSelect2 = "<script type='text/javascript'>if ($('.select2').length > 0) {$('.select2').select2();}</script>";
+    var initSelect2 = "";
 	$.get(url + action, {},function (html) {
 		layer.open({
 	        type: 1,
