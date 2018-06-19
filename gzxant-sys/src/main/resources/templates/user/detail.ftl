@@ -4,7 +4,7 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
 
-                    <form class="form-horizontal form-bordered" id="gzxantForm">
+                    <form class="form-horizontal form-bordered" id="gzxantForm" >
                         <input type="hidden" name="id" value="${sysUser.id}"/>
                         <input type="hidden" name="photo" value="${sysUser.photo}" id="photo"/>
 
