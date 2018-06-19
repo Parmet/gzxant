@@ -1,5 +1,3 @@
-<script src="${rc.contextPath}/js/plugins/dropzone/dropzone.min.js"></script>
-<link href="${rc.contextPath}/css/plugins/dropzone/dropzone.css" rel="stylesheet" />
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-sm-12">
@@ -86,30 +84,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">状态</label>
-
-                            <#--<div class="col-sm-8">-->
-                                <#--<select name="status" class="form-control">-->
-                                    <#--<option value="Y">启用</option>-->
-                                    <#--<option value="N">禁用</option>-->
-                                <#--</select>-->
-                            <#--</div>-->
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">角色</label>
-
-                            <#--<div class="col-sm-8">-->
-                                <#--<select name="ids" multiple="multiple" class="select2" style="width: 100%;">-->
-
-                                <#--</select>-->
-                            <#--</div>-->
-                        </div>
-
                     <#if action !='detail'>
                         <div class="form-actions fluid">
                             <div class="col-md-offset-3 col-md-9">
-                                <button type="submit" class="btn-green">保存</button>
+                                <button type="submit" class="btn btn-info">保存</button>
                             </div>
                         </div>
                     </#if>

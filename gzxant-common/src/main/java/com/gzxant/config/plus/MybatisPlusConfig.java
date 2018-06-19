@@ -2,6 +2,7 @@ package com.gzxant.config.plus;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.plugins.PerformanceInterceptor;
@@ -19,6 +20,7 @@ public class MybatisPlusConfig {
 	 * @return
      */
 	@Bean
+	@Profile({"dev", "local"})
 	public PerformanceInterceptor performanceInterceptor() {
 		PerformanceInterceptor performanceInterceptor=new PerformanceInterceptor();
 		/*<!-- SQL 执行性能分析，开发环境使用，线上不推荐。 maxTime 指的是 sql 最大执行时长 -->*/

@@ -32,5 +32,7 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/gzxant/jar/aip-java-sdk-4.2.0.jar"/>
+	<classpathentry kind="lib" path="/gzxant/jar/json-20160810.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,6 +42,7 @@ import com.gzxant.service.equipment.standard.item.IEquipmentStandardItemService;
 import com.gzxant.util.FileUtils;
 import com.gzxant.util.ReturnDTOUtil;
 import com.gzxant.util.data.JsonUtil;
+import com.gzxant.util.image.ocr.ImageUtils;
 import com.gzxant.util.pdf.PDFUtil;
 
 import io.swagger.annotations.ApiOperation;
@@ -233,6 +235,34 @@ public class EquipmentStandardController extends BaseController {
 	private EquipmentStandardDTO parseData(String data) {
 		EquipmentStandardDTO dto = JsonUtil.toBean(data, EquipmentStandardDTO.class);
 		return dto;
+	}
+	
+	@ApiOperation(value = "更新标准文字", notes = "更新标准文字")
+	@PutMapping(value = "/update/txt")
+	@ResponseBody
+	public ReturnDTO updateTxt(@RequestParam("txtUrl") String txtUrl, 
+			@RequestParam("imgsPath") String imgsPath, 
+			@RequestParam("pageSize") String pageSize) {
+		if (StringUtils.isBlank(txtUrl)
+			|| StringUtils.isBlank(imgsPath)
+			|| StringUtils.isBlank(pageSize)) {
+			return ReturnDTOUtil.fail();
+		}
+		
+		int size = Integer.parseInt(pageSize);
+		
+		// 按页数循环读取图片，调用OCR接口转换文字
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < size; i++) {
+			sb.append(ImageUtils.img2Str(imgsPath + i + ".jpg"));
+		}
+		
+		// 重新写进该标准的文字文件
+		PDFUtil.writeContent2Txt(sb.toString(), txtUrl);
+		
+		// 返回文字列表给页面
+		List<String> txts = FileUtils.readFileTxt(new File(txtUrl));
+		return ReturnDTOUtil.success(txts);
 	}
 
 	@ApiOperation(value = "编辑标准表", notes = "编辑标准表")

@@ -1,4 +1,4 @@
-package com.gzxant.util.image.ocr.aliyun;
+package com.gzxant.util.image.ocr;
 
 import com.alibaba.cloudapi.sdk.core.BaseApiClient;
 import com.alibaba.cloudapi.sdk.core.BaseApiClientBuilder;

@@ -124,6 +124,6 @@
     load_data( getcolumns(), {"createDate": "desc"});
 
     function dt_explort_buttont() {
-        location.href=url + "exportUserList";
+        location.href=url + "excel";
     }
 </script>

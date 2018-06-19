@@ -103,7 +103,7 @@ public class PDFUtil {
 	 * @param al
 	 * @param file
 	 */
-	private static void writeContent2Txt(String al, String file) {
+	public static void writeContent2Txt(String al, String file) {
 		File f = new File(file);
 		if (!f.exists()) {
 			try {

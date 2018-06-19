@@ -62,7 +62,7 @@ public class SysUserController extends BaseController {
      *
      * @throws Exception
      */
-    @GetMapping(value = "/exportUserList")
+    @GetMapping(value = "/excel")
     @ResponseBody
     public void exportCollectCustomerList(HttpServletResponse response) throws Exception {
 

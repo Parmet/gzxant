@@ -1,4 +1,9 @@
 <style>
+.panel-body.parent-box {
+	height:450px;
+	overflow: scroll;
+}
+
 #dict_edit_table .control-label {
 	text-align: left !important;
 }
@@ -14,6 +19,7 @@
 .txt_box {
 	height:500px; 
 	overflow-y: scroll;
+	position:  relative;
 }
 
 .card {
@@ -96,7 +102,7 @@
 			<div class="tab-content">
 				<div role="tabpanel" class="tab-pane active" id="import">
 					<div class="panel panel-default">
-		  				<div class="panel-body">
+		  				<div class="panel-body parent-box">
 		  					<div class="row">
 		  						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
 		  						</div>
@@ -140,7 +146,7 @@
 				</div>
 				<div role="tabpanel" class="tab-pane" id="pdf">
 					<div class="panel panel-default">
-			  			<div class="panel-body">
+			  			<div class="panel-body parent-box">
 			  				<div id="pdf_box" class="pdf_box">
 				  				<span>请上传PDF文件</span>
 				  			</div>
@@ -158,7 +164,7 @@
 				</div>
 				<div role="tabpanel" class="tab-pane" id="info">
 					<div class="panel panel-default">
-		  				<div class="panel-body" style="height:500px;overflow: scroll;">
+		  				<div class="panel-body parent-box">
 		  					<form id="info_form" action="#">
 		  					<div class = "row">
 		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
@@ -261,7 +267,7 @@
 				<div role="tabpanel" class="tab-pane" id="content">
 					<div class="panel panel-default">
 						<form id="item_form" action="#">
-						<div id="item-box" class="panel-body" style="height:500px;overflow: scroll;">
+						<div id="item-box" class="panel-body parent-box">
 							<div class="panel panel-success">
 								<div class="panel-heading form-group">
 									<input onclick="addTxt(this);" type="text" class="form-control btn_inline" style="color:black;" placeholder="请选择输入检验项" />
@@ -344,11 +350,18 @@
 			<div class="tab-content">
 				<div role="tabpanel" class="tab-pane active" id="txt">
 					<div class="panel panel-default">
-			  			<div class="panel-body">
+			  			<div class="panel-body parent-box">
 				  			<div id="txt_box" class="txt_box">
 				  				<span>请上传PDF文件</span>
 				  			</div>
 						</div>
+						<div class="panel-footer">
+		  					<div class="row">
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<button class="btn btn-success" onclick="dealCode(this);">乱码处理</button>
+		  						</div>
+		  					</div>
+		  				</div>
 					</div>
 				</div>
 				
@@ -358,6 +371,43 @@
 	
 </div>
 <script type="text/javascript">
+	var txt_url, imgs_path, upload_date, page_size;
+	function dealCode(obj) {
+		if (!txt_url) {
+			layer.alert("请上传PDF文件！");
+			return ;
+		}
+		
+		$("<div id='shade' style='opacity: 0.8;background: white;position: absolute;top: 0px;left: 0px;z-index: 300;height: 100%;width: 100%;'><img src='${rc.contextPath}/img/loading-upload.gif' style='width: auto;position: absolute;top: 50%;left: 50%;z-index: 300;height: auto;' /></div>").appendTo('#txt_box');
+		$(obj).attr("disable", true);
+		$.ajax({
+			type: 'PUT',
+		    url: base_url + "/back/standard/update/txt",
+		    async: true,
+		    data: {
+		    	txtUrl : txt_url,
+		    	imgsPath: imgs_path,
+		    	pageSize: page_size
+			},
+		    success: function (data) {
+		    	if (data.code != 200) {
+		    		layer.alert(data.error);
+		    		$("#shade").remove();
+		    		$(obj).attr("disable", false);
+		    	} else {
+		    		loadTxt(data.message);
+		    		$("#shade").remove();
+		    		$(obj).attr("disable", false);
+		    	}
+		    }, 
+		    error: function (XMLHttpRequest, textStatus, errorThrown) {
+	            layer.alert(XMLHttpRequest.responseJSON.error);
+	            $("#shade").remove();
+	    		$(obj).attr("disable", false);
+	        }
+		});
+	}
+
 	function addTrInuput(obj) {
 		var tr_dom = $(obj).parent("td").parent("tr");
 		tr_dom = tr_dom.after(tr_dom.clone(true));
@@ -477,7 +527,6 @@
 		}
 	}
 	
-	var txt_url, imgs_path, upload_date, page_size;
 	function saveStandard() {
 		var load_index = layer.load(1, {shade: [0.8, '#000']});
 		var data = {
@@ -698,9 +747,9 @@
 				clearTimeout(t);
 				progress(0, 100);
 				$("#txt_box").html("");
-				$("#txt_box").html("PDF上传成功，正在解析中&nbsp;<img src='${rc.contextPath}/img/loading-upload.gif' style='width:auto;' />");
+				$("#txt_box").html("PDF上传成功，拼命解析中&nbsp;<img src='${rc.contextPath}/img/loading-upload.gif' style='width:auto;' />");
 				$("#pdf_box").html("");
-				$("#pdf_box").html("PDF上传成功，正在解析中&nbsp;<img src='${rc.contextPath}/img/loading-upload.gif' style='width:auto;' />");
+				$("#pdf_box").html("PDF上传成功，拼命解析中&nbsp;<img src='${rc.contextPath}/img/loading-upload.gif' style='width:auto;' />");
 				
 				$("#uploadUrl").val(result.message[0].url);
 				upload_date = result.message[0].date;
@@ -718,24 +767,13 @@
 							var txts = data.message.txts;
 							var imgs = data.message.imgs;
 							var html = "";
-							$.each(txts, function (index, item){
-								html = html + '<div class="row">';
-								html = html + '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">';
-								html = html + '<input type="checkbox" style="margin: 5px;" value="' + item +'"/>';//class="fa fa-plus-square"
-								html = html + '<a onclick="clickTxt(this);">';
-								html = html + item;
-								html = html + '</a>';
-								html = html + '</div>';
-								html = html + '</div>';
-							});
 							
+							loadTxt(txts);
 							if (imgs.length > 0) {
 								imgs_path = imgs[0].substring(0, imgs[0].indexOf('0.jpg'));
 								page_size = imgs.length;
 							}
 							
-							$("#txt_box").html("");
-							$("#txt_box").html(html);
 							html = "";
 							$.each(imgs, function (index, item){
 								html = html + '<div class="row">';
@@ -797,6 +835,23 @@
 			});
 		}
 	});
+	
+	function loadTxt(txts) {
+		var html = "";
+		$.each(txts, function (index, item){
+			html = html + '<div class="row">';
+			html = html + '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">';
+			html = html + '<input type="checkbox" style="margin: 5px;" value="' + item +'"/>';//class="fa fa-plus-square"
+			html = html + '<a onclick="clickTxt(this);">';
+			html = html + item;
+			html = html + '</a>';
+			html = html + '</div>';
+			html = html + '</div>';
+		});
+		
+		$("#txt_box").html("");
+		$("#txt_box").html(html);
+	}
 	
 	function clickTxt(obj) {
 		var checkbox_dom = $(obj).prev(":checkbox")

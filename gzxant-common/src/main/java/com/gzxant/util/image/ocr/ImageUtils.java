@@ -1,4 +1,4 @@
-package com.gzxant.util.image.ocr.aliyun;
+package com.gzxant.util.image.ocr;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

@@ -90,14 +90,14 @@
 	        },
 	        {
 	            field: 'foodName',
-	            title: '食品名称',
+	            title: '食品名称'
 	            // formatter: function (value, row, index) {
 	            // 	return value.split(" ")[0];
 	            // }
 	        },
 	        {
 	            field: 'foodType',
-	            title: '分类',
+	            title: '分类'
 	            // formatter: function (value, row, index) {
 	            // 	return value.split(" ")[1];
 	            // }
