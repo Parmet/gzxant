@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gzxant.dao.equipment.province.food.safety.EquipmentProvinceFoodSafetyDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.gzxant.entity.equipment.province.food.safety.EquipmentProvinceFoodSafety">
+		<result column="enterprise_name" property="enterpriseName" />
+		<result column="enterprise_address" property="enterpriseAddress" />
+		<result column="sampling_name" property="samplingName" />
+		<result column="province" property="province" />
+		<result column="specifications_model" property="specificationsModel" />
+		<result column="sampling_type" property="samplingType" />
+		<result column="food_type" property="foodType" />
+		<result column="classification" property="classification" />
+		<result column="sampling_result" property="samplingResult" />
+		<result column="prodect_date" property="prodectDate" />
+		<result column="announcement_number" property="announcementNumber" />
+		<result column="announcement_date" property="announcementDate" />
+		<result column="title" property="title" />
+		<result column="Sampling" property="Sampling" />
+		<result column="update_id" property="updateId" />
+	</resultMap>
+
+</mapper>
