@@ -84,18 +84,27 @@
                                        value="${equipmentCountryFoodSafety.samplingResult}"/>
                             </div>
                         </div>
+
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">分类：<span class="required">*</span></label>
-                            <div class="col-sm8">
-                                <select id="type_input" name="${type.jvalue}" class="form-control" >
-                                    <option value="">请选择</option>
-		  								<#list foodType as type>
-		  									<option value="${type.jvalue}">${type.jvalue}</option>
-                                        </#list>
+                            <label class="col-sm-3 control-label">分类&nbsp;</label>
+                            <div class="col-sm-8">
+                                <select id="type_input" name="classification" class="form-control " style="width:100%;">
+                                <#list foodType as type>
+                                <option value="${type.jvalue}">${type.jvalue}</option>
+                                </#list>
                                 </select>
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">抽检类型&nbsp;</label>
+                            <div class="col-sm-8">
+                                <select id="type_input" name="samplingType" class="form-control " style="width:100%;">
+                                    <option value="">${equipmentCountryFoodSafety.samplingType}</option>
+                                    <option value="国家食品安全监督抽检(合格)">国家食品安全监督抽检(合格)</option>
+                                    <option value="国家食品安全监督抽检(不合格)">国家食品安全监督抽检(不合格)</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">公告号：<span class="required">*</span></label>
                             <div class="col-sm-8">

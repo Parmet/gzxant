@@ -6,6 +6,7 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.gzxant.base.entity.BaseEntity;
+import com.gzxant.base.entity.DataEntity;
 
 /**
  * <p>
@@ -16,7 +17,7 @@ import com.gzxant.base.entity.BaseEntity;
  * @since 2018-06-17
  */
 @TableName("equipment_country_food_safety")
-public class EquipmentCountryFoodSafety extends BaseEntity<EquipmentCountryFoodSafety> {
+public class EquipmentCountryFoodSafety extends DataEntity<EquipmentCountryFoodSafety> {
 
     private static final long serialVersionUID = 1L;
 
@@ -57,8 +58,8 @@ public class EquipmentCountryFoodSafety extends BaseEntity<EquipmentCountryFoodS
     /**
      * 食品类型
      */
-	@TableField("food_type")
-	private String foodType;
+//	@TableField("food_type")
+//	private String foodType;
     /**
      * 生产日期
      */
@@ -156,13 +157,13 @@ public class EquipmentCountryFoodSafety extends BaseEntity<EquipmentCountryFoodS
 		this.samplingType = samplingType;
 	}
 
-	public String getFoodType() {
-		return foodType;
-	}
-
-	public void setFoodType(String foodType) {
-		this.foodType = foodType;
-	}
+//	public String getFoodType() {
+//		return foodType;
+//	}
+//
+//	public void setFoodType(String foodType) {
+//		this.foodType = foodType;
+//	}
 
 	public String getProduceDate() {
 		return produceDate;
@@ -227,14 +228,14 @@ public class EquipmentCountryFoodSafety extends BaseEntity<EquipmentCountryFoodS
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
-	public Long getUpdateId() {
-		return updateId;
-	}
-
-	public void setUpdateId(Long updateId) {
-		this.updateId = updateId;
-	}
+//
+//	public Long getUpdateId() {
+//		return updateId;
+//	}
+//
+//	public void setUpdateId(Long updateId) {
+//		this.updateId = updateId;
+//	}
 
 	@Override
 	protected Serializable pkVal() {
@@ -251,7 +252,6 @@ public class EquipmentCountryFoodSafety extends BaseEntity<EquipmentCountryFoodS
 			", foodName=" + foodName +
 			", specificationsModel=" + specificationsModel +
 			", samplingType=" + samplingType +
-			", foodType=" + foodType +
 			", produceDate=" + produceDate +
 			", classification=" + classification +
 			", announcementNumber=" + announcementNumber +

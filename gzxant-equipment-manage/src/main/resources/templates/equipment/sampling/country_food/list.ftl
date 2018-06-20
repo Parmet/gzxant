@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                                     <label for="type_input" class="control-label">食品类型&nbsp;</label>
-                                    <select id="type_input" name="search_eq_food_type" class="form-control _search" style="width:100%;">
+                                    <select id="type_input" name="search_eq_classification" class="form-control _search" style="width:100%;">
                                         <option value="">请选择</option>
 		  								<#list foodType as type>
 		  									<option value="${type.jvalue}">${type.jvalue}</option>

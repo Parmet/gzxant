@@ -49,16 +49,16 @@ public class EquipmentCountryFoodSafetyController extends BaseController {
 
 	@ApiOperation(value = "进入国家食品安全监督抽检(合格)编辑界面", notes = "进入国家食品安全监督抽检(合格)编辑界面")
 	@GetMapping(value = "/detail/{id}")
-	public String detail(@PathVariable("id") String action, Model model) {
-		EquipmentCountryFoodSafety equipmentCountryFoodSafety = equipmentCountryFoodSafetyService.selectById(Integer.parseInt(action));
-		model.addAttribute("action", action);
+	public String detail(@PathVariable("id") String id, Model model) {
+		EquipmentCountryFoodSafety equipmentCountryFoodSafety = equipmentCountryFoodSafetyService.selectById(id);
+		model.addAttribute("action", id);
 		model.addAttribute("equipmentCountryFoodSafety", equipmentCountryFoodSafety);
 		return "/equipment/sampling/country_food/detail";
 	}
 	@ApiOperation(value = "进入国家食品安全监督抽检(合格)编辑界面", notes = "进入国家食品安全监督抽检(合格)编辑界面")
-	@GetMapping(value = "/{update}/{id}")
-	public String update(@PathVariable("") String action,@PathVariable("id") String id, Model model) {
-			EquipmentCountryFoodSafety equipmentCountryFoodSafety = equipmentCountryFoodSafetyService.selectById(Integer.parseInt(id));
+	@GetMapping(value = "/{action}/{id}")
+	public String update(@PathVariable("action") String action,@PathVariable("id") String id, Model model) {
+			EquipmentCountryFoodSafety equipmentCountryFoodSafety = equipmentCountryFoodSafetyService.selectById(id);
 			model.addAttribute("action", action);
 			model.addAttribute("foodType", dictService.getDictTree("FOOD_TYPE"));
 			model.addAttribute("equipmentCountryFoodSafety", equipmentCountryFoodSafety);
@@ -80,9 +80,9 @@ public class EquipmentCountryFoodSafetyController extends BaseController {
 	}
 
 	@ApiOperation(value = "添加国家食品安全监督抽检(合格)", notes = "添加国家食品安全监督抽检(合格)")
-	@PostMapping(value = "/create")
+	@PostMapping(value = "/import")
 	@ResponseBody
-	public ReturnDTO create(EquipmentCountryFoodSafety param) {
+	public ReturnDTO create(EquipmentCountryFoodSafety param,Model model) {
 		equipmentCountryFoodSafetyService.insert(param);
 		return ReturnDTOUtil.success();
 	}
