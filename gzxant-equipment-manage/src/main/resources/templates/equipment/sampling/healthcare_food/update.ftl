@@ -3,20 +3,49 @@
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
+
                     <form class="form-horizontal form-bordered" id="gzxantForm">
+                        <input type="hidden" name="id" value="${equipmentHealthcareFood.id}"/>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">文章标题：<span class="required">*</span></label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="title"
-                                       value="" placeholder="请输入文章标题"/>
+                                       value="${equipmentHealthcareFood.title}"/>
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">批号：<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="number"
+                                       value="${equipmentHealthcareFood.number}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">标称批准文号：<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="announcement"
+                                       value="${equipmentHealthcareFood.announcement}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">规格(包装规格)：<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="specificationsModel"
+                                       value="${equipmentHealthcareFood.specificationsModel}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">产品名称：<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="prodeuctName"
+                                       value="${equipmentHealthcareFood.prodeuctName}"/>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">标称生产企业名称：<span class="required">*</span></label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="enterpriseName"
-                                       value="" placeholder="请输入标称生产企业名称"/>
+                                       value="${equipmentHealthcareFood.enterpriseName}"/>
                             </div>
                         </div>
 
@@ -24,7 +53,7 @@
                             <label class="col-sm-3 control-label">标称生产企业地址：<span class="required">*</span></label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="enterpriseAddress"
-                                       value=""  placeholder="请输入标称生产企业地址"/>
+                                       value="${equipmentHealthcareFood.enterpriseAddress}"/>
                             </div>
                         </div>
 
@@ -32,7 +61,7 @@
                             <label class="col-sm-3 control-label">被抽样单位名称：<span class="required">*</span></label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="samplingName"
-                                       value="" placeholder="请输入被抽样单位名称"/>
+                                       value="${equipmentHealthcareFood.samplingName}"/>
                             </div>
                         </div>
 
@@ -40,102 +69,93 @@
                             <label class="col-sm-3 control-label">被抽样单位地址：<span class="required">*</span></label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="province"
-                                       value="" placeholder="请输入被抽样单位地址"/>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">食品名称：<span class="required">*</span></label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="foodName"
-                                       value="" placeholder="请输入食品名称"/>
+                                       value="${equipmentHealthcareFood.province}"/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">规格型号：<span class="required">*</span></label>
+                            <label class="col-sm-3 control-label">产品类别：<span class="required">*</span></label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="specificationsModel"
-                                       value="" placeholder="请输入规格型号"/>
+                                <input type="text" class="form-control" name="prodeuceType"
+                                       value="${equipmentHealthcareFood.prodeuceType}"/>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">商标：<span class="required">*</span></label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="trademark"
-                                       value="" placeholder="请输入商标"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">生产日期/批号：<span class="required">*</span></label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="produceDate"
-                                       value="" placeholder="请输入生产日期/批号(格式 2018-01-01)"/>
-                            </div>
-                        </div>
-
-
                         <div class="form-group">
                             <label class="col-sm-3 control-label">不合格项目║检验结果║标准值：<span class="required">*</span></label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="samplingResult"
-                                       value="" placeholder="请输入不合格项目║检验结果║标准值"/>
+                                       value="${equipmentHealthcareFood.samplingResult}"/>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">分类：<span class="required">*</span></label>
-                            <div class="col-sm-8">
-                                <select id="type_input" name="classification" class="form-control" >
-                                    <option value="">请选择</option>
-	  								<#list foodType as type>
-	  									<option value="${type.jvalue}">${type.jvalue}</option>
-                                    </#list>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">抽检类型&nbsp;</label>
-                            <div class="col-sm-8">
-                            <select id="type_input" name="samplingType" class="form-control _search" style="width:100%;">
-                                <option value="">请选择</option>
-                                <option value="国家食品安全监督抽检(合格)">国家食品安全监督抽检(合格)</option>
-                                <option value="国家食品安全监督抽检(不合格)">国家食品安全监督抽检(不合格)</option>
-                            </select>
-                            </div>
-                        </div>
+
                         <div class="form-group">
                             <label class="col-sm-3 control-label">公告号：<span class="required">*</span></label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="announcementNumber"
-                                       value="" placeholder="请输入公告号"/>
+                                       value="${equipmentHealthcareFood.announcementNumber}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">公告日期：<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="announcementDate"
+                                       value="${equipmentHealthcareFood.announcementDate}"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">分类：<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="classification"
+                                       value="${equipmentHealthcareFood.classification}"/>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">抽检类型&nbsp;</label>
+                            <div class="col-sm-8">
+                                <select id="type_input" name="samplingType" class="form-control " style="width:100%;">
+                                    <option value="">${equipmentHealthcareFood.samplingType}</option>
+                                    <option value="国家保健食品安全监督抽检(合格产品)">国家保健食品安全监督抽检(合格产品)</option>
+                                    <option value="国家保健食品安全监督抽检(不合格产品)">国家保健食品安全监督抽检(不合格产品)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">检验项目：<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="testingProduce"
+                                       value="${equipmentHealthcareFood.testingProduce}"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">抽检项目：<span class="required">*</span></label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="samplingProduce"
-                                       value="" placeholder="请输入抽检项目"/>
+                                       value="${equipmentHealthcareFood.samplingProduce}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">检测机构：<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="mechanism"
+                                       value="${equipmentHealthcareFood.mechanism}"/>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">公告日期：<span class="required">*</span></label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="announcementDate"
-                                       value="" placeholder="请输入公告日期(格式 2018-01-01)"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label class="col-sm-3 control-label">备注：<span class="required">*</span></label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="remark"
-                                       value="" placeholder="请输入备注"/>
+                                       value="${equipmentCountryFoodSafety.remark}"/>
                             </div>
                         </div>
 
                         <div class="form-actions fluid">
                             <div class="col-md-offset-3 col-md-9">
-                                <button type="submit" class="btn btn-success">保存</button>
+                                <button type="submit" class="btn btn-green">保存</button>
                             </div>
                         </div>
 

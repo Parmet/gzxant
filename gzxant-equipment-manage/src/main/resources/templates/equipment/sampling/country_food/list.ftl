@@ -74,22 +74,18 @@
 	            title: '标称生产企业名称',
 
 	        },
-	        {
-	            field: 'announcementNumber',
-	            title: '公告号'
-	        },
+            {
+                field: 'province',
+                title: '省份'
+            },
 	        {
 	            field: 'foodName',
 	            title: '食品名称'
 	        },
-	        {
-	            field: 'foodType',
-	            title: '分类'
-	        },
-	        {
-	            field: 'province',
-	            title: '省份'
-	        },
+            {
+                field: 'announcementNumber',
+                title: '公告号'
+            },
 	        {
 	            field: 'produceDate',
 	            title: '生产日期',

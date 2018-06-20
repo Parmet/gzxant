@@ -9,7 +9,7 @@ import com.gzxant.base.service.IBaseService;
  * </p>
  *
  * @author mojinsheng
- * @since 2018-06-17
+ * @since 2018-06-20
  */
 public interface IEquipmentProvinceFoodSafetyService extends IBaseService<EquipmentProvinceFoodSafety> {
 	
