@@ -1,3 +1,13 @@
+<style xmlns="http://www.w3.org/1999/html">
+
+    .control-labels{
+        text-align: right;
+        width: 100%;
+        color: black;
+    }
+
+
+</style>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-sm-12">
@@ -6,106 +16,139 @@
 
                     <form class="form-horizontal form-bordered" id="gzxantForm">
                         <input type="hidden" name="id" value="${equipmentCountryFoodSafety.id}"/>
-
                         <div class = "row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                                <label for="first_category_input" class="control-label" style="width: 30%;">标题：
-                                </label><span>${equipmentCountryFoodSafety.title}</span>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-group">
+                                <p class="control-labels">标题：</p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 form-group">
+                                <p> ${equipmentCountryFoodSafety.title}</p>
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-group">
+                                <p class="control-labels">标称生产企业名称：</p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 form-group">
+                                <p> ${equipmentCountryFoodSafety.enterpriseName}</p>
                             </div>
                         </div>
 
                         <div class = "row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                            <label for="first_category_input" class="control-label" style="width: 30%;">标称生产企业名称：
-                            </label><span>${equipmentCountryFoodSafety.enterpriseAddress}</span>
-                        </div>
-                    </div>
-
-                        <div class = "row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                                <label for="first_category_input" class="control-label" style="width: 30%;">标称生产企业地址：
-                                </label><span>${equipmentCountryFoodSafety.enterpriseAddress}</span>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-group">
+                                <p class="control-labels">标称生产企业地址：</p>
                             </div>
-                        </div>
-                        <div class = "row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                                <label for="first_category_input" class="control-label" style="width: 30%;">被抽样单位名称：
-                                </label><span> ${equipmentCountryFoodSafety.samplingName}</>
-                            </div>
-                        </div>
-                        <div class = "row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                                <label for="first_category_input" class="control-label" style="width: 30%;">被抽样单位地址：
-                                </label><span> ${equipmentCountryFoodSafety.province}</>
-                            </div>
-                        </div>
-                        <div class = "row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                                <label for="first_category_input" class="control-label" style="width: 30%;">食品名称：
-                                </label><span> ${equipmentCountryFoodSafety.foodName}</>
-                            </div>
-                        </div>
-
-                        <div class = "row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                                <label for="first_category_input" class="control-label" style="width: 30%;">规格型号：
-                                </label><span> ${equipmentCountryFoodSafety.specificationsModel}</>
-                            </div>
-                        </div>
-
-                        <div class = "row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                                <label for="first_category_input" class="control-label" style="width: 30%;">商标：
-                                </label><span> ${equipmentCountryFoodSafety.trademark}</>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 form-group">
+                                <p> ${equipmentCountryFoodSafety.enterpriseAddress}</p>
                             </div>
                         </div>
 
 
                         <div class = "row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                                <label for="first_category_input" class="control-label" style="width: 30%;">生产日期/批号：
-                                </label><span> ${equipmentCountryFoodSafety.produceDate}</>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-group">
+                                <p class="control-labels" >被抽样单位名称：</p>
                             </div>
-                        </div>
-                        <div class = "row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                                <label for="first_category_input" class="control-label" style="width: 30%;"> 不合格项目║检验结果║标准值：
-                                </label><span> ${equipmentCountryFoodSafety.samplingResult}</>
-                            </div>
-
-                        </div>
-
-                        <div class = "row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                                <label for="first_category_input" class="control-label" style="width: 30%;"> 分类：
-                                </label><span> ${equipmentCountryFoodSafety.classification}</>
-                            </div>
-                        </div>
-                        <div class = "row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                                <label for="first_category_input" class="control-label" style="width: 30%;"> 公告号：
-                                </label><span> ${equipmentCountryFoodSafety.announcementNumber}</>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 form-group">
+                                <p> ${equipmentCountryFoodSafety.samplingName}</p>
                             </div>
                         </div>
 
                         <div class = "row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                                <label for="first_category_input" class="control-label" style="width: 30%;"> 抽检项目：
-                                </label><span> ${equipmentCountryFoodSafety.samplingProduce}</>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-group">
+                                <p class="control-labels" >被抽样单位地址：</p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 form-group">
+                                <p> ${equipmentCountryFoodSafety.province}</p>
                             </div>
                         </div>
                         <div class = "row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                                <label for="first_category_input" class="control-label" style="width: 30%;">公告日期：
-                                </label><span> ${equipmentCountryFoodSafety.announcementDate}</>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-group">
+                                <p class="control-labels" >食品名称：</p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 form-group">
+                                <p> ${equipmentCountryFoodSafety.foodName}</p>
+                            </div>
+                        </div>
+
+                        <div class = "row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-group">
+                                <p class="control-labels" >规格型号：</p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 form-group">
+                                <p> ${equipmentCountryFoodSafety.specificationsModel}</p>
+                            </div>
+                        </div>
+
+                        <div class = "row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-group">
+                                <p class="control-labels" >商标：</p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 form-group">
+                                <p> ${equipmentCountryFoodSafety.trademark}</p>
+                            </div>
+                        </div>
+
+                        <div class = "row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-group">
+                                <p class="control-labels" >生产日期/批号：</p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 form-group">
+                                <p> ${equipmentCountryFoodSafety.produceDate}</p>
+                            </div>
+                        </div>
+
+
+                        <div class = "row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-group">
+                                <p class="control-labels">不合格项目║检验结果║标准值：</p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 form-group">
+                                <p> ${equipmentCountryFoodSafety.samplingResult}}</p>
+                            </div>
+                        </div>
+
+                        <div class = "row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-group">
+                                <p class="control-labels">分类：</p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 form-group">
+                                <p> ${equipmentCountryFoodSafety.classification}}</p>
+                            </div>
+                        </div>
+
+                        <div class = "row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-group">
+                                <p class="control-labels">公告号：</p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 form-group">
+                                <p> ${equipmentCountryFoodSafety.announcementNumber}}</p>
                             </div>
                         </div>
                         <div class = "row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                                <label for="first_category_input" class="control-label" style="width: 30%;"> 备注：
-                                </label><span> ${equipmentCountryFoodSafety.remark}</>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-group">
+                                <p class="control-labels">抽检项目：</p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 form-group">
+                                <p> ${equipmentCountryFoodSafety.samplingProduce}}</p>
                             </div>
                         </div>
+                        <div class = "row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-group">
+                                <p class="control-labels">公告日期：</p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 form-group">
+                                <p> ${equipmentCountryFoodSafety.announcementDate}}</p>
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 form-group">
+                                <p class="control-labels">备注：</p>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 form-group">
+                                <p> ${equipmentCountryFoodSafety.remark}}</p>
+                            </div>
+                        </div>
+
+
                     </form>
 
                 </div>

@@ -78,6 +78,9 @@ public class EquipmentProvinceFoodSafetyController extends BaseController {
 	@PostMapping(value = "/import")
 	@ResponseBody
 	public ReturnDTO create(EquipmentProvinceFoodSafety param) {
+		if (param == null) {
+			return ReturnDTOUtil.paramError();
+		}
 		equipmentProvinceFoodSafetyService.insert(param);
 		return ReturnDTOUtil.success();
 	}
@@ -86,6 +89,9 @@ public class EquipmentProvinceFoodSafetyController extends BaseController {
 	@PostMapping(value = "/update")
 	@ResponseBody
 	public ReturnDTO update(EquipmentProvinceFoodSafety param) {
+		if (param == null) {
+			return ReturnDTOUtil.paramError();
+		}
 		equipmentProvinceFoodSafetyService.updateById(param);
 		return ReturnDTOUtil.success();
 	}
@@ -95,6 +101,9 @@ public class EquipmentProvinceFoodSafetyController extends BaseController {
 	@PostMapping(value = "/delete")
 	@ResponseBody
 	public ReturnDTO delete(@RequestParam("ids") List<Long> ids) {
+		if (ids == null) {
+			return ReturnDTOUtil.paramError();
+		}
 		boolean success = equipmentProvinceFoodSafetyService.deleteBatchIds(ids);
 		if (success) {
 			return ReturnDTOUtil.success();

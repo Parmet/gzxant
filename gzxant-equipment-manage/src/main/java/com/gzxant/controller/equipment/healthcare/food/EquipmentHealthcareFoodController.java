@@ -80,6 +80,9 @@ public class EquipmentHealthcareFoodController extends BaseController {
 	@PostMapping(value = "/import")
 	@ResponseBody
 	public ReturnDTO create(EquipmentHealthcareFood param) {
+		if (param == null) {
+			return ReturnDTOUtil.paramError();
+		}
 		equipmentHealthcareFoodService.insert(param);
 		return ReturnDTOUtil.success();
 	}
@@ -88,6 +91,9 @@ public class EquipmentHealthcareFoodController extends BaseController {
 	@PostMapping(value = "/update")
 	@ResponseBody
 	public ReturnDTO update(EquipmentHealthcareFood param) {
+		if (param == null) {
+			return ReturnDTOUtil.paramError();
+		}
 		equipmentHealthcareFoodService.updateById(param);
 		return ReturnDTOUtil.success();
 	}
@@ -97,6 +103,9 @@ public class EquipmentHealthcareFoodController extends BaseController {
 	@PostMapping(value = "/delete")
 	@ResponseBody
 	public ReturnDTO delete(@RequestParam("ids") List<Long> ids) {
+		if (ids == null) {
+			return ReturnDTOUtil.paramError();
+		}
 		boolean success = equipmentHealthcareFoodService.deleteBatchIds(ids);
 		if (success) {
 			return ReturnDTOUtil.success();
