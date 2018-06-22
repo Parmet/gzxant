@@ -2,6 +2,9 @@ package com.gzxant.controller.equipment.province.food.safety;
 
 import java.util.List;
 
+import com.gzxant.entity.equipment.healthcare.food.EquipmentHealthcareFood;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.http.util.TextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,12 +46,20 @@ public class EquipmentProvinceFoodSafetyController extends BaseController {
 		return "/equipment/sampling/province_food_safety/list";
 	}
 
-	@ApiOperation(value = "进入省食品安全监督抽检编辑界面", notes = "进入省食品安全监督抽检编辑界面")
-	@GetMapping(value = "/detail/{action}")
-	public String detail(@PathVariable("action") String action, Model model) {
-		model.addAttribute("action", action);
-		return "/equipment/sampling/province_food_safety/detail";
-	}
+    @ApiOperation(value = "进入国家保健食品安全监督抽检编辑界面\", notes = \"进入国家保健食品安全监督抽检编辑界面")
+    @GetMapping(value = "/{action}/{id}")
+    public String update(@PathVariable("action") String action,@PathVariable("id") String id, Model model) {
+        if (TextUtils.isEmpty(id)||TextUtils.isEmpty(action)){
+            if (StringUtils.isBlank(id)) {
+                return "redirect:/healthcare_food";
+            }
+        }
+        EquipmentProvinceFoodSafety equipmentProvinceFoodSafety = equipmentProvinceFoodSafetyService.selectById(id);
+        model.addAttribute("action", action);
+        //model.addAttribute("foodType", dictService.getDictTree("FOOD_TYPE"));
+        model.addAttribute("equipmentProvinceFoodSafety", equipmentProvinceFoodSafety);
+        return "/equipment/sampling/province_food_safety/"+action;
+    }
 
 	@ApiOperation(value = "获取省食品安全监督抽检列表数据", notes = "获取省食品安全监督抽检列表数据:使用约定的DataTable")
 	@PostMapping(value = "/list")
@@ -56,11 +67,20 @@ public class EquipmentProvinceFoodSafetyController extends BaseController {
 	public DataTable<EquipmentProvinceFoodSafety> list(@RequestBody DataTable<EquipmentProvinceFoodSafety> dt) {
 		return equipmentProvinceFoodSafetyService.pageSearch(dt);
 	}
+	@ApiOperation(value = "进入省食品安全监督抽检(合格)编辑界面", notes = "进入省食品安全监督抽检编辑界面")
+	@GetMapping(value = "/insert")
+	public String importDate(Model model) {
+		model.addAttribute("action", "import");
+		return "/equipment/sampling/province_food_safety/import";
+	}
 
 	@ApiOperation(value = "添加省食品安全监督抽检", notes = "添加省食品安全监督抽检")
-	@PostMapping(value = "/create")
+	@PostMapping(value = "/import")
 	@ResponseBody
 	public ReturnDTO create(EquipmentProvinceFoodSafety param) {
+		if (param == null) {
+			return ReturnDTOUtil.paramError();
+		}
 		equipmentProvinceFoodSafetyService.insert(param);
 		return ReturnDTOUtil.success();
 	}
@@ -69,6 +89,9 @@ public class EquipmentProvinceFoodSafetyController extends BaseController {
 	@PostMapping(value = "/update")
 	@ResponseBody
 	public ReturnDTO update(EquipmentProvinceFoodSafety param) {
+		if (param == null) {
+			return ReturnDTOUtil.paramError();
+		}
 		equipmentProvinceFoodSafetyService.updateById(param);
 		return ReturnDTOUtil.success();
 	}
@@ -78,6 +101,9 @@ public class EquipmentProvinceFoodSafetyController extends BaseController {
 	@PostMapping(value = "/delete")
 	@ResponseBody
 	public ReturnDTO delete(@RequestParam("ids") List<Long> ids) {
+		if (ids == null) {
+			return ReturnDTOUtil.paramError();
+		}
 		boolean success = equipmentProvinceFoodSafetyService.deleteBatchIds(ids);
 		if (success) {
 			return ReturnDTOUtil.success();

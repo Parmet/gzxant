@@ -6,6 +6,7 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.gzxant.base.entity.BaseEntity;
+import com.gzxant.base.entity.DataEntity;
 
 /**
  * <p>
@@ -13,13 +14,26 @@ import com.gzxant.base.entity.BaseEntity;
  * </p>
  *
  * @author mojinsheng
- * @since 2018-06-16
+ * @since 2018-06-20
  */
 @TableName("equipment_healthcare_food")
-public class EquipmentHealthcareFood extends BaseEntity<EquipmentHealthcareFood> {
+public class EquipmentHealthcareFood extends DataEntity<EquipmentHealthcareFood> {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 标称产品名称
+     */
+	@TableField("prodeuct_name")
+	private String prodeuctName;
+    /**
+     * 标称批准文号
+     */
+	private String announcement;
+    /**
+     * 批号
+     */
+	private String number;
     /**
      * 标称生产企业名称
      */
@@ -40,34 +54,28 @@ public class EquipmentHealthcareFood extends BaseEntity<EquipmentHealthcareFood>
      */
 	private String province;
     /**
-     * 标称批准文号
-     */
-	private String number;
-    /**
      * 规格
      */
 	@TableField("specifications_model")
 	private String specificationsModel;
-	/**
-	 * 产品类别
-	 */
-	@TableField("prodeuce_type")
-	private String prodeuceType;
     /**
      * 抽检类型
      */
 	@TableField("sampling_type")
 	private String samplingType;
     /**
-     * 标称产品名称
-     */
-	@TableField("prodeuct_name")
-	private String prodeuctName;
-    /**
      * 分类
      */
 	private String classification;
-	private String announcement;
+    /**
+     * 分类
+     */
+	private String mechanism;
+    /**
+     * 产品类别
+     */
+	@TableField("prodeuce_type")
+	private String prodeuceType;
     /**
      * 抽检项目
      */
@@ -82,12 +90,12 @@ public class EquipmentHealthcareFood extends BaseEntity<EquipmentHealthcareFood>
      * 公告号
      */
 	@TableField("announcement_number")
-	private Date announcementNumber;
+	private String announcementNumber;
     /**
      * 公告日期
      */
 	@TableField("announcement_date")
-	private Date announcementDate;
+	private String announcementDate;
     /**
      * 不合格||检测结果||标准值
      */
@@ -97,10 +105,33 @@ public class EquipmentHealthcareFood extends BaseEntity<EquipmentHealthcareFood>
      * 标题
      */
 	private String title;
-	private Integer Sampling;
 	@TableField("update_id")
 	private Long updateId;
 
+
+	public String getProdeuctName() {
+		return prodeuctName;
+	}
+
+	public void setProdeuctName(String prodeuctName) {
+		this.prodeuctName = prodeuctName;
+	}
+
+	public String getAnnouncement() {
+		return announcement;
+	}
+
+	public void setAnnouncement(String announcement) {
+		this.announcement = announcement;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
 
 	public String getEnterpriseName() {
 		return enterpriseName;
@@ -130,24 +161,8 @@ public class EquipmentHealthcareFood extends BaseEntity<EquipmentHealthcareFood>
 		return province;
 	}
 
-	public void setProdeuceType(String province) {
-		this.prodeuceType = prodeuceType;
-	}
-
-	public String getProdeuceType() {
-		return prodeuceType;
-	}
-
 	public void setProvince(String province) {
 		this.province = province;
-	}
-
-	public String getNumber() {
-		return number;
-	}
-
-	public void setNumber(String number) {
-		this.number = number;
 	}
 
 	public String getSpecificationsModel() {
@@ -166,14 +181,6 @@ public class EquipmentHealthcareFood extends BaseEntity<EquipmentHealthcareFood>
 		this.samplingType = samplingType;
 	}
 
-	public String getProdeuctType() {
-		return prodeuctName;
-	}
-
-	public void setProdeuctType(String prodeuctType) {
-		this.prodeuctName = prodeuctType;
-	}
-
 	public String getClassification() {
 		return classification;
 	}
@@ -182,12 +189,20 @@ public class EquipmentHealthcareFood extends BaseEntity<EquipmentHealthcareFood>
 		this.classification = classification;
 	}
 
-	public String getAnnouncement() {
-		return announcement;
+	public String getMechanism() {
+		return mechanism;
 	}
 
-	public void setAnnouncement(String announcement) {
-		this.announcement = announcement;
+	public void setMechanism(String mechanism) {
+		this.mechanism = mechanism;
+	}
+
+	public String getProdeuceType() {
+		return prodeuceType;
+	}
+
+	public void setProdeuceType(String prodeuceType) {
+		this.prodeuceType = prodeuceType;
 	}
 
 	public String getSamplingProduce() {
@@ -206,19 +221,19 @@ public class EquipmentHealthcareFood extends BaseEntity<EquipmentHealthcareFood>
 		this.testingProduce = testingProduce;
 	}
 
-	public Date getAnnouncementNumber() {
+	public String getAnnouncementNumber() {
 		return announcementNumber;
 	}
 
-	public void setAnnouncementNumber(Date announcementNumber) {
+	public void setAnnouncementNumber(String announcementNumber) {
 		this.announcementNumber = announcementNumber;
 	}
 
-	public Date getAnnouncementDate() {
+	public String getAnnouncementDate() {
 		return announcementDate;
 	}
 
-	public void setAnnouncementDate(Date announcementDate) {
+	public void setAnnouncementDate(String announcementDate) {
 		this.announcementDate = announcementDate;
 	}
 
@@ -238,14 +253,6 @@ public class EquipmentHealthcareFood extends BaseEntity<EquipmentHealthcareFood>
 		this.title = title;
 	}
 
-	public Integer getSampling() {
-		return Sampling;
-	}
-
-	public void setSampling(Integer Sampling) {
-		this.Sampling = Sampling;
-	}
-
 	public Long getUpdateId() {
 		return updateId;
 	}
@@ -262,24 +269,24 @@ public class EquipmentHealthcareFood extends BaseEntity<EquipmentHealthcareFood>
 	@Override
 	public String toString() {
 		return "EquipmentHealthcareFood{" +
-			"enterpriseName=" + enterpriseName +
+			"prodeuctName=" + prodeuctName +
+			", announcement=" + announcement +
+			", number=" + number +
+			", enterpriseName=" + enterpriseName +
 			", enterpriseAddress=" + enterpriseAddress +
 			", samplingName=" + samplingName +
 			", province=" + province +
-			", number=" + number +
 			", specificationsModel=" + specificationsModel +
 			", samplingType=" + samplingType +
-			", prodeuctType=" + prodeuctName +
 			", classification=" + classification +
-			", announcement=" + announcement +
+			", mechanism=" + mechanism +
+			", prodeuceType=" + prodeuceType +
 			", samplingProduce=" + samplingProduce +
 			", testingProduce=" + testingProduce +
 			", announcementNumber=" + announcementNumber +
 			", announcementDate=" + announcementDate +
 			", samplingResult=" + samplingResult +
-			", prodeuceType=" + prodeuceType +
 			", title=" + title +
-			", Sampling=" + Sampling +
 			", updateId=" + updateId +
 			"}";
 	}

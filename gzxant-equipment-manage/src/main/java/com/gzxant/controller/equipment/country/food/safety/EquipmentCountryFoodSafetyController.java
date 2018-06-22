@@ -2,6 +2,8 @@ package com.gzxant.controller.equipment.country.food.safety;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.http.util.TextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,23 +48,19 @@ public class EquipmentCountryFoodSafetyController extends BaseController {
 		model.addAttribute("foodType", dictService.getDictTree("FOOD_TYPE"));
 		return "/equipment/sampling/country_food/list";
 	}
-
-	@ApiOperation(value = "进入国家食品安全监督抽检(合格)编辑界面", notes = "进入国家食品安全监督抽检(合格)编辑界面")
-	@GetMapping(value = "/detail/{id}")
-	public String detail(@PathVariable("id") String id, Model model) {
-		EquipmentCountryFoodSafety equipmentCountryFoodSafety = equipmentCountryFoodSafetyService.selectById(id);
-		model.addAttribute("action", id);
-		model.addAttribute("equipmentCountryFoodSafety", equipmentCountryFoodSafety);
-		return "/equipment/sampling/country_food/detail";
-	}
 	@ApiOperation(value = "进入国家食品安全监督抽检(合格)编辑界面", notes = "进入国家食品安全监督抽检(合格)编辑界面")
 	@GetMapping(value = "/{action}/{id}")
 	public String update(@PathVariable("action") String action,@PathVariable("id") String id, Model model) {
+        if (TextUtils.isEmpty(id)||TextUtils.isEmpty(action)){
+            if (StringUtils.isBlank(id)) {
+                return "redirect:/country_food_safety";
+            }
+        }
 			EquipmentCountryFoodSafety equipmentCountryFoodSafety = equipmentCountryFoodSafetyService.selectById(id);
 			model.addAttribute("action", action);
 			model.addAttribute("foodType", dictService.getDictTree("FOOD_TYPE"));
 			model.addAttribute("equipmentCountryFoodSafety", equipmentCountryFoodSafety);
-			return "/equipment/sampling/country_food/update";
+			return "/equipment/sampling/country_food/"+action;
 	}
 	@ApiOperation(value = "进入国家食品安全监督抽检(合格)编辑界面", notes = "进入国家食品安全监督抽检(合格)编辑界面")
 	@GetMapping(value = "/insert")
@@ -83,6 +81,9 @@ public class EquipmentCountryFoodSafetyController extends BaseController {
 	@PostMapping(value = "/import")
 	@ResponseBody
 	public ReturnDTO create(EquipmentCountryFoodSafety param,Model model) {
+        if (param == null) {
+            return ReturnDTOUtil.paramError();
+        }
 		equipmentCountryFoodSafetyService.insert(param);
 		return ReturnDTOUtil.success();
 	}
@@ -91,8 +92,10 @@ public class EquipmentCountryFoodSafetyController extends BaseController {
 	@PostMapping(value = "/update")
 	@ResponseBody
 	public ReturnDTO update(EquipmentCountryFoodSafety param,Model model) {
-		logger.info("=============================================================");
-		equipmentCountryFoodSafetyService.updateById(param);
+        if (param == null) {
+            return ReturnDTOUtil.paramError();
+        }
+        equipmentCountryFoodSafetyService.updateById(param);
 		return ReturnDTOUtil.success();
 	}
 
@@ -101,6 +104,9 @@ public class EquipmentCountryFoodSafetyController extends BaseController {
 	@PostMapping(value = "/delete")
 	@ResponseBody
 	public ReturnDTO delete(@RequestParam("ids") List<Long> ids) {
+        if (ids == null) {
+            return ReturnDTOUtil.paramError();
+        }
 		boolean success = equipmentCountryFoodSafetyService.deleteBatchIds(ids);
 		if (success) {
 			return ReturnDTOUtil.success();

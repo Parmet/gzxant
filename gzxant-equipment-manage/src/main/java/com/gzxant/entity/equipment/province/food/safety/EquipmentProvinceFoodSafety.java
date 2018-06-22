@@ -6,6 +6,7 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.gzxant.base.entity.BaseEntity;
+import com.gzxant.base.entity.DataEntity;
 
 /**
  * <p>
@@ -13,10 +14,10 @@ import com.gzxant.base.entity.BaseEntity;
  * </p>
  *
  * @author mojinsheng
- * @since 2018-06-17
+ * @since 2018-06-20
  */
 @TableName("equipment_province_food_safety")
-public class EquipmentProvinceFoodSafety extends BaseEntity<EquipmentProvinceFoodSafety> {
+public class EquipmentProvinceFoodSafety extends DataEntity<EquipmentProvinceFoodSafety> {
 
     private static final long serialVersionUID = 1L;
 
@@ -52,7 +53,7 @@ public class EquipmentProvinceFoodSafety extends BaseEntity<EquipmentProvinceFoo
     /**
      * 食品名称
      */
-	@TableField("foodName")
+	@TableField("food_name")
 	private String foodName;
     /**
      * 分类
@@ -63,31 +64,34 @@ public class EquipmentProvinceFoodSafety extends BaseEntity<EquipmentProvinceFoo
      */
 	@TableField("sampling_result")
 	private String samplingResult;
-	/**
-	 * 广东/总局国抽
-	 */
-	@TableField("taskSource")
-	private String taskSource;
     /**
      * 生产日期/批号
      */
 	@TableField("prodect_date")
-	private Date prodectDate;
+	private String prodectDate;
     /**
      * 公告号
      */
 	@TableField("announcement_number")
-	private Date announcementNumber;
+	private String announcementNumber;
+    /**
+     * 任务来源/项目名称
+     */
+	@TableField("task_source")
+	private String taskSource;
+    /**
+     * 商标
+     */
+	private String trademark;
     /**
      * 公告日期
      */
 	@TableField("announcement_date")
-	private Date announcementDate;
+	private String announcementDate;
     /**
      * 标题
      */
 	private String title;
-	private Integer Sampling;
 	@TableField("update_id")
 	private Long updateId;
 
@@ -140,24 +144,16 @@ public class EquipmentProvinceFoodSafety extends BaseEntity<EquipmentProvinceFoo
 		this.samplingType = samplingType;
 	}
 
-	public String getFoodType() {
+	public String getFoodName() {
 		return foodName;
 	}
 
-	public void setFoodType(String foodType) {
-		this.foodName = foodType;
+	public void setFoodName(String foodName) {
+		this.foodName = foodName;
 	}
 
 	public String getClassification() {
 		return classification;
-	}
-
-	public String getTaskSource() {
-		return taskSource;
-	}
-
-	public void setTaskSource(String taskSource) {
-		this.taskSource = taskSource;
 	}
 
 	public void setClassification(String classification) {
@@ -172,27 +168,43 @@ public class EquipmentProvinceFoodSafety extends BaseEntity<EquipmentProvinceFoo
 		this.samplingResult = samplingResult;
 	}
 
-	public Date getProdectDate() {
+	public String getProdectDate() {
 		return prodectDate;
 	}
 
-	public void setProdectDate(Date prodectDate) {
+	public void setProdectDate(String prodectDate) {
 		this.prodectDate = prodectDate;
 	}
 
-	public Date getAnnouncementNumber() {
+	public String getAnnouncementNumber() {
 		return announcementNumber;
 	}
 
-	public void setAnnouncementNumber(Date announcementNumber) {
+	public void setAnnouncementNumber(String announcementNumber) {
 		this.announcementNumber = announcementNumber;
 	}
 
-	public Date getAnnouncementDate() {
+	public String getTaskSource() {
+		return taskSource;
+	}
+
+	public void setTaskSource(String taskSource) {
+		this.taskSource = taskSource;
+	}
+
+	public String getTrademark() {
+		return trademark;
+	}
+
+	public void setTrademark(String trademark) {
+		this.trademark = trademark;
+	}
+
+	public String getAnnouncementDate() {
 		return announcementDate;
 	}
 
-	public void setAnnouncementDate(Date announcementDate) {
+	public void setAnnouncementDate(String announcementDate) {
 		this.announcementDate = announcementDate;
 	}
 
@@ -204,21 +216,7 @@ public class EquipmentProvinceFoodSafety extends BaseEntity<EquipmentProvinceFoo
 		this.title = title;
 	}
 
-	public Integer getSampling() {
-		return Sampling;
-	}
 
-	public void setSampling(Integer Sampling) {
-		this.Sampling = Sampling;
-	}
-
-	public Long getUpdateId() {
-		return updateId;
-	}
-
-	public void setUpdateId(Long updateId) {
-		this.updateId = updateId;
-	}
 
 	@Override
 	protected Serializable pkVal() {
@@ -234,15 +232,15 @@ public class EquipmentProvinceFoodSafety extends BaseEntity<EquipmentProvinceFoo
 			", province=" + province +
 			", specificationsModel=" + specificationsModel +
 			", samplingType=" + samplingType +
-			", foodType=" + foodName +
+			", foodName=" + foodName +
 			", classification=" + classification +
-				", taskSource=" + taskSource +
 			", samplingResult=" + samplingResult +
 			", prodectDate=" + prodectDate +
 			", announcementNumber=" + announcementNumber +
+			", taskSource=" + taskSource +
+			", trademark=" + trademark +
 			", announcementDate=" + announcementDate +
 			", title=" + title +
-			", Sampling=" + Sampling +
 			", updateId=" + updateId +
 			"}";
 	}

@@ -4,23 +4,24 @@
 
 	<!-- 通用查询映射结果 -->
 	<resultMap id="BaseResultMap" type="com.gzxant.entity.equipment.healthcare.food.EquipmentHealthcareFood">
+		<result column="prodeuct_name" property="prodeuctName" />
+		<result column="announcement" property="announcement" />
+		<result column="number" property="number" />
 		<result column="enterprise_name" property="enterpriseName" />
 		<result column="enterprise_address" property="enterpriseAddress" />
 		<result column="sampling_name" property="samplingName" />
 		<result column="province" property="province" />
-		<result column="number" property="number" />
 		<result column="specifications_model" property="specificationsModel" />
 		<result column="sampling_type" property="samplingType" />
-		<result column="prodeuct_type" property="prodeuctType" />
 		<result column="classification" property="classification" />
-		<result column="announcement" property="announcement" />
+		<result column="mechanism" property="mechanism" />
+		<result column="prodeuce_type" property="prodeuceType" />
 		<result column="sampling_produce" property="samplingProduce" />
 		<result column="testing_produce" property="testingProduce" />
 		<result column="announcement_number" property="announcementNumber" />
 		<result column="announcement_date" property="announcementDate" />
 		<result column="sampling_result" property="samplingResult" />
 		<result column="title" property="title" />
-		<result column="Sampling" property="Sampling" />
 		<result column="update_id" property="updateId" />
 	</resultMap>
 

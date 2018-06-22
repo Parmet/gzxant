@@ -9,7 +9,7 @@ import com.gzxant.base.dao.BaseDao;
  * </p>
  *
  * @author mojinsheng
- * @since 2018-06-16
+ * @since 2018-06-20
  */
 public interface EquipmentHealthcareFoodDao extends BaseDao<EquipmentHealthcareFood> {
 

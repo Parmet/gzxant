@@ -26,26 +26,17 @@
                                 <input type="text" class="form-filter form-control _search" id="numberInput" name="search_like_enterprise_name"  />
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                                <label for="nameInput" class="control-label">食物名称</label>
-                                <input type="text" class="form-filter form-control _search" id="nameInput" name="search_like_food_name"  />
+                                <label for="nameInput" class="control-label">产品名称</label>
+                                <input type="text" class="form-filter form-control _search" id="nameInput" name="search_like_prodeuct_name"  />
                             </div>
                         </div>
                             <div class = "row">
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
                                     <label for="type_input" class="control-label">抽检类型&nbsp;</label>
                                     <select id="type_input" name="search_eq_sampling_type" class="form-control _search" style="width:100%;">
                                         <option value="">请选择</option>
-                                        <option value="国家食品安全监督抽检(合格)">国家食品安全监督抽检(合格)</option>
-                                        <option value="国家食品安全监督抽检(不合格)">国家食品安全监督抽检(不合格)</option>
-                                    </select>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                                    <label for="type_input" class="control-label">食品类型&nbsp;</label>
-                                    <select id="type_input" name="search_eq_classification" class="form-control _search" style="width:100%;">
-                                        <option value="">请选择</option>
-		  								<#list foodType as type>
-		  									<option value="${type.jvalue}">${type.jvalue}</option>
-										</#list>
+                                        <option value="省级食品安全监督抽检(合格产品)">国家保健食品安全监督抽检(合格产品)</option>
+                                        <option value="省级食品安全监督抽检(不合格产品)">国家保健食品安全监督抽检(不合格产品)</option>
                                     </select>
                                 </div>
                             </div>
@@ -78,17 +69,18 @@
                 field: 'enterpriseAddress',
                 title: '标称生产企业地址'
             },
-	        {
-	            field: 'foodName',
-	            title: '食品名称'
-	        },
             {
-                field: 'announcementNumber',
-                title: '公告号'
+                field: 'foodName',
+                title: '名称'
             },
+            {
+	            field: 'announcementNumber',
+	            title: '公告号'
+	        },
+
 	        {
-	            field: 'produceDate',
-	            title: '生产日期',
+	            field: 'announcementNumber',
+	            title: '公告号',
 
 	        },
 
