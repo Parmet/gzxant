@@ -10,14 +10,15 @@
 		<result column="province" property="province" />
 		<result column="specifications_model" property="specificationsModel" />
 		<result column="sampling_type" property="samplingType" />
-		<result column="food_type" property="foodType" />
+		<result column="food_name" property="foodName" />
 		<result column="classification" property="classification" />
 		<result column="sampling_result" property="samplingResult" />
 		<result column="prodect_date" property="prodectDate" />
 		<result column="announcement_number" property="announcementNumber" />
+		<result column="task_source" property="taskSource" />
+		<result column="trademark" property="trademark" />
 		<result column="announcement_date" property="announcementDate" />
 		<result column="title" property="title" />
-		<result column="Sampling" property="Sampling" />
 		<result column="update_id" property="updateId" />
 	</resultMap>
 
