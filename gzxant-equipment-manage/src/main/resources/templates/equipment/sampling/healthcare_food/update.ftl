@@ -139,7 +139,7 @@
                             <label class="col-sm-3 control-label">抽检项目：<span class="required">*</span></label>
                             <div class="col-sm-8">
                                 <textarea class="form-control" name="samplingProduce"
-                                       value="${equipmentHealthcareFood.samplingProduce}"/>
+                                          value="${equipmentHealthcareFood.samplingProduce}">${equipmentHealthcareFood.samplingProduce}</textarea>
                             </div>
                         </div>
                         <div class="form-group">

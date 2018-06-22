@@ -74,8 +74,8 @@
                 title: '名称'
             },
             {
-	            field: 'announcementNumber',
-	            title: '公告号'
+	            field: 'announcementDae',
+	            title: '公告日期'
 	        },
 
 	        {
@@ -88,6 +88,7 @@
 	            field: 'id',
 	            title: '操作',
 	            align: 'center',
+                width: '130px',
                 formatter: function (value, row, index) {
                     return dt_edit_button(row)+dt_detail_button(row)+dt_delete_button(row);
                 }
