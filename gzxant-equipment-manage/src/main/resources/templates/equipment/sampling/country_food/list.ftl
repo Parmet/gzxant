@@ -75,8 +75,8 @@
 
 	        },
             {
-                field: 'province',
-                title: '省份'
+                field: 'enterpriseAddress',
+                title: '标称生产企业地址'
             },
 	        {
 	            field: 'foodName',
