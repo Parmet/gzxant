@@ -24,7 +24,7 @@ function saveForm(form_id) {
         async: false,
         dataType : "json",
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-            parent.layer.alert(XMLHttpRequest.responseJSON.error);
+            layer.alert(XMLHttpRequest.responseJSON.error);
         },
         beforeSend: function () {
             start_request_load();
@@ -33,12 +33,10 @@ function saveForm(form_id) {
         },
         success: function (data) {
             if (data.code == 200) {
-                parent.re_load();
-                var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-                parent.layer.close(index);
-                parent.layer.msg("操作成功");
+                layer.msg("操作成功");
+                window.location.reload();
             } else {
-                parent.layer.alert(data.error)
+                layer.alert(data.error);
             }
 
         }
