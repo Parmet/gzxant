@@ -20,5 +20,5 @@ public interface IEquipmentShopProductService extends IBaseService<EquipmentShop
 	List<Long> getIds(List<EquipmentShopProduct> existsProductexistsProduct);
 
 	List<EquipmentShopProduct> insert(List<EquipmentShopProduct> products);
-	
+
 }

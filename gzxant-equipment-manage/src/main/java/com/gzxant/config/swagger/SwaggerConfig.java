@@ -1,7 +1,6 @@
 
 package com.gzxant.config.swagger;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,45 +28,32 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-	
-    /**
-     * 全局参数
-     * @return
-     */
-    private List<Parameter> parameter() {
-        List<Parameter> params = new ArrayList<>();
-        params.add(new ParameterBuilder().name("Authorization")
-                .description("Authorization Bearer token")
-                .modelRef(new ModelRef("string"))
-                .parameterType("header")
-                .required(false).build());
-        return params;
 
-    }
+	/**
+	 * 全局参数
+	 * 
+	 * @return
+	 */
+	private List<Parameter> parameter() {
+		List<Parameter> params = new ArrayList<>();
+		params.add(new ParameterBuilder().name("Authorization").description("Authorization Bearer token")
+				.modelRef(new ModelRef("string")).parameterType("header").required(false).build());
+		return params;
 
+	}
 
-    @Bean
-    public Docket createRestApi() {
+	@Bean
+	public Docket createRestApi() {
 
-        return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.gzxant"))
-                .paths(PathSelectors.any())
-                .build().globalOperationParameters(parameter());
+		return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select()
+				.apis(RequestHandlerSelectors.basePackage("com.gzxant")).paths(PathSelectors.any()).build()
+				.globalOperationParameters(parameter());
 
+	}
 
-    }
-
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title(" gzxant ")
-                .description(" gzxant ")
-                .termsOfServiceUrl("")
-                .contact(" gzxant ")
-                .version("1.0")
-                .build();
-    }
+	private ApiInfo apiInfo() {
+		return new ApiInfoBuilder().title(" gzxant ").description(" gzxant ").termsOfServiceUrl("").contact(" gzxant ")
+				.version("1.0").build();
+	}
 
 }
-

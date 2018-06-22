@@ -12,24 +12,25 @@ import java.util.List;
  * @since 2018-05-17
  */
 public class EquipmentStandardDTO implements Serializable {
-    private static final long serialVersionUID = 1L;
-    
-    private String id;
-    private String name;
-    private String englishName;
-    private String number;
-    private String category;
-    private String type;
-    private String replaceStandard;
-    private String importStandard;
-    private String pdfUrl;
-    private String txtUrl;
-    private String imgsPath;
-    private String pageSize;
-    private String publishDate;
-    private String uploadDate;
-    private String implementDate;
-    private List<EquipmentStandardItemDTO> items;
+	private static final long serialVersionUID = 1L;
+
+	private String id;
+	private String name;
+	private String englishName;
+	private String number;
+	private String category;
+	private String type;
+	private String replaceStandard;
+	private String importStandard;
+	private String pdfUrl;
+	private String txtUrl;
+	private String imgsPath;
+	private String pageSize;
+	private String publishDate;
+	private String uploadDate;
+	private String implementDate;
+	private List<EquipmentStandardItemDTO> items;
+	private List<EquipmentStandardTechDTO> techs;
 
 	public String getId() {
 		return id;
@@ -110,7 +111,7 @@ public class EquipmentStandardDTO implements Serializable {
 	public void setTxtUrl(String txtUrl) {
 		this.txtUrl = txtUrl;
 	}
-	
+
 	public String getPublishDate() {
 		return publishDate;
 	}
@@ -159,7 +160,15 @@ public class EquipmentStandardDTO implements Serializable {
 		this.pageSize = pageSize;
 	}
 
+	public List<EquipmentStandardTechDTO> getTechs() {
+		return techs;
+	}
+
+	public void setTechs(List<EquipmentStandardTechDTO> techs) {
+		this.techs = techs;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}  
+	}
 }

@@ -17,20 +17,20 @@ import com.gzxant.base.entity.DataEntity;
 @TableName("equipment_standard_item")
 public class EquipmentStandardItem extends DataEntity<EquipmentStandardItem> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * 分类名称
-     */
+	/**
+	 * 分类名称
+	 */
 	private String name;
-    /**
-     * 关联标准分类id
-     */
+	/**
+	 * 关联标准分类id
+	 */
 	@TableField("standard_id")
 	private Long standardId;
-    /**
-     * 排序
-     */
+	/**
+	 * 排序
+	 */
 	private Integer sort;
 
 	public String getName() {
@@ -64,10 +64,6 @@ public class EquipmentStandardItem extends DataEntity<EquipmentStandardItem> {
 
 	@Override
 	public String toString() {
-		return "EquipmentStandardItem{" +
-			"name=" + name +
-			", standId=" + standardId +
-			", sort=" + sort +
-			"}";
+		return "EquipmentStandardItem{" + "name=" + name + ", standId=" + standardId + ", sort=" + sort + "}";
 	}
 }

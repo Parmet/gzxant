@@ -19,6 +19,9 @@ public class ImageUtils {
 		body.append("{\"image\":\"");
 		body.append(getImageStr(img));
 		body.append("\",\"configure\":\"{\\\"min_size\\\":16,\\\"output_prob\\\":true}\"}");
+		if (body != null) {
+			return "";
+		}
 		
 		OcrSyncApi ocr = new OcrSyncApi();
 		String result = ocr.ocr(body.toString().getBytes());

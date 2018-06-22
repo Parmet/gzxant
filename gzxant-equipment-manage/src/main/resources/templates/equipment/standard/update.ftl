@@ -1,4 +1,9 @@
 <style>
+.panel-body.parent-box {
+	height:450px;
+	overflow: scroll;
+}
+
 #dict_edit_table .control-label {
 	text-align: left !important;
 }
@@ -14,6 +19,7 @@
 .txt_box {
 	height:500px; 
 	overflow-y: scroll;
+	position:  relative;
 }
 
 .card {
@@ -85,6 +91,9 @@
 					<a href="#info" aria-controls="info" role="tab" data-toggle="tab">基本信息</a>
 				</li>
 				<li role="presentation">
+					<a href="#tech" aria-controls="tech" role="tab" data-toggle="tab">技术要求</a>
+				</li>
+				<li role="presentation">
 					<a href="#content" aria-controls="content" role="tab" data-toggle="tab">耗材设备</a>
 				</li>
 			</ul>
@@ -93,7 +102,7 @@
 			<div class="tab-content">
 				<div role="tabpanel" class="tab-pane active" id="pdf">
 					<div class="panel panel-default">
-			  			<div class="panel-body">
+			  			<div class="panel-body parent-box">
 			  				<div id="pdf_box" class="pdf_box">
 			  				
 				  			</div>
@@ -110,7 +119,7 @@
 				</div>
 				<div role="tabpanel" class="tab-pane" id="info">
 					<div class="panel panel-default">
-		  				<div class="panel-body" style="height:500px;overflow: scroll;">
+		  				<div class="panel-body parent-box">
 		  					<form id="info_form" action="#">
 		  					<div class = "row">
 		  						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
@@ -247,10 +256,127 @@
 		  				</div>
 		  			</div>
 				</div>
+				<div role="tabpanel" class="tab-pane" id="tech">
+					<div class="panel panel-default">
+						<form id="tech_form" action="#">
+						<div id="tech_box" class="panel-body parent-box">
+							<#if standard.techs?? && (standard.techs?size > 0)>
+							<#list standard.techs as tech>
+							<div class="panel panel-success">
+								<div class="panel-heading form-group">
+									<input onclick="addTxt(this);" type="text" class="form-control btn_inline" style="color:black;" placeholder="请选择输入技术要求" value="${tech.name}" />
+									<a class="pull-right a_del" onclick="removeItem(this)"><span class="glyphicon glyphicon-remove"></span></a>
+									<a class="pull-right a_add" onclick="addItem(this)"><span class="glyphicon glyphicon-plus"></span></a>
+									<a class="pull-right a_add" onclick="changeItem(this)"><span class="glyphicon glyphicon-chevron-up"></span></a>
+								</div>
+								<div class="panel-body">
+									<table class="table">
+										<thead>
+											<tr>
+												<th></th>
+												<th>项目</th>
+												<th>指标/要求</th>
+												<th>检验方法</th>
+											</tr>
+										</thead>
+										<tbody>
+											<#if tech.subs?? && (tech.subs?size > 0)>
+					  						<#list tech.subs as sub>
+						  					<tr>
+					  							<td style="text-align:center;">
+						  						<#if (sub_index+1 == tech.subs?size)>
+					  								<a onclick="addTrInuput(this)"><span class="glyphicon glyphicon-plus span_tip"></span></a>
+					  							<#else>
+					  								<a style="color:red;" onclick="removeTrInput(this)"><span class="glyphicon glyphicon-remove"></span></a>
+					  							</#if>
+					  							</td>
+					  							<td>
+													<input onclick="addTxt(this);" type="text" data-name="project" class="form-filter form-control"  placeholder="请选择输入项目" value="${sub.project}" />
+												</td>
+												<td>
+													<input onclick="addTxt(this);" type="text" data-name="require" class="form-filter form-control"  placeholder="请选择输入指标/要求" value="${sub.require}" />
+												</td>
+												<td>
+													<input onclick="addTxt(this);" type="text" data-name="function" class="form-filter form-control"  placeholder="请选择输入检验方法" value="${sub.function}" />
+												</td>
+					  						</tr>
+				  							</#list>
+				  							<#else>
+				  							<tr>
+												<td style="text-align:center;">
+													<a onclick="addTrInuput(this)"><span class="glyphicon glyphicon-plus span_tip"></span></a>
+												</td>
+												<td>
+													<input onclick="addTxt(this);" type="text" data-name="project" class="form-filter form-control"  placeholder="请选择输入项目"/>
+												</td>
+												<td>
+													<input onclick="addTxt(this);" type="text" data-name="require" class="form-filter form-control"  placeholder="请选择输入指标/要求"/>
+												</td>
+												<td>
+													<input onclick="addTxt(this);" type="text" data-name="function" class="form-filter form-control"  placeholder="请选择输入检验方法"/>
+												</td>
+											</tr>
+				  							</#if>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							</#list>
+							<#else>
+							<div class="panel panel-success">
+								<div class="panel-heading form-group">
+									<input onclick="addTxt(this);" type="text" class="form-control btn_inline" style="color:black;" placeholder="请选择输入技术要求" />
+									<a class="pull-right a_del" onclick="removeItem(this)"><span class="glyphicon glyphicon-remove"></span></a>
+									<a class="pull-right a_add" onclick="addItem(this)"><span class="glyphicon glyphicon-plus"></span></a>
+									<a class="pull-right a_add" onclick="changeItem(this)"><span class="glyphicon glyphicon-chevron-up"></span></a>
+								</div>
+								<div class="panel-body">
+									<table class="table">
+										<thead>
+											<tr>
+												<th></th>
+												<th>项目</th>
+												<th>指标/要求</th>
+												<th>检验方法</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td style="text-align:center;">
+													<a onclick="addTrInuput(this)"><span class="glyphicon glyphicon-plus span_tip"></span></a>
+												</td>
+												<td>
+													<input onclick="addTxt(this);" type="text" data-name="project" class="form-filter form-control"  placeholder="请选择输入项目"/>
+												</td>
+												<td>
+													<input onclick="addTxt(this);" type="text" data-name="require" class="form-filter form-control"  placeholder="请选择输入指标/要求"/>
+												</td>
+												<td>
+													<input onclick="addTxt(this);" type="text" data-name="function" class="form-filter form-control"  placeholder="请选择输入检验方法"/>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							</#if>
+						</div>
+						</form>
+						<div class="panel-footer">
+		  					<div class = "row">
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<button type="button" onclick="back()" class="btn btn-success pull-left">返回</button>
+									<button type="button" onclick="nextStep()" class="btn btn-success pull-right" style="margin-left: 10px;">下一步</button>
+									<button type="button" onclick="lastStep()" class="btn btn-success pull-right">上一步</button>
+		  						</div>
+		  					</div>
+		  				</div>
+		  			</div>
+				</div>
 				<div role="tabpanel" class="tab-pane" id="content">
 					<div class="panel panel-default">
 						<form id="item_form" action="#">
-						<div id="item-box" class="panel-body" style="height:500px;overflow: scroll;">
+						<div id="item-box" class="panel-body parent-box">
 							<#if standard.items?? && (standard.items?size > 0)>
 							<#list standard.items as item>
 							<div class="panel panel-success">
@@ -433,7 +559,7 @@
 			<div class="tab-content">
 				<div role="tabpanel" class="tab-pane active" id="txt">
 					<div class="panel panel-default">
-			  			<div class="panel-body">
+			  			<div class="panel-body parent-box">
 				  			<div id="txt_box" class="txt_box">
 				  				<#list txts as txt>
 				  				<div class="row">
@@ -444,6 +570,13 @@
 				  				</#list>
 				  			</div>
 						</div>
+						<div class="panel-footer">
+		  					<div class="row">
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<button class="btn btn-success" onclick="dealCode(this);">乱码处理</button>
+		  						</div>
+		  					</div>
+		  				</div>
 					</div>
 				</div>
 				
@@ -463,7 +596,59 @@
 	</#list>
 	$("#pdf_box").html("");
 	$("#pdf_box").html(html);
+	
+	function dealCode(obj) {
+		if ("${standard.txtUrl?replace('\\', '\\\\')}" == "") {
+			layer.alert("请上传PDF文件！");
+			return ;
+		}
+		
+		//$("<div id='shade' style='opacity: 0.8;background: white;position: absolute;top: 0px;left: 0px;z-index: 300;height: 100%;width: 100%;'><img src='${rc.contextPath}/img/loading-upload.gif' style='width: auto;position: absolute;top: 50%;left: 50%;z-index: 300;height: auto;' /></div>").appendTo('#txt_box');
+		var load_index = layer.load(1, {shade: [0.8, '#000']});
+		$.ajax({
+			type: 'PUT',
+		    url: base_url + "/back/standard/update/txt",
+		    async: true,
+		    data: {
+		    	txtUrl : "${standard.txtUrl?replace('\\', '\\\\')}",
+		    	imgsPath: "${standard.imgsPath?replace('\\', '\\\\')}",
+		    	pageSize: "${standard.pageSize}"
+			},
+			success: function (data) {
+		    	if (data.code != 200) {
+		    		layer.close(load_index);
+		    		layer.alert("乱码处理失败，请重试！");
+		    	} else {
+		    		loadTxt(data.message);
+		    		layer.close(load_index);
+		    		layer.msg("乱码处理成功");
+		    	}
+		    }, 
+		    error: function (XMLHttpRequest, textStatus, errorThrown) {
+	            layer.alert(XMLHttpRequest.responseJSON.error);
+	            layer.close(load_index);
+	            layer.alert("乱码处理失败，请重试！");
+	        }
+		});
+	}
 
+	function loadTxt(txts) {
+		var html = "";
+		$.each(txts, function (index, item){
+			html = html + '<div class="row">';
+			html = html + '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">';
+			html = html + '<input type="checkbox" style="margin: 5px;" value="' + item +'"/>';//class="fa fa-plus-square"
+			html = html + '<a onclick="clickTxt(this);">';
+			html = html + item;
+			html = html + '</a>';
+			html = html + '</div>';
+			html = html + '</div>';
+		});
+		
+		$("#txt_box").html("");
+		$("#txt_box").html(html);
+	}
+	
 	function clickTxt(obj) {
 		var checkbox_dom = $(obj).prev(":checkbox")
 		if (checkbox_dom.is(':checked')) {
@@ -610,6 +795,7 @@
 			"publishDate": $('[name=publishDate]').val().trim(),
 			"uploadDate": "${standard.uploadDate}",
 			"implementDate": $('[name=implementDate]').val().trim(),
+			"techs": getTechs(),
 			"items": getItems()
 		};
 		
@@ -659,6 +845,36 @@
 	            layer.alert(XMLHttpRequest.responseJSON.error);
 	        }
 		});
+	}
+	
+	function getTechs() {
+		var techs = [];
+		var tech_divs = $("#tech_box").children();
+		tech_divs.each(function(index, tech_div) {
+			var tech_name = getItemName(tech_div);
+			if (tech_name != "") {
+				techs.push({
+					"name": tech_name,
+					"subs": getTechSubs(tech_div)
+				});
+			}
+		});
+		
+		return techs;
+	}
+	
+	function getTechSubs(obj) {
+		var subs = [];
+		var rows = $(obj).find("table").children("tbody").children("tr");
+		rows.each(function(index, row) {
+			subs.push({
+				"project": $(row).children("td").children("input[data-name='project']").val().trim(),
+				"require": $(row).children("td").children("input[data-name='require']").val().trim(),
+				"function": $(row).children("td").children("input[data-name='function']").val().trim()
+			});
+		});
+		
+		return subs;
 	}
 	
 	function getReplaceStandard() {
@@ -808,7 +1024,8 @@
 		layer.confirm('是否删除该检测项？', {
 			btn: ['确定','取消'] //按钮
 		}, function(){
-			if ($("#item-box").children().length > 1) {
+			var box = $(obj).parent("div").parent("div").parent("div");
+			if (box.children().length > 1) {
 				$(obj).parent().parent().remove();
 			} else {
 				addItem(obj);

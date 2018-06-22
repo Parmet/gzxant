@@ -84,6 +84,9 @@
 					<a href="#info" aria-controls="info" role="tab" data-toggle="tab">基本信息</a>
 				</li>
 				<li role="presentation">
+					<a href="#tech" aria-controls="tech" role="tab" data-toggle="tab">技术要求</a>
+				</li>
+				<li role="presentation">
 					<a href="#content" aria-controls="content" role="tab" data-toggle="tab">耗材设备</a>
 				</li>
 			</ul>
@@ -163,6 +166,49 @@
 							</table>
 		  				</div>
 		  				<div class="panel-footer">
+		  					<div class = "row">
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<button type="button" onclick="back()" class="btn btn-success pull-left">返回</button>
+		  						</div>
+		  					</div>
+		  				</div>
+		  			</div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="tech">
+					<div class="panel panel-default">
+						<div id="tech-box" class="panel-body" style="height:400px;overflow: scroll;">
+							<#list standard.techs as tech>
+							<div class="panel panel-success">
+								<div class="panel-heading form-group">
+									<span>${tech.name}</span>
+									<a class="pull-right a_add" onclick="changeItem(this)"><span class="glyphicon glyphicon-chevron-up"></span></a>
+								</div>
+								<div class="panel-body form-group">
+									<#if (tech.subs?size > 0)>
+									<table class="table">
+										<thead>
+											<tr>
+												<th width="30%">项目</th>
+												<th width="40%">指标/要求</th>
+												<th width="30%">检验方法</th>
+											</tr>
+										</thead>
+										<tbody>
+											<#list tech.subs as sub>
+											<tr>
+												<td>${sub.project}</td>
+												<td>${sub.require}</td>
+												<td>${sub.function}</td>
+											</tr>
+											</#list>
+										</tbody>
+									</table>
+									</#if>
+								</div>
+							</div>
+							</#list>
+						</div>
+						<div class="panel-footer">
 		  					<div class = "row">
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 									<button type="button" onclick="back()" class="btn btn-success pull-left">返回</button>

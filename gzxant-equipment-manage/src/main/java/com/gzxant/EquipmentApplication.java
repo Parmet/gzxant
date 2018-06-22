@@ -9,10 +9,10 @@ import com.gzxant.constant.Setting;
 
 @SpringBootApplication
 @EnableTransactionManagement
-@MapperScan(Setting.SCAN_MAPPER_PATH)//@Mapper  在mapper 接口上加入也行
+@MapperScan(Setting.SCAN_MAPPER_PATH) // @Mapper 在mapper 接口上加入也行
 public class EquipmentApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(EquipmentApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(EquipmentApplication.class, args);
+	}
 }

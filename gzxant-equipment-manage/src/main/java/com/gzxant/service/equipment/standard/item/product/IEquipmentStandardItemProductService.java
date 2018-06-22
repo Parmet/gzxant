@@ -17,5 +17,5 @@ import com.gzxant.base.service.IBaseService;
 public interface IEquipmentStandardItemProductService extends IBaseService<EquipmentStandardItemProduct> {
 
 	List<EquipmentStandardItemProduct> selectByStandradId(String id);
-	
+
 }

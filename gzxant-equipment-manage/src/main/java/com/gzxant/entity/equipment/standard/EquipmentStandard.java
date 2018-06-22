@@ -17,39 +17,39 @@ import com.gzxant.base.entity.DataEntity;
 @TableName("equipment_standard")
 public class EquipmentStandard extends DataEntity<EquipmentStandard> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * 标准名称
-     */
+	/**
+	 * 标准名称
+	 */
 	private String name;
-	 /**
-     * 关联分类父级id
-     */
+	/**
+	 * 关联分类父级id
+	 */
 	@TableField("english_name")
 	private String englishName;
-    /**
-     * 关联分类父级id
-     */
+	/**
+	 * 关联分类父级id
+	 */
 	@TableField("category_id")
 	private Long categoryId;
-    /**
-     * 路径
-     */
+	/**
+	 * 路径
+	 */
 	@TableField("category_path")
 	private String categoryPath;
-    /**
-     * 编码
-     */
+	/**
+	 * 编码
+	 */
 	private String number;
-    /**
-     * 替代标准
-     */
+	/**
+	 * 替代标准
+	 */
 	@TableField("replace_standard")
 	private String replaceStandard;
 	/**
-     * 引用标准
-     */
+	 * 引用标准
+	 */
 	@TableField("import_standard")
 	private String importStandard;
 	/**
@@ -72,24 +72,24 @@ public class EquipmentStandard extends DataEntity<EquipmentStandard> {
 	 */
 	@TableField("page_size")
 	private String pageSize;
-    /**
-     * 发布时间
-     */
+	/**
+	 * 发布时间
+	 */
 	@TableField("publish_date")
 	private String publishDate;
-    /**
-     * 上传时间
-     */
+	/**
+	 * 上传时间
+	 */
 	@TableField("upload_date")
 	private String uploadDate;
-    /**
-     * 实施时间
-     */
+	/**
+	 * 实施时间
+	 */
 	@TableField("implement_date")
 	private String implementDate;
-    /**
-     * 发布状态Y：已发布；N：未发布
-     */
+	/**
+	 * 发布状态Y：已发布；N：未发布
+	 */
 	private String state;
 	/**
 	 * 标准大类
@@ -101,7 +101,7 @@ public class EquipmentStandard extends DataEntity<EquipmentStandard> {
 	 */
 	@TableField("type_name")
 	private String typeName;
-	
+
 	public String getName() {
 		return name;
 	}

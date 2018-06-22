@@ -27,30 +27,33 @@ import com.gzxant.service.equipment.standard.item.product.IEquipmentStandardItem
  */
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)
-public class EquipmentStandardItemService extends BaseService<EquipmentStandardItemDao, EquipmentStandardItem> implements IEquipmentStandardItemService {
+public class EquipmentStandardItemService extends BaseService<EquipmentStandardItemDao, EquipmentStandardItem>
+		implements IEquipmentStandardItemService {
 
 	@Autowired
 	private IEquipmentStandardItemProductService itemProductService;
-	
+
 	/**
-	 * @param items 数据库的检验项
-	 * @param productDatas 数据库的产品数据
-	 * @param itemMap 页面传递的检验项结构数据
+	 * @param items
+	 *            数据库的检验项
+	 * @param productDatas
+	 *            数据库的产品数据
+	 * @param itemMap
+	 *            页面传递的检验项结构数据
 	 */
 	@Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
 	@Override
-	public void saveItemProducts(List<EquipmentStandardItem> itemDatas, 
-			List<EquipmentShopProduct> productDatas, 
+	public void saveItemProducts(List<EquipmentStandardItem> itemDatas, List<EquipmentShopProduct> productDatas,
 			Map<String, List<EquipmentShopProduct>> itemMap) {
 		// 保存关联
 		List<EquipmentStandardItemProduct> itemProducts = new ArrayList<>();
-		
+
 		// product 名称和实体的对应map
 		Map<String, EquipmentShopProduct> productDataMap = new HashMap<>();
 		for (EquipmentShopProduct product : productDatas) {
 			productDataMap.put(product.getName(), product);
 		}
-		
+
 		for (EquipmentStandardItem item : itemDatas) {
 			if (itemMap.containsKey(item.getName())) {
 				for (EquipmentShopProduct product : itemMap.get(item.getName())) {
@@ -63,7 +66,7 @@ public class EquipmentStandardItemService extends BaseService<EquipmentStandardI
 				}
 			}
 		}
-		
+
 		if (!itemProducts.isEmpty()) {
 			itemProductService.insertBatch(itemProducts);
 		}

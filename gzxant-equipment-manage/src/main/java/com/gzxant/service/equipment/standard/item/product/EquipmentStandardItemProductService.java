@@ -21,7 +21,9 @@ import com.gzxant.base.service.impl.BaseService;
  */
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)
-public class EquipmentStandardItemProductService extends BaseService<EquipmentStandardItemProductDao, EquipmentStandardItemProduct> implements IEquipmentStandardItemProductService {
+public class EquipmentStandardItemProductService
+		extends BaseService<EquipmentStandardItemProductDao, EquipmentStandardItemProduct>
+		implements IEquipmentStandardItemProductService {
 
 	@Override
 	public List<EquipmentStandardItemProduct> selectByStandradId(String id) {
@@ -29,7 +31,7 @@ public class EquipmentStandardItemProductService extends BaseService<EquipmentSt
 		if (datas == null) {
 			datas = new ArrayList<>();
 		}
-		
+
 		return datas;
 	}
 }

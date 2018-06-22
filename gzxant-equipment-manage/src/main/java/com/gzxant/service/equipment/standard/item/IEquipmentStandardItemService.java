@@ -19,5 +19,5 @@ public interface IEquipmentStandardItemService extends IBaseService<EquipmentSta
 
 	void saveItemProducts(List<EquipmentStandardItem> items, List<EquipmentShopProduct> products,
 			Map<String, List<EquipmentShopProduct>> itemMap);
-	
+
 }

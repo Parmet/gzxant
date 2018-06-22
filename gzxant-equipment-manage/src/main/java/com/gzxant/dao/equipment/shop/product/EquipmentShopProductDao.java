@@ -5,7 +5,7 @@ import com.gzxant.base.dao.CrudDao;
 
 /**
  * <p>
-  * 产品表 Mapper 接口
+ * 产品表 Mapper 接口
  * </p>
  *
  * @author ycxiao

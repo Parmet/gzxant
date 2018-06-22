@@ -17,20 +17,20 @@ import com.gzxant.base.entity.DataEntity;
 @TableName("equipment_standard_item_product")
 public class EquipmentStandardItemProduct extends DataEntity<EquipmentStandardItemProduct> {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @TableField("item_id")
+	@TableField("item_id")
 	private Long itemId;
-    /**
-     * fs_product 表 id
-     */
-    @TableField("product_id")
+	/**
+	 * fs_product 表 id
+	 */
+	@TableField("product_id")
 	private Long productId;
 	private Integer sort;
-	
+
 	@TableField(exist = false)
 	private String itemName;
-	
+
 	@TableField(exist = false)
 	private String productName;
 
@@ -57,7 +57,7 @@ public class EquipmentStandardItemProduct extends DataEntity<EquipmentStandardIt
 	public void setSort(Integer sort) {
 		this.sort = sort;
 	}
-	
+
 	public String getItemName() {
 		return itemName;
 	}
@@ -81,10 +81,7 @@ public class EquipmentStandardItemProduct extends DataEntity<EquipmentStandardIt
 
 	@Override
 	public String toString() {
-		return "EquipmentStandardItemProduct{" +
-			"itemId=" + itemId +
-			", productId=" + productId +
-			", sort=" + sort +
-			"}";
+		return "EquipmentStandardItemProduct{" + "itemId=" + itemId + ", productId=" + productId + ", sort=" + sort
+				+ "}";
 	}
 }

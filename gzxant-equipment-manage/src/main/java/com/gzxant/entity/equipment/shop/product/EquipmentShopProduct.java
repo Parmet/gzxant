@@ -17,29 +17,29 @@ import com.gzxant.base.entity.DataEntity;
 @TableName("equipment_shop_product")
 public class EquipmentShopProduct extends DataEntity<EquipmentShopProduct> implements Cloneable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * 分类名称
-     */
+	/**
+	 * 分类名称
+	 */
 	private String name;
-    /**
-     * 分类id
-     */
+	/**
+	 * 分类id
+	 */
 	@TableField("category_id")
 	private Long categoryId;
-    /**
-     * 分类id
-     */
+	/**
+	 * 分类id
+	 */
 	@TableField("brands_id")
 	private Long brandsId;
-    /**
-     * 排序
-     */
+	/**
+	 * 排序
+	 */
 	private Integer sort;
-    /**
-     * 商品类型(M:材料， E:设备)
-     */
+	/**
+	 * 商品类型(M:材料， E:设备)
+	 */
 	private String type;
 
 	public String getName() {
@@ -89,16 +89,10 @@ public class EquipmentShopProduct extends DataEntity<EquipmentShopProduct> imple
 
 	@Override
 	public String toString() {
-		return "EquipmentShopProduct{" +
-			"name=" + name +
-			", categoryId=" + categoryId +
-			", brandsId=" + brandsId +
-			", sort=" + sort +
-			", type=" + type +
-			", updateId=" + updateId +
-			"}";
+		return "EquipmentShopProduct{" + "name=" + name + ", categoryId=" + categoryId + ", brandsId=" + brandsId
+				+ ", sort=" + sort + ", type=" + type + ", updateId=" + updateId + "}";
 	}
-	
+
 	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}

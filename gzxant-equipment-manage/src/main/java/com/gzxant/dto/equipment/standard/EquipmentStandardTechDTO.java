@@ -1,6 +1,7 @@
 package com.gzxant.dto.equipment.standard;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>
@@ -10,12 +11,11 @@ import java.io.Serializable;
  * @author ycxiao
  * @since 2018-05-17
  */
-public class EquipmentStandardProductDTO implements Serializable {
+public class EquipmentStandardTechDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String name;
-	private String type;
-	private String remark;
+	private List<EquipmentStandardTechSubDTO> subs;
 
 	public String getName() {
 		return name;
@@ -25,20 +25,12 @@ public class EquipmentStandardProductDTO implements Serializable {
 		this.name = name;
 	}
 
-	public String getType() {
-		return type;
+	public List<EquipmentStandardTechSubDTO> getSubs() {
+		return subs;
 	}
 
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
+	public void setSubs(List<EquipmentStandardTechSubDTO> subs) {
+		this.subs = subs;
 	}
 
 	public static long getSerialversionuid() {

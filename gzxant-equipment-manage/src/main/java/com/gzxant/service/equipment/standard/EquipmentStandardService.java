@@ -13,14 +13,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.mapper.Condition;
 import com.gzxant.base.service.impl.BaseService;
+import com.gzxant.bo.equipment.standard.EquipmentStandardBO;
+import com.gzxant.bo.equipment.standard.EquipmentStandardItemBO;
 import com.gzxant.dao.equipment.standard.EquipmentStandardDao;
 import com.gzxant.entity.equipment.shop.product.EquipmentShopProduct;
 import com.gzxant.entity.equipment.standard.EquipmentStandard;
 import com.gzxant.entity.equipment.standard.item.EquipmentStandardItem;
 import com.gzxant.entity.equipment.standard.item.product.EquipmentStandardItemProduct;
+import com.gzxant.entity.equipment.standard.tech.EquipmentStandardTech;
 import com.gzxant.service.equipment.shop.product.IEquipmentShopProductService;
 import com.gzxant.service.equipment.standard.item.IEquipmentStandardItemService;
 import com.gzxant.service.equipment.standard.item.product.IEquipmentStandardItemProductService;
+import com.gzxant.service.equipment.standard.tech.IEquipmentStandardTechService;
 import com.gzxant.util.FileUtils;
 import com.gzxant.util.StringUtils;
 
@@ -34,20 +38,23 @@ import com.gzxant.util.StringUtils;
  */
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)
-public class EquipmentStandardService extends BaseService<EquipmentStandardDao, EquipmentStandard> implements IEquipmentStandardService {
-	
+public class EquipmentStandardService extends BaseService<EquipmentStandardDao, EquipmentStandard>
+		implements IEquipmentStandardService {
+
 	@Autowired
 	private IEquipmentStandardItemService itemService;
+	@Autowired
+	private IEquipmentStandardTechService techService;
 	@Autowired
 	private IEquipmentShopProductService productService;
 	@Autowired
 	private IEquipmentStandardItemProductService itemProductService;
-	
+
 	@Override
 	public Map<String, Object> parse(String txtPath) {
 		// 读取txtpath下所有txt文件
 		List<File> files = FileUtils.getFiles(txtPath);
-		
+
 		EquipmentStandard info = new EquipmentStandard();
 		List<String> txts = new ArrayList<>();
 		Map<String, ArrayList<String>> items = new HashMap<>();
@@ -58,7 +65,7 @@ public class EquipmentStandardService extends BaseService<EquipmentStandardDao, 
 				info = parseInfo(file, files.get(i + 1));
 				continue;
 			}
-			
+
 			List<String> curTxts = FileUtils.readFileTxt(file);
 			// 删除第一行的编号
 			if (curTxts.get(0).startsWith("GB")) {
@@ -66,11 +73,11 @@ public class EquipmentStandardService extends BaseService<EquipmentStandardDao, 
 				txts.addAll(curTxts);
 			}
 		}
-		
+
 		items = parseItem(txts);
 		return null;
 	}
-	
+
 	private EquipmentStandard parseInfo(File homePage, File secondPage) {
 		EquipmentStandard stand = new EquipmentStandard();
 		// 读取第一个文件
@@ -83,40 +90,37 @@ public class EquipmentStandardService extends BaseService<EquipmentStandardDao, 
 			if (txt.trim().contains("GB")) {
 				stand.setNumber(txt.trim());
 				String firstCategory = txts.get(i + 1).trim();
-				if (StringUtils.isNotBlank(firstCategory)
-					&& firstCategory.contains("国家标准")) { 
+				if (StringUtils.isNotBlank(firstCategory) && firstCategory.contains("国家标准")) {
 					String secondCategory = txts.get(i + 2).trim();
-					
+
 					stand.setCategoryName(firstCategory);
 					stand.setTypeName(secondCategory);
-					stand.setName(firstCategory 
-							+ secondCategory 
-							+ txts.get(i + 3).trim());
+					stand.setName(firstCategory + secondCategory + txts.get(i + 3).trim());
 				}
 			}
-			
+
 			// 读取发布时间
 			if (txt.contains("-") && txt.contains("发布")) {
 				stand.setPublishDate(txt.trim().substring(0, 10));
 			}
-			
+
 			// 读取实施时间
 			if (txt.contains("-") && txt.contains("实施")) {
 				stand.setImplementDate(txt.trim().substring(0, 10));
 			}
-			
+
 			// 读取就标准编号
 			if (txt.contains("代替") && txt.contains("GB")) {
 				txt = txt.substring(txt.indexOf("GB"), txt.length());
 				String oldNumber = txt.substring(0, txt.indexOf("《"));
-				//String oldName = txt.substring(txt.indexOf("《"), txt.length());
+				// String oldName = txt.substring(txt.indexOf("《"), txt.length());
 				stand.setReplaceStandard(oldNumber);
 			}
 		}
-		
+
 		return stand;
 	}
-	
+
 	private Map<String, ArrayList<String>> parseItem(List<String> txts) {
 		Map<String, ArrayList<String>> map = new HashMap<>();
 		String txt = "";
@@ -126,50 +130,64 @@ public class EquipmentStandardService extends BaseService<EquipmentStandardDao, 
 		for (int i = 0; i < txts.size(); i++) {
 			txt = txts.get(i);
 		}
-		
+
 		return map;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Map<EquipmentStandard, Map<EquipmentStandardItem, List<EquipmentShopProduct>>> getDataMapById(
-			String id) {
-		Map<EquipmentStandard, Map<EquipmentStandardItem, List<EquipmentShopProduct>>> map = new HashMap<>();
-		Map<EquipmentStandardItem, List<EquipmentShopProduct>> itemProductMap = new HashMap<>();
+	public EquipmentStandardBO getDataById(String id) {
+		EquipmentStandardBO standardBo = new EquipmentStandardBO();
+		List<EquipmentStandardItemBO> itemBos = new ArrayList<>();
 		if (StringUtils.isBlank(id)) {
 			return null;
 		}
-		
+
 		// 标准信息
 		EquipmentStandard standard = selectById(id);
 		if (standard == null || standard.getId() == null) {
 			return null;
+		} else {
+			standardBo.setStandard(standard);
 		}
-		
+
+		// 技术要求信息
+		List<EquipmentStandardTech> techs = techService
+				.selectList(Condition.create().eq("standard_id", id).orderBy("name"));
+		if (techs == null || techs.isEmpty()) {
+			standardBo.setTechs(new ArrayList<>());
+		} else {
+			standardBo.setTechs(techs);
+		}
+
 		// 检验项信息
 		List<EquipmentStandardItem> items = itemService.selectList(Condition.create().eq("standard_id", id));
 		if (items == null || items.isEmpty()) {
-			map.put(standard, itemProductMap);
-			return map;
+			standardBo.setItems(new ArrayList<>());
+			return standardBo;
 		}
-		
+
 		Map<Long, EquipmentStandardItem> itemMap = new HashMap<>();
 		for (EquipmentStandardItem item : items) {
-			map.put(standard, itemProductMap);
 			itemMap.put(item.getId(), item);
 		}
-		
+
 		// 检验项和耗材设备关联信息
 		Set<Long> itemIds = itemMap.keySet();
-		List<EquipmentStandardItemProduct> itemProducts = itemProductService.selectList(Condition.create().in("item_id", itemIds));
+		List<EquipmentStandardItemProduct> itemProducts = itemProductService
+				.selectList(Condition.create().in("item_id", itemIds).orderBy("item_id"));
 		if (itemProducts == null || itemProducts.isEmpty()) {
 			for (EquipmentStandardItem item : items) {
-				itemProductMap.put(item, new ArrayList<>());
+				EquipmentStandardItemBO itemBo = new EquipmentStandardItemBO();
+				itemBo.setItem(item);
+				itemBo.setProducts(new ArrayList<>());
+				itemBos.add(itemBo);
 			}
-			
-			map.put(standard, itemProductMap);
-			return map;
+
+			standardBo.setItems(itemBos);
+			return standardBo;
 		}
-		
+
 		// 耗材设备信息
 		List<Long> productIds = new ArrayList<>();
 		for (EquipmentStandardItemProduct itemProduct : itemProducts) {
@@ -180,8 +198,9 @@ public class EquipmentStandardService extends BaseService<EquipmentStandardDao, 
 		for (EquipmentShopProduct product : products) {
 			productMap.put(product.getId(), product);
 		}
-		
+
 		// 检验项和耗材设备关联信息
+		Map<EquipmentStandardItem, List<EquipmentShopProduct>> itemProductMap = new HashMap<>();
 		for (EquipmentStandardItemProduct itemProduct : itemProducts) {
 			EquipmentStandardItem key = itemMap.get(itemProduct.getItemId());
 			List<EquipmentShopProduct> curItemProducts = null;
@@ -190,7 +209,7 @@ public class EquipmentStandardService extends BaseService<EquipmentStandardDao, 
 			} else {
 				curItemProducts = new ArrayList<>();
 			}
-			
+
 			EquipmentShopProduct product;
 			try {
 				product = (EquipmentShopProduct) (productMap.get(itemProduct.getProductId())).clone();
@@ -201,29 +220,36 @@ public class EquipmentStandardService extends BaseService<EquipmentStandardDao, 
 				e.printStackTrace();
 			}
 		}
-		
-		map.put(standard, itemProductMap);
-		return map;
+
+		for (EquipmentStandardItem item : itemProductMap.keySet()) {
+			EquipmentStandardItemBO itemBo = new EquipmentStandardItemBO();
+			itemBo.setItem(item);
+			itemBo.setProducts(itemProductMap.get(item));
+			itemBos.add(itemBo);
+		}
+
+		standardBo.setItems(itemBos);
+		return standardBo;
 	}
 
 	@Override
 	@Transactional(readOnly = false)
 	public void deleteItemsById(Long id) {
 		if (id == null || id.longValue() <= 0L) {
-			return ;
+			return;
 		}
-		
+
 		List<EquipmentStandardItem> oldItems = itemService.selectList(Condition.create().eq("standard_id", id));
 		if (oldItems == null || oldItems.isEmpty()) {
-			return ;
+			return;
 		}
-		
+
 		List<Long> itemIds = new ArrayList<>();
 		for (EquipmentStandardItem item : oldItems) {
 			itemIds.add(item.getId());
 		}
-		
+
 		itemProductService.delete(Condition.create().in("item_id", itemIds));
-		itemService.deleteBatchIds(itemIds);		
+		itemService.deleteBatchIds(itemIds);
 	}
 }

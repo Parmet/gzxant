@@ -84,17 +84,20 @@
 		<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
 			<!-- Nav tabs -->
 			<ul id="standardTab" class="nav nav-tabs" role="tablist">
-				<li role="presentation" class="active">
-					<a href="#import" aria-controls="import" role="tab" data-toggle="tab">导入标准</a>
+				<li role="presentation" class="active disabled">
+					<a href="#import" class="disabled" aria-controls="import" role="tab" data-toggle="tab">导入标准</a>
 				</li>
-				<li role="presentation">
-					<a href="#pdf" aria-controls="pdf" role="tab" data-toggle="tab">PDF源文件</a>
+				<li role="presentation" class="disabled">
+					<a href="#pdf" class="disabled" aria-controls="pdf" role="tab" data-toggle="tab">PDF源文件</a>
 				</li>
-				<li role="presentation">
-					<a href="#info" aria-controls="info" role="tab" data-toggle="tab">基本信息</a>
+				<li role="presentation" class="disabled">
+					<a href="#info" class="disabled" aria-controls="info" role="tab" data-toggle="tab">基本信息</a>
 				</li>
-				<li role="presentation">
-					<a href="#content" aria-controls="content" role="tab" data-toggle="tab">耗材设备</a>
+				<li role="presentation" class="disabled">
+					<a href="#tech" class="disabled" aria-controls="tech" role="tab" data-toggle="tab">技术要求</a>
+				</li>
+				<li role="presentation" class="disabled">
+					<a href="#content" class="disabled" aria-controls="content" role="tab" data-toggle="tab">检验项</a>
 				</li>
 			</ul>
 		
@@ -264,67 +267,172 @@
 		  				</div>
 		  			</div>
 				</div>
+				<div role="tabpanel" class="tab-pane" id="tech">
+					<div class="panel panel-default">
+			  			<div id="tech_box" class="panel-body parent-box">
+			  				<div class="panel panel-success">
+								<div class="panel-heading form-inline">
+									<div class="form-group" style="color:black;">
+										<input onclick="addTxt(this);" type="text" class="form-control" placeholder="请选择输入技术要求" />
+									</div>
+									<a class="pull-right a_del" onclick="removeItem(this)"><span class="glyphicon glyphicon-remove"></span></a>
+									<a class="pull-right a_add" onclick="addItem(this)"><span class="glyphicon glyphicon-plus"></span></a>
+									<a class="pull-right a_add" onclick="changeItem(this)"><span class="glyphicon glyphicon-chevron-up"></span></a>
+								</div>
+								<table class="table">
+									<thead>
+										<tr>
+											<th></th>
+											<th>项目</th>
+											<th>指标/要求</th>
+											<th>检验方法</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td style="text-align:center;">
+												<a onclick="addTrInuput(this)"><span class="glyphicon glyphicon-plus span_tip"></span></a>
+											</td>
+											<td>
+												<input onclick="addTxt(this);" type="text" data-name="project" class="form-filter form-control"  placeholder="请选择输入项目"/>
+											</td>
+											<td>
+												<input onclick="addTxt(this);" type="text" data-name="require" class="form-filter form-control"  placeholder="请选择输入指标/要求"/>
+											</td>
+											<td>
+												<input onclick="addTxt(this);" type="text" data-name="function" class="form-filter form-control"  placeholder="请选择输入检验方法"/>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="panel-footer">
+		  					<div class = "row">
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<button type="button" onclick="back()" class="btn btn-success pull-left">返回</button>
+									<button type="button" onclick="nextStep()" class="btn btn-success pull-right" style="margin-left: 10px;">下一步</button>
+									<button type="button" onclick="lastStep()" class="btn btn-success pull-right">上一步</button>
+		  						</div>
+		  					</div>
+		  				</div>
+					</div>
+				</div>
 				<div role="tabpanel" class="tab-pane" id="content">
 					<div class="panel panel-default">
-						<form id="item_form" action="#">
-						<div id="item-box" class="panel-body parent-box">
+						<div id="item-box" class="panel-body parent-box form-inline">
 							<div class="panel panel-success">
-								<div class="panel-heading form-group">
-									<input onclick="addTxt(this);" type="text" class="form-control btn_inline" style="color:black;" placeholder="请选择输入检验项" />
+								<div class="panel-heading">
+									<div class="form-group" style="color:black;">
+										<input onclick="addTxt(this);" type="text" class="form-control" placeholder="请选择输入检验项" />
+									</div>
 									<a class="pull-right a_del" onclick="removeItem(this)"><span class="glyphicon glyphicon-remove"></span></a>
 									<a class="pull-right a_add" onclick="addItem(this)"><span class="glyphicon glyphicon-plus"></span></a>
 									<a class="pull-right a_add" onclick="changeItem(this)"><span class="glyphicon glyphicon-chevron-up"></span></a>
 								</div>
 								<div class="panel-body">
-									<table class="table">
-										<thead>
-											<tr>
-												<th>耗材</th>
-												<th>名称（如：无水甲醇。请勿填写编号）</th>
-												<th>属性</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td style="text-align:center;">
-													<a onclick="addTrInuput(this)"><span class="glyphicon glyphicon-plus span_tip"></span></a>
-												</td>
-												<td>
-													<input onclick="addTxt(this);" type="text" data-name="material_name" class="form-filter form-control"  placeholder="请选择输入耗材名称"/>
-												</td>
-												<td>
-													<input onclick="addTxt(this);" type="text" data-name="material_remark" class="form-filter form-control"  placeholder=""/>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-									<table class="table">
-										<thead>
-											<tr>
-												<th>设备</th>
-												<th>名称（如：锥形瓶。请勿填写编号）</th>
-												<th>属性</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td style="text-align:center;">
-													<a onclick="addTrInuput(this)"><span class="glyphicon glyphicon-plus span_tip"></span></a>
-												</td>
-												<td>
-													<input onclick="addTxt(this);" type="text" data-name="equipment_name" class="form-filter form-control"  placeholder="请选择输入设备名称"/>
-												</td>
-												<td>
-													<input onclick="addTxt(this);" type="text" data-name="equipment_remark" class="form-filter form-control"  placeholder=""/>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-									
+									<div class="panel panel-primary">
+										<!-- Default panel contents -->
+										<div class="panel-heading">
+											<div class="form-group" style="color:black;">
+												<input onclick="addTxt(this);" type="text" class="form-control" placeholder="（选填）检验方法" />
+											</div>
+											<a class="pull-right a_del" onclick="removeItem(this)"><span class="glyphicon glyphicon-remove"></span></a>
+											<a class="pull-right a_add" onclick="addItem(this)"><span class="glyphicon glyphicon-plus"></span></a>
+											<a class="pull-right a_add" onclick="changeItem(this)"><span class="glyphicon glyphicon-chevron-up"></span></a>
+										</div>
+										<table class="table">
+											<thead>
+												<tr>
+													<th>耗材</th>
+													<th>名称（如：无水甲醇。请勿填写编号）</th>
+													<th>备注</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td style="text-align:center;">
+														<a onclick="addTrInuput(this)"><span class="glyphicon glyphicon-plus span_tip"></span></a>
+													</td>
+													<td>
+														<input onclick="addTxt(this);" type="text" data-name="material_name" class="form-filter form-control"  placeholder="请选择输入耗材名称"/>
+													</td>
+													<td>
+														<input onclick="addTxt(this);" type="text" data-name="material_remark" class="form-filter form-control"  placeholder="请选择输入属性"/>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										<table class="table">
+											<thead>
+												<tr>
+													<th>设备</th>
+													<th>名称（如：锥形瓶。请勿填写编号）</th>
+													<th>备注</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td style="text-align:center;">
+														<a onclick="addTrInuput(this)"><span class="glyphicon glyphicon-plus span_tip"></span></a>
+													</td>
+													<td>
+														<input onclick="addTxt(this);" type="text" data-name="equipment_name" class="form-filter form-control"  placeholder="请选择输入设备名称"/>
+													</td>
+													<td>
+														<input onclick="addTxt(this);" type="text" data-name="equipment_remark" class="form-filter form-control"  placeholder="请选择输入属性"/>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
 								</div>
+								<table class="table">
+									<thead>
+										<tr>
+											<th>耗材</th>
+											<th>名称（如：无水甲醇。请勿填写编号）</th>
+											<th>备注</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td style="text-align:center;">
+												<a onclick="addTrInuput(this)"><span class="glyphicon glyphicon-plus span_tip"></span></a>
+											</td>
+											<td>
+												<input onclick="addTxt(this);" type="text" data-name="material_name" class="form-filter form-control"  placeholder="请选择输入耗材名称"/>
+											</td>
+											<td>
+												<input onclick="addTxt(this);" type="text" data-name="material_remark" class="form-filter form-control"  placeholder="请选择输入属性"/>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<table class="table">
+									<thead>
+										<tr>
+											<th>设备</th>
+											<th>名称（如：锥形瓶。请勿填写编号）</th>
+											<th>备注</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td style="text-align:center;">
+												<a onclick="addTrInuput(this)"><span class="glyphicon glyphicon-plus span_tip"></span></a>
+											</td>
+											<td>
+												<input onclick="addTxt(this);" type="text" data-name="equipment_name" class="form-filter form-control"  placeholder="请选择输入设备名称"/>
+											</td>
+											<td>
+												<input onclick="addTxt(this);" type="text" data-name="equipment_remark" class="form-filter form-control"  placeholder="请选择输入属性"/>
+											</td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
-						</form>
 						<div class="panel-footer">
 		  					<div class = "row">
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -378,8 +486,9 @@
 			return ;
 		}
 		
-		$("<div id='shade' style='opacity: 0.8;background: white;position: absolute;top: 0px;left: 0px;z-index: 300;height: 100%;width: 100%;'><img src='${rc.contextPath}/img/loading-upload.gif' style='width: auto;position: absolute;top: 50%;left: 50%;z-index: 300;height: auto;' /></div>").appendTo('#txt_box');
-		$(obj).attr("disable", true);
+		//$("<div id='shade' style='opacity: 0.8;background: white;position: absolute;top: 0px;left: 0px;z-index: 300;height: 100%;width: 100%;'><img src='${rc.contextPath}/img/loading-upload.gif' style='width: auto;position: absolute;top: 50%;left: 50%;z-index: 300;height: auto;' /></div>").appendTo('#txt_box');
+		//$(obj).attr("disable", true);
+		var load_index = layer.load(1, {shade: [0.8, '#000']});
 		$.ajax({
 			type: 'PUT',
 		    url: base_url + "/back/standard/update/txt",
@@ -391,19 +500,18 @@
 			},
 		    success: function (data) {
 		    	if (data.code != 200) {
-		    		layer.alert(data.error);
-		    		$("#shade").remove();
-		    		$(obj).attr("disable", false);
+		    		layer.close(load_index);
+		    		layer.alert("乱码处理失败，请重试！");
 		    	} else {
 		    		loadTxt(data.message);
-		    		$("#shade").remove();
-		    		$(obj).attr("disable", false);
+		    		layer.close(load_index);
+		    		layer.msg("乱码处理成功");
 		    	}
 		    }, 
 		    error: function (XMLHttpRequest, textStatus, errorThrown) {
 	            layer.alert(XMLHttpRequest.responseJSON.error);
-	            $("#shade").remove();
-	    		$(obj).attr("disable", false);
+	            layer.close(load_index);
+	            layer.alert("乱码处理失败，请重试！");
 	        }
 		});
 	}
@@ -522,9 +630,9 @@
 	}
 	
 	function infoNextStep() {
-		if (info_validate.form()) {
+		//if (info_validate.form()) {
 			nextStep();
-		}
+		//}
 	}
 	
 	function saveStandard() {
@@ -544,6 +652,7 @@
 			"publishDate": $('[name=publishDate]').val().trim(),
 			"uploadDate": upload_date,
 			"implementDate": $('[name=implementDate]').val().trim(),
+			"techs": getTechs(),
 			"items": getItems()
 		};
 		
@@ -619,6 +728,36 @@
 		});
 		
 		return stanards;
+	}
+	
+	function getTechs() {
+		var techs = [];
+		var tech_divs = $("#tech_box").children();
+		tech_divs.each(function(index, tech_div) {
+			var tech_name = getItemName(tech_div);
+			if (tech_name != "") {
+				techs.push({
+					"name": tech_name,
+					"subs": getTechSubs(tech_div)
+				});
+			}
+		});
+		
+		return techs;
+	}
+	
+	function getTechSubs(obj) {
+		var subs = [];
+		var rows = $(obj).find("table").children("tbody").children("tr");
+		rows.each(function(index, row) {
+			subs.push({
+				"project": $(row).children("td").children("input[data-name='project']").val().trim(),
+				"require": $(row).children("td").children("input[data-name='require']").val().trim(),
+				"function": $(row).children("td").children("input[data-name='function']").val().trim()
+			});
+		});
+		
+		return subs;
 	}
 	
 	function getItems() {
@@ -896,7 +1035,6 @@
 	}
 	
 	$("#standardTab li a").click(function() {
-		layer.msg("请不要按我");
 		return false;
 	});
 	
@@ -904,7 +1042,8 @@
 		layer.confirm('是否删除该检测项？', {
 			btn: ['确定','取消'] //按钮
 		}, function(){
-			if ($("#item-box").children().length > 1) {
+			var box = $(obj).parent("div").parent("div").parent("div");
+			if (box.children().length > 1) {
 				$(obj).parent().parent().remove();
 			} else {
 				addItem(obj);
@@ -921,13 +1060,21 @@
 		box = box.after(box.clone(true));
 		var copy_box = box.next();
 		copy_box.find("input").val("");
+		copy_box.find(".panel").each(function(index, item){
+			if (index > 0) {
+				$(item).remove();
+			}
+		});
 		copy_box.find("span.glyphicon-remove").each(function(){
 			$(this).parent("a").parent("td").parent("tr").remove();
 		});
+		
+		copy_box.find(":hidden").show();
+		copy_box.find(".glyphicon-chevron-down").attr("class", "glyphicon glyphicon-chevron-up");
 	}
 	
 	function changeItem(obj) {
-		var item_body = $(obj).parent().next();
+		var item_body = $(obj).parent().nextAll();
 		var display_val = item_body.css("display");
 		if (display_val == 'none') {
 			item_body.show();

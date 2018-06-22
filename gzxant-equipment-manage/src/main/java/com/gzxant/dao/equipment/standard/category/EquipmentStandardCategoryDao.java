@@ -5,7 +5,7 @@ import com.gzxant.base.dao.TreeDao;
 
 /**
  * <p>
-  * 标准分类表 Mapper 接口
+ * 标准分类表 Mapper 接口
  * </p>
  *
  * @author ycxiao
