@@ -224,6 +224,28 @@ public class EquipmentStandardController extends BaseController {
 	public DataTable<EquipmentStandard> list(@RequestBody DataTable<EquipmentStandard> dt) {
 		return standardService.pageSearch(dt);
 	}
+	
+	@ApiOperation(value = "添加标准表", notes = "添加标准表")
+	@PostMapping(value = "/")
+	@ResponseBody
+	public ReturnDTO save(String data) {
+		EquipmentStandardDTO standardData = parseData(data);
+		if (standardData == null) {
+			return ReturnDTOUtil.fail();
+		}
+
+		// 解析标准信息
+		EquipmentStandard standard = parseStandard(standardData);
+
+		// 解析分类并保存数据
+		EquipmentStandardCategory category = parseCategory(standardData);
+
+		// 保存标准信息
+		standard.setCategoryId(category.getId());
+		standard.setCategoryPath(category.getPath());
+		standardService.insert(standard);
+		return ReturnDTOUtil.success(standard.getId());
+	}
 
 	@ApiOperation(value = "添加标准表", notes = "添加标准表")
 	@PostMapping(value = "/create")

@@ -29,6 +29,7 @@ public class EquipmentStandardDTO implements Serializable {
 	private String publishDate;
 	private String uploadDate;
 	private String implementDate;
+	
 	private List<EquipmentStandardItemDTO> items;
 	private List<EquipmentStandardTechDTO> techs;
 

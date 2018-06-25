@@ -39,7 +39,27 @@
 }
 
 .card span {
-	color: white;
+	/* color: white; */
+}
+
+.glyphicon {
+	margin-left : 5px;
+}
+
+.glyphicon.glyphicon-chevron-up, .glyphicon.glyphicon-chevron-down {
+	color: white ;
+}
+
+.glyphicon.glyphicon-plus {
+	color: blue;
+}
+
+.glyphicon.glyphicon-remove {
+	color: red;
+}
+
+.glyphicon.glyphicon-ok {
+	color: green;
 }
 
 .pdf_box {
@@ -55,21 +75,6 @@
 
 .box_shadow {
 	box-shadow: 5px 5px 5px;
-}
-
-.a_del {
-	color:red;
-	margin-left:10px;
-	margin-right:10px;
-}
-
-.a_del span {
-	color:red;
-}
-
-.a_add {
-	color: white;
-	margin-left:10px;
 }
 
 .btn_inline {
@@ -259,7 +264,8 @@
 		  				<div class="panel-footer">
 		  					<div class = "row">
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-									<button type="button" onclick="back()" class="btn btn-success pull-left">返回</button>
+									<button type="button" onclick="saveInfo()" class="btn btn-success pull-left">保存</button>
+									<button type="button" onclick="back()" class="btn btn-success pull-left" style="margin-left: 10px;">返回</button>
 									<button type="button" onclick="infoNextStep()" class="btn btn-success pull-right" style="margin-left: 10px;">下一步</button>
 									<button type="button" onclick="lastStep()" class="btn btn-success pull-right">上一步</button>
 		  						</div>
@@ -273,7 +279,7 @@
 			  				<div class="panel panel-success">
 								<div class="panel-heading form-inline">
 									<div class="form-group" style="color:black;">
-										<input onclick="addTxt(this);" type="text" class="form-control" placeholder="请选择输入技术要求" />
+										<input onclick="addTxt(this);" onblur="saveTech()" type="text" class="form-control" placeholder="请选择输入技术要求" />
 									</div>
 									<a class="pull-right a_del" onclick="removeItem(this)"><span class="glyphicon glyphicon-remove"></span></a>
 									<a class="pull-right a_add" onclick="addItem(this)"><span class="glyphicon glyphicon-plus"></span></a>
@@ -310,7 +316,7 @@
 						<div class="panel-footer">
 		  					<div class = "row">
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-									<button type="button" onclick="back()" class="btn btn-success pull-left">返回</button>
+									<button type="button" onclick="back()" class="btn btn-success pull-left" style="margin-left: 10px;">返回</button>
 									<button type="button" onclick="nextStep()" class="btn btn-success pull-right" style="margin-left: 10px;">下一步</button>
 									<button type="button" onclick="lastStep()" class="btn btn-success pull-right">上一步</button>
 		  						</div>
@@ -330,7 +336,7 @@
 									<a class="pull-right a_add" onclick="addItem(this)"><span class="glyphicon glyphicon-plus"></span></a>
 									<a class="pull-right a_add" onclick="changeItem(this)"><span class="glyphicon glyphicon-chevron-up"></span></a>
 								</div>
-								<div class="panel-body">
+								<div id="item-sub-box" class="panel-body">
 									<div class="panel panel-primary">
 										<!-- Default panel contents -->
 										<div class="panel-heading">
@@ -436,8 +442,7 @@
 						<div class="panel-footer">
 		  					<div class = "row">
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-									<button type="button" onclick="back()" class="btn btn-success pull-left">返回</button>
-									<button type="button" onclick="saveStandard()" class="btn btn-success pull-right" style="margin-left: 10px;">保存</button>
+									<button type="button" onclick="back()" class="btn btn-success pull-left" style="margin-left: 10px;">返回</button>
 									<button type="button" onclick="lastStep()" class="btn btn-success pull-right">上一步</button>
 		  						</div>
 		  					</div>
@@ -479,7 +484,7 @@
 	
 </div>
 <script type="text/javascript">
-	var txt_url, imgs_path, upload_date, page_size;
+	var standard_id = "", txt_url, imgs_path, upload_date, page_size;
 	function dealCode(obj) {
 		if (!txt_url) {
 			layer.alert("请上传PDF文件！");
@@ -630,9 +635,82 @@
 	}
 	
 	function infoNextStep() {
-		//if (info_validate.form()) {
+		if (info_validate.form()) {
+			if (standard_id == "") {
+				layer.msg("请保存信息！");
+				return ;
+			}
+
 			nextStep();
-		//}
+		}
+	}
+	
+	function saveInfo() {
+		if (!info_validate.form()) {
+			return ;
+		}
+		
+		var load_index = layer.load(1, {shade: [0.8, '#000']});
+		var data = {
+			"name": $('[name=name]').val().trim(),
+			"englishName": $('[name=englishName]').val().trim(),
+			"number": $('[name=number]').val().trim(),
+			"category": $('[name=category]').val().trim(),
+			"type": $('[name=type]').val().trim(),
+			"replaceStandard": getReplaceStandard(),
+			"importStandard": getImportStandard(),
+			"pdfUrl": $("#uploadUrl").val().trim(),
+			"txtUrl": txt_url,
+			"imgsPath": imgs_path,
+			"pageSize": page_size,
+			"publishDate": $('[name=publishDate]').val().trim(),
+			"uploadDate": upload_date,
+			"implementDate": $('[name=implementDate]').val().trim(),
+		};
+		
+		if (!checkNumber(data.number) 
+			|| !checNnumberExists(data.number)) {
+			layer.close(load_index);
+			return ;
+		}
+		
+		if (data.pdfUrl == "") {
+			layer.close(load_index);
+			layer.msg("请上传PDF文件");
+			return ;
+		}
+		
+		if (data.txtUrl == "") {
+			layer.close(load_index);
+			layer.msg("PDF文件解析错误，请重新上传PDF文件");
+			return ;
+		}
+		
+		data = JSON.stringify(data);
+		console.log(data);
+		
+		$.ajax({
+		    type: 'POST',
+		    url: base_url + "/back/standard/",
+		    async: true,
+		    data: {
+		    	data: data
+		    },
+		    success: function (data) {
+		    	if (data.code == 200) {
+		    		layer.close(load_index);
+		    		standard_id = data.message;
+			    	layer.msg("保存成功");
+		    	} else {
+		    		layer.close(load_index);
+		    		layer.msg("保存失败");
+		    	}
+			},
+			error: function (XMLHttpRequest, textStatus, errorThrown) {
+				layer.close(load_index);
+	            layer.alert(XMLHttpRequest.responseJSON.error);
+	        }
+		});
 	}
 	
 	function saveStandard() {
@@ -653,8 +731,13 @@
 			"uploadDate": upload_date,
 			"implementDate": $('[name=implementDate]').val().trim(),
 			"techs": getTechs(),
-			"items": getItems()
+			"items": getItems($("#item-box"))
 		};
+		
+		data = JSON.stringify(data);
+		console.log(data);
+		layer.close(load_index);
+		return ;
 		
 		if (!checkNumber(data.number) 
 			|| !checNnumberExists(data.number)) {
@@ -760,15 +843,20 @@
 		return subs;
 	}
 	
-	function getItems() {
+	function getItems(box_obj) {
+		if ($(box_obj).length <= 0) {
+			return null;
+		}
+		
 		var items = [];
-		var item_divs = $("#item-box").children();
+		var item_divs = $(box_obj).children();
 		item_divs.each(function(index, item_div) {
 			var item_name = getItemName(item_div);
 			if (item_name != "") {
 				items.push({
 					"name": item_name,
-					"materials": getItemSub(item_div, "M"),
+					"subs" : getItems($(box_obj).find("#item-sub-box")), 
+					"materials": getItemSub(item_div, "M"), 
 					"equipments": getItemSub(item_div, "E")
 				});
 			}
@@ -776,7 +864,7 @@
 		
 		return items;
 	}
-
+	
 	function getItemName(item_div) {
 		return $(item_div).find(".panel-heading").find("input").val().trim();
 	}
@@ -784,7 +872,7 @@
 	function getItemSub(item_div, type) {
 		var subs = [];
 		if (type == "M") {
-			var materials = $(item_div).find(".panel-body").find('input[data-name="material_name"]');
+			var materials = $(item_div).children("table").find('input[data-name="material_name"]');
 			materials.each(function(index, item) {
 				if ($(item).val().trim() != "") {
 					subs.push({
@@ -797,7 +885,7 @@
 			
 			return subs;
 		} else if (type == "E") {
-			var equipments = $(item_div).find(".panel-body").find('input[data-name="equipment_name"]');
+			var equipments = $(item_div).children("table").find('input[data-name="equipment_name"]');
 			equipments.each(function(index, item) {
 				if ($(item).val().trim() != "") {
 					subs.push({
@@ -809,7 +897,7 @@
 			});
 			
 			return subs;
-		}
+		} 
 		
 		return subs;
 	}

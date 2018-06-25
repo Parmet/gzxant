@@ -15,6 +15,7 @@ public class EquipmentStandardItemDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String name;
+	private List<EquipmentStandardDTO> subs;
 	private List<EquipmentStandardProductDTO> materials;
 	private List<EquipmentStandardProductDTO> equipments;
 
@@ -40,6 +41,14 @@ public class EquipmentStandardItemDTO implements Serializable {
 
 	public void setEquipments(List<EquipmentStandardProductDTO> equipments) {
 		this.equipments = equipments;
+	}
+
+	public List<EquipmentStandardDTO> getSubs() {
+		return subs;
+	}
+
+	public void setSubs(List<EquipmentStandardDTO> subs) {
+		this.subs = subs;
 	}
 
 	public static long getSerialversionuid() {
