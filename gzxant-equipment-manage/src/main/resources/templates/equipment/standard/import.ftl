@@ -976,7 +976,7 @@
 	});
 	
 	function loadTxt(txts) {
-		var html = "";
+		var html = "";src
 		$.each(txts, function (index, item){
 			html = html + '<div class="row">';
 			html = html + '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">';
