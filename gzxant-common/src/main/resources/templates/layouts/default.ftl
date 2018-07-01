@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-    <title>Gzxant 广州小码蚁网络科技有限公司
+    <title>${gzxant.name}
         <sitemesh:write property='title'/>
     </title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,7 +18,8 @@
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
     <sitemesh:write property='head'/>
-    <link rel="shortcut icon" href="${rc.contextPath}/favicon.ico">
+    <link rel="shortcut icon" href="${rc.contextPath}/${gzxant.photo}">
+    
     <link href="${rc.contextPath}/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="${rc.contextPath}/css/font-awesome.min.css?v=4.4.0" rel="stylesheet"/>
     <link href="${rc.contextPath}/css/animate.css" rel="stylesheet"/>
@@ -76,12 +77,12 @@
                 <li class="nav-header">
                     <div class="dropdown profile-element">
 							<span>
-                                <img alt="image" class="img-circle" style="max-width: 50px" src="${rc.contextPath}${slife.photo}"/>
+                                <img alt="image" class="img-circle" style="max-width: 50px" src="${rc.contextPath}/${gzxant.photo}"/>
                             </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear">
                                 <span class="block m-t-xs">
-                                    <strong class="font-bold">${slife.name}</strong>
+                                    <strong class="font-bold">${gzxant.name}</strong>
                                 </span>
 
 							</span>
@@ -96,7 +97,7 @@
                             <li><a href="${rc.contextPath}/logout">安全退出</a></li>
                         </ul>
                     </div>
-                    <div class="logo-element">Gzxant</div>
+                    <div class="logo-element">${gzxant.username}</div>
                 </li>
 
 
@@ -229,9 +230,9 @@
                             class="right-sidebar-toggle" aria-expanded="false"> <i
                             class="fa fa-tasks"></i> 主题
                     </a></li>
-                    <li class="dropdown hidden-xs">
-                        <a href="${rc.contextPath}/logout" class="right-sidebar-toggle" aria-expanded="false"> <i
-                                class="fa fa-tasks"></i> 退出</a>
+                    <li class="hidden-xs">
+                        <a href="${rc.contextPath}/logout"> <i
+                                class="fa fa-sign-out"></i> 退出</a>
                     </li>
                 </ul>
             </nav>
@@ -382,5 +383,10 @@
 <sitemesh:write property='slife_js'/>
 
 </body>
+<script type="text/javascript">
+$("body").removeClass("skin-2");
+$("body").removeClass("skin-3");
+$("body").addClass("skin-1");
+</script>
 
 </html>

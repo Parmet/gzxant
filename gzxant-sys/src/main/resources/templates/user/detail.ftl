@@ -175,7 +175,7 @@
                     <#if action !='detail'>
                         <div class="form-actions fluid">
                             <div class="col-md-offset-3 col-md-9">
-                                <button type="submit" class="btn green">保存</button>
+                                <button type="submit" class="btn-green">保存</button>
                             </div>
                         </div>
                     </#if>
@@ -189,7 +189,7 @@
 
 
 <script type="text/javascript">
-
+	action = "${action}";
     function  cusFunction() {
         console.info("提交之前，最后执行自定义的函数");
     }

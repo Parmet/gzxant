@@ -2,6 +2,7 @@ package com.gzxant.controller.shop.goods;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,7 +50,7 @@ public class ShopGoodsController extends BaseController {
 	}
 
 	@ApiOperation(value = "进入商城商品表编辑界面", notes = "进入商城商品表编辑界面")
-	@GetMapping(value = "/detail/{action}")
+	@GetMapping(value = {"/detail/{id}", "/{action}"})
 	public String detail(@PathVariable("action") String action, Model model) {
 		model.addAttribute("action", action);
 		return "/shop/goods/detail";

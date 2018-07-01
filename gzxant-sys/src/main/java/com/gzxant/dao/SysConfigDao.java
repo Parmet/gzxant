@@ -1,6 +1,8 @@
 package com.gzxant.dao;
 
 
+import java.util.List;
+
 import com.gzxant.base.dao.CrudDao;
 import com.gzxant.entity.SysConfig;
 
@@ -12,4 +14,5 @@ import com.gzxant.entity.SysConfig;
  * Describe: 系统配置dao
  */
 public interface SysConfigDao extends CrudDao<SysConfig> {
+	List<SysConfig> getSub(String jkey);
 }

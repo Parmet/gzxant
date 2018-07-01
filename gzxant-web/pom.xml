@@ -39,11 +39,6 @@
             <artifactId>gzxant-common</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.gzxant</groupId>
-            <artifactId>gzxant-drools</artifactId>
-        </dependency>
-        
  		<dependency>
             <groupId>com.gzxant</groupId>
             <artifactId>gzxant-log</artifactId>

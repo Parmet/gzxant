@@ -34,7 +34,7 @@ public class SiteMeshController extends BaseController{
     @GetMapping(value = "layouts")
     public String getIndex(Model model, HttpServletRequest request) {
 
-        model.addAttribute("slife", GzxantSysUser.ShiroUser());
+        model.addAttribute("gzxant", GzxantSysUser.ShiroUser());
         model.addAttribute("menus", sysMenuService.CaseMenu(GzxantSysUser.id()));
 
         return "layouts/default";
