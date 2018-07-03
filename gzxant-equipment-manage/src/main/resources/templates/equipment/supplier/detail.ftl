@@ -3,6 +3,26 @@
         color:red;
     }
 </style>
+<#macro optionList list selected="" >
+    <#-- macro function to show the option list -->
+    <#-- list is the list of all items, the selected is the value of selected item -->
+    <#--<option value="${equipmentSupplier.enterpriseWhere}">${equipmentSupplier.enterpriseWhere}</option>-->
+    <#if action=="detail">
+        <#-- Only need to show the detail attacth to the obj -->
+        <option label="${selected}">${selected}</option>
+    <#else >
+        <#-- ELSE: action == "update" -->
+        <#list list as option>
+        <option value="${option.jvalue}"
+            <#if option.jvalue == selected>
+                <#-- Reduce the duplicate show -->
+                selected="true"
+            </#if>
+        >${option.jvalue}</option>
+        </#list>
+    </#if>
+</#macro>
+
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-sm-12">
@@ -21,10 +41,7 @@
                             <label class="col-sm-3 control-label">企业总部所在地：<span class="required">*</span></label>
                             <div class="col-sm-8">
                                 <select name="enterpriseWhere" class="form-control">
-                                    <option value="${equipmentSupplier.enterpriseWhere}">${equipmentSupplier.enterpriseWhere}</option>
-                                          <#list businessLocation as address>
-		  									  <option value="${businessLocation.jvalue}">${businessLocation.jvalue}</option>
-                                          </#list>
+                                    <@optionList businessLocation equipmentSupplier.enterpriseWhere />
                                 </select>
 
                             </div>
@@ -34,10 +51,7 @@
                             <label class="col-sm-3 control-label">国内总部所在地：<span class="required">*</span></label>
                             <div class="col-sm-8">
                                 <select name="domesticAddress" class="form-control">
-                                    <option value="${equipmentSupplier.domesticAddress}">${equipmentSupplier.domesticAddress}</option>
-                                             <#list supplierAddress as address>
-		  									  <option value="${address.jvalue}">${address.jvalue}</option>
-                                             </#list>
+                                    <@optionList supplierAddress equipmentSupplier.domesticAddress />
                                 </select>
                             </div>
                         </div>
@@ -45,10 +59,7 @@
                             <label class="col-sm-3 control-label">企业性质：<span class="required">*</span></label>
                             <div class="col-sm-8">
                                 <select name="enterpriseNature" class="form-control">
-                                    <option value="${equipmentSupplier.enterpriseNature}">${equipmentSupplier.enterpriseNature}</option>
-                                             <#list natureOfBusiness as nature>
-		  									  <option value="${nature.jvalue}">${nature.jvalue}</option>
-                                             </#list>
+ x                                   <@optionList natureOfBusiness equipmentSupplier.enterpriseNature />
                                 </select>
                             </div>
                         </div>
@@ -56,10 +67,7 @@
                             <label class="col-sm-3 control-label">企业规模：<span class="required">*</span></label>
                             <div class="col-sm-8">
                                 <select name="enterpriseScale" class="form-control">
-                                    <option value="${equipmentSupplier.enterpriseScale}">${equipmentSupplier.enterpriseScale}</option>
-                                             <#list enterpriseScale as enterprisescale>
-		  									  <option value="${enterprisescale.jvalue}">${enterprisescale.jvalue}</option>
-                                             </#list>
+                                    <@optionList enterpriseScale equipmentSupplier.enterpriseScale />
                                 </select>
                             </div>
                         </div>
@@ -91,21 +99,15 @@
                             <label class="col-sm-3 control-label">年产值：<span class="required">*</span></label>
                             <div class="col-sm-8">
                                 <select name="outputValue" class="form-control">
-                                    <option value="${equipmentSupplier.outputValue}">${equipmentSupplier.outputValue}</option>
-                                             <#list yearValues as yearvalue>
-		  									  <option value="${yearvalue.jvalue}">${yearvalue.jvalue}</option>
-                                             </#list>
-                                    </select>
+x                                    <@optionList yearValues equipmentSupplier.outputValue />
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">经营范围：<span class="required">*</span></label>
                             <div class="col-sm-8">
                                 <select name="businessScope" class="form-control">
-                                    <option value="${equipmentSupplier.businessScope}">${equipmentSupplier.businessScope}</option>
-                                             <#list businessScope as business>
-		  									  <option value="${business.jvalue}">${business.jvalue}</option>
-                                             </#list>
+                                    <@optionList businessScope equipmentSupplier.businessScope />
                                 </select>
                             </div>
                         </div>
@@ -115,10 +117,7 @@
                             <label class="col-sm-3 control-label">主攻行业：<span class="required">*</span></label>
                             <div class="col-sm-8">
                                 <select name="announcementNumber" class="form-control">
-                                    <option value="${equipmentSupplier.announcementNumber}">${equipmentSupplier.announcementNumber}</option>
-                                             <#list mainIndustry as mainin>
-		  									  <option value="${mainin.jvalue}">${mainin.jvalue}</option>
-                                             </#list>
+                                    <@optionList mainIndustry equipmentSupplier.announcementNumber />
                                 </select>
                             </div>
                         </div>
@@ -140,10 +139,7 @@
                             <label class="col-sm-3 control-label">职位：<span class="required">*</span></label>
                             <div class="col-sm-8">
                                 <select name="position" class="form-control">
-                                    <option value="${companyPosition.position}">${equipmentSupplier.position}</option>
-                                             <#list companyPosition as postition>
-		  									  <option value="${postition.jvalue}">${postition.jvalue}</option>
-                                             </#list>
+                                    <@optionList companyPosition companyPosition.position />
                                 </select>
                             </div>
                         </div>
@@ -188,13 +184,12 @@
 
                         <#if action !='detail'>
                             <div class="form-actions fluid">
-                            <div class="col-md-offset-3 col-md-9">
-                                <button type="submit" onclick="infoNextStep()" class="btn btn-success">保存</button>
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" onclick="infoNextStep()" class="btn btn-success">保存</button>
+                                </div>
                             </div>
-                        </div>
-                    </#if>
+                        </#if>
                     </form>
-
                 </div>
             </div>
         </div>

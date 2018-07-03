@@ -58,6 +58,7 @@ public class EquipmentSupplierController extends BaseController {
 		model.addAttribute("action", action);
 		EquipmentSupplier equipmentSupplier = equipmentSupplierService.selectById(id);
 		model.addAttribute("equipmentSupplier", equipmentSupplier);
+        model.addAttribute("businessLocation", dictService.getDictTree("Business_Location"));
 		model.addAttribute("supplierAddress", dictService.getDictTree("SUPPLIER_ADDRESS"));
 		model.addAttribute("natureOfBusiness", dictService.getDictTree("nature_of_business"));
 		model.addAttribute("companyPosition", dictService.getDictTree("company_position"));
@@ -104,6 +105,8 @@ public class EquipmentSupplierController extends BaseController {
 	@PostMapping(value = "/update")
 	@ResponseBody
 	public ReturnDTO update(EquipmentSupplier param) {
+//        TODO: BUG Couldn't correctly update the info of province
+//        	    I don't know what the reason, so I couldn't help
 		if (param == null) {
 			return ReturnDTOUtil.paramError();
 		}

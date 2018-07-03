@@ -45,7 +45,7 @@
                             <label class="col-sm-3 control-label">企业性质：<span class="required">*</span></label>
                             <div class="col-sm-8">
                                 <select name="enterpriseNature" class="form-control">
-                                    <option value=""">请选择</option>
+                                    <option value="">请选择</option>
                                              <#list natureOfBusiness as nature>
 		  									  <option value="${nature.jvalue}">${nature.jvalue}</option>
                                              </#list>
