@@ -79,22 +79,21 @@
 	                    </script>
 	               		</#if>
                         </div>
-
-
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">登录名<span class="required">*</span></label>
-                                <div class="col-sm-8">
-                                    <input name="loginName" type="text" value="${equipmentMemberUser.loginName}" class="form-control"  placeholder="请输入登录名"/>
-                                </div>
-
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">登录名：<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="loginName" id="loginName"
+                                      placeholder="请输入登录名"/>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">登录密码：<span class="required">*</span></label>
-                                <div class="col-sm-8">
-                                    <input name="password" value="${equipmentMemberUser.password}"  type="password" class="form-control"
-                                             placeholder="请输入登录密码"/>
-                                </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">登录密码：<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <input name="password" type="password" class="form-control"
+                                        placeholder="请输入登录密码"/>
                             </div>
+                        </div>
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">邮箱：<span class="required">*</span></label>
@@ -200,9 +199,7 @@
 
     }
     function infoNextStep() {
-        if (info_validate.form()) {
-            nextStep();
-        }
+        info_validate.form();
     }
 
     var info_validate = $('#gzxantForm');
@@ -218,6 +215,7 @@
             },
             password: {
                 required: true,
+                minlength:6
             },
             email: {
                 required: true
@@ -229,7 +227,10 @@
                 remote: "用户名已经存在",
 
             },
-            password: "请输入密码",
+            password:{
+                required:  "请输入密码",
+                minlength:"密码不能小于6位数"
+            },
             email: "请输入邮箱"
         }
     });

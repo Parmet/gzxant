@@ -160,9 +160,7 @@
         console.info("提交之前，最后执行自定义的函数");
     }
     function infoNextStep() {
-        if (info_validate.form()) {
-            nextStep();
-        }
+        info_validate.form();
     }
 
     var info_validate = $('#gzxantForm');

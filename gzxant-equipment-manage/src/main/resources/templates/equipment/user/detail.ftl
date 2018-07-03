@@ -232,9 +232,7 @@
       //   return imgpaths;
     }
     function infoNextStep() {
-        if (info_validate.form()) {
-            nextStep();
-        }
+        info_validate.form();
     }
 
     var info_validate = $('#gzxantForm');
