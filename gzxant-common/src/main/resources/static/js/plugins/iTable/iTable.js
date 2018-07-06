@@ -244,7 +244,7 @@
 
 			ids = ids.substr(0, ids.length - 1);
 			$.ajax({
-				type : 'POST',
+				type : 'DELETE',
 				data : {
 					"ids" : ids
 				},
@@ -273,7 +273,7 @@
 	iTable.prototype.load_data = function() {
 		var option = _options;
 		this._element.bootstrapTable({
-			method : 'post', // 服务器数据的请求方式 get or post
+			method : 'get', // 服务器数据的请求方式 get or post
 			url : option.url.load_data, // 服务器数据的加载地址
 			//showRefresh : true,
 			//showToggle : true,

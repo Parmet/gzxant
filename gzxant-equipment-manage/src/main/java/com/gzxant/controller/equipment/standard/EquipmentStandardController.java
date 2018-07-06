@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.baomidou.mybatisplus.mapper.Condition;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.gzxant.annotation.SLog;
 import com.gzxant.base.controller.BaseController;
@@ -114,7 +114,7 @@ public class EquipmentStandardController extends BaseController {
 
 	@ApiOperation(value = "进入标准表编辑界面", notes = "进入标准表编辑界面")
 	@GetMapping(value = "/detail/{id}")
-	public String detail(@PathVariable("id") String id, Model model) {
+	public String toDetail(@PathVariable("id") String id, Model model) {
 		EquipmentStandardBO standardBo = standardService.getDataById(id);
 		if (standardBo == null) {
 			return "redirect:/back/standard/";
@@ -130,44 +130,88 @@ public class EquipmentStandardController extends BaseController {
 		return "/equipment/standard/detail";
 	}
 
-	private List<EquipmentStandardTechDTO> parseTechs(List<EquipmentStandardTech> techs) {
-		List<EquipmentStandardTechDTO> techDtos = new ArrayList<>();
-		if (techs == null || techs.isEmpty()) {
-			return techDtos;
-		}
-
-		Map<String, List<EquipmentStandardTechSubDTO>> map = new HashMap<>();
-		for (EquipmentStandardTech tech : techs) {
-			List<EquipmentStandardTechSubDTO> subs = null;
-			if (map.containsKey(tech.getName())) {
-				subs = map.get(tech.getName());
-			} else {
-				subs = new ArrayList<>();
-			}
-
-			EquipmentStandardTechSubDTO sub = new EquipmentStandardTechSubDTO();
-			sub.setProject(tech.getProject());
-			sub.setRequire(tech.getRequire());
-			sub.setFunction(tech.getFunction());
-			subs.add(sub);
-			map.put(tech.getName(), subs);
-		}
-
-		for (String techName : map.keySet()) {
-			EquipmentStandardTechDTO techDto = new EquipmentStandardTechDTO();
-			techDto.setName(techName);
-			techDto.setSubs(map.get(techName));
-			techDtos.add(techDto);
-		}
-
-		return techDtos;
-	}
-
 	@ApiOperation(value = "进入标准表导入界面", notes = "进入标准表导入界面")
-	@GetMapping(value = "/import")
+	@GetMapping(value = "/jcreate")
 	public String toImport(Model model) {
 		model.addAttribute("types", dictService.getSub("STANDARD_TYPE"));
 		return "/equipment/standard/import";
+	}
+
+	@ApiOperation(value = "获取标准表列表数据", notes = "获取标准表列表数据:使用约定的DataTable")
+	@GetMapping(value = "/list")
+	@ResponseBody
+	public DataTable<EquipmentStandard> list(@RequestBody DataTable<EquipmentStandard> dt) {
+		return standardService.pageSearch(dt);
+	}
+
+	@ApiOperation(value = "添加标准表", notes = "添加标准表")
+	@PostMapping(value = "/")
+	@ResponseBody
+	public ReturnDTO create(EquipmentStandardDTO standardData) {
+		/*String data*/
+//		if (data != "") {
+//			return ReturnDTOUtil.success();
+//		}
+		
+//		EquipmentStandardDTO standardData = parseData(data);
+		if (standardData == null) {
+			return ReturnDTOUtil.fail();
+		}
+	
+		// 解析标准信息
+		EquipmentStandard standard = parseStandard(standardData);
+	
+		// 解析分类并保存数据
+		EquipmentStandardCategory category = parseCategory(standardData);
+	
+		// 保存标准信息
+		standard.setCategoryId(category.getId());
+		standard.setCategoryPath(category.getPath());
+		standardService.insert(standard);
+		return ReturnDTOUtil.success(standard.getId());
+	}
+
+	@ApiOperation(value = "编辑标准表", notes = "编辑标准表")
+	@PutMapping(value = "/{id}")
+	@ResponseBody
+	public ReturnDTO update(String data) {
+		if (data != "") {
+			return ReturnDTOUtil.success();
+		}
+		
+		EquipmentStandardDTO standardData = parseData(data);
+		if (standardData == null) {
+			return ReturnDTOUtil.fail();
+		}
+	
+		// 解析标准信息
+		EquipmentStandard standard = parseStandard(standardData);
+	
+		// 解析分类并保存数据
+		EquipmentStandardCategory category = parseCategory(standardData);
+	
+		// 保存标准信息
+		standard.setCategoryId(category.getId());
+		standard.setCategoryPath(category.getPath());
+		standardService.insert(standard);
+		return ReturnDTOUtil.success(standard.getId());
+	}
+
+	@SLog("批量删除标准表")
+	@ApiOperation(value = "批量删除标准表", notes = "批量删除标准表")
+	@DeleteMapping(value = "/")
+	@ResponseBody
+	public ReturnDTO delete(@RequestParam("ids") List<Long> ids) {
+		List<EquipmentStandard> standards = standardService.selectBatchIds(ids);
+		for (EquipmentStandard standard : standards) {
+			standard.setDelFlag("N");
+		}
+	
+		boolean success = standardService.updateBatchById(standards);
+		if (success) {
+			return ReturnDTOUtil.success();
+		}
+		return ReturnDTOUtil.fail();
 	}
 
 	@ApiOperation(value = "下载标准", notes = "下载标准")
@@ -201,11 +245,11 @@ public class EquipmentStandardController extends BaseController {
 		String pdfPath = standard.getPdfUrl();
 		String txtPath = PDFUtil.pdf2Txt(pdfPath);
 
-		// 读取txt的内容，返回页面
+		// 读取 txt 的内容，返回页面
 		List<String> txts = FileUtils.readFileTxt(new File(txtPath));
 		logger.debug("pdf 转 txt 完成");
 
-		// pdf转图片
+		// pdf 转 图片
 		List<String> imgs = PDFUtil.pdf2Img(pdfPath);
 		logger.debug("pdf 转 图片 完成");
 
@@ -218,61 +262,76 @@ public class EquipmentStandardController extends BaseController {
 		return ReturnDTOUtil.success(map);
 	}
 
-	@ApiOperation(value = "获取标准表列表数据", notes = "获取标准表列表数据:使用约定的DataTable")
-	@PostMapping(value = "/list")
+	@ApiOperation(value = "更新标准文字", notes = "更新标准文字")
+	@PutMapping(value = "/txt")
 	@ResponseBody
-	public DataTable<EquipmentStandard> list(@RequestBody DataTable<EquipmentStandard> dt) {
-		return standardService.pageSearch(dt);
-	}
-	
-	@ApiOperation(value = "添加标准表", notes = "添加标准表")
-	@PostMapping(value = "/")
-	@ResponseBody
-	public ReturnDTO save(String data) {
-		EquipmentStandardDTO standardData = parseData(data);
-		if (standardData == null) {
+	public ReturnDTO updateTxt(@RequestParam("txtUrl") String txtUrl, 
+			@RequestParam("imgsPath") String imgsPath,
+			@RequestParam("pageSize") String pageSize) {
+		if (StringUtils.isBlank(txtUrl) || StringUtils.isBlank(imgsPath) || StringUtils.isBlank(pageSize)) {
 			return ReturnDTOUtil.fail();
 		}
-
-		// 解析标准信息
-		EquipmentStandard standard = parseStandard(standardData);
-
-		// 解析分类并保存数据
-		EquipmentStandardCategory category = parseCategory(standardData);
-
-		// 保存标准信息
-		standard.setCategoryId(category.getId());
-		standard.setCategoryPath(category.getPath());
-		standardService.insert(standard);
-		return ReturnDTOUtil.success(standard.getId());
+	
+		int size = Integer.parseInt(pageSize);
+	
+		// 按页数循环读取图片，调用OCR接口转换文字
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < size; i++) {
+			sb.append(ImageUtils.image2Str(imgsPath + i + ".jpg"));
+		}
+	
+		// 重新写进该标准的文字文件
+		PDFUtil.writeContent2Txt(sb.toString(), txtUrl);
+	
+		// 返回文字列表给页面
+		List<String> txts = FileUtils.readFileTxt(new File(txtUrl));
+		return ReturnDTOUtil.success(txts);
 	}
-
-	@ApiOperation(value = "添加标准表", notes = "添加标准表")
+	
+	@ApiOperation(value = "校验标准是否存在", notes = "校验标准是否存在")
+	@GetMapping(value = "/check/{number}")
+	@ResponseBody
+	public ReturnDTO check(@PathVariable("number") String number) {
+		EntityWrapper<EquipmentStandard> ew = new EntityWrapper<>();
+		ew.setEntity(new EquipmentStandard());
+		ew.where("number={0}", number);
+		if (standardService.selectCount(ew) > 0) {
+			return ReturnDTOUtil.custom(201, "该标准已存在，请核实！");
+		}
+	
+		return ReturnDTOUtil.success();
+	}
+	
+	/*@ApiOperation(value = "添加标准表", notes = "添加标准表")
 	@PostMapping(value = "/create")
 	@ResponseBody
 	public ReturnDTO create(String data) {
+		if (data != "") {
+			return ReturnDTOUtil.success();
+		}
+		
 		EquipmentStandardDTO standardData = parseData(data);
 		if (standardData == null) {
 			return ReturnDTOUtil.fail();
 		}
-
+	
 		// 解析标准信息
 		EquipmentStandard standard = parseStandard(standardData);
-
+	
 		// 解析分类并保存数据
 		EquipmentStandardCategory category = parseCategory(standardData);
-
+	
 		// 保存标准信息
 		standard.setCategoryId(category.getId());
 		standard.setCategoryPath(category.getPath());
 		standardService.insert(standard);
-
+	
 		// 解析技术要求
 		List<EquipmentStandardTech> techs = parseTechs(standard, standardData);
 		if (!techs.isEmpty()) {
 			techService.insertBatch(techs);
 		}
-
+	
 		// 解析检验项，以及检验项的耗材、设备
 		Map<String, List<EquipmentShopProduct>> itemMap = parseItems(standardData);
 		List<EquipmentStandardItem> items = getItems(standard, itemMap);
@@ -280,33 +339,95 @@ public class EquipmentStandardController extends BaseController {
 			return ReturnDTOUtil.success();
 		}
 		itemService.insertBatch(items);
-
+	
 		// 所有产品
 		List<EquipmentShopProduct> products = new ArrayList<>();
 		for (List<EquipmentShopProduct> list : itemMap.values()) {
 			products.addAll(list);
 		}
-
+	
 		if (products.isEmpty()) {
 			return ReturnDTOUtil.success();
 		}
 		products = productService.insert(products);
 		itemService.saveItemProducts(items, products, itemMap);
-
+	
 		// 增加关联信息的备注后清空产品的备注
 		for (EquipmentShopProduct product : products) {
 			product.setRemark("");
 		}
-
+	
 		productService.updateBatchById(products);
 		return ReturnDTOUtil.success();
 	}
+	
+	@SuppressWarnings("unchecked")
+	@ApiOperation(value = "编辑标准表", notes = "编辑标准表")
+	@PostMapping(value = "/update")
+	@ResponseBody
+	public ReturnDTO update(String data) {
+		EquipmentStandardDTO standardData = parseData(data);
+		if (standardData == null || StringUtils.isBlank(standardData.getId())) {
+			return ReturnDTOUtil.fail();
+		}
+	
+		// 解析标准信息 保存标准信息
+		EquipmentStandard standard = parseStandard(standardData);
+		if (standard == null) {
+			return ReturnDTOUtil.fail();
+		}
+		EquipmentStandardCategory category = parseCategory(standardData);
+		standard.setCategoryId(category.getId());
+		standard.setCategoryPath(category.getPath());
+		standardService.updateAllColumnById(standard);
+	
+		// 删除检验项、以及检验项与商品的关联
+		standardService.deleteItemsById(standard.getId());
+		// 删除技术要求
+		techService.delete(Condition.create().eq("standard_id", standard.getId()));
+	
+		// 解析技术要求
+		List<EquipmentStandardTech> techs = parseTechs(standard, standardData);
+		if (!techs.isEmpty()) {
+			techService.insertBatch(techs);
+		}
+	
+		// 解析检验项，以及检验项的耗材、设备
+		Map<String, List<EquipmentShopProduct>> itemMap = parseItems(standardData);
+		List<EquipmentStandardItem> items = getItems(standard, itemMap);
+		if (items.isEmpty()) {
+			return ReturnDTOUtil.success();
+		}
+	
+		itemService.insertBatch(items);
+	
+		// 所有产品
+		List<EquipmentShopProduct> products = new ArrayList<>();
+		for (List<EquipmentShopProduct> list : itemMap.values()) {
+			products.addAll(list);
+		}
+	
+		if (products.isEmpty()) {
+			return ReturnDTOUtil.success();
+		}
+	
+		products = productService.insert(products);
+		itemService.saveItemProducts(items, products, itemMap);
+	
+		// 增加关联信息的备注后清空产品的备注
+		for (EquipmentShopProduct product : products) {
+			product.setRemark("");
+		}
+	
+		productService.updateBatchById(products);
+		return ReturnDTOUtil.success();
+	}*/
 
 	private List<EquipmentStandardTech> parseTechs(EquipmentStandard standard, EquipmentStandardDTO standardData) {
 		if (standardData.getTechs() == null || standardData.getTechs().isEmpty()) {
 			return (new ArrayList<>());
 		}
-
+	
 		List<EquipmentStandardTech> techs = new ArrayList<>();
 		for (EquipmentStandardTechDTO techData : standardData.getTechs()) {
 			for (EquipmentStandardTechSubDTO subData : techData.getSubs()) {
@@ -319,7 +440,7 @@ public class EquipmentStandardController extends BaseController {
 				techs.add(tech);
 			}
 		}
-
+	
 		return techs;
 	}
 
@@ -328,126 +449,37 @@ public class EquipmentStandardController extends BaseController {
 		return dto;
 	}
 
-	@ApiOperation(value = "更新标准文字", notes = "更新标准文字")
-	@PutMapping(value = "/update/txt")
-	@ResponseBody
-	public ReturnDTO updateTxt(@RequestParam("txtUrl") String txtUrl, @RequestParam("imgsPath") String imgsPath,
-			@RequestParam("pageSize") String pageSize) {
-		if (StringUtils.isBlank(txtUrl) || StringUtils.isBlank(imgsPath) || StringUtils.isBlank(pageSize)) {
-			return ReturnDTOUtil.fail();
+	private List<EquipmentStandardTechDTO> parseTechs(List<EquipmentStandardTech> techs) {
+		List<EquipmentStandardTechDTO> techDtos = new ArrayList<>();
+		if (techs == null || techs.isEmpty()) {
+			return techDtos;
 		}
-
-		int size = Integer.parseInt(pageSize);
-
-		// 按页数循环读取图片，调用OCR接口转换文字
-		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < size; i++) {
-			sb.append(ImageUtils.image2Str(imgsPath + i + ".jpg"));
+	
+		Map<String, List<EquipmentStandardTechSubDTO>> map = new HashMap<>();
+		for (EquipmentStandardTech tech : techs) {
+			List<EquipmentStandardTechSubDTO> subs = null;
+			if (map.containsKey(tech.getName())) {
+				subs = map.get(tech.getName());
+			} else {
+				subs = new ArrayList<>();
+			}
+	
+			EquipmentStandardTechSubDTO sub = new EquipmentStandardTechSubDTO();
+			sub.setProject(tech.getProject());
+			sub.setRequire(tech.getRequire());
+			sub.setFunction(tech.getFunction());
+			subs.add(sub);
+			map.put(tech.getName(), subs);
 		}
-
-		// 重新写进该标准的文字文件
-		PDFUtil.writeContent2Txt(sb.toString(), txtUrl);
-
-		// 返回文字列表给页面
-		List<String> txts = FileUtils.readFileTxt(new File(txtUrl));
-		return ReturnDTOUtil.success(txts);
-	}
-
-	@SuppressWarnings("unchecked")
-	@ApiOperation(value = "编辑标准表", notes = "编辑标准表")
-	@PostMapping(value = "/update")
-	@ResponseBody
-	public ReturnDTO update(String data) {
-		EquipmentStandardDTO standardData = parseData(data);
-		if (standardData == null || StringUtils.isBlank(standardData.getId())) {
-			return ReturnDTOUtil.fail();
+	
+		for (String techName : map.keySet()) {
+			EquipmentStandardTechDTO techDto = new EquipmentStandardTechDTO();
+			techDto.setName(techName);
+			techDto.setSubs(map.get(techName));
+			techDtos.add(techDto);
 		}
-
-		// 解析标准信息 保存标准信息
-		EquipmentStandard standard = parseStandard(standardData);
-		if (standard == null) {
-			return ReturnDTOUtil.fail();
-		}
-		EquipmentStandardCategory category = parseCategory(standardData);
-		standard.setCategoryId(category.getId());
-		standard.setCategoryPath(category.getPath());
-		standardService.updateAllColumnById(standard);
-
-		// 删除检验项、以及检验项与商品的关联
-		standardService.deleteItemsById(standard.getId());
-		// 删除技术要求
-		techService.delete(Condition.create().eq("standard_id", standard.getId()));
-
-		// 解析技术要求
-		List<EquipmentStandardTech> techs = parseTechs(standard, standardData);
-		if (!techs.isEmpty()) {
-			techService.insertBatch(techs);
-		}
-
-		// 解析检验项，以及检验项的耗材、设备
-		Map<String, List<EquipmentShopProduct>> itemMap = parseItems(standardData);
-		List<EquipmentStandardItem> items = getItems(standard, itemMap);
-		if (items.isEmpty()) {
-			return ReturnDTOUtil.success();
-		}
-
-		itemService.insertBatch(items);
-
-		// 所有产品
-		List<EquipmentShopProduct> products = new ArrayList<>();
-		for (List<EquipmentShopProduct> list : itemMap.values()) {
-			products.addAll(list);
-		}
-
-		if (products.isEmpty()) {
-			return ReturnDTOUtil.success();
-		}
-
-		products = productService.insert(products);
-		itemService.saveItemProducts(items, products, itemMap);
-
-		// 增加关联信息的备注后清空产品的备注
-		for (EquipmentShopProduct product : products) {
-			product.setRemark("");
-		}
-
-		productService.updateBatchById(products);
-		return ReturnDTOUtil.success();
-	}
-
-	@SLog("批量删除标准表")
-	@ApiOperation(value = "批量删除标准表", notes = "批量删除标准表")
-	@PostMapping(value = "/delete")
-	@ResponseBody
-	public ReturnDTO delete(@RequestParam("ids") List<Long> ids) {
-		List<EquipmentStandard> standards = standardService.selectBatchIds(ids);
-		for (EquipmentStandard standard : standards) {
-			standard.setDelFlag("N");
-		}
-
-		boolean success = standardService.updateBatchById(standards);
-		if (success) {
-			return ReturnDTOUtil.success();
-		}
-		return ReturnDTOUtil.fail();
-	}
-
-	@ApiOperation(value = "校验标准是否存在", notes = "校验标准是否存在")
-	@GetMapping(value = "/check")
-	@ResponseBody
-	public ReturnDTO check(String number) {
-		if (StringUtils.isBlank(number)) {
-			return ReturnDTOUtil.paramError();
-		}
-
-		EntityWrapper<EquipmentStandard> ew = new EntityWrapper<>();
-		ew.setEntity(new EquipmentStandard());
-		ew.where("number={0}", number);
-		if (standardService.selectCount(ew) > 0) {
-			return ReturnDTOUtil.custom(201, "该标准已存在，请核实！");
-		}
-
-		return ReturnDTOUtil.success();
+	
+		return techDtos;
 	}
 
 	private List<EquipmentStandardItem> getItems(EquipmentStandard standard,

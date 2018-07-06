@@ -18,7 +18,7 @@
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
     <sitemesh:write property='head'/>
-    <link rel="shortcut icon" href="${rc.contextPath}/${gzxant.photo}">
+    <link rel="shortcut icon" href="${gzxant.photo}">
     
     <link href="${rc.contextPath}/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="${rc.contextPath}/css/font-awesome.min.css?v=4.4.0" rel="stylesheet"/>
@@ -77,7 +77,7 @@
                 <li class="nav-header">
                     <div class="dropdown profile-element">
 							<span>
-                                <img alt="image" class="img-circle" style="max-width: 50px" src="${rc.contextPath}/${gzxant.photo}"/>
+                                <img alt="image" class="img-circle" style="max-width: 50px" src="${gzxant.photo}"/>
                             </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear">

@@ -1,0 +1,82 @@
+.panel-body.parent-box {
+	height:450px;
+	overflow: scroll;
+}
+
+#dict_edit_table .control-label {
+	text-align: left !important;
+}
+
+#dict_edit_table input, #dict_edit_table select {
+	margin-left: -45px;
+}
+
+#dict_edit_table .row {
+	margin-top: 15px !important;
+}
+
+.txt_box {
+	height:500px; 
+	overflow-y: scroll;
+	position:  relative;
+}
+
+.card {
+	padding-top: 10px;
+	margin-top: 20px;
+	width: 95%;
+	background-color: #1c84c6;
+	float: left;
+	border-radius: 10px;
+	margin-left: 10px; 
+	text-align: center;
+	color: black;
+}
+
+.card .span_tip {
+	line-height: 80px;
+}
+
+.card span {
+	/* color: white; */
+}
+
+.glyphicon {
+	margin-left : 5px;
+}
+
+.glyphicon.glyphicon-chevron-up, .glyphicon.glyphicon-chevron-down {
+	color: white ;
+}
+
+.glyphicon.glyphicon-plus {
+	color: blue;
+}
+
+.glyphicon.glyphicon-remove {
+	color: red;
+}
+
+.glyphicon.glyphicon-ok {
+	color: green;
+}
+
+.pdf_box {
+	height:500px; 
+	overflow-y: scroll;
+}
+
+.pdf_box img {
+	background-size:contain|cover;
+	width:100%;
+	height: auto;
+}
+
+.box_shadow {
+	box-shadow: 5px 5px 5px;
+}
+
+.btn_inline {
+	width: 60%; 
+	display: inline;
+}

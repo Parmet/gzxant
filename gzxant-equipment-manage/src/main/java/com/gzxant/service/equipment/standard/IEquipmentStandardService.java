@@ -21,4 +21,5 @@ public interface IEquipmentStandardService extends IBaseService<EquipmentStandar
 	EquipmentStandardBO getDataById(String id);
 
 	void deleteItemsById(Long id);
+	
 }

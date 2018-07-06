@@ -122,7 +122,7 @@
 					icon : "glyphicon glyphicon-cloud-upload",
 					title : "导入",
 					click: function() {
-						window.location.href = url + "import";
+						window.location.href = url + "jcreate";
 				    }
 				}
 			]
