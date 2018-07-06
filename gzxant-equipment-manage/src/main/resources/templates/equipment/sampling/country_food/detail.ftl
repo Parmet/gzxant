@@ -102,7 +102,7 @@
                                 <p class="control-labels">不合格项目║检验结果║标准值：</p>
                             </div>
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 form-group">
-                                <p> ${equipmentCountryFoodSafety.samplingResult}}</p>
+                                <p> ${equipmentCountryFoodSafety.samplingResult}</p>
                             </div>
                         </div>
 
@@ -111,7 +111,7 @@
                                 <p class="control-labels">分类：</p>
                             </div>
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 form-group">
-                                <p> ${equipmentCountryFoodSafety.classification}}</p>
+                                <p> ${equipmentCountryFoodSafety.classification}</p>
                             </div>
                         </div>
 
@@ -120,7 +120,7 @@
                                 <p class="control-labels">公告号：</p>
                             </div>
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 form-group">
-                                <p> ${equipmentCountryFoodSafety.announcementNumber}}</p>
+                                <p> ${equipmentCountryFoodSafety.announcementNumber}</p>
                             </div>
                         </div>
                         <div class = "row">
@@ -128,7 +128,7 @@
                                 <p class="control-labels">抽检项目：</p>
                             </div>
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 form-group">
-                                <p> ${equipmentCountryFoodSafety.samplingProduce}}</p>
+                                <p> ${equipmentCountryFoodSafety.samplingProduce}</p>
                             </div>
                         </div>
                         <div class = "row">
@@ -136,7 +136,7 @@
                                 <p class="control-labels">公告日期：</p>
                             </div>
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 form-group">
-                                <p> ${equipmentCountryFoodSafety.announcementDate}}</p>
+                                <p> ${equipmentCountryFoodSafety.announcementDate}</p>
                             </div>
                         </div>
                         <div class = "row">
@@ -144,7 +144,7 @@
                                 <p class="control-labels">备注：</p>
                             </div>
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 form-group">
-                                <p> ${equipmentCountryFoodSafety.remark}}</p>
+                                <p> ${equipmentCountryFoodSafety.remark}</p>
                             </div>
                         </div>
 

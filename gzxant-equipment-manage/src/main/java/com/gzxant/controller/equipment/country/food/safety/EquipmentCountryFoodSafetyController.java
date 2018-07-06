@@ -2,6 +2,7 @@ package com.gzxant.controller.equipment.country.food.safety;
 
 import java.util.List;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.util.TextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
